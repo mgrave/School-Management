@@ -1,0 +1,44 @@
+
+Contraseña Mongo Manager admin:pass
+
+docker-compose up -d
+docker build -t imagen .
+docker run -p 3000:3000 imagen
+
+
+
+origin: ['http://localhost:3000', 'http://localhost:80'],
+methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+
+BACKEND
+PORT=5000
+DATABASE_URL=mongodb://admin:admin@host.docker.internal:27017/school?authSource=admin
+ORIGIN=http://localhost:3000
+JWT_SECRET_KEY=thisismysecretkey
+
+
+{
+    _id: ObjectId('66cea6f8830ab71a2d9bb399'),
+    username: 'administrador',
+    password: '$2b$10$GO92auoj41SdxUVTyKjiF.VjGKU5STLdVAIkD79Bviso0jNttFVRK',
+    nama: 'administrador'
+}
+
+
+
+
+Nilai - Calificacion
+Siswa - Estudiante
+Mata Pelajaran - Asignatura  (mapel)
+Aula
+jadwal - Horario
+libur - Vacaciones/dia libre
+tahun ajarans - año escolar
+Wali Kelas - Profesor principal
+
+required: " -> Es obligatorio ingresar
+placeholder=" -> Ingrese
+message: " -> 
+
+
+El nombre debe tener máximo 20 carcateres
