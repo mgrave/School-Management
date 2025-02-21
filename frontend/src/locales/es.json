@@ -1,0 +1,625 @@
+{
+  "metadata": {
+    "language": "Español",
+    "locale": "es-ES",
+    "direction": "ltr",
+    "version": "1.0",
+    "lastUpdate": "2024-01-20"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "username": "Usuario",
+      "password": "Contraseña",
+      "rememberMe": "Recordarme",
+      "forgotPassword": "¿Olvidó su contraseña?",
+      "submit": "Ingresar",
+      "nipNis": "NIP/NIS",
+      "nipPlaceholder": "Ingrese su NIP/NIS",
+      "passwordPlaceholder": "Ingrese su contraseña",
+      "loginButton": "Iniciar sesión",
+      "spanishText": "Bienvenido a Schoolarcy"
+    },
+    "logout": "Cerrar sesión",
+    "validation": {
+      "username": {
+        "min": "El usuario debe tener al menos 8 caracteres",
+        "max": "El usuario debe tener menos de 20 caracteres"
+      },
+      "password": {
+        "min": "La contraseña debe tener al menos 8 caracteres",
+        "max": "La contraseña debe tener menos de 20 caracteres"
+      }
+    }
+  },
+  "common": {
+    "basic": {
+      "yes": "Sí",
+      "no": "No",
+      "ok": "OK",
+      "all": "Todos",
+      "empty": "vacío",
+      "optional": "opcional",
+      "clear":"Limpiar",
+      "download": "Descargar",
+      "or":"o",
+      "language": "Idioma"
+    },
+    "status": {
+      "title": "Estado",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "loading": "Cargando",
+      "error": "Error",
+      "success": "Éxito",
+      "copied": "Datos copiados"
+    },
+    "gender": {
+      "title": "Género",
+      "male": "Masculino",
+      "female": "Femenino"
+    },
+    "time": {
+      "date": "Fecha",
+      "time": "Hora",
+      "year": "Año",
+      "month": "Mes",
+      "today": "Hoy",
+      "thisWeek": "Esta Semana",
+      "start": "Inicio",
+      "end": "Fin"
+    },
+    "calendar": {
+      "days": {
+        "monday": "Lunes",
+        "tuesday": "Martes",
+        "wednesday": "Miércoles",
+        "thursday": "Jueves",
+        "friday": "Viernes",
+        "saturday": "Sábado",
+        "sunday": "Domingo",
+        "day": "Día"
+      }
+    },
+	"fileUpload": {
+		"maxSize": "Tamaño máximo {size}MB",
+		"allowedExtensions": "Extensiones permitidas: {extensions}",
+		"dragDrop": "Arrastre y suelte archivos aquí",
+		"browse": "Buscar archivo"
+	},
+    "religions": {
+      "islam": "Islam",
+      "christian": "Cristiano",
+      "catholic": "Católico",
+      "hindu": "Hinduista",
+      "buddhist": "Budista",
+      "confucianism": "Confucionismo",
+      "beliefs": "Creencias"
+    }
+  },
+  "ui": {
+    "buttons": {
+      "add": "Agregar",
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "clear": "Limpiar",
+      "print": "Imprimir",
+      "export": "Exportar",
+      "search": "Buscar",
+      "filter": "Filtrar",
+      "close": "Cerrar",
+      "upload": "Subir"
+    },
+    "modal": {
+      "close": "Cerrar modal",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar"
+    },
+    "table": {
+      "actions": "Acciones",
+      "noData": "Sin datos disponibles",
+      "showing": "Mostrando {from} a {to} de {total} registros",
+      "dataNotFound": "Datos no encontrados"
+    },
+    "filters": {
+      "sortBy": "Ordenar por",
+      "orderOptions": {
+        "aToZ": "A-Z",
+        "zToA": "Z-A",
+        "newest": "Más reciente",
+        "oldest": "Más antiguo"
+      },
+      "clearFilter": "Limpiar Filtro",
+      "filterCategory": "Filtro de Categoría"
+    }
+  },
+  "messages": {
+    "confirmation": {
+      "delete": {
+        "title": "Confirmar eliminación",
+        "message": "¿Está seguro que desea eliminar este elemento?",
+        "confirm": "Sí, eliminar",
+        "cancel": "No, cancelar"
+      }
+    },
+    "success": {
+      "saved": "Guardado exitosamente",
+      "updated": "Actualizado exitosamente",
+      "deleted": "Eliminado exitosamente"
+    },
+    "errors": {
+      "generic": "Ha ocurrido un error",
+      "notFound": "No encontrado",
+      "required": "Campo requerido",
+      "invalidFileType": "Formato de archivo no soportado"
+    }
+  },
+  "forms": {
+    "formName": {
+      "title": "Título del Formulario",
+      "labels": {
+        "name": "Nombre",
+        "date": "Fecha",
+        "time": "Hora",
+        "description": "Descripción",
+        "status": "Estado"
+      },
+      "validation": {
+        "required": {
+          "field": "{field} es requerido",
+          "name": "El nombre es requerido",
+          "date": "La fecha es requerida",
+          "time": "La hora es requerida"
+        },
+        "length": {
+          "min": "Mínimo {min} caracteres",
+          "max": "Máximo {max} caracteres"
+        }
+      },
+      "messages": {
+        "confirmDelete": "Desea eliminar el elemento?"
+      },
+      "placeholders": {
+        "search": "Buscar...",
+        "select": "Seleccionar...",
+        "enterName": "Ingrese nombre"
+      },
+      "buttons": {
+        "submit": "Texto específico",
+        "cancel": "Texto específico"
+      }
+    },
+    "dataTeacher": {
+      "title": "Datos del Profesor",
+      "labels": {
+        "nip": "NIP",
+        "name": "Nombre",
+        "password": "Contraseña",
+        "birthPlace": "Lugar de Nacimiento",
+        "birthDate": "Fecha de Nacimiento",
+        "gender": "Género",
+        "subject": "Materia",
+        "phone": "Teléfono",
+        "class": "Clase",
+        "className": "Nombre de la Clase",
+        "address": "Dirección",
+        "level":"Nivel"
+      },
+      "validation": {
+        "required": {
+          "name": "El nombre es requerido",
+          "nip": "El NIP es requerido",
+          "password": "La contraseña es requerida",
+          "birthPlace": "El lugar de nacimiento es requerido",
+          "birthDate": "La fecha de nacimiento es requerida",
+          "gender": "El género es requerido",
+          "subject": "La materia es requerida",
+          "phone": "El teléfono es requerido",
+          "className": "El nombre de la clase es requerido"
+        },
+        "length": {
+          "min": "Mínimo {min} caracteres",
+          "max": "Máximo {max} caracteres"
+        },
+        "username": {
+          "min": "El usuario debe tener al menos 8 caracteres",
+          "max": "El usuario debe tener menos de 20 caracteres"
+        },
+        "password": {
+          "min": "La contraseña debe tener al menos 8 caracteres"
+        },
+        "name": {
+          "min": "El nombre debe tener al menos 5 caracteres",
+          "max": "El nombre debe tener menos de 20 caracteres"
+        }
+      },
+      "placeholders": {
+        "selectGender": "Seleccionar género",
+        "selectClass": "Seleccionar clase",
+        "selectClassName": "Seleccionar nombre de clase",
+        "password": "La contraseña no se muestra por seguridad",
+        "selectLevel":"Selecciona el nivel",
+        "username": "Ingrese nombre de usuario"
+      },
+      "buttons": {
+        "addTeacher": "Agregar Profesor",
+        "exportExcel": "Exportar a Excel",
+        "deleteSelected": "Eliminar Seleccionados",
+        "cancel": "Cancelar",
+        "save": "Guardar"
+      },
+      "messages": {
+        "confirmDeleteSingle": "¿Está seguro que desea eliminar este profesor?",
+        "confirmDeleteMultiple": "¿Está seguro que desea eliminar los profesores seleccionados?"
+      }
+    },
+    "dataStudent": {
+      "title": "Datos del Estudiante",
+      "labels": {
+        "nis": "NIS",
+        "name": "Nombre",
+        "password": "Contraseña",
+        "birthPlace": "Lugar de Nacimiento",
+        "birthDate": "Fecha de Nacimiento",
+        "gender": "Género",
+        "religion": "Religión",
+        "entryYear": "Año de Ingreso",
+        "address": "Dirección",
+        "phone": "Contacto",
+        "class": "Clase",
+        "contact": "Contacto",
+        "className": "Nombre de la clase",
+        "section":"Sección",
+        "level":"Nivel",
+        "fillData": "Completar datos",
+        "classInfo": "Información de clase"
+      },
+      "validation": {
+        "required": {
+          "nis": "El NIS es requerido",
+          "name": "El nombre es requerido",
+          "password": "La contraseña es requerida",
+          "birthPlace": "El lugar de nacimiento es requerido",
+          "birthDate": "La fecha de nacimiento es requerida",
+          "gender": "El género es requerido",
+          "religion": "La religión es requerida",
+          "entryYear": "El año de ingreso es requerido",
+          "phone": "El teléfono es requerido",
+          "class": "La clase es requerida",
+          "className": "Nombre de clase requerido"
+        },
+        "length": {
+          "min": "Mínimo {min} caracteres",
+          "max": "Máximo {max} caracteres"
+        }
+      },
+      "placeholders": {
+        "selectGender": "Seleccionar género",
+        "selectClass": "Seleccionar Clase",
+        "selectReligion": "Seleccionar religión",
+        "selectClassName": "Seleccionar nombre de clase",
+        "password": "Ingrese contraseña",
+        "selectLevel": "Seleccionar Nivel"
+      },
+      "buttons": {
+        "uploadExcel": "Subir Excel",
+        "addStudent": "Agregar Estudiante",
+        "exportExcel": "Exportar a Excel",
+        "deleteSelected": "Eliminar Seleccionados",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "downloadTemplate": "Descargar plantilla Excel"
+      },
+      "messages": {
+        "confirmDeleteSingle": "¿Está seguro que desea eliminar este estudiante?",
+        "confirmDeleteMultiple": "¿Está seguro que desea eliminar los estudiantes seleccionados?",
+        "uploadInstructions": {
+          "step1": "Haga clic en 'Descargar plantilla' para obtener el archivo Excel vacío",
+          "step2": "Complete todos los datos de estudiantes con información correcta",
+          "step3": "Asegúrese que la clase y nombre coincidan con datos existentes",
+          "step4": "Arrastre el archivo al área o seleccione manualmente",
+          "step5": "Haga clic en 'Subir' para procesar los datos"
+        },
+        "fileNotFound": "Archivo no encontrado",
+        "invalidFormat": "Formato de archivo no soportado",
+        "instructions": "Instrucciones:"
+      }
+    },
+    "dataSchedule": {
+      "title": "Horario",
+      "currentSchedule": "Horario Actual",
+      "noSchedule": "Sin horario",
+      "holidayMessages": {
+        "noClassNational": "No hay clases. {holiday}",
+        "noClassCustom": "No hay clases. {holiday}"
+      },
+      "times": {
+        "start": "Inicio",
+        "end": "Fin"
+      },
+      "messages": {
+        "confirmDeleteSingle": "¿Está seguro que desea eliminar este horario?",
+        "confirmDeleteMultiple": "¿Está seguro que desea eliminar los horarios seleccionados?"
+      },
+      "placeholders": {
+        "search": "Buscar horario..."
+      },
+      "buttons": {
+        "addSchedule": "Agregar Horario"
+      }
+    },
+    "dataCategories": {
+      "options": {
+        "exam": "Examen",
+        "assignment": "Tarea"
+      }
+    },
+    "dataClasses": {
+      "title": "Clase",
+      "messages": {
+        "confirmDelete": "¿Está seguro que desea eliminar este elemento?",        
+        "selectClassFirst": "Seleccione una clase primero",
+        "selectAttendanceReport": "Seleccione informes de asistencia estudiantil por clase.",
+        "studentName": "Nombre del Estudiante",
+        "total": "Total",
+        "date": "Fecha",
+        "selectGradeReport": "Seleccionar reportes de calificaciones por clase",
+        "studentGradeReport": "Reporte de Calificaciones",
+        "classYear": "Año de Clase",
+        "className": "Nombre de Clase",
+        "noData": "Sin datos",
+        "confirmExport": "Exportar a Excel",
+        "confirmDeleteGeneric": "¿Está seguro que desea eliminar este elemento?",
+        "noHomeroom": "Sin tutor de clase",
+        "teacherNotFound": "Datos de profesor no encontrados",
+        "noStudents": "La clase no tiene estudiantes"
+      },
+      "placeholders": {
+        "search": "Buscar nombre y número de clase",        
+        "searchStudent": "Buscar nombre y NIS del estudiante",
+        "selectClass": "Seleccionar clase",
+        "selectMeeting": "Seleccionar encuentro...",
+        "searchTeacher": "Buscar nombre del profesor...",
+        "selectClassName": "Seleccionar nombre de clase",
+        "selectTeacher": "Seleccionar Profesor",
+        "enterMeetingCount": "Ingrese número de reuniones"
+      },
+      "buttons": {
+        "addClass": "Agregar Clase",
+        "clear": "Limpiar",
+        "excel": "Excel",
+        "print": "Imprimir",
+        "clearFilters": "Limpiar Filtros",
+        "exportExcel": "Exportar a Excel"
+      },
+      "labels": {
+        "selectAttendanceReport": "Seleccione informes de asistencia estudiantil por clase",
+        "selectGradeReport": "Seleccionar reportes de calificaciones por clase",
+        "studentGradeReport": "Reporte de Calificaciones Estudiantiles",
+        "studentName": "Nombre del Estudiante",
+        "date": "Fecha",
+        "average": "Promedio",
+        "ranking": "Posición",
+        "semester": "Semestre",
+        "academicYear": "Año Académico",
+        "student": "Estudiante",
+        "total": "Total",
+        "filterCategory": "Categoría de Filtro",
+        "examCategory": "Categoría de Examen",
+        "rowsPerPage": "Filas por página",
+        "time": "Hora",
+        "start": "Inicio",
+        "end": "Fin",
+        "day": "Día",
+        "class": "Clase",
+        "className": "Nombre de Clase",
+        "entryYear": "Año de Ingreso",
+        "studentCount": "Cantidad de Estudiantes",
+        "homeroomTeacher": "Tutor de Clase",
+        "classPosition": "Posición del Aula",
+        "level": "Nivel",
+        "students":"Estudiantes",
+        "addSchedule": "Agregar Horario",
+        "subject": "Materia",
+        "meeting": "Reunión",
+        "editSchedule": "Editar Horario",
+        "dashboard": "Panel",
+        "masterData": "Datos Maestros",
+        "teacher": "Profesor",
+        "schedule": "Horario",
+        "reports": "Reportes",
+        "attendance": "Asistencia",
+        "grades": "Calificaciones",
+        "subjects": "Materias"
+      },
+      "headers": {
+        "studentName": "Nombre del Estudiante",
+        "subjects": "Materias",
+        "average": "Promedio",
+        "ranking": "Posición",
+        "task": "T",
+        "exam": "U",
+        "attendanceReport": "Reporte de Asistencia",
+        "present": "P",
+        "permit": "I",
+        "sick": "S",
+        "absent": "A"
+      },
+      "orderOptions": {
+        "1-12": "1-12",
+        "12-1": "12-1",
+        "mostStudents": "Más Estudiantes",
+        "leastStudents": "Menos Estudiantes",
+        "newest": "Más reciente",
+        "oldest": "Más antiguo",
+        "100-0": "100-0",
+        "0-100": "0-100"
+      },
+      "semester1": "Semestre 1",
+      "semester2": "Semestre 2",
+      "semesterStatus": "Estado del Semestre",      
+      "validation": {
+        "required": {
+          "className": "Nivel de clase requerido",
+          "classNameMin": "Mínimo clase 1",
+          "classNameMax": "Máximo clase 12",
+          "name": "Nombre de clase requerido", 
+          "nameMax": "Nombre máximo 20 caracteres",
+          "class": "Clase requerida",
+          "day": "Día requerido",
+          "start": "Hora de inicio requerida",
+          "end": "Hora de fin requerida"
+        },
+        "max": {
+          "meeting": "Máximo 50 reuniones por semestre"
+        },
+        "min": {
+          "meeting": "Mínimo 15 reuniones requeridas"
+        }
+      }
+    },
+    "dataLessons": {
+      "title": "Materias",
+      "messages": {
+        "confirmDelete": "¿Está seguro que desea eliminar esta materia?",
+        "noSubjectsFound": "No se encontraron materias"
+      },
+      "placeholders": {
+        "search": "Buscar código y nombre de materia",
+        "selectSubject": "Seleccionar materia",
+        "searchSubject": "Buscar nombre de materia..."
+      },
+      "buttons": {
+        "addLesson": "Agregar Materia"
+      }
+    },
+    "dataMaster": {
+      "labels": {
+        "academicSystem": "Sistema Académico",
+        "learningHours": "Horas de Clase",
+        "semester": "Semestre",
+        "academicYear": "Año Académico",
+        "holidaySystem": "Sistema de Vacaciones",
+        "weeklyHoliday": "Vacaciones Semanales",
+        "nationalHoliday": "Feriados Nacionales",
+        "holidayDescription": "Descripción del Feriado",
+        "date": "Fecha"
+      },
+      "placeholders": {
+        "academicYear": "2000/2001"
+      },
+      "buttons": {
+        "addAcademicYear": "Agregar Año Académico",
+        "addHoliday": "Agregar Feriado Nacional"
+      },
+      "validation": {
+        "required": {
+          "date": "Fecha es requerida",
+          "description": "Descripción es requerida"
+        }
+      }
+    },
+    "dataSubjects": {
+      "labels": {
+        "subjectCode": "Código de Materia",
+        "subjectName": "Nombre de Materia"
+      },
+      "validation": {
+        "required": {
+          "subjectCode": "El código es requerido",
+          "subjectName": "El nombre es requerido"
+        }
+      }
+    },
+    "dataGrades": {
+      "labels": {
+        "subject": "Materia",
+        "category": "Categoría",
+        "grade": "Calificación",
+        "academicYear": "Año Académico",
+        "semester": "Semestre"
+      }
+    },
+    "dataStudy": {
+      "labels": {
+        "studentName": "Nombre del Estudiante",
+        "meeting": "Reunión",
+        "grade": "Calificación",
+        "academicYear": "Año Académico",
+        "semester": "Semestre"
+      }
+    },
+    "validation": {
+      "required": {
+        "className": "Nombre de clase requerido",
+        "name": "Nombre requerido"
+      },
+      "length": {
+        "classNameMin": "Mínimo clase 1",
+        "classNameMax": "Máximo clase 12",
+        "name": "Nombre requerido",
+        "nameMax": "Nombre máximo 20 caracteres"
+      }
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "totalStudents": "Total de Estudiantes",
+      "totalTeachers": "Total de Profesores",
+      "totalClasses": "Total de Clases",
+      "totalSubjects": "Total de Materias",
+      "studentLevelChart": "Gráfico de Niveles de Estudiantes",
+      "studentGrowthChart": "Gráfico de Crecimiento de Estudiantes",
+      "classChart": "Gráfico de Clases",
+      "academicYear": "Año Académico",
+      "classCount": "Cantidad de Clases",
+      "noData": "Sin datos",
+      "studentLevels": {
+        "SD": "Inicial",
+        "SMP": "Primaria",
+        "SMA": "Secundaria"
+      }
+    },
+    "sidebar": {
+      "reports": "Reportes",
+      "attendance": "Asistencia",
+      "grades": "Calificaciones"
+    },
+    "dataGuru": {
+      "labels": {
+        "nip": "NIP",
+        "name": "Nombre",
+        "studyField": "Área de Estudio", 
+        "contact": "Contacto",
+        "homeroom": "Tutor de Clase"
+      },
+      "messages": {
+        "emptyData": "Datos Vacíos"
+      }
+    }
+  },
+  "guru": {
+    "sidebar": {
+      "homeroom": "Tutoría",
+      "dailyAttendance": "Asistencia Diaria",
+      "studentData": "Datos del Estudiante",
+      "gradeData": "Datos de Calificaciones",
+      "study": "Estudio",
+      "reports": "Reportes",
+      "reportCard": "Boletín de Notas"
+    }
+  },
+  "siswa": {
+    "sidebar": {
+      "schedule": "Horario",
+      "reportCard": "Boletín de Notas"
+    }
+  },
+  "pages": {
+    "report": {
+      "selectStudent": "Seleccione estudiante para ver y imprimir reporte"
+    }
+  }
+}

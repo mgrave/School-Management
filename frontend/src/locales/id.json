@@ -1,0 +1,492 @@
+{
+  "metadata": {
+    "language": "Bahasa Indonesia",
+    "locale": "id-ID",
+    "direction": "ltr",
+    "version": "1.0",
+    "lastUpdate": "2024-01-20"
+  },
+  "auth": {
+    "login": {
+      "title": "Masuk",
+      "username": "Nama Pengguna",
+      "password": "Kata Sandi",
+      "rememberMe": "Ingat saya",
+      "forgotPassword": "Lupa kata sandi?",
+      "submit": "Masuk",
+      "nipNis": "NIP/NIS",
+      "nipPlaceholder": "Masukkan NIP/NIS Anda",
+      "passwordPlaceholder": "Masukkan kata sandi Anda",
+      "loginButton": "Masuk",
+      "spanishText": "Selamat datang di Schoolarcy"
+    },
+    "logout": "Keluar",
+    "validation": {
+      "username": {
+        "min": "Nama pengguna minimal 8 karakter",
+        "max": "Nama pengguna maksimal 20 karakter"
+      },
+      "password": {
+        "min": "Kata sandi minimal 8 karakter",
+        "max": "Kata sandi maksimal 20 karakter"
+      }
+    }
+  },
+  "common": {
+    "basic": {
+      "yes": "Ya",
+      "no": "Tidak",
+      "ok": "OK",
+      "all": "Semua",
+      "empty": "kosong",
+      "optional": "opsional",
+      "clear":"Clean",
+      "or":"or"
+    },
+    "status": {
+      "title": "Status",
+      "active": "Aktif",
+      "inactive": "Tidak Aktif",
+      "loading": "Memuat",
+      "error": "Error",
+      "success": "Berhasil",
+      "copied": "Data tersalin"
+    },
+    "gender": {
+      "title": "Jenis Kelamin",
+      "male": "Laki-laki",
+      "female": "Perempuan"
+    },
+    "time": {
+      "date": "Tanggal",
+      "time": "Waktu",
+      "year": "Tahun",
+      "month": "Bulan",
+      "today": "Hari Ini",
+      "thisWeek": "Minggu Ini"
+    },
+    "calendar": {
+      "days": {
+        "monday": "Senin",
+        "tuesday": "Selasa",
+        "wednesday": "Rabu",
+        "thursday": "Kamis",
+        "friday": "Jumat",
+        "saturday": "Sabtu",
+        "sunday": "Minggu",
+        "day": "Hari"
+      }
+    },
+    "fileUpload": {
+      "maxSize": "Ukuran file maksimal {size}MB",
+      "allowedExtensions": "Ekstensi yang diizinkan: {extensions}",
+      "dragDrop": "Seret dan lepas file di sini",
+      "browse": "Pilih file"
+    }
+  },
+  "ui": {
+    "buttons": {
+      "add": "Tambah",
+      "edit": "Edit",
+      "delete": "Hapus",
+      "save": "Simpan",
+      "cancel": "Batal",
+      "clear": "Bersihkan",
+      "print": "Cetak",
+      "export": "Ekspor",
+      "search": "Cari",
+      "filter": "Filter",
+      "close": "Tutup"
+    },
+    "modal": {
+      "close": "Tutup modal",
+      "confirm": "Konfirmasi",
+      "cancel": "Batal"
+    },
+    "table": {
+      "actions": "Aksi",
+      "noData": "Tidak ada data tersedia",
+      "showing": "Menampilkan {from} sampai {to} dari {total} data",
+      "dataNotFound": "Data tidak ditemukan"
+    },
+    "filters": {
+      "sortBy": "Urut berdasarkan",
+      "orderOptions": {
+        "aToZ": "A-Z",
+        "zToA": "Z-A",
+        "newest": "Terbaru",
+        "oldest": "Terlama"
+      },
+      "clearFilter": "Hapus Filter",
+      "filterCategory": "Kategori Filter"
+    }
+  },
+  "messages": {
+    "confirmation": {
+      "delete": {
+        "title": "Konfirmasi penghapusan",
+        "message": "Apakah Anda yakin ingin menghapus item ini?",
+        "confirm": "Ya, hapus",
+        "cancel": "Tidak, batal"
+      }
+    },
+    "success": {
+      "saved": "Berhasil disimpan",
+      "updated": "Berhasil diperbarui",
+      "deleted": "Berhasil dihapus"
+    },
+    "errors": {
+      "generic": "Terjadi kesalahan",
+      "notFound": "Tidak ditemukan",
+      "required": "Bidang wajib diisi"
+    }
+  },
+  "forms": {
+    "formName": {
+      "title": "Judul Formulir",
+      "labels": {
+        "name": "Nama",
+        "date": "Tanggal",
+        "time": "Waktu",
+        "description": "Deskripsi",
+        "status": "Status"
+      },
+      "validation": {
+        "required": {
+          "field": "{field} wajib diisi",
+          "name": "Nama wajib diisi",
+          "date": "Tanggal wajib diisi",
+          "time": "Waktu wajib diisi"
+        },
+        "length": {
+          "min": "Minimal {min} karakter",
+          "max": "Maksimal {max} karakter"
+        }
+      },
+      "messages": {
+        "confirmDelete": "Apakah anda yakin ingin menghapus guru?"
+      },
+      "placeholders": {
+        "search": "Cari...",
+        "select": "Pilih...",
+        "enterName": "Masukkan nama"
+      },
+      "buttons": {
+        "submit": "Teks spesifik",
+        "cancel": "Teks spesifik"
+      }
+    },
+    "dataTeacher": {
+      "title": "Data Guru",
+      "labels": {
+        "name": "Nama",
+        "nip": "NIP",
+        "password": "Kata Sandi",
+        "birthPlace": "Tempat Lahir",
+        "birthDate": "Tanggal Lahir",
+        "gender": "Jenis Kelamin",
+        "subject": "Mata Pelajaran",
+        "phone": "Telepon",
+        "class": "Kelas",
+        "className": "Nama Kelas",
+        "address": "Alamat",
+        "level":"Level"
+      },
+      "validation": {
+        "required": {
+          "name": "Nama wajib diisi",
+          "nip": "NIP wajib diisi",
+          "password": "Kata sandi wajib diisi",
+          "birthPlace": "Tempat lahir wajib diisi",
+          "birthDate": "Tanggal lahir wajib diisi",
+          "gender": "Jenis kelamin wajib diisi",
+          "subject": "Mata pelajaran wajib diisi",
+          "phone": "Telepon wajib diisi",
+          "className": "Nama kelas wajib diisi"
+        },
+        "length": {
+          "min": "Minimal {min} karakter",
+          "max": "Maksimal {max} karakter"
+        }
+      },
+      "placeholders": {
+        "selectGender": "Pilih jenis kelamin",
+        "selectClass": "Pilih kelas",
+        "selectClassName": "Pilih nama kelas",
+        "selectLevel":"Select level"
+      },
+      "buttons": {
+        "addTeacher": "Tambah Guru",
+        "exportExcel": "Ekspor ke Excel",
+        "deleteSelected": "Hapus yang Dipilih",
+        "cancel": "Batal",
+        "save": "Simpan"
+      },
+      "messages": {
+        "confirmDeleteSingle": "Apakah Anda yakin ingin menghapus guru ini?",
+        "confirmDeleteMultiple": "Apakah Anda yakin ingin menghapus guru yang dipilih?"
+      }
+    },
+    "dataStudent": {
+      "title": "Data Siswa",
+      "labels": {
+        "nis": "NIS",
+        "name": "Nama",
+        "password": "Kata Sandi",
+        "birthPlace": "Tempat Lahir",
+        "birthDate": "Tanggal Lahir",
+        "gender": "Jenis Kelamin",
+        "religion": "Agama",
+        "entryYear": "Tahun Masuk",
+        "address": "Alamat",
+        "phone": "Kontak",
+        "class": "Kelas",
+        "contact": "Kontak",
+        "className": "Kelas Name",
+        "level":"Level"
+      },
+      "validation": {
+        "required": {
+          "nis": "NIS wajib diisi",
+          "name": "Nama wajib diisi",
+          "password": "Kata sandi wajib diisi",
+          "birthPlace": "Tempat lahir wajib diisi",
+          "birthDate": "Tanggal lahir wajib diisi",
+          "gender": "Jenis kelamin wajib diisi",
+          "religion": "Agama wajib diisi",
+          "entryYear": "Tahun masuk wajib diisi",
+          "phone": "Telepon wajib diisi",
+          "class": "Kelas wajib diisi",
+          "section":"Section"
+        },
+        "length": {
+          "min": "Minimal {min} karakter",
+          "max": "Maksimal {max} karakter"
+        }
+      },
+      "placeholders": {
+        "selectGender": "Pilih jenis kelamin",
+        "selectClass": "Pilih kelas",
+        "selectReligion": "Pilih agama",
+        "selectLevel": "Select level"
+      },
+      "buttons": {
+        "uploadExcel": "Unggah Excel",
+        "addStudent": "Tambah Siswa",
+        "exportExcel": "Ekspor ke Excel",
+        "deleteSelected": "Hapus yang Dipilih",
+        "cancel": "Batal",
+        "save": "Simpan"
+      },
+      "messages": {
+        "confirmDeleteSingle": "Apakah Anda yakin ingin menghapus siswa ini?",
+        "confirmDeleteMultiple": "Apakah Anda yakin ingin menghapus siswa yang dipilih?"
+      }
+    },
+    "dataSchedule": {
+      "title": "Jadwal",
+      "messages": {
+        "confirmDeleteSingle": "Apakah Anda yakin ingin menghapus jadwal ini?",
+        "confirmDeleteMultiple": "Apakah Anda yakin ingin menghapus jadwal yang dipilih?"
+      },
+      "placeholders": {
+        "search": "Cari jadwal..."
+      },
+      "buttons": {
+        "addSchedule": "Tambah Jadwal"
+      }
+    },
+    "dataCategories": {
+      "options": {
+        "exam": "Ujian",
+        "assignment": "Tugas"
+      }
+    },
+    "dataClasses": {
+      "title": "Kelas",
+      "messages": {
+        "confirmDelete": "Apakah anda yakin ingin menghapus kelas?",
+        "selectClassFirst": "Pilih Kelas Terlebih dulu..",
+        "selectAttendanceReport": "Pilih rekap absensi siswa pada setiap kelas.",
+        "selectGradeReport": "Pilih rekap nilai siswa pada setiap kelas.",
+        "studentGradeReport": "Laporan Nilai Siswa",
+        "classYear": "Tahun Kelas",
+        "className": "Nama Kelas",
+        "noData": "Tidak ada data",
+        "noHomeroom": "Tidak memiliki Wali Kelas",
+        "confirmExport": "Ekspor ke Excel",
+        "confirmDeleteGeneric": "Apakah Anda yakin ingin menghapus item ini?"
+      },
+      "placeholders": {
+        "search": "Cari nama dan kelas",
+        "selectClass": "Pilih Kelas",
+        "selectReligion": "Pilih agama",
+        "selectPertemuan": "Pilih pertemuan...",
+        "searchTeacher": "Cari nama guru...",
+        "selectMeeting": "Pilih pertemuan...",
+        "searchStudent": "Cari nama dan NIS siswa"
+      },
+      "buttons": {
+        "addClass": "Tambah Kelas",
+        "clear": "Bersihkan",
+        "excel": "Excel",
+        "print": "Cetak",
+        "clearFilters": "Bersihkan Filter",
+        "exportExcel": "Ekspor ke Excel"
+      },
+      "labels": {
+        "selectAttendanceReport": "Pilih rekap absensi siswa pada setiap kelas.",
+        "selectGradeReport": "Pilih rekap nilai siswa pada setiap kelas.",
+        "studentGradeReport": "Laporan Nilai Siswa",
+        "studentName": "Nama Siswa",
+        "total": "Total",
+        "date": "Tanggal",
+        "average": "Rata-Rata",
+        "ranking": "Peringkat",
+        "semester": "Semester",
+        "academicYear": "Tahun Ajaran",
+        "student": "Siswa",
+        "filterCategory": "Kategori Filter",
+        "examCategory": "Kategori Ujian",
+        "rowsPerPage": "Baris per halaman",
+        "time": "Waktu",
+        "start": "Mulai",
+        "end": "Selesai",
+        "day": "Hari",
+        "class": "Kelas",
+        "className": "Nama Kelas",
+        "entryYear": "Tahun Masuk",
+        "studentCount": "Jumlah Siswa",
+        "homeroomTeacher": "Wali Kelas",
+        "classPosition": "Posisi Kelas",
+        "name":"Section",
+        "students":"Students",
+        "level":"Level"
+      },
+      "orderOptions": {
+        "1-12": "1-12",
+        "12-1": "12-1",
+        "mostStudents": "Siswa Terbanyak",
+        "leastStudents": "Siswa Terdikit",
+        "newest": "Terbaru",
+        "oldest": "Terlama",
+        "100-0": "100-0",
+        "0-100": "0-100"
+      },
+      "semester1": "Semester 1",
+      "semester2": "Semester 2",
+      "semesterStatus": "Status Semester"
+    },
+    "dataLessons": {
+      "title": "Mata Pelajaran",
+      "messages": {
+        "confirmDelete": "Apakah anda yakin ingin menghapus mata pelajaran?",
+        "noSubjectsFound": "Data bidang studi tidak ditemukan"
+      },
+      "placeholders": {
+        "search": "Cari kode dan nama mata pelajaran",
+        "selectSubject": "Pilih bidang studi",
+        "searchSubject": "Cari nama bidang studi..."
+      },
+      "buttons": {
+        "addLesson": "Tambah Pelajaran"
+      }
+    },
+    "dataMaster": {
+      "labels": {
+        "academicSystem": "Sistem Akademik",
+        "learningHours": "Jam Pembelajaran",
+        "semester": "Semester",
+        "academicYear": "Tahun Ajaran",
+        "holidaySystem": "Sistem Libur Sekolah",
+        "weeklyHoliday": "Libur Perpekan",
+        "nationalHoliday": "Libur Nasional",
+        "holidayDescription": "Keterangan Libur",
+        "date": "Tanggal"
+      },
+      "placeholders": {
+        "academicYear": "2000/2001"
+      },
+      "buttons": {
+        "addAcademicYear": "Tambah Ajaran",
+        "addHoliday": "Tambah Libur Nasional"
+      },
+      "validation": {
+        "required": {
+          "date": "Tanggal diperlukan.",
+          "description": "Keterangan diperlukan."
+        }
+      }
+    },
+    "dataSubjects": {
+      "labels": {
+        "subjectCode": "Kode Mata Pelajaran",
+        "subjectName": "Nama Mata Pelajaran"
+      }
+    },
+    "dataGrades": {
+      "labels": {
+        "subject": "Mata Pelajaran",
+        "category": "Kategori",
+        "grade": "Nilai",
+        "academicYear": "Tahun Ajaran",
+        "semester": "Semester"
+      }
+    },
+    "dataStudy": {
+      "labels": {
+        "studentName": "Nama Siswa",
+        "meeting": "Pertemuan",
+        "grade": "Nilai",
+        "academicYear": "Tahun Ajaran",
+        "semester": "Semester"
+      }
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "totalStudents": "Total Siswa",
+      "totalTeachers": "Total Guru",
+      "totalClasses": "Total Kelas",
+      "totalSubjects": "Total Mata Pelajaran",
+      "studentLevelChart": "Grafik Tingkat Siswa",
+      "studentGrowthChart": "Grafik Pertumbuhan Siswa",
+      "classChart": "Grafik Kelas",
+      "academicYear": "Tahun Ajaran",
+      "classCount": "Jumlah Kelas",
+      "noData": "Tidak ada data",
+      "studentLevels": {
+        "SD": "SD",
+        "SMP": "SMP",
+        "SMA": "SMA"
+      }
+    },
+    "sidebar": {
+      "reports": "Rekap",
+      "attendance": "Absensi",
+      "grades": "Nilai"
+    }
+  },
+  "guru": {
+    "sidebar": {
+      "homeroom": "Wali Kelas",
+      "dailyAttendance": "Absen Harian",
+      "studentData": "Data Siswa",
+      "gradeData": "Data Nilai",
+      "study": "Studi",
+      "reports": "Rekap",
+      "reportCard": "Rapor"
+    }
+  },
+  "siswa": {
+    "sidebar": {
+      "schedule": "Jadwal",
+      "reportCard": "Rapor"
+    }
+  },
+  "pages": {
+    "report": {
+      "selectStudent": "Pilih siswa untuk menampilkan dan mencetak rapor"
+    }
+  }
+}

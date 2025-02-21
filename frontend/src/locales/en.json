@@ -1,0 +1,624 @@
+{
+  "metadata": {
+    "language": "English",
+    "locale": "en-US",
+    "direction": "ltr",
+    "version": "1.0",
+    "lastUpdate": "2024-01-20"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "submit": "Sign in",
+      "nipNis": "NIP/NIS",
+      "nipPlaceholder": "Enter your NIP/NIS",
+      "passwordPlaceholder": "Enter your password",
+      "loginButton": "Login",
+      "spanishText": "Welcome to Schoolarcy"
+    },
+    "logout": "Sign out",
+    "validation": {
+      "username": {
+        "min": "Username must be at least 8 characters",
+        "max": "Username must be less than 20 characters"
+      },
+      "password": {
+        "min": "Password must be at least 8 characters",
+        "max": "Password must be less than 20 characters"
+      }
+    }
+  },
+  "common": {
+    "basic": {
+      "yes": "Yes",
+      "no": "No",
+      "ok": "OK",
+      "all": "All",
+      "empty": "empty",
+      "optional": "optional",
+      "clear":"Clean",
+      "download": "Download",
+      "or":"or",
+      "language": "Language"
+    },
+    "status": {
+      "title": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "loading": "Loading",
+      "error": "Error",
+      "success": "Success",
+      "copied": "Data copied"
+    },
+    "gender": {
+      "title": "Gender",
+      "male": "Male",
+      "female": "Female"
+    },
+    "time": {
+      "date": "Date",
+      "time": "Time",
+      "year": "Year",
+      "month": "Month",
+      "today": "Today",
+      "thisWeek": "This Week",
+      "start": "Start",
+      "end": "End"
+    },
+    "calendar": {
+      "days": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        "day": "Day"
+      }
+    },
+    "fileUpload": {
+      "maxSize": "Maximum file size {size}MB",
+      "allowedExtensions": "Allowed extensions: {extensions}",
+      "dragDrop": "Drag and drop files here",
+      "browse": "Browse file"
+    },
+    "religions": {
+      "islam": "Islam",
+      "christian": "Christian",
+      "catholic": "Catholic",
+      "hindu": "Hindu",
+      "buddhist": "Buddhist",
+      "confucianism": "Confucianism",
+      "beliefs": "Beliefs"
+    }
+  },
+  "ui": {
+    "buttons": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "clear": "Clear",
+      "print": "Print",
+      "export": "Export",
+      "search": "Search",
+      "filter": "Filter",
+      "close": "Close",
+      "upload": "Upload"
+    },
+    "modal": {
+      "close": "Close modal",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "table": {
+      "actions": "Actions",
+      "noData": "No data available",
+      "showing": "Showing {from} to {to} of {total} records",
+      "dataNotFound": "No data found"
+    },
+    "filters": {
+      "sortBy": "Sort by",
+      "orderOptions": {
+        "aToZ": "A-Z",
+        "zToA": "Z-A",
+        "newest": "Newest",
+        "oldest": "Oldest"
+      },
+      "clearFilter": "Clear Filter",
+      "filterCategory": "Filter Category"
+    }
+  },
+  "messages": {
+    "confirmation": {
+      "delete": {
+        "title": "Confirm deletion",
+        "message": "Are you sure you want to delete this item?",
+        "confirm": "Yes, delete",
+        "cancel": "No, cancel"
+      }
+    },
+    "success": {
+      "saved": "Successfully saved",
+      "updated": "Successfully updated",
+      "deleted": "Successfully deleted"
+    },
+    "errors": {
+      "generic": "An error has occurred",
+      "notFound": "Not found",
+      "required": "Required field",
+      "invalidFileType": "Unsupported file format"
+    }
+  },
+  "forms": {
+    "formName": {
+      "title": "Form Title",
+      "labels": {
+        "name": "Name",
+        "date": "Date",
+        "time": "Time",
+        "description": "Description",
+        "status": "Status"
+      },
+      "validation": {
+        "required": {
+          "field": "{field} is required",
+          "name": "Name is required",
+          "date": "Date is required",
+          "time": "Time is required"
+        },
+        "length": {
+          "min": "Minimum {min} characters",
+          "max": "Maximum {max} characters"
+        }
+      },
+      "messages": {
+        "confirmDelete": "Really delete the item"
+      },
+      "placeholders": {
+        "search": "Search...",
+        "select": "Select...",
+        "enterName": "Enter name"
+      },
+      "buttons": {
+        "submit": "Specific text",
+        "cancel": "Specific text"
+      }
+    },
+    "dataTeacher": {
+      "title": "Teacher Data",
+      "labels": {
+        "nip": "NIP",
+        "name": "Name",
+        "password": "Password",
+        "birthPlace": "Birth Place",
+        "birthDate": "Birth Date",
+        "gender": "Gender",
+        "subject": "Subject",
+        "phone": "Phone",
+        "class": "Class",
+        "className": "Class Name",
+        "address": "Address",
+        "level":"Level"
+      },
+      "validation": {
+        "required": {
+          "name": "Name is required",
+          "nip": "NIP is required",
+          "password": "Password is required",
+          "birthPlace": "Birth place is required",
+          "birthDate": "Birth date is required",
+          "gender": "Gender is required",
+          "subject": "Subject is required",
+          "phone": "Phone is required",
+          "className": "Class name is required"
+        },
+        "length": {
+          "min": "Minimum {min} characters",
+          "max": "Maximum {max} characters"
+        },
+        "username": {
+          "min": "Username must be at least 8 characters",
+          "max": "Username must be less than 20 characters"
+        },
+        "password": {
+          "min": "Password must be at least 8 characters"
+        },
+        "name": {
+          "min": "Name must be at least 5 characters",
+          "max": "Name must be less than 20 characters"
+        }
+      },
+      "placeholders": {
+        "selectGender": "Select gender",
+        "selectClass": "Select class",
+        "selectClassName": "Select class name",
+        "password": "Password is hidden for security",
+        "selectLevel":"Select level",
+        "username": "Enter username"
+      },
+      "buttons": {
+        "addTeacher": "Add Teacher",
+        "exportExcel": "Export to Excel",
+        "deleteSelected": "Delete Selected",
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "messages": {
+        "confirmDeleteSingle": "Are you sure you want to delete this teacher?",
+        "confirmDeleteMultiple": "Are you sure you want to delete the selected teachers?"
+      }
+    },
+    "dataStudent": {
+      "title": "Student Data",
+      "labels": {
+        "nis": "NIS",
+        "name": "Name",
+        "password": "Password",
+        "birthPlace": "Birth Place",
+        "birthDate": "Birth Date",
+        "gender": "Gender",
+        "religion": "Religion",
+        "entryYear": "Entry Year",
+        "address": "Address",
+        "phone": "Contact",
+        "class": "Class",
+        "contact": "Contact",
+        "className": "Class Name",
+        "section":"Section",
+        "level":"Level",
+        "fillData": "Fill Student Data",
+        "classInfo": "Class Information"
+      },
+      "validation": {
+        "required": {
+          "nis": "NIS is required",
+          "name": "Name is required",
+          "password": "Password is required",
+          "birthPlace": "Birth place is required",
+          "birthDate": "Birth date is required",
+          "gender": "Gender is required",
+          "religion": "Religion is required",
+          "entryYear": "Entry year is required",
+          "phone": "Phone is required",
+          "class": "Class is required",
+          "className": "Class name is required"
+        },
+        "length": {
+          "min": "Minimum {min} characters",
+          "max": "Maximum {max} characters"
+        }
+      },
+      "placeholders": {
+        "selectGender": "Select gender",
+        "selectClass": "Select Class",
+        "selectReligion": "Select religion",
+        "selectClassName": "Select class name",
+        "password": "Enter password",
+        "selectLevel": "Select level"
+      },
+      "buttons": {
+        "uploadExcel": "Upload Excel",
+        "addStudent": "Add Student",
+        "exportExcel": "Export to Excel",
+        "deleteSelected": "Delete Selected",
+        "cancel": "Cancel",
+        "save": "Save",
+        "downloadTemplate": "Download Excel Template"
+      },
+      "messages": {
+        "confirmDeleteSingle": "Are you sure you want to delete this student?",
+        "confirmDeleteMultiple": "Are you sure you want to delete the selected students?",
+        "uploadInstructions": {
+          "step1": "Click 'Download Template' to get the empty Excel file",
+          "step2": "Fill all student data with correct information",
+          "step3": "Ensure class and class name match existing data",
+          "step4": "Drag file to upload area or select manually",
+          "step5": "Click 'Upload' to process data"
+        },
+        "fileNotFound": "File not found",
+        "invalidFormat": "Unsupported file format",
+        "instructions": "Instructions:"
+      }
+    },
+    "dataSchedule": {
+      "title": "Schedule",
+      "currentSchedule": "Current Schedule",
+      "noSchedule": "No schedule",
+      "holidayMessages": {
+        "noClassNational": "No classes. {holiday}",
+        "noClassCustom": "No classes. {holiday}"
+      },
+      "times": {
+        "start": "Start",
+        "end": "End"
+      },
+      "messages": {
+        "confirmDeleteSingle": "Are you sure you want to delete this schedule?",
+        "confirmDeleteMultiple": "Are you sure you want to delete the selected schedules?"
+      },
+      "placeholders": {
+        "search": "Search schedule..."
+      },
+      "buttons": {
+        "addSchedule": "Add Schedule"
+      }
+    },
+    "dataCategories": {
+      "options": {
+        "exam": "Exam",
+        "assignment": "Assignment"
+      }
+    },
+    "dataClasses": {
+      "messages": {
+        "confirmDelete": "Are you sure you want to delete this class?",
+        "selectClassFirst": "Please select a class first",
+        "selectAttendanceReport": "Select student attendance reports for each class.",
+        "studentName": "Student Name",
+        "total": "Total",
+        "date": "Date",
+        "selectGradeReport": "Select student grade reports for each class.",
+        "studentGradeReport": "Student Grade Report",
+        "classYear": "Class Year",
+        "className": "Class Name",
+        "noData": "No data",
+        "noHomeroom": "No homeroom teacher",
+        "confirmExport": "Export to Excel",
+        "confirmDeleteGeneric": "Are you sure you want to delete this item?",
+        "teacherNotFound": "Teacher data not found",
+        "noStudents": "Class has no students"
+      },
+      "placeholders": {
+        "search": "Search class name and number",
+        "searchStudent": "Search student name and NIS",
+        "selectClass": "Select class",
+        "selectMeeting": "Select meeting...",
+        "searchTeacher": "Search teacher name...",
+        "selectClassName": "Select class name",
+        "selectTeacher": "Select Teacher",
+        "meetingCount": "Enter number of meetings",
+        "enterMeetingCount": "Enter number of meetings"
+      },
+      "buttons": {
+        "addClass": "Add Class",
+        "clear": "Clear",
+        "excel": "Excel",
+        "print": "Print",
+        "clearFilters": "Clear Filters",
+        "exportExcel": "Export to Excel"
+      },
+      "labels": {
+        "selectAttendanceReport": "Select student attendance reports for each class.",
+        "studentName": "Student Name",
+        "total": "Total",
+        "date": "Date",
+        "average": "Average",
+        "ranking": "Ranking",
+        "semester": "Semester",
+        "academicYear": "Academic Year",
+        "student": "Student",
+        "selectGradeReport": "Select student grade reports for each class.",
+        "studentGradeReport": "Student Grade Report",
+        "filterCategory": "Filter Category",
+        "examCategory": "Exam Category",
+        "rowsPerPage": "Rows per page",
+        "time": "Time",
+        "start": "Start",
+        "end": "End",
+        "day": "Day",
+        "class": "Class",
+        "className": "Class Name",
+        "entryYear": "Entry Year",
+        "studentCount": "Student Count",
+        "homeroomTeacher": "Homeroom Teacher",
+        "classPosition": "Class Position",
+        "name": "Section",
+        "students":"Students",
+        "level":"Level",
+        "addSchedule": "Add Schedule",
+        "subject": "Subject",
+        "meeting": "Meeting",
+        "editSchedule": "Edit Schedule",
+        "dashboard": "Dashboard",
+        "masterData": "Master Data",
+        "teacher": "Teacher",
+        "subjects": "Subjects",
+        "schedule": "Schedule",
+        "reports": "Reports",
+        "attendance": "Attendance",
+        "grades": "Grades"
+      },
+      "orderOptions": {
+        "1-12": "1-12",
+        "12-1": "12-1",
+        "mostStudents": "Most Students",
+        "leastStudents": "Least Students",
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "100-0": "100-0",
+        "0-100": "0-100"
+      },
+      "semester1": "Semester 1",
+      "semester2": "Semester 2",
+      "semesterStatus": "Semester Status",
+      "title": "Class",
+      "validation": {
+        "required": {
+          "className": "Class level is required",
+          "classNameMin": "Minimum class is 1",
+          "classNameMax": "Maximum class is 12",
+          "name": "Class name is required",
+          "nameMax": "Name maximum 20 characters",
+          "class": "Class is required",
+          "day": "Day is required",
+          "start": "Start time is required",
+          "end": "End time is required"
+        },
+        "max": {
+          "meeting": "Maximum 50 meetings per semester"
+        },
+        "min": {
+          "meeting": "Minimum 15 meetings required"
+        }
+      },
+      "headers": {
+        "studentName": "Student Name",
+        "subjects": "Subjects",
+        "average": "Average",
+        "ranking": "Ranking",
+        "task": "T",
+        "exam": "U",
+        "attendanceReport": "Attendance Report",
+        "present": "P",
+        "permit": "I",
+        "sick": "S",
+        "absent": "A"
+      }
+    },
+    "dataLessons": {
+      "messages": {
+        "confirmDelete": "Are you sure you want to delete this subject?",
+        "noSubjectsFound": "No subjects found"
+      },
+      "placeholders": {
+        "search": "Search subject code and name",
+        "selectSubject": "Select subject",
+        "searchSubject": "Search subject name..."
+      },
+      "buttons": {
+        "addLesson": "Add Subject"
+      },
+      "title": "Subjects"
+    },
+    "dataMaster": {
+      "labels": {
+        "academicSystem": "Academic System",
+        "learningHours": "Learning Hours",
+        "semester": "Semester",
+        "academicYear": "Academic Year",
+        "holidaySystem": "School Holiday System",
+        "weeklyHoliday": "Weekly Holiday",
+        "nationalHoliday": "National Holiday",
+        "holidayDescription": "Holiday Description",
+        "date": "Date"
+      },
+      "placeholders": {
+        "academicYear": "2000/2001"
+      },
+      "buttons": {
+        "addAcademicYear": "Add Academic Year",
+        "addHoliday": "Add National Holiday"
+      },
+      "validation": {
+        "required": {
+          "date": "Date is required",
+          "description": "Description is required"
+        }
+      }
+    },
+    "dataSubjects": {
+      "labels": {
+        "subjectCode": "Subject Code",
+        "subjectName": "Subject Name"
+      },
+      "validation": {
+        "required": {
+          "subjectCode": "Subject code is required",
+          "subjectName": "Subject name is required"
+        }
+      }
+    },
+    "dataGrades": {
+      "labels": {
+        "subject": "Subject",
+        "category": "Category",
+        "grade": "Grade",
+        "academicYear": "Academic Year",
+        "semester": "Semester"
+      }
+    },
+    "dataStudy": {
+      "labels": {
+        "studentName": "Student Name",
+        "meeting": "Meeting",
+        "grade": "Grade",
+        "academicYear": "Academic Year",
+        "semester": "Semester"
+      }
+    },
+    "validation": {
+      "required": {
+        "className": "Class name is required",
+        "classNameMin": "Minimum class 1",
+        "classNameMax": "Maximum class 12",
+        "name": "Name is required",
+        "nameMax": "Name maximum 20 characters"
+      }
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "totalStudents": "Total Students",
+      "totalTeachers": "Total Teachers",
+      "totalClasses": "Total Classes",
+      "totalSubjects": "Total Subjects",
+      "studentLevelChart": "Student Level Chart",
+      "studentGrowthChart": "Student Growth Chart",
+      "classChart": "Class Chart",
+      "academicYear": "Academic Year",
+      "classCount": "Class Count",
+      "noData": "No data",
+      "studentLevels": {
+        "SD": "Elementary",
+        "SMP": "Middle School",
+        "SMA": "High School"
+      }
+    },
+    "sidebar": {
+      "reports": "Reports",
+      "attendance": "Attendance",
+      "grades": "Grades"
+    },
+    "dataGuru": {
+      "labels": {
+        "nip": "NIP",
+        "name": "Name",
+        "studyField": "Field of Study",
+        "contact": "Contact",
+        "homeroom": "Homeroom Teacher"
+      },
+      "messages": {
+        "emptyData": "Empty Data"
+      }
+    }
+  },
+  "guru": {
+    "sidebar": {
+      "homeroom": "Homeroom",
+      "dailyAttendance": "Daily Attendance",
+      "studentData": "Student Data",
+      "gradeData": "Grade Data",
+      "study": "Study",
+      "reports": "Reports",
+      "reportCard": "Report Card"
+    }
+  },
+  "siswa": {
+    "sidebar": {
+      "schedule": "Schedule",
+      "reportCard": "Report Card"
+    }
+  },
+  "pages": {
+    "report": {
+      "selectStudent": "Select student to display and print report"
+    }
+  }
+}
