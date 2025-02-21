@@ -4,8 +4,10 @@ import axios from "axios";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const KelasDropdown = ({ onChange, value }) => {
+  const { t } = useTranslation();
   const dataEdit = useSelector(selectedDataEdit);
   const dropdownRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -80,8 +82,8 @@ const KelasDropdown = ({ onChange, value }) => {
           selectedKelas
             ? `${selectedKelas.grade} ${selectedKelas.nama}`
             : dataKelas.length === 0
-            ? "Jadwal Kosong"
-            : "Pilih Kelas"
+            ? t('forms.dataClasses.messages.noData')
+            : t('forms.dataClasses.placeholders.selectClass')
         }
         onClick={handleInputClick}
       />

@@ -21,6 +21,7 @@ import AddModalNasional from "@/components/views/admin/master-data/AddModalNasio
 import DeleteModalNasional from "@/components/views/admin/master-data/DeleteModalNasional";
 import TableSemester from "@/components/views/admin/master-data/TableSemester";
 import TableJam from "@/components/views/admin/master-data/TableJam";
+import { useTranslation } from "react-i18next";
 
 const MasterDataPage = () => {
   const [dataAjaran, setDataAjaran] = useState([]);
@@ -33,6 +34,7 @@ const MasterDataPage = () => {
   const [isDeleteNasional, setIsDeleteNasional] = useState(false);
   const [ajaran, setAjaran] = useState("");
   const [trigger, setTrigger] = useState(1);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -128,11 +130,11 @@ const MasterDataPage = () => {
     <section className="px-6 py-8  ">
       <div className="w-full">
         <div className="w-full   py-4 px-2 rounded-md  gap-6 border border-b-0 bg-white">
-          <h1 className="font-bold text-sm text-gray-800 ">Sistem Akademik</h1>
+          <h1 className="font-bold text-sm text-gray-800 ">{t('forms.dataMaster.labels.academicSystem')}</h1>
         </div>
         <div className="w-full flex-between  pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Jam Pembelajaran
+            {t('forms.dataMaster.labels.learningHours')}
           </h1>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden ">
@@ -150,7 +152,7 @@ const MasterDataPage = () => {
         </div>
         <div className="w-full flex-between  pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Semester
+            {t('forms.dataMaster.labels.semester')}
           </h1>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden  ">
@@ -167,7 +169,7 @@ const MasterDataPage = () => {
         </div>
         <div className="w-full flex-between flex-wrap pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Tahun Ajaran
+            {t('forms.dataMaster.labels.academicYear')}
           </h1>
           <div className="flex-center  ml-auto gap-2">
             {isAddajaran && (
@@ -181,7 +183,7 @@ const MasterDataPage = () => {
                 <input
                   type="text"
                   id="ajaran"
-                  placeholder="2000/2001"
+                  placeholder={t('forms.dataMaster.placeholders.academicYear')}
                   value={ajaran}
                   onChange={(e) => setAjaran(e.target.value)}
                   maxLength={10}
@@ -213,8 +215,8 @@ const MasterDataPage = () => {
                 onClick={handleToggleAdd}
                 className="bg-neutral hover:bg-indigo-800  min-w-fit transition-all w-fit duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
               >
-                <CalendarCog width={15} height={15} className=" " /> Tambah
-                Ajaran
+                <CalendarCog width={15} height={15} className=" " /> 
+                {t('forms.dataMaster.buttons.addAcademicYear')}
               </button>
             )}
           </div>
@@ -236,13 +238,11 @@ const MasterDataPage = () => {
       </div>
       <div className="w-full mt-8">
         <div className="w-full   py-4 px-2 rounded-md  gap-6 border border-b-0 bg-white">
-          <h1 className="font-bold text-sm text-gray-800 ">
-            Sistem Libur Sekolah
-          </h1>
+          <h1 className="font-bold text-sm text-gray-800 ">{t('forms.dataMaster.labels.holidaySystem')}</h1>
         </div>
         <div className="w-full flex-between  pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Libur Perpekan
+            {t('forms.dataMaster.labels.weeklyHoliday')}
           </h1>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden  rounded-md">
@@ -256,14 +256,15 @@ const MasterDataPage = () => {
         </div>
         <div className="w-full flex-between pt-10 pb-4  py-4 px-2  mt  gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Libur Nasional
+            {t('forms.dataMaster.labels.nationalHoliday')}
           </h1>
           <button
             aria-label="tambah ajaran"
             onClick={handleToggleAddNasional}
             className="bg-neutral hover:bg-indigo-800  min-w-fit transition-all w-fit duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
           >
-            <CalendarPlus width={15} height={15} className=" " /> Tambah Libur
+            <CalendarPlus width={15} height={15} className=" " /> 
+            {t('forms.dataMaster.buttons.addHoliday')}
           </button>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden  rounded-md">

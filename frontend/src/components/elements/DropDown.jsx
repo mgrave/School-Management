@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react"; // Icon untuk dropdown
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CustomDropdown = ({ options, selected, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(selected);
   const dropdownRef = useRef(null);
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -36,7 +38,7 @@ const CustomDropdown = ({ options, selected, onSelect }) => {
         onClick={toggleDropdown}
         className="inline-flex text-xs items-center px-2 py-1.5 truncate hover:bg-neutral hover:border-gray-400 hover:text-white border border-gray-300 bg-white transition-all duration-300 text-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-neutral"
       >
-        List baris{" "}
+        {t('forms.dataClasses.labels.rowsPerPage')}{" "}
         <span className="font-semibold block ml-2">
           {searchParams.get("limit") || selectedOption}
         </span>

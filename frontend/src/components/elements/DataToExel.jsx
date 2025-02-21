@@ -2,6 +2,7 @@
 import { FileDown } from "lucide-react";
 import React from "react";
 import * as XLSX from "xlsx";
+import { useTranslation } from "react-i18next";
 
 // Helper function to access nested properties
 const getNestedValue = (obj, path) => {
@@ -12,6 +13,8 @@ const getNestedValue = (obj, path) => {
 };
 
 const ExportExcel = ({ columns, data, namaFile, loading }) => {
+  const { t } = useTranslation();
+
   const handleExport = () => {
     // Map the data to a format suitable for json_to_sheet
     const sheetData = data.map((row) => {
@@ -69,8 +72,8 @@ const ExportExcel = ({ columns, data, namaFile, loading }) => {
   return (
     <button
       onClick={handleExport}
-      aria-label="export to exel"
-      title="export ke exel"
+      aria-label={t('forms.dataClasses.buttons.exportExcel')}
+      title={t('forms.dataClasses.messages.confirmExport')}
       disabled={loading}
       className="disabled:cursor-not-allowed"
     >

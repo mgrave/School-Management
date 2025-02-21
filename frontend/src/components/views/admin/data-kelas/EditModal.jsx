@@ -10,8 +10,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ onClose }) => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -77,7 +79,7 @@ const EditModal = ({ onClose }) => {
       >
         <div className="p-4 px-6 border-b">
           <HeaderModal
-            titile={"Edit Kelas"}
+            titile={t('forms.dataClasses.labels.className')}
             onClose={handleClose}
             className={"font-semibold"}
           />
@@ -90,21 +92,21 @@ const EditModal = ({ onClose }) => {
                 htmlFor="kelas"
                 className="text-xs mb-2 block font-semibold text-gray-700"
               >
-                Kelas
+                {t('forms.dataClasses.labels.level')}
               </label>
               <input
                 type="number"
                 id="kelas"
                 min={1}
                 {...register("kelas", {
-                  required: "Kelas tidak boleh kosong.",
+                  required: t('forms.dataClasses.validation.required.className'),
                   min: {
                     value: 1,
-                    message: "Manimum kelas 1",
+                    message: t('forms.dataClasses.validation.length.classNameMin')
                   },
                   max: {
                     value: 12,
-                    message: "Maksimal kelas 12",
+                    message: t('forms.dataClasses.validation.length.classNameMax')
                   },
                 })}
                 className="w-full border text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
@@ -118,16 +120,16 @@ const EditModal = ({ onClose }) => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold text-gray-700"
               >
-                Nama
+                {t('forms.dataClasses.labels.class')}
               </label>
               <input
                 id="nama"
                 type="text"
                 {...register("nama", {
-                  required: "Nama tidak boleh kosong.",
+                  required: t('forms.dataClasses.validation.required.name'),
                   maxLength: {
                     value: 20,
-                    message: "Nama maksimal 20 karakter.",
+                    message: t('forms.dataClasses.validation.length.nameMax')
                   },
                 })}
                 className="w-full border text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
@@ -142,12 +144,12 @@ const EditModal = ({ onClose }) => {
               htmlFor="waliKelas"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Wali Kelas
+              {t('forms.dataClasses.labels.homeroomTeacher')}
             </label>
             <CustomSelectOption onChange={handleChangeWaliKelas} />
 
             <span className="text-xs font-medium h-4 mt-1 block">
-              (opsional)
+              ({t('common.basic.optional')})
             </span>
           </div>
           <div className=" px-6">
@@ -155,7 +157,7 @@ const EditModal = ({ onClose }) => {
               htmlFor="nama"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Posisi Kelas
+              {t('forms.dataClasses.labels.classPosition')}
             </label>
             <input
               id="posisi"
@@ -164,7 +166,7 @@ const EditModal = ({ onClose }) => {
               className="w-full border text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
             />
             <span className="text-xs font-medium h-4 mt-1 block">
-              (opsional)
+              ({t('common.basic.optional')})
             </span>
           </div>
 
@@ -174,7 +176,7 @@ const EditModal = ({ onClose }) => {
               type="submit"
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.status.loading') : t('ui.buttons.save')}
             </button>
           </div>
         </form>

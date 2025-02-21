@@ -13,7 +13,7 @@ export const getAbsenKelas = async (req, res, next) => {
     const kelas = await Kelas.findById(kelasId).populate("siswa");
 
     if (!kelas) {
-      throw new ResponseError(404, "Kelas Tidak ditemukan.");
+      throw new ResponseError(404, "Clase no encontrada");
     }
 
     const today = new Date();
@@ -90,7 +90,7 @@ export const postAbsenKelas = async (req, res, next) => {
     });
 
     if (libur) {
-      throw new ResponseError(400, "Saat ini libur sekolah");
+      throw new ResponseError(400, "Actualmente es día festivo escolar");
     }
 
     const existingAbsensi = await Absensi.findOne({
@@ -103,7 +103,7 @@ export const postAbsenKelas = async (req, res, next) => {
     });
 
     if (existingAbsensi) {
-      throw new ResponseError(400, "Anda sudah melakukan absen hari ini");
+      throw new ResponseError(400, "Ya has realizado la asistencia hoy");
     }
 
     for (let siswaList of absensiData) {
@@ -122,7 +122,7 @@ export const postAbsenKelas = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: `Absensi berhasil disimpan pada ${formattedDate}`,
+      message: `Asistencia guardada exitosamente el ${formattedDate}`,
     });
   } catch (error) {
     next(error);
@@ -169,7 +169,7 @@ export const editAbsenKelas = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: `Berhasil mengubah absensi pada ${formattedDate}`,
+      message: `Asistencia modificada exitosamente el ${formattedDate}`,
     });
   } catch (error) {
     next(error);
@@ -199,7 +199,7 @@ export const getDataAlreadyAbsen = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data absensi hari ini.",
+      message: "Datos de asistencia de hoy obtenidos con éxito",
       absenHariIni,
     });
   } catch (error) {
@@ -218,7 +218,7 @@ export const getRekapAbsensi = async (req, res, next) => {
     const kelas = await Kelas.findById(kelasId).populate({ path: "siswa" });
 
     if (!kelas) {
-      return res.status(404).json({ message: "Kelas tidak ditemukan." });
+      return res.status(404).json({ message: "Clase no encontrada" });
     }
 
     const siswaList = kelas.siswa.sort((a, b) => {

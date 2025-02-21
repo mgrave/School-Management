@@ -14,8 +14,10 @@ import BarChartComponent from "@/components/elements/dashboard-admin/BarChart";
 import PieChartComponent from "@/components/elements/dashboard-admin/Piechar";
 import AreaChartComponent from "@/components/elements/dashboard-admin/AreacChart";
 import { AreaChart } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   const [dataUmum, setdataUmum] = useState([]);
   const [loading, setLoading] = useState(true);
   const [siswaPertingkat, setSiswaPertingkat] = useState(null);
@@ -57,7 +59,7 @@ const AdminDashboard = () => {
               <SiswaIcon width={"20"} height={"20"} className={" stroke-[1]"} />
             </div>
             <h3 className="text-sm font-semibold text-neutral line-clamp-1 ">
-              Total Siswa
+              {t("admin.dashboard.totalStudents")}
             </h3>
           </div>
           <div className="h-8 flex-1 flex-center">
@@ -83,7 +85,7 @@ const AdminDashboard = () => {
               <GuruIcon width={"20"} height={"20"} className={" stroke-[1]"} />
             </div>
             <h3 className="text-sm font-semibold text-neutral line-clamp-1 ">
-              Total Guru
+              {t("admin.dashboard.totalTeachers")}
             </h3>
           </div>
           <div className="h-8 flex-1 flex-center">
@@ -113,7 +115,7 @@ const AdminDashboard = () => {
               />
             </div>
             <h3 className="text-sm font-semibold text-neutral line-clamp-1 ">
-              Total Kelas
+              {t("admin.dashboard.totalClasses")}
             </h3>
           </div>
           <div className="h-8 flex-1 flex-center">
@@ -143,7 +145,7 @@ const AdminDashboard = () => {
               />
             </div>
             <h3 className="text-sm font-semibold text-neutral line-clamp-1  ">
-              Total Mata Pelajaran
+              {t("admin.dashboard.totalSubjects")}
             </h3>
           </div>
           <div className="h-8 flex-1 flex-center">
@@ -165,7 +167,7 @@ const AdminDashboard = () => {
             <AreaChart width={"20"} height={"20"} className="text-[#4d44b5]" />
           </div>
           <span className="text-sm font-semibold">
-            Grafik Total Siswa Pertingkat
+            {t("admin.dashboard.studentLevelChart")}
           </span>
         </div>
         <div className="h-[250px] w-full">
@@ -179,7 +181,7 @@ const AdminDashboard = () => {
               <Barchart width={"20"} height={"20"} />
             </div>
             <span className="text-sm font-semibold">
-              Grafik Pertambahan Siswa
+              {t("admin.dashboard.studentGrowthChart")}
             </span>
           </div>
           <div className="h-[200px]">
@@ -193,7 +195,7 @@ const AdminDashboard = () => {
 
           {!loading && (
             <p className="text-center text-xs mt-2 ml-1 font-medium ">
-              Tahun Ajaran
+              {t("admin.dashboard.academicYear")}
             </p>
           )}
         </div>
@@ -202,7 +204,9 @@ const AdminDashboard = () => {
             <div>
               <Piechart width={"20"} height={"20"} />
             </div>
-            <span className="text-sm font-semibold">Grafik Kelas</span>
+            <span className="text-sm font-semibold">
+              {t("admin.dashboard.classChart")}
+            </span>
           </div>
           <div className="h-[200px]">
             <PieChartComponent
@@ -213,7 +217,7 @@ const AdminDashboard = () => {
 
           {!loading && (
             <p className="text-center text-xs mt-6 ml-1 font-medium ">
-              Jumlah Perkelas
+              {t("admin.dashboard.classCount")}
             </p>
           )}
         </div>

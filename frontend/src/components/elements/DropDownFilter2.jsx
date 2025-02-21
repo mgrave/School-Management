@@ -4,6 +4,7 @@ import DayDropdown from "./DayDropdown";
 import KelasDropdown from "./KelasDropdown";
 import { object } from "zod";
 import NamaKelasDropdown from "./NamaKelasDropdown";
+import { useTranslation } from "react-i18next";
 
 const DropDownFilter2 = ({ handleFilterChange, setFilter }) => {
   const filterRef = useRef(null);
@@ -14,6 +15,7 @@ const DropDownFilter2 = ({ handleFilterChange, setFilter }) => {
     namaKelas: "",
     hari: "",
   });
+  const { t } = useTranslation();
 
   const handleToggleDropDown = (e) => {
     e.stopPropagation();
@@ -64,11 +66,11 @@ const DropDownFilter2 = ({ handleFilterChange, setFilter }) => {
           className="absolute mt-1 w-[9.25rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
         >
           <div className="flex-between px-4 py-4 h-12 border-gray-200 border-b ">
-            <h3 className=" font-bold  text-xs">Kategori Filter</h3>
+            <h3 className=" font-bold  text-xs">{t('forms.dataClasses.labels.filterCategory')}</h3>
             {Object.values(selectedFilter).some((value) => value !== "") && (
               <button
                 className="text-xs font-medium rounded-xl bg-indigo-400 hover:bg-neutral p-1"
-                title="Clear Filter"
+                title={t('ui.filters.clearFilter')}
                 onClick={() => {
                   setSelectedFilter({ hari: "", kelas: "", namaKelas: "" });
                   setFilter({ hari: "", kelas: "", namaKelas: "" });

@@ -2,11 +2,13 @@ import { setDataDelete } from "@/store/slices/admin-slice";
 import { ChevronLeft, ChevronRight, Trash, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const TableUmum = ({ data, handleToggleDelete, handleEditAjaran, loading }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 3;
+  const { t } = useTranslation();
 
   const lastIndexajaran = perPage * currentPage;
   const firstIndexajaran = lastIndexajaran - perPage;
@@ -32,10 +34,10 @@ const TableUmum = ({ data, handleToggleDelete, handleEditAjaran, loading }) => {
           <thead className="text-xs uppercase text-white bg-neutral">
             <tr>
               <th scope="col" className="px-2 py-4">
-                Tahun Ajaran
+                {t('forms.dataMaster.labels.academicYear')}
               </th>
               <th scope="col" className="px-3 py-4">
-                Status
+                {t('common.status.title')}
               </th>
               <th className="opacity-0">Edit</th>
             </tr>
@@ -49,7 +51,7 @@ const TableUmum = ({ data, handleToggleDelete, handleEditAjaran, loading }) => {
                 >
                   <div className="flex flex-col items-center justify-center">
                     <span className="w-8 h-8 block mb-2 animate-spin rounded-full border-4 border-t-gray-800 border-gray-300"></span>
-                    <span>Loading</span>
+                    <span>{t('common.status.loading')}</span>
                   </div>
                 </td>
               </tr>
@@ -60,7 +62,7 @@ const TableUmum = ({ data, handleToggleDelete, handleEditAjaran, loading }) => {
                   colSpan="10"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[180px]"
                 >
-                  Tidak ada data
+                  {t('ui.table.dataNotFound')}
                 </td>
               </tr>
             )}
@@ -90,7 +92,7 @@ const TableUmum = ({ data, handleToggleDelete, handleEditAjaran, loading }) => {
                         ajaran.status ? "bg-neutral1" : "bg-neutral2"
                       }  text-white w-20 py-1.5 rounded-md font-medium`}
                     >
-                      {ajaran.status ? "Aktif" : "Non Aktif"}
+                      {ajaran.status ? t('common.status.active') : t('common.status.inactive')}
                     </button>
                   </td>
 
@@ -144,7 +146,7 @@ const Pagination = ({
   dataSlice,
 }) => {
   const pageNumber = [];
-
+  const { t } = useTranslation();
   const totalPage = Math.ceil(totalajaran / perPage);
 
   for (let i = 1; i <= totalPage; i++) {
@@ -166,13 +168,16 @@ const Pagination = ({
     <div className=" absolute h-9 left-0 bottom-5 border-t pt-4 w-full flex-between px-3">
       {!loading && (
         <>
-          <div className="h-6 flex-center">
-            <p className="text-xs">{`Menampilkan ${
-              dataSlice.length === 0 ? 0 : firstIndexajaran + 1
-            } - ${
-              firstIndexajaran + dataSlice.length
-            } dari ${totalajaran} Data`}</p>
-          </div>
+          {dataSlice && (
+            <div className="h-6 flex-center">
+              <p className="text-xs">
+                {`${t('ui.table.showing')
+                  .replace('{from}', dataSlice?.length === 0 ? 0 : firstIndexajaran + 1,)
+                  .replace('{to}', firstIndexajaran + dataSlice?.length,)
+                  .replace('{total}', totalajaran)}`}
+              </p>
+            </div>
+          )}
           {pageNumber.length !== 0 && (
             <div className="flex gap-2 ">
               <button

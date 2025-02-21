@@ -12,6 +12,7 @@ import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import PrintComponent from "@/components/views/guru/rekap/PrintModal";
+import { useTranslation } from "react-i18next";
 
 const RekapAbsenFragment = () => {
   const menuRef = useRef(null);
@@ -27,6 +28,7 @@ const RekapAbsenFragment = () => {
   const [kelas, setkelas] = useState({});
 
   const componentRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -83,11 +85,11 @@ const RekapAbsenFragment = () => {
         <div className="flex-between flex-row-reverse md:flex-row-reverse">
           <div className="hidden md:flex justify-start flex-wrap gap-4">
             <div className="flex items-center gap-4">
-              <p className="text-sm font-semibold text-gray-700">Tahun</p>
+              <p className="text-sm font-semibold text-gray-700">{t('common.time.year')}</p>
               <YearDropdown onSelectYear={handleSelectYeay} />
             </div>
             <div className="flex items-center gap-4">
-              <p className="text-sm font-semibold text-gray-700">Bulan</p>
+              <p className="text-sm font-semibold text-gray-700">{t('common.time.month')}</p>
               <MonthDropdown onSelectMonth={handleSelectMonth} />
             </div>
           </div>
@@ -107,7 +109,7 @@ const RekapAbsenFragment = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t('forms.dataClasses.buttons.excel')}
             </button>
 
             <ReactToPrint
@@ -117,7 +119,7 @@ const RekapAbsenFragment = () => {
                   className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t('forms.dataClasses.buttons.print')}
                 </button>
               )}
               content={() => componentRef.current}
@@ -138,11 +140,11 @@ const RekapAbsenFragment = () => {
             {isMenu && (
               <div className="absolute left-0  w-max  mt-1 z-10 bg-white border shadow-md rounded-md p-4">
                 <div className="grid grid-cols-2 items-center">
-                  <p className="text-sm font-semibold text-gray-700">Tahun</p>
+                  <p className="text-sm font-semibold text-gray-700">{t('common.time.year')}</p>
                   <YearDropdown onSelectYear={handleSelectYeay} />
                 </div>
                 <div className="grid grid-cols-2 mt-4 items-center">
-                  <p className="text-sm font-semibold text-gray-700">Bulan</p>
+                  <p className="text-sm font-semibold text-gray-700">{t('common.time.month')}</p>
                   <MonthDropdown onSelectMonth={handleSelectMonth} />
                 </div>
               </div>
@@ -204,11 +206,11 @@ const exportToExcel = async (
   year
 ) => {
   const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet("Rekap Absen");
+  const worksheet = workbook.addWorksheet(t('forms.dataClasses.headers.attendanceReport'));
 
   // Title Header
   const header = [
-    `Absensi Kelas ${kelas} ${nama} ${new Date(
+    `${t('forms.dataClasses.headers.attendanceReport')} ${kelas} ${nama} ${new Date(
       year,
       month + 1,
       0
@@ -220,14 +222,19 @@ const exportToExcel = async (
   worksheet.mergeCells(headerRow.number, 1, headerRow.number, countDay + 5); // Adjust the number of columns to match header width
   worksheet.getRow(1).height = 30;
   // Membuat header tabel
-  const header1 = ["Nama Siswa", ...Array(countDay).fill("Tanggal"), "Total"];
+  const header1 = [
+    t('forms.dataClasses.headers.studentName'), 
+    ...Array(countDay).fill(t('common.time.date')), 
+    t('common.basic.total')
+  ];
+  
   const header2 = [
     "",
     ...Array.from({ length: countDay }, (_, i) => i + 1),
-    "H",
-    "I",
-    "S",
-    "A",
+    t('forms.dataClasses.headers.present'),
+    t('forms.dataClasses.headers.permit'),
+    t('forms.dataClasses.headers.sick'),
+    t('forms.dataClasses.headers.absent')
   ];
 
   // Menambahkan header ke worksheet

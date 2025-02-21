@@ -11,6 +11,7 @@ import ClassIcon from "../../assets/svg/class.svg?react";
 import { useSelector } from "react-redux";
 import { selectedDataDelete } from "@/store/slices/admin-slice";
 import DeleteModal from "@/components/fragments/ModalDelete";
+import { useTranslation } from "react-i18next";
 
 const DataKelasPage = () => {
   const dataDelete = useSelector(selectedDataDelete);
@@ -25,6 +26,7 @@ const DataKelasPage = () => {
   const [isFilter, setIsFilter] = useState(false);
   const filterRef = useRef();
   const buttonFilterRef = useRef();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getKelas = async () => {
@@ -139,7 +141,7 @@ const DataKelasPage = () => {
         <div className="relative flex w-full  md:max-w-[300px]">
           <input
             type="search"
-            placeholder="Cari nama dan kelas "
+            placeholder={t('forms.dataClasses.placeholders.search')}
             value={search}
             id="search"
             disabled={loading}
@@ -169,7 +171,7 @@ const DataKelasPage = () => {
               onClick={() => setOption("terbaru")}
               className="border border-gray-400 bg-white text-gray-500  hover:bg-neutral hover:border-gray-400 border-dashed  py-1.5 transition-all duration-300 font-medium hover:text-white  text-xs px-4 rounded-md flex-between gap-3"
             >
-              Clear
+              {t('ui.buttons.clear')}
             </button>
           )}
 
@@ -188,7 +190,8 @@ const DataKelasPage = () => {
           disabled={loading}
           className="bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
         >
-          <ClassIcon width={15} height={15} className=" " /> Tambah Kelas
+          <ClassIcon width={15} height={15} className=" " /> 
+          {t('forms.dataClasses.buttons.addClass')}
         </button>
       </div>
       <div className="relative bg-white w-full  mt-6 border  overflow-hidden  rounded-md">
@@ -210,7 +213,7 @@ const DataKelasPage = () => {
       {isDeleteKelas && (
         <DeleteModal
           url={"/api/kelas/delete-kelas/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus kelas?"}
+          title={t('forms.dataClasses.messages.confirmDelete')}
           onClose={handleToggleDelete}
         />
       )}

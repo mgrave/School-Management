@@ -3,11 +3,13 @@ import { formatDate } from "@/util/formatDate";
 import { ChevronLeft, ChevronRight, Trash, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const TabelNasionsal = ({ libur, loading, handleToggleDeleteNasional }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 3;
+  const { t } = useTranslation();
 
   const lastIndexajaran = perPage * currentPage;
   const firstIndexajaran = lastIndexajaran - perPage;
@@ -32,12 +34,12 @@ const TabelNasionsal = ({ libur, loading, handleToggleDeleteNasional }) => {
           <thead className="text-xs uppercase text-white bg-neutral">
             <tr>
               <th scope="col" className="px-2 py-4">
-                Tanggal
+                {t('forms.dataMaster.labels.date')}
               </th>
               <th scope="col" className="px-3 py-4">
-                Keterangan
+                {t('forms.dataMaster.labels.holidayDescription')}
               </th>
-              <th className="opacity-0">Edit</th>
+              <th className="opacity-0">{t('ui.buttons.edit')}</th>
             </tr>
           </thead>
           <tbody>
@@ -61,7 +63,7 @@ const TabelNasionsal = ({ libur, loading, handleToggleDeleteNasional }) => {
                     colSpan="10"
                     className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[180px]"
                   >
-                    Tidak ada data
+                    {t('forms.dataClasses.messages.noData')}
                   </td>
                 </tr>
               ))}
@@ -71,7 +73,7 @@ const TabelNasionsal = ({ libur, loading, handleToggleDeleteNasional }) => {
                   colSpan="10"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[180px]"
                 >
-                  Tidak ada data
+                  {t('forms.dataClasses.messages.noData')}
                 </td>
               </tr>
             )}
@@ -90,7 +92,7 @@ const TabelNasionsal = ({ libur, loading, handleToggleDeleteNasional }) => {
                   <td scope="row" className="w-12 py-4 ">
                     <div className="flex-center gap-4">
                       <button
-                        title="Hapus"
+                        title={t('ui.buttons.delete')}
                         className="w-[30px] h-[30px] border-2 border-gray-300 hover:border-neutral2 group rounded-md transition-all duration-300  flex-center"
                         onClick={() => handleDeleteNasional(free.tanggal)}
                       >
@@ -133,6 +135,7 @@ const Pagination = ({
   dataSlice,
 }) => {
   const pageNumber = [];
+  const { t } = useTranslation();
 
   const totalPage = Math.ceil(totalData / perPage);
 
@@ -157,11 +160,12 @@ const Pagination = ({
         <>
           {dataSlice && (
             <div className="h-6 flex-center">
-              <p className="text-xs">{`Menampilkan ${
-                dataSlice?.length === 0 ? 0 : firstIndexajaran + 1
-              } - ${
-                firstIndexajaran + dataSlice?.length
-              } dari ${totalData} Data`}</p>
+              <p className="text-xs">
+                {`${t('ui.table.showing')
+                  .replace('{from}', dataSlice?.length === 0 ? 0 : firstIndexajaran + 1,)
+                  .replace('{to}', firstIndexajaran + dataSlice?.length,)
+                  .replace('{total}', totalData)}`}
+              </p>
             </div>
           )}
           {pageNumber.length !== 0 && (

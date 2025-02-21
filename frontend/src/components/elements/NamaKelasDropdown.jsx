@@ -4,8 +4,10 @@ import axios from "axios";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const NamaKelasDropdown = ({ onChange, kelas, onChange2, value }) => {
+  const { t } = useTranslation();
   const dataEdit = useSelector(selectedDataEdit);
   const dropdownRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -99,12 +101,14 @@ const NamaKelasDropdown = ({ onChange, kelas, onChange2, value }) => {
         disabled={kelas === 0 || !kelas}
         value={
           kelas === ""
-            ? "Pilih Kelas terlebih Dulu"
+            ? t("forms.dataClasses.messages.selectClassFirst")
             : !selectedNamaKelas.nama
-            ? "Pilih Kelas"
+            ? t("forms.dataClasses.placeholders.selectClass")
             : selectedNamaKelas.nama
         }
         onClick={handleInputClick}
+        placeholder={t("forms.dataClasses.placeholders.selectClass")}
+        aria-label={t("forms.dataClasses.labels.className")}
       />
       <div className="absolute pointer-events-none right-2 top-2.5">
         {isOpen ? (

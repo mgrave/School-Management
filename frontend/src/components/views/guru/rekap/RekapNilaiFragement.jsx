@@ -14,6 +14,7 @@ import DropdownSemester from "@/components/elements/DropdownSemester";
 import TableNilai from "../../../fragments/TableNilai";
 import { data } from "autoprefixer";
 import PrintComponentNilai from "../../../fragments/PrintModalNilai";
+import { useTranslation } from 'react-i18next';
 
 const RekapNilaiFragment = () => {
   const menuRef = useRef(null);
@@ -27,6 +28,8 @@ const RekapNilaiFragment = () => {
   const [dataMapel, setDataMapel] = useState([]);
 
   const componentRef = useRef(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -100,7 +103,7 @@ const RekapNilaiFragment = () => {
           <div className="hidden md:flex justify-start flex-wrap gap-4">
             <div className="flex items-center gap-4">
               <p className="text-sm font-semibold text-gray-700">
-                Tahun Ajaran
+                {t('forms.dataClasses.labels.academicYear')}
               </p>
               <DropdownTahunAjaran onSelectAjaran={handleSelectAjaran} />
             </div>
@@ -124,7 +127,7 @@ const RekapNilaiFragment = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t('ui.buttons.export')}
             </button>
 
             <ReactToPrint
@@ -134,7 +137,7 @@ const RekapNilaiFragment = () => {
                   className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t('ui.buttons.print')}
                 </button>
               )}
               content={() => componentRef.current}
@@ -156,7 +159,7 @@ const RekapNilaiFragment = () => {
               <div className="absolute left-0  w-max  mt-1 z-10 bg-white border shadow-md rounded-md p-4">
                 <div className="grid grid-cols-2 items-center">
                   <p className="text-sm font-semibold text-gray-700">
-                    Tahun Ajaran
+                    {t('forms.dataClasses.labels.academicYear')}
                   </p>
                   <DropdownTahunAjaran onSelectAjaran={handleSelectAjaran} />
                 </div>

@@ -17,152 +17,11 @@ import {
   NotebookText,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 // import KelasSVG from "@/components/base/svg/KelasSVG
 
-const Navlist = [
-  {
-    id: 1,
-    nama: "Dashboard",
-    path: "/admin/dashboard",
-    icon: (
-      <DashboardIcon
-        height={17}
-        width={17}
-        className={
-          "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 2,
-    nama: "Master Data",
-    path: "/admin/master-data",
-    icon: (
-      <MonitorCog
-        height={17}
-        width={17}
-        className={
-          "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 3,
-    nama: "Siswa",
-    path: "/admin/data-siswa",
-    icon: (
-      <SiswaIcon
-        height={19}
-        width={19}
-        className={
-          "text-white group-hover:stroke-neutral group-hover:fill-neutral stroke-[0.1] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 4,
-    nama: "Guru",
-    path: "/admin/data-guru",
-    icon: (
-      <GuruIcon
-        height={20}
-        width={20}
-        className="text-white group-hover:text-neutral duration-300 transition-all"
-      />
-    ),
-  },
-  {
-    id: 5,
-    nama: "Kelas",
-    path: "/admin/data-kelas",
-    icon: (
-      <KelasIcon
-        height={20}
-        width={20}
-        className={
-          "text-white group-hover:text-neutral stroke-[0.1] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 6,
-    nama: "Mata Pelajaran",
-    path: "/admin/data-pelajaran",
-    icon: (
-      <MapelIcon
-        height={20}
-        width={20}
-        className={
-          "text-white group-hover:text-neutral duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 7,
-    nama: "Jadwal",
-    path: "/admin/data-jadwal",
-    icon: (
-      <AcaraIcon
-        height={20}
-        width={20}
-        className={
-          "text-white group-hover:text-neutral duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 8,
-    nama: "Rekap Data",
-    icon: (
-      <NotebookTabs
-        height={20}
-        width={20}
-        className={
-          "text-white group-hover:text-neutral duration-300 transition-all"
-        }
-      />
-    ),
-
-    dropDown: [
-      {
-        id: 1,
-        nama: "Absensi",
-        path: "/admin/rekap-absensi-kelas",
-        icon: (
-          <NotebookPen
-            height={20}
-            width={20}
-            className={
-              "text-white group-hover:text-neutral duration-300 transition-all"
-            }
-          />
-        ),
-      },
-      {
-        id: 2,
-        nama: "Nilai",
-        path: "/admin/rekap-nilai-kelas",
-        icon: (
-          <NotebookText
-            height={20}
-            width={20}
-            className={
-              "text-white group-hover:text-neutral duration-300 transition-all"
-            }
-          />
-        ),
-      },
-    ],
-  },
-];
-
 const ListSidebarAdmin = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeDropDown, setActiveDropDown] = useState(null);
 
@@ -173,6 +32,149 @@ const ListSidebarAdmin = () => {
       setActiveDropDown(index);
     }
   };
+
+  const Navlist = [
+    {
+      id: 1,
+      nama: t('forms.dataClasses.labels.dashboard'),
+      path: "/admin/dashboard",
+      icon: (
+        <DashboardIcon
+          height={17}
+          width={17}
+          className={
+            "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 2,
+      nama: t('forms.dataClasses.labels.masterData'),
+      path: "/admin/master-data",
+      icon: (
+        <MonitorCog
+          height={17}
+          width={17}
+          className={
+            "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 3,
+      nama: t('forms.dataClasses.labels.student'),
+      path: "/admin/data-siswa",
+      icon: (
+        <SiswaIcon
+          height={19}
+          width={19}
+          className={
+            "text-white group-hover:stroke-neutral group-hover:fill-neutral stroke-[0.1] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 4,
+      nama: t('forms.dataClasses.labels.teacher'),
+      path: "/admin/data-guru",
+      icon: (
+        <GuruIcon
+          height={20}
+          width={20}
+          className="text-white group-hover:text-neutral duration-300 transition-all"
+        />
+      ),
+    },
+    {
+      id: 5,
+      nama: t('forms.dataClasses.labels.class'),
+      path: "/admin/data-kelas",
+      icon: (
+        <KelasIcon
+          height={20}
+          width={20}
+          className={
+            "text-white group-hover:text-neutral stroke-[0.1] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 6,
+      nama: t('forms.dataClasses.labels.subjects'),
+      path: "/admin/data-pelajaran",
+      icon: (
+        <MapelIcon
+          height={20}
+          width={20}
+          className={
+            "text-white group-hover:text-neutral duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 7,
+      nama: t('forms.dataClasses.labels.schedule'),
+      path: "/admin/data-jadwal",
+      icon: (
+        <AcaraIcon
+          height={20}
+          width={20}
+          className={
+            "text-white group-hover:text-neutral duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 8,
+      nama: t('forms.dataClasses.labels.reports'),
+      icon: (
+        <NotebookTabs
+          height={20}
+          width={20}
+          className={
+            "text-white group-hover:text-neutral duration-300 transition-all"
+          }
+        />
+      ),
+
+      dropDown: [
+        {
+          id: 1,
+          nama: t('forms.dataClasses.labels.attendance'),
+          path: "/admin/rekap-absensi-kelas",
+          icon: (
+            <NotebookPen
+              height={20}
+              width={20}
+              className={
+                "text-white group-hover:text-neutral duration-300 transition-all"
+              }
+            />
+          ),
+        },
+        {
+          id: 2,
+          nama: t('forms.dataClasses.labels.grades'),
+          path: "/admin/rekap-nilai-kelas",
+          icon: (
+            <NotebookText
+              height={20}
+              width={20}
+              className={
+                "text-white group-hover:text-neutral duration-300 transition-all"
+              }
+            />
+          ),
+        },
+      ],
+    },
+  ];
 
   return (
     <ul className="w-full py-1 h-[80vh] overflow-auto">

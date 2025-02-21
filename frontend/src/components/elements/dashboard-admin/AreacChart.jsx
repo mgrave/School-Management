@@ -9,16 +9,19 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { useTranslation } from 'react-i18next';
 
 const LineChartComponent = ({ data }) => {
+  const { t } = useTranslation();
+  
   const dataSort = useMemo(() => {
-    return data && data.sort((a, b) => a.year.localeCompare(b.year));
+    return data?.sort((a, b) => a.year.localeCompare(b.year));
   }, [data]);
 
-  if (dataSort && dataSort.length === 0) {
+  if (!dataSort || dataSort.length === 0) {
     return (
       <div className="flex-center w-full h-full">
-        <p className="text-xs text-neutral">Tidak ada data.</p>
+        <p className="text-xs text-neutral">{t('admin.dashboard.noData')}</p>
       </div>
     );
   }
@@ -51,31 +54,21 @@ const LineChartComponent = ({ data }) => {
         <XAxis dataKey="year" />
         <YAxis fontSize={10} axisLine={false} tickLine={false} />
         <Tooltip />
-        <Legend fontSize={"0.5rem"} />
-        <Line
-          type="monotone"
-          dataKey="SD"
-          stroke="#2eb88a"
-          strokeWidth={2}
-          dot={{ r: 3 }}
-          activeDot={{ r: 5 }}
-        />
-        <Line
-          type="monotone"
-          dataKey="SMP"
-          stroke="#fe2712"
-          strokeWidth={2}
-          dot={{ r: 3 }}
-          activeDot={{ r: 5 }}
-        />
-        <Line
-          type="monotone"
-          dataKey="SMA"
-          stroke="#9333ea"
-          strokeWidth={2}
-          dot={{ r: 3 }}
-          activeDot={{ r: 5 }}
-        />
+        <Legend formatter={(value) => t(`admin.dashboard.studentLevels.${value}`)} />
+        {['SD', 'SMP', 'SMA'].map((level) => (
+          <Line
+            key={level}
+            type="monotone"
+            dataKey={level}
+            stroke={
+              level === 'SD' ? '#2eb88a' :
+              level === 'SMP' ? '#fe2712' : '#9333ea'
+            }
+            strokeWidth={2}
+            dot={{ r: 3 }}
+            activeDot={{ r: 5 }}
+          />
+        ))}
       </LineChart>
     </ResponsiveContainer>
   );

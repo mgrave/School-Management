@@ -13,7 +13,7 @@ export const addMapel = async (req, res, next) => {
     const isExist = await Mapel.findOne({ kode });
 
     if (isExist) {
-      throw new ResponseError(400, "Kode sudah diguanakan.");
+      throw new ResponseError(400, "El código ya está en uso.");
     }
 
     const mapel = new Mapel({ kode, nama });
@@ -22,7 +22,7 @@ export const addMapel = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menambah mata pelajaran.",
+      message: "Materia agregada correctamente",
     });
   } catch (error) {
     next(error);
@@ -35,7 +35,7 @@ export const getMapel = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menambah mata pelajaran.",
+      message: "Listado de materias obtenido",
       mapel,
     });
   } catch (error) {
@@ -51,20 +51,20 @@ export const editMapel = async (req, res, next) => {
     const mapel = await Mapel.findById(id);
 
     if (!mapel) {
-      throw new ResponseError(404, "Mata Pelajaran tidak ditemukan");
+      throw new ResponseError(404, "Materia no encontrada");
     }
 
     const isExist = await Mapel.findOne({ kode, _id: { $ne: id } });
 
     if (isExist) {
-      throw new ResponseError(404, "Kode sudah digunakan.");
+      throw new ResponseError(404, "El código ya está registrado");
     }
 
     await Mapel.findByIdAndUpdate(id, { kode, nama });
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengubah data mata pelajaran.",
+      message: "Materia actualizada correctamente",
     });
   } catch (error) {
     next(error);
@@ -78,7 +78,7 @@ export const deleteMapel = async (req, res, next) => {
     const mapel = await Mapel.findById(id);
 
     if (!mapel) {
-      throw new ResponseError(404, "Mata Pelajaran tidak ditemukan.");
+      throw new ResponseError(404, "Materia no encontrada");
     }
 
     await Mapel.findByIdAndDelete(id);
@@ -87,7 +87,7 @@ export const deleteMapel = async (req, res, next) => {
 
     for (const jadwall of jadwalList) {
       if (!jadwall._id) {
-        throw new ResponseError(404, "Jadwal tidak ditemukan");
+        throw new ResponseError(404, "Horario no encontrado");
       }
 
       await Jadwal.findOneAndDelete({ _id: jadwall._id });
@@ -97,7 +97,7 @@ export const deleteMapel = async (req, res, next) => {
 
     for (const gurus of guruList) {
       if (!gurus._id) {
-        throw new ResponseError(404, "Guru tidak ditemukan");
+        throw new ResponseError(404, "Profesor no encontrado");
       }
 
       await Guru.findByIdAndUpdate(
@@ -111,7 +111,7 @@ export const deleteMapel = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menghapus mata pelajaran.",
+      message: "Materia eliminada correctamente",
     });
   } catch (error) {
     next(error);

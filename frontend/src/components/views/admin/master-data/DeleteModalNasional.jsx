@@ -8,10 +8,12 @@ import { TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const DeleteModalNasional = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const tanggal = useSelector(selectedDataDelete);
+  const { t } = useTranslation();
 
   const handleDelete = async () => {
     setLoading(true);
@@ -41,7 +43,7 @@ const DeleteModalNasional = ({ onClose }) => {
       >
         <div className="p-4 border-b">
           <HeaderModal
-            titile={"Konfimasi Hapus"}
+            titile={t('messages.confirmation.delete.title')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -51,7 +53,7 @@ const DeleteModalNasional = ({ onClose }) => {
             <TriangleAlert className="w-8 h-8 text-neutral2" />
           </div>
           <h3 className="text-sm  font-medium">
-            {" Apakah And yakin ingin menghapus?"}
+            {t('messages.confirmation.delete.message')}
           </h3>
         </div>
         <div className="text-end border-t mt-4 p-4 space-x-4">
@@ -62,7 +64,7 @@ const DeleteModalNasional = ({ onClose }) => {
             className="btn w-24 h-8.5 bg-gray-100 disabled:bg-gray-200  text-gray-800 border-gray-200 border hover:text-white"
             onClick={() => onClose()}
           >
-            {loading ? "Loading" : "Tidak"}
+            {loading ? t('common.status.loading') : t('messages.confirmation.delete.cancel')}
           </button>
           <button
             aria-label="ya"
@@ -71,7 +73,7 @@ const DeleteModalNasional = ({ onClose }) => {
             onClick={handleDelete}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Ya"}
+            {loading ? t('common.status.loading') : t('messages.confirmation.delete.confirm')}
           </button>
         </div>
       </div>

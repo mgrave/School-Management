@@ -1,8 +1,11 @@
 import guru from "../../../assets/svg/Student.svg";
 import male from "../../../assets/svg/male.svg";
 import female from "../../../assets/svg/female.svg";
+import { useTranslation } from "react-i18next";
 
 const HeaderBox = ({ dataDetail, loading }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex-between flex-wrap xl:flex-nowrap gap-4 mb-6">
       <div className=" grid flex-1 sm:grid-cols-2  md:grid-cols-4 gap-4 lg:justify-center items-center  md:gap-2   ">
@@ -22,7 +25,9 @@ const HeaderBox = ({ dataDetail, loading }) => {
                 height={20}
               />
             </div>
-            <h1 className="text-sm font-medium text-neutral">Total Guru</h1>
+            <h1 className="text-sm font-medium text-neutral">
+              {t('admin.dashboard.totalTeachers')}
+            </h1>
           </div>
           <div className="flex-center w-8 h-8">
             {loading ? (
@@ -50,7 +55,9 @@ const HeaderBox = ({ dataDetail, loading }) => {
                 height={25}
               />
             </div>
-            <h1 className="text-sm font-medium text-neutral">Laki - Laki</h1>
+            <h1 className="text-sm font-medium text-neutral">
+              {t('common.gender.male')}
+            </h1>
           </div>
           <div className="flex-center w-8 h-8">
             {loading ? (
@@ -78,7 +85,9 @@ const HeaderBox = ({ dataDetail, loading }) => {
                 height={20}
               />
             </div>
-            <h1 className="text-sm font-medium text-neutral">Perempuan</h1>
+            <h1 className="text-sm font-medium text-neutral">
+              {t('common.gender.female')}
+            </h1>
           </div>
           <div className="flex-center w-8 h-8">
             {loading ? (
@@ -93,7 +102,9 @@ const HeaderBox = ({ dataDetail, loading }) => {
 
         <div className="order-2 lg:order-4 bg-white flex-col flex justify-between py-4  border-l shadow-sm  h-[85px] rounded-md  ">
           <div className="flex-between px-4  h-8 border-green-500">
-            <h1 className="text-xs font-medium text-neutral">Aktif</h1>
+            <h1 className="text-xs font-medium text-neutral">
+              {t('common.status.active')}
+            </h1>
             <div className="flex-center w-6 h-6">
               {loading ? (
                 <div className="border-4 border-gray-200 border-t-neutral rounded-full w-4 h-4 animate-spin"></div>
@@ -106,7 +117,9 @@ const HeaderBox = ({ dataDetail, loading }) => {
           </div>
 
           <div className="flex-between px-4 h-8 ">
-            <h1 className="text-xs font-medium  text-neutral">Non Aktif</h1>
+            <h1 className="text-xs font-medium  text-neutral">
+              {t('common.status.inactive')}
+            </h1>
             <div className="flex-center w-6 h-6">
               {loading ? (
                 <div className="border-4 border-gray-200 border-t-neutral rounded-full w-4 h-4 animate-spin"></div>

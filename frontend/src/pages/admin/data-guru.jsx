@@ -19,10 +19,12 @@ import TableGuru from "@/components/views/admin/data-guru/TableGuru";
 import DeleteModal from "@/components/fragments/ModalDelete";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
 import InputSearch from "@/components/elements/InputSearch";
+import { useTranslation } from "react-i18next";
 
 const selectRow = [7, 14, 21, 28];
 
 const DataGuruPage = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const dataChecked = useSelector(selectedDataDeleteMany);
   const dataDelete = useSelector(selectedDataDelete);
@@ -147,7 +149,7 @@ const DataGuruPage = () => {
           className="flex-between gap-3 min-w-fit bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
         >
           <img src={guru} alt="guru" width={15} height={15} />
-          Tambah Guru
+          {t('forms.dataTeacher.buttons.addTeacher')}
         </Link>
       </div>
 
@@ -155,7 +157,7 @@ const DataGuruPage = () => {
         <div className="flex-between px-4 h-14 ">
           <div className="flex items-center gap-4  ">
             <button
-              title="Hapus Guru terpilih"
+              title={t('forms.dataTeacher.buttons.deleteSelected')}
               disabled={loading}
               onClick={handleToggleDeleteMany}
               className={`${
@@ -177,7 +179,7 @@ const DataGuruPage = () => {
           </div>
           <div>
             <button
-              title="Excel"
+              title={t('forms.dataTeacher.buttons.exportExcel')}
               disabled={loading}
               className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
               onClick={() => exportToExcel(dataGuru)}
@@ -216,7 +218,7 @@ const DataGuruPage = () => {
         <DeleteModal
           onClose={handleToggleDeleteOne}
           url={"/api/guru/delete-one-guru/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus guru?"}
+          title={t('forms.dataTeacher.messages.confirmDeleteSingle')}
         />
       )}
       {isDeleteManyGuru && (
@@ -224,7 +226,7 @@ const DataGuruPage = () => {
           onClose={handleToggleDeleteMany}
           setAllCheck={setAllCheck}
           url={"/api/guru/delete-many-guru"}
-          title={"Apakah anda yakin ingin mengapus guru terpilih?"}
+          title={t('forms.dataTeacher.messages.confirmDeleteMultiple')}
         />
       )}
     </section>
@@ -233,10 +235,10 @@ const DataGuruPage = () => {
 
 const exportToExcel = async (data) => {
   const workbook = new ExcelJs.Workbook();
-  const worksheet = workbook.addWorksheet(`Data Guru`);
+  const worksheet = workbook.addWorksheet(t('forms.dataTeacher.title'));
 
   worksheet.mergeCells("A1:J1"); // Menggabungkan sel A1 hingga D1
-  worksheet.getCell("A1").value = `Data Guru`; // Menambahkan judul
+  worksheet.getCell("A1").value = t('forms.dataTeacher.title'); // Menambahkan judul
   worksheet.getCell("A1").font = { size: 16, bold: true };
   worksheet.getCell("A1").border = {
     top: { style: "thin", color: "FFFFFFFF" },

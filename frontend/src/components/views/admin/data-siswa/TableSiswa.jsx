@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableSiswa = ({
   data,
@@ -25,6 +26,7 @@ const TableSiswa = ({
   loading,
   setPagination,
 }) => {
+  const { t } = useTranslation();
   const lastOfIndexSiswa = page * limit;
   const firstOfindexSiswa = lastOfIndexSiswa - limit;
   const [dataChecked, setDataChecked] = useState([]);
@@ -90,31 +92,31 @@ const TableSiswa = ({
                   />
                 </th>
                 <th scope="col" className="px-3 py-4">
-                  NIS
+                  {t('forms.dataStudent.labels.nis')}
                 </th>
                 <th scope="col" className="px-4 py-4">
-                  Nama
+                  {t('forms.dataStudent.labels.name')}
                 </th>
                 <th scope="col" className=" py-4 whitespace-nowrap">
-                  Jenis Kelamin
+                  {t('common.gender.title')}
                 </th>
                 <th
                   scope="col"
                   className="px-3 py-4 text-center whitespace-nowrap"
                 >
-                  Tahun Masuk
+                  {t('forms.dataStudent.labels.entryYear')}
                 </th>
                 <th scope="col" className="px-2 py-4">
-                  Alamat
+                  {t('forms.dataStudent.labels.address')}
                 </th>
                 <th scope="col" className="py-4 text-center">
-                  Kontak
+                  {t('forms.dataStudent.labels.phone')}
                 </th>
                 <th
                   scope="Kelas"
                   className="text-center px-8 py-4 whitespace-nowrap"
                 >
-                  Kelas
+                  {t('forms.dataStudent.labels.section')}
                 </th>
                 <th scope="col" className="px-5 py-3">
                   <span className="sr-only">Edit</span>
@@ -129,7 +131,7 @@ const TableSiswa = ({
                     className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                   >
                     <div className="flex justify-center w-full">
-                      Tidak ada data
+                        {t('ui.table.noData')}
                     </div>
                   </td>
                 </tr>
@@ -174,7 +176,9 @@ const TableSiswa = ({
                       scope="row"
                       className="py-4 text-xs font-normal text-gray-900 whitespace-nowrap "
                     >
-                      {siswa.jenisKelamin}
+                      {siswa.jenisKelamin === 'Laki-laki' 
+                        ? t('common.gender.male') 
+                        : t('common.gender.female')}
                     </td>
                     <td
                       scope="row"
@@ -190,7 +194,7 @@ const TableSiswa = ({
                         `${siswa.alamat}`
                       ) : (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t('common.basic.empty')}
                         </span>
                       )}
                     </td>
@@ -216,7 +220,7 @@ const TableSiswa = ({
                         `${siswa.kelas.kelas} ${siswa.kelas.nama}`
                       ) : (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t('common.basic.empty')}
                         </span>
                       )}
                     </td>
@@ -226,7 +230,7 @@ const TableSiswa = ({
                     >
                       <div className="flex-center gap-4">
                         <button
-                          title="Edit"
+                          title={t('ui.buttons.edit')}
                           onClick={() => handleEditSiswa(siswa)}
                           className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral1 flex-center transition-all duration-300"
                         >
@@ -239,7 +243,7 @@ const TableSiswa = ({
                           />
                         </button>
                         <button
-                          title="Hapus"
+                          title={t('ui.buttons.delete')}
                           className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral2 flex-center transition-all duration-300"
                           onClick={() => handleDeleteSiswa(siswa)}
                         >

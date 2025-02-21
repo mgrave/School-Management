@@ -1,9 +1,11 @@
 import { Filter, SlidersHorizontal } from "lucide-react";
 import React, { useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const FilterCategory = ({ handleOptionChange, selectedFilter }) => {
   const filterRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggleDropDown = (e) => {
     e.stopPropagation();
@@ -45,11 +47,11 @@ const FilterCategory = ({ handleOptionChange, selectedFilter }) => {
           className="w-[200px] border left-0 top-8 rounded-lg absolute  bg-white shadow-md z-10 flex flex-col  flex-between py-3 items-stretch"
         >
           <h4 className="text-xs border-b mb-2 px-3 pb-3 font-medium text-gray-700">
-            Kategori Filter :
+            {t('forms.dataClasses.labels.filterCategory')}
           </h4>
           <div className="px-4 py-2">
             <label className="block text-xs font-medium text-gray-700">
-              Kategori Ujian
+              {t('forms.dataClasses.labels.examCategory')}
             </label>
             <select
               name="kelas"
@@ -58,13 +60,12 @@ const FilterCategory = ({ handleOptionChange, selectedFilter }) => {
               className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md border focus:outline-none"
               role="menuitem"
             >
-              <option value="">Semua</option>
-
-              <option value={"ujian"} className="my-2">
-                Ujian
+              <option value="">{t('common.basic.all')}</option>
+              <option value={"ujian"}>
+                {t('forms.dataCategories.options.exam')}
               </option>
-              <option value={"tugas"} className="my-2">
-                Tugas
+              <option value={"tugas"}>
+                {t('forms.dataCategories.options.assignment')}
               </option>
             </select>
           </div>

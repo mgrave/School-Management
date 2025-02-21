@@ -4,12 +4,15 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableJam = ({ loading, startTime, endTime }) => {
   const [start, setStart] = useState(startTime || 0);
   const [end, setEnd] = useState(endTime || 0);
 
   const [mounted, setMounted] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -51,7 +54,7 @@ const TableJam = ({ loading, startTime, endTime }) => {
           <tr>
             <th scope="col" className="opacity-0"></th>
             <th scope="col" className="px-3 py-4">
-              Pukul
+              {t('forms.dataClasses.labels.time')}
             </th>
           </tr>
         </thead>
@@ -71,7 +74,7 @@ const TableJam = ({ loading, startTime, endTime }) => {
           )}
           <tr className="border-b hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Mulai
+              {t('forms.dataClasses.labels.start')}
             </td>
 
             <td scope="row" className="py-4 w-12">
@@ -87,7 +90,7 @@ const TableJam = ({ loading, startTime, endTime }) => {
           </tr>
           <tr className=" hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Selesai
+              {t('forms.dataClasses.labels.end')}
             </td>
 
             <td scope="row" className="py-4 w-12">

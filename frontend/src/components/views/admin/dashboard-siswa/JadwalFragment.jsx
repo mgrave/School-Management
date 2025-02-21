@@ -1,6 +1,8 @@
 import { Fragment } from "react";
+import { useTranslation } from 'react-i18next';
 
 const JadwalFragment = ({ libur, liburNasional, dataJadwal, loading }) => {
+  const { t } = useTranslation();
   const today = new Intl.DateTimeFormat("id-ID", {
     weekday: "long",
   }).format(new Date());
@@ -12,7 +14,7 @@ const JadwalFragment = ({ libur, liburNasional, dataJadwal, loading }) => {
   return (
     <Fragment>
       <h1 className="text-sm font-medium text-neutral  border-b border-neutral text-center py-2">
-        Jadwal Sekarang
+        {t('forms.dataSchedule.currentSchedule')}
       </h1>
       {loading ? (
         <div className="min-h-16 py-2.5">
@@ -41,7 +43,7 @@ const JadwalFragment = ({ libur, liburNasional, dataJadwal, loading }) => {
           dataJadwal.filter((jadwal) => jadwal.hari === today).length === 0 ? (
             <div className="py-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex text-xs justify-center items-center gap-1 ">
               <p className="font-medium capitalize text-center text-[#fb7d5b]">
-                {loading ? "" : "Tidak ada jadwal"}
+                {loading ? "" : t('forms.dataSchedule.noSchedule')}
               </p>
             </div>
           ) : (
@@ -81,11 +83,11 @@ const JadwalFragment = ({ libur, liburNasional, dataJadwal, loading }) => {
                   <p className="font-medium capitalize text-center text-[#fb7d5b]">
                     {loading
                       ? ""
-                      : `Tidak ada jadwal. Hari ${
-                          holiday.keterangan.toLowerCase().includes("libur")
-                            ? holiday.keterangan
-                            : `Libur ${holiday.keterangan}`
-                        }`}
+                      : t('forms.dataSchedule.holidayMessages.noClassNational', {
+                          holiday: holiday.keterangan.toLowerCase().includes("libur") 
+                            ? holiday.keterangan 
+                            : t('forms.dataSchedule.holidayMessages.noClassCustom', { holiday: holiday.keterangan })
+                        })}
                   </p>
                 </div>
               ))}
@@ -102,11 +104,11 @@ const JadwalFragment = ({ libur, liburNasional, dataJadwal, loading }) => {
                   <p className="font-medium capitalize text-center text-[#fb7d5b]">
                     {loading
                       ? ""
-                      : `Tidak ada jadwal. Hari ${
-                          holiday.keterangan.toLowerCase().includes("libur")
-                            ? holiday.keterangan
-                            : `Libur ${holiday.keterangan}`
-                        }`}
+                      : t('forms.dataSchedule.holidayMessages.noClassNational', {
+                          holiday: holiday.keterangan.toLowerCase().includes("libur") 
+                            ? holiday.keterangan 
+                            : t('forms.dataSchedule.holidayMessages.noClassCustom', { holiday: holiday.keterangan })
+                        })}
                   </p>
                 </div>
               ))}

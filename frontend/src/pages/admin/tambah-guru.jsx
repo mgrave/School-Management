@@ -8,9 +8,11 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from "react-i18next";
 
 const TambahGuruPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -146,9 +148,9 @@ const TambahGuruPage = () => {
     const file = e.target.files[0];
 
     if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      return toast.error("Ektensi file tidak di dukung");
+      return toast.error(t('common.fileUpload.invalidType'));
     } else if (file.size > MAX_FILE_SIZE) {
-      return toast.error("Ukuran File Maksimal 1 MB.");
+      return toast.error(t('common.fileUpload.maxSize').replace('{size}', 1));
     } else {
       const formData = new FormData();
 
@@ -176,7 +178,7 @@ const TambahGuruPage = () => {
   return (
     <>
       <div className="bg-white mx-6 border-b rounded-md p-4">
-        <h1 className="font-bold text-gray-700 text-sm">Masukkan Data Guru</h1>
+        <h1 className="font-bold text-gray-700 text-sm">{t('forms.dataTeacher.title')}</h1>
       </div>
       <div className="  mx-6 mb-16 bg-white  grid grid-cols-1 rounded-lg rounded-tr-none rounded-tl-none py-6 px-6 gap-8 lg:grid-cols-4">
         <div className=" flex justify-start  items-center flex-col">
@@ -213,11 +215,11 @@ const TambahGuruPage = () => {
               </div>
             )}
           </div>
-          <p className="text-[0.625rem] text-neutral mt-8">
-            Besar file maksimal 1 MB
+          <p className="text-[0.625rem] text-center mt-4 text-neutral">
+            {t('common.fileUpload.maxSize').replace('{size}', 1)}
           </p>
-          <p className="text-[0.625rem] text-neutral mt-2">
-            Ekstensi file: jpeg/jpg, png
+          <p className="text-[0.625rem] text-center mt-2 text-neutral">
+            {t('common.fileUpload.allowedExtensions').replace('{extensions}', "JPEG, JPG, PNG")}
           </p>
         </div>
         <form
@@ -230,17 +232,17 @@ const TambahGuruPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.name')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 id="nama"
                 name="nama"
                 {...register("nama", {
-                  required: "Nama tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.name'),
                   maxLength: {
                     value: 50,
-                    message: "Nama maksimal 50 karakter.",
+                    message: t('forms.dataTeacher.validation.length.max', { max: 50 }),
                   },
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral px-2"
@@ -251,7 +253,7 @@ const TambahGuruPage = () => {
             </div>
             <div className="mb-2">
               <label htmlFor="nip" className="text-xs mb-2 block font-semibold">
-                NIP <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.nip')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -259,7 +261,7 @@ const TambahGuruPage = () => {
                 name="nip"
                 value={nip}
                 {...register("nip", {
-                  required: "Nip tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.nip'),
                 })}
                 onChange={(e) => handleNumberChange(e, "nip")}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
@@ -274,20 +276,20 @@ const TambahGuruPage = () => {
                 htmlFor="password"
                 className="text-xs mb-2 block font-semibold"
               >
-                Password <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.password')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
                 id="password"
                 {...register("password", {
-                  required: "Password tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.password'),
                   maxLength: {
                     value: 50,
-                    message: "Password maksimal 20 karakter.",
+                    message: t('forms.dataTeacher.validation.length.max', { max: 20 }),
                   },
                   minLength: {
                     value: 5,
-                    message: "Password minimal 5 karakter.",
+                    message: t('forms.dataTeacher.validation.length.min', { min: 5 }),
                   },
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
@@ -301,16 +303,16 @@ const TambahGuruPage = () => {
                 htmlFor="tempatLahir"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tempat Lahir <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.birthPlace')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
                 id="tempatLahir"
                 {...register("tempatLahir", {
-                  required: "Tempat Lahir tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.birthPlace'),
                   maxLength: {
                     value: 50,
-                    message: "Tempat Lahir maksimal 20 karakter.",
+                    message: t('forms.dataTeacher.validation.length.max', { max: 20 }),
                   },
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
@@ -324,14 +326,14 @@ const TambahGuruPage = () => {
                 htmlFor="TanggalLahir"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tanggal Lahir <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.birthDate')} <span className="text-red-500">*</span>
               </label>
 
               <input
                 type="date"
                 id="TanggalLahir"
                 {...register("tanggalLahir", {
-                  required: "Tanggal Lahir tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.birthDate'),
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               />
@@ -344,18 +346,18 @@ const TambahGuruPage = () => {
                 htmlFor="Jenis Kelamin"
                 className="text-xs mb-2 block font-semibold"
               >
-                Jenis Kelamin <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.gender')} <span className="text-red-500">*</span>
               </label>
               <select
                 id="Jenis Kelamin"
                 {...register("jenisKelamin", {
-                  required: "Jenis Kelamin tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.gender'),
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
-                <option value="">Pilih jenis kelamin</option>
-                <option value="Laki-Laki">Laki-Laki</option>
-                <option value="Perempuan">Perempuan</option>
+                <option value="">{t('forms.dataTeacher.placeholders.selectGender')}</option>
+                <option value="Laki-Laki">{t('common.gender.male')}</option>
+                <option value="Perempuan">{t('common.gender.female')}</option>
               </select>
               <span className="text-xs h-4 block mt-1 text-neutral2">
                 {errors.jenisKelamin && errors.jenisKelamin.message}
@@ -368,12 +370,12 @@ const TambahGuruPage = () => {
                 htmlFor="bidangStudi"
                 className="text-xs mb-2 block font-semibold w-fit"
               >
-                Bidang Studi <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.subject')} <span className="text-red-500">*</span>
               </label>
               <Controller
                 control={control}
                 name="bidangStudi"
-                rules={{ required: "Bidang Studi tidak boleh kosong." }}
+                rules={{ required: t('forms.dataTeacher.validation.required.subject') }}
                 render={({ field: { onChange, value } }) => (
                   <DropdownBidangStudi
                     onChange={changeBidangStudi}
@@ -391,7 +393,7 @@ const TambahGuruPage = () => {
                 htmlFor="No. Telepon"
                 className="text-xs mb-2 block font-semibold"
               >
-                No. Telepon <span className="text-red-500">*</span>
+                {t('forms.dataTeacher.labels.phone')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"number"}
@@ -400,7 +402,7 @@ const TambahGuruPage = () => {
                 value={phone}
                 autoComplete="off"
                 {...register("phone", {
-                  required: "No. Telepon tidak boleh kosong.",
+                  required: t('forms.dataTeacher.validation.required.phone'),
                 })}
                 onChange={(e) => handleNumberChange(e, "phone")}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
@@ -415,14 +417,18 @@ const TambahGuruPage = () => {
                 htmlFor="kelas"
                 className="text-xs mb-2 block font-semibold"
               >
-                Wali Kelas
+                {t('forms.dataTeacher.labels.level')}
               </label>
               <select
                 id="kelas"
                 {...register("kelas")}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
-                <option value="">Tidak sebagai wali kelas</option>
+                <option value="">
+                  {selectedValue === "" 
+                    ? t('forms.dataTeacher.placeholders.selectLevel') 
+                    : t('common.basic.clear')}
+                </option>
 
                 {kelas.map((kel, i) => (
                   <option
@@ -444,7 +450,7 @@ const TambahGuruPage = () => {
                   htmlFor="Nama Kelas"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Nama Kelas <span className="text-red-500">*</span>
+                  {t('forms.dataTeacher.labels.className')} <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="Nama Kelas"
@@ -468,7 +474,7 @@ const TambahGuruPage = () => {
                 htmlFor="Alamat"
                 className="text-xs mb-2 block font-semibold"
               >
-                Alamat
+                {t('forms.dataTeacher.labels.address')}
               </label>
               <textarea
                 id="Alamat"
@@ -483,7 +489,7 @@ const TambahGuruPage = () => {
                   type="button"
                   className="btn  w-28 bg-gray-300 text-gray-800 hover:text-white disabled:cursor-not-allowed   border border-gray-500"
                 >
-                  {loading ? "Loading" : "Batal"}
+                  {loading ? t('common.status.loading') : t('forms.dataTeacher.buttons.cancel')}
                 </button>
               </Link>
 
@@ -492,7 +498,7 @@ const TambahGuruPage = () => {
                 type="submit"
                 className="btn  disabled:cursor-not-allowed w-28 "
               >
-                {loading ? "Loading" : "Simpan"}
+                {loading ? t('common.status.loading') : t('forms.dataTeacher.buttons.save')}
               </button>
             </div>
           </div>

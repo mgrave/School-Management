@@ -5,8 +5,10 @@ import axios from "axios";
 import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const CustomSelectOption = ({ onChange }) => {
+  const { t } = useTranslation();
   const dataEdit = useSelector(selectedDataEdit);
   const dropRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -14,12 +16,12 @@ const CustomSelectOption = ({ onChange }) => {
   const [search, setSearch] = useState("");
   const [dataSearch, setDataSearch] = useState([]);
   const [waliKelas, setWaliKelas] = useState({
-    nama: "Tidak memiliki Wali Kelas",
+    nama: t('forms.dataClasses.messages.noHomeroom'),
   });
 
   const handleWaliKelasSelection = (nama, id) => {
     if (nama === "") {
-      setWaliKelas({ nama: "Tidak memiliki Wali Kelas" });
+      setWaliKelas({ nama: t('forms.dataClasses.messages.noHomeroom') });
     } else {
       setWaliKelas({ nama, id });
     }
@@ -112,7 +114,7 @@ const CustomSelectOption = ({ onChange }) => {
             <div className="sticky top-0   text-xs hover:bg-gray-200 cursor-pointer">
               <input
                 type="search"
-                placeholder="Cari nama guru..."
+                placeholder={t('forms.dataClasses.placeholders.searchTeacher')}
                 value={search}
                 className=" block mb-2 w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-8 py-2 pr-8 rounded shadow leading-tight focus:outline-none  "
                 onChange={(e) => setSearch(e.target.value)}
@@ -124,16 +126,14 @@ const CustomSelectOption = ({ onChange }) => {
               />
             </div>
           </li>
-          {
-            <li
-              tabIndex={0}
-              type="button"
-              onClick={() => handleWaliKelasSelection("", "")}
-              className="cursor-pointer block w-full my-1 py-1 text-left hover:bg-background px-2"
-            >
-              {"Kosongkan"}
-            </li>
-          }
+          <li
+            tabIndex={0}
+            type="button"
+            onClick={() => handleWaliKelasSelection("", "")}
+            className="cursor-pointer block w-full my-1 py-1 text-left hover:bg-background px-2"
+          >
+            {t('common.basic.clear')}
+          </li>
           {guru &&
             dataSearch.map((gu) => (
               <li

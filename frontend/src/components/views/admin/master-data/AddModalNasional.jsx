@@ -6,6 +6,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AddModalNasional = ({ onClose }) => {
   const {
@@ -15,6 +16,7 @@ const AddModalNasional = ({ onClose }) => {
   } = useForm();
 
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -44,7 +46,7 @@ const AddModalNasional = ({ onClose }) => {
       >
         <div className="px-6 py-4 border-b">
           <HeaderModal
-            titile={"Tambah Libur Nasional"}
+            titile={t('forms.dataMaster.buttons.addHoliday')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -56,7 +58,7 @@ const AddModalNasional = ({ onClose }) => {
                 htmlFor="tanggal"
                 className="text-xs mb-2 block font-semibold text-gray-700"
               >
-                Tanggal
+                {t('common.time.date')}
               </label>
               <input
                 type="date"
@@ -64,7 +66,7 @@ const AddModalNasional = ({ onClose }) => {
                 name="tanggal"
                 min={1}
                 {...register("tanggal", {
-                  required: "Tanggal diperlukan.",
+                  required: t('forms.dataMaster.validation.required.date'),
                 })}
                 className=" border w-full text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
               />
@@ -77,14 +79,14 @@ const AddModalNasional = ({ onClose }) => {
                 htmlFor="keterangan"
                 className="text-xs mb-2 block font-semibold text-gray-700"
               >
-                Keterangan Libur
+                {t('forms.dataMaster.labels.holidayDescription')}
               </label>
               <input
                 type="text"
                 id="keterangan"
                 name="keterangan"
                 {...register("keterangan", {
-                  required: "Keterangan diperlukan.",
+                  required: t('forms.dataMaster.validation.required.description'),
                 })}
                 className=" border w-full text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
               />
@@ -101,7 +103,7 @@ const AddModalNasional = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.status.loading') : t('ui.buttons.save')}
             </button>
           </div>
         </form>

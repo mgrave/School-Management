@@ -4,10 +4,12 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableSemester = ({ loading, semester }) => {
   const [isGanjil, setIsGanjil] = useState(false);
   const [isGenap, setIsGenap] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggleSwitch = async (keterangan) => {
     keterangan === "semester 1" &&
@@ -44,7 +46,7 @@ const TableSemester = ({ loading, semester }) => {
           <tr>
             <th scope="col" className="px-2 py-4 opacity-0"></th>
             <th scope="col" className="px-3 py-4">
-              Status
+              {t('common.status.title')}
             </th>
             <th className="opacity-0">Edit</th>
           </tr>
@@ -52,7 +54,7 @@ const TableSemester = ({ loading, semester }) => {
         <tbody>
           <tr className="border-b hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Semester 1
+              {t('forms.dataClasses.semester1')}
             </td>
             <td
               scope="row"
@@ -60,7 +62,7 @@ const TableSemester = ({ loading, semester }) => {
                 isGanjil ? "text-neutral1" : "text-neutral2"
               } py-4 w-12 text-xs font-semibold`}
             >
-              {isGanjil ? "Aktif" : "Non Aktif"}
+              {isGanjil ? t('common.status.active') : t('common.status.inactive')}
             </td>
             <td scope="row" className="py-4 w-12">
               <label
@@ -88,7 +90,7 @@ const TableSemester = ({ loading, semester }) => {
           </tr>
           <tr className=" hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Semester 2
+              {t('forms.dataClasses.semester2')}
             </td>
             <td
               scope="row"
@@ -96,7 +98,7 @@ const TableSemester = ({ loading, semester }) => {
                 isGenap ? "text-neutral1" : "text-neutral2"
               } py-4 w-12 text-xs font-semibold`}
             >
-              {isGenap ? "Aktif" : "Non Aktif"}
+              {isGenap ? t('common.status.active') : t('common.status.inactive')}
             </td>
             <td scope="row" className="py-4 w-12">
               <label

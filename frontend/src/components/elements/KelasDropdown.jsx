@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const KelasDropdown = ({ onChange, value }) => {
   const { pathname } = useLocation();
@@ -14,6 +15,7 @@ const KelasDropdown = ({ onChange, value }) => {
   const [dataKelas, setDataKelas] = useState([]);
   const [kelas, setKelas] = useState([]);
   const [selectedKelas, setSelectedKelas] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (dataEdit) {
@@ -86,7 +88,7 @@ const KelasDropdown = ({ onChange, value }) => {
         className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline cursor-pointer"
         readOnly
         id={"kelas"}
-        value={selectedKelas ? selectedKelas : "Pilih Kelas"}
+        value={selectedKelas ? selectedKelas : t("forms.dataClasses.placeholders.selectClass")}
         onClick={handleInputClick}
       />
       <div className="absolute pointer-events-none right-2 top-2.5">

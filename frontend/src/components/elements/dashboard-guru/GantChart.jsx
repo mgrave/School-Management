@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const totalDailyMinutes = 8 * 60;
 
@@ -21,7 +22,8 @@ const getClassColor = (classNumber) => {
 };
 
 const GantChart = ({ schedules, durasi, loading }) => {
-  const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+  const { t } = useTranslation();
+  const days = Object.values(t('common.calendar.days', { returnObjects: true }));
 
   const calculatePercentage = (start, end) => {
     const [startHour, startMinute] = start.split(":").map(Number);
@@ -82,6 +84,11 @@ const GantChart = ({ schedules, durasi, loading }) => {
                   );
                 })}
           </div>
+          {!loading && schedules.length === 0 && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-xs">{t('common.status.noData')}</p>
+            </div>
+          )}
         </div>
       ))}
     </div>

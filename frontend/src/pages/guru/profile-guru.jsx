@@ -12,8 +12,10 @@ import { toast } from "sonner";
 import { Edit, Edit2, Plus, Trash, X } from "lucide-react";
 import { selectedUserData, setUserData } from "@/store/slices/auth-slice";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from "react-i18next";
 
 const ProfileGuruPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -108,9 +110,9 @@ const ProfileGuruPage = () => {
     const file = e.target.files[0];
 
     if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      return toast.error("Ektensi file tidak di dukung");
+      return toast.error(t('common.fileUpload.invalidType'));
     } else if (file.size > MAX_FILE_SIZE) {
-      return toast.error("Ukuran File Maksimal 1 MB.");
+      return toast.error(t('common.fileUpload.maxSize').replace('{size}', 1));
     } else {
       const formData = new FormData();
 
@@ -236,10 +238,10 @@ const ProfileGuruPage = () => {
             )}
           </div>
           <p className="text-[0.625rem] text-center mt-4 text-neutral">
-            Besar file maksimal 1 MB
+            {t('common.fileUpload.maxSize').replace('{size}', 1)}
           </p>
           <p className="text-[0.625rem] text-center mt-2 text-neutral">
-            Ekstensi file: jpeg/jpg, png
+            {t('common.fileUpload.allowedExtensions').replace('{extensions}', "JPEG, JPG, PNG")}
           </p>
 
           <div className="flex flex-col justify-center  mt-8">

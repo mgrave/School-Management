@@ -9,6 +9,7 @@ import { space } from "postcss/lib/list";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useTranslation } from "react-i18next";
 
 const TableJadwal = ({
   data,
@@ -24,6 +25,7 @@ const TableJadwal = ({
   const [dataChecked, setDataChecked] = useState([]);
   const lastIndexjadwal = perPage * currentPage;
   const firstIndexjadwal = lastIndexjadwal - perPage;
+  const { t } = useTranslation();
 
   const dataSlice = data?.slice(firstIndexjadwal, lastIndexjadwal);
 
@@ -92,22 +94,22 @@ const TableJadwal = ({
                 scope="col"
                 className="px-10 text-left py-4 whitespace-nowrap"
               >
-                Bidang Studi
+                {t('forms.dataClasses.labels.subject')}
               </th>
               <th scope="col" className="px-10 text-left py-4">
-                Guru
+                {t('forms.dataTeacher.title')}
               </th>
               <th scope="col" className="px-4 text-left py-4">
-                kelas
+                {t('forms.dataClasses.labels.class')}
               </th>
               <th scope="col" className="px-1 py-4 whitespace-nowrap">
-                Jumlah pertemuan
+                {t('forms.dataClasses.labels.meeting')}
               </th>
               <th scope="col" className="px-1  py-4">
-                Hari
+                {t('forms.dataClasses.labels.day')}
               </th>
               <th scope="col" className="px-5 py-4">
-                waktu
+                {t('common.time.time')}
               </th>
 
               <th className="sr-only"></th>
@@ -122,7 +124,7 @@ const TableJadwal = ({
                 >
                   <div className="flex flex-col items-center justify-center">
                     <span className="w-8 h-8 block mb-2 animate-spin rounded-full border-4 border-t-gray-800 border-gray-300"></span>
-                    <span>Loading</span>
+                    <span>{t('common.status.loading')}</span>
                   </div>
                 </td>
               </tr>
@@ -133,7 +135,7 @@ const TableJadwal = ({
                   colSpan="7"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[280px]"
                 >
-                  <p className="text-center">Tidak ada data.</p>
+                  <p className="text-center">{t('ui.table.noData')}</p>
                 </td>
               </tr>
             )}
@@ -259,6 +261,7 @@ const Pagination = ({
   paginate,
   dataSlice,
 }) => {
+  const { t } = useTranslation();
   const pageNumber = [];
 
   const totalPage = Math.ceil(totaljadwal / perPage);
@@ -283,11 +286,12 @@ const Pagination = ({
       {!loading && (
         <>
           <div className="h-6 flex-center">
-            <p className="text-xs">{`Menampilkan ${
-              dataSlice.length === 0 ? 0 : firstIndexjadwal + 1
-            } - ${
-              firstIndexjadwal + dataSlice.length
-            } dari ${totaljadwal} Data`}</p>
+            <p className="text-xs">
+              {t('ui.table.showing')
+                .replace('{from}', dataSlice.length === 0 ? 0 : firstIndexjadwal + 1)
+                .replace('{to}', firstIndexjadwal + dataSlice.length)
+                .replace('{total}', totaljadwal)}
+            </p>
           </div>
           {pageNumber.length !== 0 && (
             <div className="flex gap-2 ">

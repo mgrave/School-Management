@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableGuru = ({
   data,
@@ -37,10 +38,11 @@ const TableGuru = ({
   const [dataChecked, setDataChecked] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const HandleCopyText = (text) => {
     navigator.clipboard.writeText(text).then(() => {
-      toast.info("Succes mengambil data");
+      toast.info(t('common.status.copied'));
     });
   };
 
@@ -97,35 +99,35 @@ const TableGuru = ({
                   />
                 </th>
                 <th scope="col" className="px-4 py-4">
-                  NIP
+                  {t('admin.dataGuru.labels.nip')}
                 </th>
                 <th scope="col" className="px-4 py-4">
-                  Nama
+                  {t('admin.dataGuru.labels.name')}
                 </th>
                 <th scope="col" className=" py-4 whitespace-nowrap">
-                  Jenis Kelamin
+                  {t('common.gender.title')}
                 </th>
                 <th
                   scope="col"
                   className="px-3 py-4 text-left whitespace-nowrap"
                 >
-                  Bidang Studi
+                  {t('admin.dataGuru.labels.studyField')}
                 </th>
 
                 <th scope="col" className="py-4 text-center">
-                  Kontak
+                  {t('admin.dataGuru.labels.contact')}
                 </th>
                 <th
                   scope="Kelas"
                   className="text-center px-4 py-4 whitespace-nowrap"
                 >
-                  Status
+                  {t('common.status.title')}
                 </th>
                 <th
                   scope="Kelas"
                   className="text-center px-4 py-4 whitespace-nowrap"
                 >
-                  Wali Kelas
+                  {t('admin.dataGuru.labels.homeroom')}
                 </th>
                 <th scope="col" className="px-5 py-3">
                   <span className="sr-only">Edit</span>
@@ -140,7 +142,7 @@ const TableGuru = ({
                     className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                   >
                     <div className="flex justify-center w-full">
-                      Tidak ada data
+                      {t('ui.table.noData')}
                     </div>
                   </td>
                 </tr>
@@ -185,7 +187,9 @@ const TableGuru = ({
                       scope="row"
                       className="py-4 text-xs font-normal text-gray-900 whitespace-nowrap "
                     >
-                      {guru.jenisKelamin}
+                      {guru.jenisKelamin === 'Laki-Laki' 
+                        ? t('common.gender.male') 
+                        : t('common.gender.female')}
                     </td>
                     <td
                       scope="row"
@@ -195,7 +199,7 @@ const TableGuru = ({
                         guru.bidangStudi.nama
                       ) : (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t('common.basic.empty')}
                         </span>
                       )}
                     </td>
@@ -223,8 +227,7 @@ const TableGuru = ({
                           guru.status ? "bg-gray-700" : "bg-gray-600"
                         } px-4 py-1 text-white rounded-full`}
                       >
-                        {" "}
-                        {guru.status ? "Aktif" : "Non Aktif"}
+                        {guru.status ? t('common.status.active') : t('common.status.inactive')}
                       </span>
                     </td>
                     <td
@@ -235,7 +238,7 @@ const TableGuru = ({
                         `${guru.waliKelas.kelas} ${guru.waliKelas.nama}`
                       ) : (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t('common.basic.empty')}
                         </span>
                       )}
                     </td>

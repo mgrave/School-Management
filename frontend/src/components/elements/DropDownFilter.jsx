@@ -4,9 +4,11 @@ import axios from "axios";
 import { ListRestart, SlidersHorizontal } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FilterDropdown = ({ handleFilterChange, setFilters }) => {
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const [selectedFilter, setSelectedFilter] = useState({
     kelas: "",
@@ -120,7 +122,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
           className=" absolute right-0 mt-1 w-[11rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
         >
           <div className="flex-between px-4 py-4 h-12 border-gray-200 border-b ">
-            <h3 className=" font-bold  text-xs">Kategori Filter</h3>
+            <h3 className=" font-bold  text-xs">{t('ui.filters.filterCategory')}</h3>
             {Object.values(selectedFilter).some((value) => value !== "") && (
               <button
                 className="text-xs font-medium rounded-xl bg-indigo-400 p-1"
@@ -160,7 +162,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
           >
             <div className="px-4 py-2">
               <label className="block text-xs font-medium text-gray-700">
-                Kelas
+                {t('forms.dataClasses.labels.level')}
               </label>
               <select
                 name="kelas"
@@ -169,13 +171,13 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
                 className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md border focus:outline-none"
                 role="menuitem"
               >
-                <option value="">Semua</option>
+                <option value="">{t('common.basic.all')}</option>
                 {kelas &&
                   kelas
                     .sort((a, b) => b - a)
                     .map((kel, i) => (
                       <option key={i} value={kel} className="my-2">
-                        {"Kelas " + kel}
+                        {t('forms.dataClasses.labels.level')+" "+ kel}
                       </option>
                     ))}
               </select>
@@ -183,7 +185,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
             {selectedFilter.kelas !== "" && (
               <div className="px-4 py-2">
                 <label className="block text-xs font-medium text-gray-700">
-                  Nama Kelas
+                  {t('forms.dataClasses.labels.className')}
                 </label>
                 <select
                   name="kelasNama"
@@ -204,7 +206,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
 
             <div className="px-4 py-2">
               <label className="block text-xs font-medium text-gray-700">
-                Jenis Kelamin
+                {t('common.gender.title')}
               </label>
               <select
                 name="jenisKelamin"
@@ -213,15 +215,15 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
                 className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md border  focus:outline-none"
                 role="menuitem"
               >
-                <option value="">Semua</option>
-                <option value="Laki-Laki">Laki-Laki</option>
-                <option value="Perempuan">Perempuan</option>
+                <option value="">{t('common.basic.all')}</option>
+                <option value="Laki-Laki">{t('common.gender.male')}</option>
+                <option value="Perempuan">{t('common.gender.female')}</option>
               </select>
             </div>
             {pathname === "/admin/data-guru" && (
               <div className="px-4 py-2">
                 <label className="block text-xs font-medium text-gray-700">
-                  Bidang Studi
+                  {t('forms.dataTeacher.labels.subject')}
                 </label>
                 <select
                   name="bidangStudi"
@@ -230,7 +232,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
                   className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md border  focus:outline-none"
                   role="menuitem"
                 >
-                  <option value="">Semua</option>
+                  <option value="">{t('common.basic.all')}</option>
                   {mapel.map((studi) => (
                     <option key={studi.kode} value={studi._id}>
                       {studi.nama}
@@ -243,7 +245,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
             {pathname !== "/admin/data-guru" && (
               <div className="px-4 py-2">
                 <label className="block text-xs font-medium text-gray-700">
-                  Tahun Masuk
+                  {t('forms.dataClasses.labels.entryYear')}
                 </label>
                 <select
                   name="tahunMasuk"
@@ -252,7 +254,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
                   className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md  border focus:outline-none"
                   role="menuitem"
                 >
-                  <option value="">Semua</option>
+                  <option value="">{t('common.basic.all')}</option>
                   {tahunMasuk.map((tahun, i) => (
                     <option key={tahun} value={tahun}>
                       {tahun}

@@ -8,6 +8,7 @@ import responseError from "@/util/services";
 import axios, { all } from "axios";
 import { HOST } from "@/util/constant";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AddModal = ({ onClose, kelas }) => {
   const {
@@ -37,6 +38,7 @@ const AddModal = ({ onClose, kelas }) => {
   const fotoRef = useRef();
   const nis = watch("nis");
   const phone = watch("phone");
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (kelas) {
@@ -178,10 +180,10 @@ const AddModal = ({ onClose, kelas }) => {
               />
             </div>
             <p className="text-[0.625rem] text-center mt-4 text-neutral">
-              Besar file maksimal 1 MB
+              {t('common.fileUpload.maxSize').replace('{size}', 1)}
             </p>
             <p className="text-[0.625rem] text-center mt-2 text-neutral">
-              Ekstensi file: jpeg/jpg, png
+              {t('common.fileUpload.allowedExtensions').replace('{extensions}', "JPEG, JPG, PNG")}
             </p>
           </div>
           <form className=" col-span-2 w-full   grid grid-cols-2 gap-x-4">

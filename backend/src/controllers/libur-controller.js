@@ -30,7 +30,7 @@ export const togglePerpekan = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengubah libur perpekan",
+      message: "Éxito al cambiar día libre semanal",
       libur,
     });
   } catch (error) {
@@ -44,7 +44,7 @@ export const getLibur = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil hari libur",
+      message: "Días libres obtenidos correctamente",
       libur,
     });
   } catch (error) {
@@ -76,7 +76,7 @@ export const liburNasional = async (req, res, next) => {
       );
 
       if (isExist) {
-        throw new ResponseError(400, "Libur pada tanggal yang sama sudah ada.");
+        throw new ResponseError(400, "Ya existe un día libre en esta fecha.");
       }
 
       libur?.nasional?.push({ tanggal, keterangan });
@@ -86,7 +86,7 @@ export const liburNasional = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menambah hari libur nasional.",
+      message: "Día festivo nacional agregado correctamente",
       libur,
     });
   } catch (error) {
@@ -110,12 +110,12 @@ export const deleteLiburNasional = async (req, res, next) => {
     );
 
     if (libur.modifiedCount === 0) {
-      throw new ResponseError(404, "Hari libur tidak detemukan");
+      throw new ResponseError(404, "Día libre no encontrado");
     }
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menghapus hari libur nasional.",
+      message: "Día festivo nacional eliminado correctamente",
     });
   } catch (error) {
     next(error);

@@ -21,10 +21,12 @@ import DeleteModal from "@/components/fragments/ModalDelete";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
 import ModalUploadExcel from "@/components/views/admin/data-siswa/ModalUploadExcel";
 import InputSearch from "@/components/elements/InputSearch";
+import { useTranslation } from 'react-i18next';
 
 const selectRow = [7, 14, 21, 28];
 
 const DataSiswaPage = () => {
+  const { t } = useTranslation();
   const dataChecked = useSelector(selectedDataDeleteMany);
   const dataDelete = useSelector(selectedDataDelete);
   const navigate = useNavigate();
@@ -147,7 +149,7 @@ const DataSiswaPage = () => {
           <button
             onClick={handleToggleUpload}
             className="btn bg-neutral rounded-md flex-center "
-            title="upload siswa with excel"
+            title={t('forms.dataStudent.buttons.uploadExcel')}
           >
             <Upload width={15} height={15} className="text-white" />
           </button>
@@ -156,7 +158,7 @@ const DataSiswaPage = () => {
             className="flex-between gap-3 min-w-fit bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
           >
             <img src={Student} alt="student" width={15} height={15} />
-            Tambah Siswa
+            {t('forms.dataStudent.buttons.addStudent')}
           </Link>
         </div>
       </div>
@@ -165,7 +167,7 @@ const DataSiswaPage = () => {
         <div className="flex-between px-4 h-14 ">
           <div className="flex items-center gap-4  ">
             <button
-              title="Hapus siswa terpilih"
+              title={t('forms.dataStudent.buttons.deleteSelected')}
               disabled={loading}
               onClick={() => setIsDeletManySiswa(!isDeleteManySiswa)}
               className={`${
@@ -187,7 +189,7 @@ const DataSiswaPage = () => {
           </div>
           <div>
             <button
-              title="Excel"
+              title={t('forms.dataStudent.buttons.exportExcel')}
               disabled={loading}
               className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
               onClick={() => exportToExcel(dataSiswa)}
@@ -199,8 +201,6 @@ const DataSiswaPage = () => {
                 className="group-hover:text-white"
               />
             </button>
-
-            <button></button>
           </div>
         </div>
         {loading ? (
@@ -228,7 +228,7 @@ const DataSiswaPage = () => {
         <DeleteModal
           onClose={() => setIsDeleteSiswa(!isDeleteSiswa)}
           url={"/api/siswa/delete-one-siswa/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus siswa?"}
+          title={t('forms.dataStudent.messages.confirmDeleteSingle')}
         />
       )}
       {isDeleteManySiswa && (
@@ -236,7 +236,7 @@ const DataSiswaPage = () => {
           onClose={() => setIsDeletManySiswa(!isDeleteManySiswa)}
           setAllCheck={setAllCheck}
           url={"/api/siswa/delete-many-siswa"}
-          title={"Apakah anda yakin ingin menghapus siswa terpilih?"}
+          title={t('forms.dataStudent.messages.confirmDeleteMultiple')}
         />
       )}
       {isUpload && <ModalUploadExcel onClose={handleToggleUpload} />}
@@ -245,43 +245,44 @@ const DataSiswaPage = () => {
 };
 
 const exportToExcel = async (data) => {
+  const { t } = useTranslation();
   const workbook = new ExcelJs.Workbook();
-  const worksheet = workbook.addWorksheet(`Data Siswa`);
+  const worksheet = workbook.addWorksheet(t('forms.dataStudent.title'));
 
-  worksheet.mergeCells("A1:J1"); // Menggabungkan sel A1 hingga D1
-  worksheet.getCell("A1").value = `Data Siswa`; // Menambahkan judul
+  worksheet.mergeCells("A1:J1");
+  worksheet.getCell("A1").value = t('forms.dataStudent.title');
   worksheet.getCell("A1").font = { size: 16, bold: true };
   worksheet.getCell("A1").border = {
     top: { style: "thin", color: "FFFFFFFF" },
     left: { style: "thin", color: "FFFFFFFF" },
     bottom: { style: "thin", color: "FFFFFFFF" },
     right: { style: "thin", color: "FFFFFFFF" },
-  }; // Mengatur gaya font
+  };
   worksheet.getCell("A1").alignment = {
     vertical: "middle",
     horizontal: "center",
   };
 
   worksheet.getRow(2).values = [
-    "NIS",
-    "Nama Siswa",
-    "Jenis Kelamin",
-    "Tempat Lahir",
-    "Tanggal Lahir",
-    "Agama",
-    "Tahun Masuk",
-    "Alamat",
-    "Telepon",
-    "kelas",
-  ]; // Mengatur nilai header kolom
+    t('forms.dataStudent.labels.nis'),
+    t('forms.dataStudent.labels.name'),
+    t('forms.dataStudent.labels.gender'),
+    t('forms.dataStudent.labels.birthPlace'),
+    t('forms.dataStudent.labels.birthDate'),
+    t('forms.dataStudent.labels.religion'),
+    t('forms.dataStudent.labels.entryYear'),
+    t('forms.dataStudent.labels.address'),
+    t('forms.dataStudent.labels.phone'),
+    t('forms.dataStudent.labels.class')
+  ];
   worksheet.getRow(2).eachCell((cell, colNumber) => {
     cell.fill = {
       type: "pattern",
       pattern: "solid",
-      fgColor: { argb: "362f7e" }, // Warna Biru
+      fgColor: { argb: "362f7e" },
     };
-    cell.font = { color: { argb: "FFFFFFFF" }, bold: true }; // Teks putih
-    cell.alignment = { vertical: "middle", horizontal: "center" }; // Rata tengah
+    cell.font = { color: { argb: "FFFFFFFF" }, bold: true };
+    cell.alignment = { vertical: "middle", horizontal: "center" };
     cell.border = {
       top: { style: "thin", color: "FFFFFFFF" },
       left: { style: "thin", color: "FFFFFFFF" },
@@ -304,9 +305,6 @@ const exportToExcel = async (data) => {
         : 15;
   });
 
-  // Styling header
-
-  // Menambahkan data siswa dan status
   data.forEach((siswa) => {
     const kelas = `${siswa?.kelas?.kelas || ""} ${siswa?.kelas?.nama || ""}`;
 
@@ -325,7 +323,6 @@ const exportToExcel = async (data) => {
 
     const row = worksheet.addRow(rowValues);
 
-    // Menambahkan border pada setiap cell di body
     row.eachCell((cell) => {
       cell.border = {
         top: { style: "thin" },
@@ -334,13 +331,8 @@ const exportToExcel = async (data) => {
         right: { style: "thin" },
       };
     });
-
-    // Menambahkan border pada setiap cell di body
-
-    // Styling berdasarkan status untuk setiap cell
   });
 
-  // Ekspor workbook ke Excel
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: "application/octet-stream" });
   saveAs(blob, `Data Siswa.xlsx`);

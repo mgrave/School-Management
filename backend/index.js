@@ -16,12 +16,15 @@ const databaseURL = process.env.DATABASE_URL;
 
 // Function to hash passwords
 async function hashPassword(users) {
+  console.log("[HASH] Starting password hashing for", users.length, "users");
   for (const user of users) {
     if (user.password) {
+      console.log("[HASH] Hashing password for user:", user.nis);
       const salt = await genSalt();
       user.password = await hash(user.password, salt);
     }
   }
+  console.log("[HASH] Completed password hashing");
   return users;
 }
 const __filename = fileURLToPath(import.meta.url);
@@ -35,12 +38,16 @@ const readJsonData = () => {
 };
 
 // Bulk add siswa function
-// Bulk add siswa function
 const bulkAddSiswa = async () => {
   try {
+    console.log("[BULK] Starting bulk insert operation");
+    
     // Read and hash the data
     const siswas = readJsonData();
+    console.log("[BULK] Read", siswas.length, "students from JSON file");
+    
     const hashedSiswas = await hashPassword(siswas);
+    console.log("[BULK] Processed", hashedSiswas.length, "hashed records");
 
     // Group siswa by kelas and namaKelas
     const kelasUpdates = {};
@@ -77,10 +84,11 @@ const bulkAddSiswa = async () => {
       tahunMasukCounts[siswa.tahunMasuk]++;
     }
 
-    // Insert siswa data in bulk
+    console.log("[BULK] Preparing to insert", siswaToInsert.length, "students");
     let insertedSiswas;
     if (siswaToInsert.length > 0) {
       insertedSiswas = await Siswa.insertMany(siswaToInsert);
+      console.log("[BULK] Successfully inserted", insertedSiswas.length, "students");
     }
 
     // Map the inserted siswa to their _id
@@ -91,7 +99,9 @@ const bulkAddSiswa = async () => {
     }, {});
 
     // Update Kelas documents
+    console.log("[BULK] Updating", Object.keys(kelasUpdates).length, "classes");
     for (const [kelasId, siswaIds] of Object.entries(kelasUpdates)) {
+      console.log("[BULK] Processing class ID:", kelasId);
       const siswaList = siswaIdMap[kelasId] || [];
 
       await Kelas.findByIdAndUpdate(kelasId, {
@@ -104,7 +114,9 @@ const bulkAddSiswa = async () => {
     }
 
     // Update Total collection
+    console.log("[BULK] Updating total counts for", Object.keys(tahunMasukCounts).length, "entry years");
     for (const [tahunMasuk, count] of Object.entries(tahunMasukCounts)) {
+      console.log("[BULK] Year", tahunMasuk, "count:", count);
       await Total.findOneAndUpdate(
         { ajaran: tahunMasuk },
         {
@@ -114,22 +126,23 @@ const bulkAddSiswa = async () => {
       );
     }
 
-    console.log("Bulk data added successfully");
+    console.log("✅ Bulk data added successfully");
   } catch (error) {
-    console.error("Failed to bulk add siswa:", error);
+    console.error("❌ Failed to bulk add siswa:", error);
   }
 };
 
 // Connect to MongoDB
 const connectDB = async () => {
   try {
+    console.log("⏳ Attempting MongoDB connection to:", databaseURL);
     await mongoose.connect(databaseURL);
-    console.log("Connected to DB");
-
-    // Perform bulk insertion after DB connection is established
+    console.log("✅ Connected to DB");
+    
+    console.log("🔄 Checking if bulk insert is needed");
     // await bulkAddSiswa();
   } catch (error) {
-    console.log("Failed to connect to DB:", error);
+    console.log("❌ Failed to connect to DB:", error);
   }
 };
 
@@ -162,6 +175,10 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, async () => {
+  console.log("🚀 Starting server initialization...");
+  console.log("🕒 Server time:", new Date().toISOString());
   await connectDB();
-  console.log("Server is running on port " + port);
+  console.log("🌐 Server is running on port", port);
+  console.log("📊 Monitoring endpoints:");
+  console.log(`   - http://localhost:${port}/ (status endpoint)`);
 });

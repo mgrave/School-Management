@@ -11,6 +11,7 @@ import ExcelJS from "exceljs";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import PrintComponent from "@/components/views/guru/rekap/PrintModal";
 import DropdownGroup from "@/components/views/admin/RekapData/DropdownGrup";
+import { useTranslation } from "react-i18next";
 
 const RekapAbsensiPage = () => {
   const menuRef = useRef();
@@ -26,6 +27,7 @@ const RekapAbsensiPage = () => {
   const [idKelas, setIdKelas] = useState("");
   const [detailKelas, setDetailKelas] = useState({});
   const componentRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -96,7 +98,7 @@ const RekapAbsensiPage = () => {
     <section className="px-6 py-4 mb-4 ">
       <div className=" bg-white p-4 border shadow-md rounded-md">
         <h3 className="text-sm font-semibold mb-4 text-neutral">
-          Pilih rekap absensi siswa pada setiap kelas.
+          {t('forms.dataClasses.labels.selectAttendanceReport')}
         </h3>
         <div className="flex-between">
           <div className="hidden md:flex gap-4">
@@ -149,7 +151,7 @@ const RekapAbsensiPage = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t('forms.dataClasses.buttons.excel')}
             </button>
 
             <ReactToPrint
@@ -159,7 +161,7 @@ const RekapAbsensiPage = () => {
                   className="rounded-md py-2  border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t('ui.buttons.print')}
                 </button>
               )}
               content={() => componentRef.current}
@@ -184,7 +186,7 @@ const RekapAbsensiPage = () => {
         )}
         {(!kelas || !idKelas) && (
           <div className="absolute inset-0 flex-center bg-white">
-            <p className="text-xs font-medium">Pilih Kelas Terlebih dulu..</p>
+            <p className="text-xs font-medium">{t('forms.dataClasses.messages.selectClassFirst')}</p>
           </div>
         )}
       </div>
@@ -234,7 +236,7 @@ const exportToExcel = async (
 
   // Title Header
   const header = [
-    `Absensi Kelas ${kelas} ${nama} ${new Date(
+    `${t('forms.dataClasses.labels.class')} ${kelas} ${nama} ${new Date(
       year,
       month + 1,
       0
@@ -246,7 +248,11 @@ const exportToExcel = async (
   worksheet.mergeCells(headerRow.number, 1, headerRow.number, countDay + 5); // Adjust the number of columns to match header width
   worksheet.getRow(1).height = 30;
   // Membuat header tabel
-  const header1 = ["Nama Siswa", ...Array(countDay).fill("Tanggal"), "Total"];
+  const header1 = [
+    t('forms.dataClasses.labels.studentName'),
+    ...Array(countDay).fill(t('common.time.date')),
+    t('common.basic.all')
+  ];
   const header2 = [
     "",
     ...Array.from({ length: countDay }, (_, i) => i + 1),

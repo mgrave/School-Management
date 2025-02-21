@@ -13,7 +13,7 @@ export const addKelas = async (req, res, next) => {
     const kelasExists = await Kelas.findOne({ kelas, nama });
 
     if (kelasExists) {
-      throw new ResponseError(400, "Kombinasi kelas dan nama sudah digunakan.");
+      throw new ResponseError(400, "La combinación de clase y nombre ya está en uso");
     }
 
     if (!waliKelas) {
@@ -26,7 +26,7 @@ export const addKelas = async (req, res, next) => {
       const waliExist = await Guru.findById({ _id: waliKelas });
 
       if (waliExist.waliKelas) {
-        throw new ResponseError(400, "Guru sudah sebagai Wali Kelas.");
+        throw new ResponseError(400, "El profesor ya es tutor de una clase");
       }
 
       const newKelas = new Kelas(req.body);
@@ -38,7 +38,7 @@ export const addKelas = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, message: "Berhasil menambah kelas." });
+      .json({ success: true, message: "Clase creada exitosamente" });
   } catch (error) {
     next(error);
   }
@@ -54,7 +54,7 @@ export const getKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data kelas.",
+      message: "Datos de clases obtenidos correctamente",
       kelas,
     });
   } catch (error) {
@@ -69,7 +69,7 @@ export const deleteKelas = async (req, res, next) => {
     const kelas = await Kelas.findById(id).populate("siswa");
 
     if (!kelas) {
-      throw new ResponseError(404, "Kelas tidak di temukan");
+      throw new ResponseError(404, "Clase no encontrada");
     }
 
     if (kelas.waliKelas) {
@@ -91,7 +91,7 @@ export const deleteKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Kelas berhasil di hapus.",
+      message: "Clase eliminada exitosamente",
     });
   } catch (error) {
     next(error);
@@ -106,7 +106,7 @@ export const updateKelas = async (req, res, next) => {
     const kelasExists = await Kelas.findOne({ nama, kelas, _id: { $ne: id } });
 
     if (kelasExists) {
-      throw new ResponseError(400, "Kombinasi kelas dan nama sudah digunakan.");
+      throw new ResponseError(400, "La combinación de clase y nombre ya está en uso");
     }
 
     const isExist = await Kelas.findById(id);
@@ -136,7 +136,7 @@ export const updateKelas = async (req, res, next) => {
       });
 
       if (alreadyWali) {
-        throw new ResponseError(404, "Guru sudah sebagai Wali Kelas.");
+        throw new ResponseError(404, "El profesor ya es tutor de otra clase");
       }
 
       if (isExist.waliKelas) {
@@ -162,7 +162,7 @@ export const updateKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengubah data kelas.",
+      message: "Datos de clase actualizados correctamente",
     });
   } catch (error) {
     next(error);
@@ -186,7 +186,7 @@ export const getWaliKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengambil  data`,
+      message: `Datos obtenidos exitosamente`,
       kelas,
     });
   } catch (error) {
@@ -205,7 +205,7 @@ export const getMapelKelas = async (req, res, next) => {
     if (!jadwal) {
       throw new ResponseError(
         404,
-        "Mata Pelajaran pada kelas ini tidak ditemukan."
+        "No se encontraron materias para esta clase"
       );
     }
 
@@ -213,7 +213,7 @@ export const getMapelKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengambil mata pelajaran pada kelas.`,
+      message: `Materias de la clase obtenidas correctamente`,
       mapel: bidangStudi,
     });
   } catch (error) {
@@ -241,7 +241,7 @@ export const getKelasMengajar = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengambil data`,
+      message: `Datos de clases para enseñanza obtenidos exitosamente`,
       kelas: uniquesKelas,
     });
   } catch (error) {

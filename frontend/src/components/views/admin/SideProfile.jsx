@@ -3,6 +3,8 @@ import { Plus, Trash, User, X } from "lucide-react";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 import responseError from "@/util/services";
 import axios from "axios";
@@ -17,6 +19,8 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
   const [isHover, setIsHover] = useState(false);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const { t } = useTranslation();
+
   const {
     control,
     handleSubmit,
@@ -28,7 +32,7 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
       password: "",
       nama: "",
     },
-    mode: onchange,
+    mode: "onChange",
   });
 
   const handleClickImage = () => {
@@ -43,9 +47,9 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
     const file = e.target.files[0];
 
     if (!file.type.includes(ALLOWED_FILE_TYPES)) {
-      return toast.error("Format file tidak di dukung");
+      return toast.error(t('messages.errors.invalidFileType'));
     } else if (file.size > MAX_FILE_SIZE) {
-      return toast.error("Ukuran File Maksimal 1 MB.");
+      return toast.error(t('common.fileUpload.maxSize', { size: 1 }));
     } else {
       const formData = new FormData();
 
@@ -103,6 +107,16 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
     }, 30);
   }, []);
 
+  useEffect(() => {
+    const savedLang = localStorage.getItem('i18nextLng') || 'en';
+    i18next.changeLanguage(savedLang);
+  }, []);
+
+  const handleLanguageChange = (lang) => {
+    i18next.changeLanguage(lang);
+    localStorage.setItem('i18nextLng', lang);
+  };
+
   return (
     <div
       ref={ref}
@@ -112,17 +126,13 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
       } fixed p-4 rounded-md shadow-xl top-1/2 -translate-y-1/2  w-[300px] flex-center  h-[70vh] max-h-[800px] bg-white duration-300 ease-in transition-all`}
     >
       <div className="">
-        <div>
+        <div className="flex justify-between items-center mb-4">
           <button
             aria-label="close edit profile sidebar"
             onClick={() => handleClose(false)}
-            className="absolute h-6 w-6 rounded-full -top-2 -left-2  group bg-backup flex-center duration-300 transition-all"
+            className="h-6 w-6 rounded-full group bg-backup flex-center"
           >
-            <X
-              height={15}
-              width={15}
-              className="text-neutral group-hover:text-white "
-            />
+            <X height={15} width={15} className="text-neutral group-hover:text-white" />
           </button>
         </div>
         <div
@@ -170,8 +180,8 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
         <p className="font-medium text-xs text-center mt-2">Foto</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="">
-            <label htmlFor="username" className="text-xs ">
-              Username :
+            <label htmlFor="username" className="text-xs">
+              {t('auth.login.username')} :
             </label>
             <Controller
               name="username"
@@ -179,16 +189,16 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
               rules={{
                 minLength: {
                   value: 8,
-                  message: "Username harus lebih dari 8 karakter",
+                  message: t('forms.dataTeacher.validation.username.min')
                 },
                 maxLength: {
                   value: 20,
-                  message: "Username harus kurang dari 20 karakter",
+                  message: t('forms.dataTeacher.validation.username.max')
                 },
               }}
               render={({ field }) => (
                 <input
-                  placeholder="Scholarcy"
+                  placeholder={t('forms.dataTeacher.placeholders.username')}
                   className="w-full border my-1 px-2.5 py-1.5 text-xs rounded-md border-gray-500 outline-neutral"
                   {...field}
                 />
@@ -203,8 +213,8 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
             )}
           </div>
           <div className="">
-            <label htmlFor="password" className="text-xs ">
-              Password :
+            <label htmlFor="password" className="text-xs">
+              {t('auth.login.password')} :
             </label>
             <Controller
               name="password"
@@ -212,7 +222,7 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
               rules={{
                 minLength: {
                   value: 8,
-                  message: "Password harus lebih dari 8 karakter",
+                  message: t('forms.dataTeacher.validation.password.min')
                 },
               }}
               render={({ field }) => (
@@ -233,19 +243,19 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
             )}
           </div>
           <div className="">
-            <label htmlFor="nama" className="text-xs ">
-              Nama :
+            <label htmlFor="nama" className="text-xs">
+              {t('forms.dataTeacher.labels.name')} :
             </label>
             <Controller
               name="nama"
               rules={{
                 minLength: {
                   value: 5,
-                  message: "Nama harus lebih dari 5 karakter",
+                  message: t('forms.dataTeacher.validation.name.min')
                 },
                 maxLength: {
                   value: 20,
-                  message: "Nama harus kurang dari 20 karakter",
+                  message: t('forms.dataTeacher.validation.name.max')
                 },
               }}
               control={control}
@@ -265,11 +275,23 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
               <div className="w-full h-6"></div>
             )}
           </div>
+          <div className="mt-4">
+            <label className="text-xs block mb-1">{t('common.basic.language')}:</label>
+            <select 
+              value={i18next.language}
+              onChange={(e) => handleLanguageChange(e.target.value)}
+              className="w-full border px-2.5 py-1.5 text-xs rounded-md border-gray-500 outline-neutral"
+            >
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="id">Bahasa Indonesia</option>
+            </select>
+          </div>
           <button
             type="submit"
             className="w-full py-2.5 mt-4 text-white bg-neutral hover:bg-indigo-600 text-xs rounded-full"
           >
-            {loading ? <LoaderButton /> : "Simpan"}
+            {loading ? <LoaderButton /> : t('ui.buttons.save')}
           </button>
         </form>
       </div>

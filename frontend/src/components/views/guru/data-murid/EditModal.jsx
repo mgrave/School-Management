@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedDataEdit, setDataEdit } from "@/store/slices/admin-slice";
 import { formatDate } from "@/util/formatDate";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ onClose, kelas }) => {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const EditModal = ({ onClose, kelas }) => {
     },
   });
   const editData = useSelector(selectedDataEdit);
-
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [hover, setHover] = useState(false);
   const [foto, setFoto] = useState("");
@@ -191,10 +192,10 @@ const EditModal = ({ onClose, kelas }) => {
               />
             </div>
             <p className="text-[0.625rem] text-center mt-4 text-neutral">
-              Besar file maksimal 1 MB
+              {t('common.fileUpload.maxSize').replace('{size}', 1)}
             </p>
             <p className="text-[0.625rem] text-center mt-2 text-neutral">
-              Ekstensi file: jpeg/jpg, png
+              {t('common.fileUpload.allowedExtensions').replace('{extensions}', "JPEG, JPG, PNG")}
             </p>
           </div>
           <form className=" col-span-2 w-full   grid grid-cols-2 gap-2">

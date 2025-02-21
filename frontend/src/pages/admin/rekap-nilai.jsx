@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import ReactToPrint from "react-to-print";
+import { useTranslation } from 'react-i18next';
 
 import TableNilai from "@/components/fragments/TableNilai";
 import PrintComponentNilai from "@/components/fragments/PrintModalNilai";
@@ -32,6 +33,7 @@ const RekapNilaiPageadmin = () => {
   const [dataMapel, setDataMapel] = useState([]);
 
   const componentRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -109,7 +111,7 @@ const RekapNilaiPageadmin = () => {
     <section className="px-6 py-4 mb-4 ">
       <div className="  bg-white p-4 rounded-md shadow-md border border-b-0">
         <h3 className="text-sm font-semibold mb-4 text-neutral">
-          Pilih rekap nilai siswa pada setiap kelas.
+          {t('forms.dataClasses.messages.selectGradeReport')}
         </h3>
         <div className="flex-between">
           <div className="hidden xl:flex-between">
@@ -161,7 +163,7 @@ const RekapNilaiPageadmin = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t('forms.dataClasses.buttons.excel')}
             </button>
 
             <ReactToPrint
@@ -171,7 +173,7 @@ const RekapNilaiPageadmin = () => {
                   className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t('forms.dataClasses.buttons.print')}
                 </button>
               )}
               content={() => componentRef.current}
@@ -189,7 +191,7 @@ const RekapNilaiPageadmin = () => {
         )}
         {(!kelas || !idKelas) && (
           <div className="absolute inset-0 flex-center bg-white">
-            <p className="text-xs font-medium">Pilih Kelas Terlebih dulu..</p>
+            <p className="text-xs font-medium">{t('forms.dataClasses.messages.selectClassFirst')}</p>
           </div>
         )}
       </div>
@@ -279,9 +281,7 @@ const exportToExcel = async (data, dataMapel, kelas, tahunAjaran, semester) => {
   // Step 4: Export to Excel
   // Title Header
   const headerTitle = [
-    `NILAI SISWA KELAS TAHUN AJARAN ${tahunAjaran} ${semester.toUpperCase()} - KELAS ${
-      kelas.kelas
-    } ${kelas.nama.toUpperCase()} `,
+    `${t('forms.dataClasses.messages.studentGradeReport')} ${t('forms.dataClasses.labels.academicYear')} ${tahunAjaran} ${t('forms.dataClasses.labels.semester')} ${semester.toUpperCase()} - ${t('forms.dataClasses.labels.classYear')} ${kelas.kelas} ${t('forms.dataClasses.labels.className')} ${kelas.nama.toUpperCase()}`
   ];
   worksheet.addRow(headerTitle);
 
@@ -291,13 +291,13 @@ const exportToExcel = async (data, dataMapel, kelas, tahunAjaran, semester) => {
 
   // Create headers for the table
   const header1 = [
-    "Nama Siswa",
+    t('forms.dataClasses.labels.studentName'),
     ...dataMapel.flatMap((mapel) => ["Mata Pelajaran", ""]),
-    "Rata-Rata",
-    "Rangking",
+    t('forms.dataClasses.labels.average'),
+    t('forms.dataClasses.labels.ranking'),
   ];
   const header2 = ["", ...dataMapel.flatMap((mapel) => [mapel, ""]), "", ""];
-  const header3 = ["", ...dataMapel.flatMap(() => ["T", "U"]), "", ""];
+  const header3 = ["", ...dataMapel.flatMap(() => [t('common.gender.male'), t('common.gender.female')]), "", ""];
 
   // Add headers to the worksheet
   worksheet.addRow(header1);

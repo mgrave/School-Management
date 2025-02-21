@@ -1,4 +1,6 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import LoginPage from "./pages/login";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -40,6 +42,7 @@ function App() {
   const dispatch = useDispatch();
   const userData = useSelector(selectedUserData);
   const [loading, setLoading] = useState(true);
+  const { ready } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -62,6 +65,10 @@ function App() {
       getData();
     }
   }, []);
+
+  if (!ready) {
+    return <div className="bg-background fixed inset-0"></div>;
+  }
 
   if (loading) {
     return <div className="bg-background fixed inset-0 "></div>;

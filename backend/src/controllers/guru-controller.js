@@ -12,7 +12,7 @@ export const addGuru = async (req, res, next) => {
     const isExist = await Guru.findOne({ nip });
 
     if (isExist) {
-      throw new ResponseError(400, "Nip Sudah digunakan.");
+      throw new ResponseError(400, "El NIP ya está en uso");
     }
 
     const salt = await genSalt();
@@ -22,11 +22,11 @@ export const addGuru = async (req, res, next) => {
       const kelass = await Kelas.findOne({ kelas, nama: namaKelas });
 
       if (!kelas) {
-        throw new ResponseError(404, "Kelas tidak di temukan");
+        throw new ResponseError(404, "Clase no encontrada");
       }
 
       if (kelass.waliKelas) {
-        throw new ResponseError(400, "Kelas sudah memiliki wali kelas");
+        throw new ResponseError(400, "La clase ya tiene un tutor asignado");
       }
       delete req.body.kelas;
       delete req.body.namaKelas;
@@ -54,7 +54,7 @@ export const addGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menambah guru.",
+      message: "Profesor agregado exitosamente",
     });
   } catch (error) {
     next(error);
@@ -102,7 +102,7 @@ export const getAllGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data guru.",
+      message: "Datos de profesores obtenidos exitosamente",
       data: guru,
       pagination: {
         page,
@@ -122,7 +122,7 @@ export const getGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data guru.",
+      message: "Datos del profesor obtenidos exitosamente",
       guru,
     });
   } catch (error) {
@@ -144,7 +144,7 @@ export const getDetail = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil detail guru.",
+      message: "Detalles del profesor obtenidos exitosamente",
       data: { jumlahGuru, pr, lk, active, nonActive },
     });
   } catch (error) {
@@ -159,7 +159,7 @@ export const deleteOneGuru = async (req, res, next) => {
     const guru = await Guru.findById({ _id: id });
 
     if (!guru) {
-      throw new ResponseError(404, "Data guru tidak ditemukan");
+      throw new ResponseError(404, "Datos del profesor no encontrados");
     }
 
     if (guru.waliKelas) {
@@ -174,7 +174,7 @@ export const deleteOneGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menghapus guru.",
+      message: "Profesor eliminado exitosamente",
     });
   } catch (error) {
     next(error);
@@ -201,7 +201,7 @@ export const deleteManyGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menghapus guru terpilih.",
+      message: "Profesores seleccionados eliminados exitosamente",
     });
   } catch (error) {
     next(error);
@@ -217,7 +217,7 @@ export const updateGuru = async (req, res, next) => {
     const guru = await Guru.findById(id);
 
     if (!guru) {
-      throw new ResponseError(404, "Guru tidak ditemukan.");
+      throw new ResponseError(404, "Profesor no encontrado");
     }
 
     if (req.body.password) {
@@ -244,11 +244,11 @@ export const updateGuru = async (req, res, next) => {
       const newKelas = await Kelas.findOne({ kelas, nama: namaKelas });
 
       if (!newKelas) {
-        throw new ResponseError(404, "kelas tidak ditemukan.");
+        throw new ResponseError(404, "Clase no encontrada");
       }
 
       if (newKelas.waliKelas && newKelas.waliKelas.toString() !== id) {
-        throw new ResponseError(404, "Kelas sudah memiliki wali kelas");
+        throw new ResponseError(404, "La clase ya tiene un tutor asignado");
       }
 
       if (guru.waliKelas) {
@@ -275,7 +275,7 @@ export const updateGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengubah data guru.",
+      message: "Datos del profesor actualizados exitosamente",
     });
   } catch (error) {
     next(error);
@@ -329,7 +329,7 @@ export const getDashboard = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil detail guru.",
+      message: "Detalles del profesor obtenidos exitosamente",
       detail,
     });
   } catch (error) {
@@ -349,7 +349,7 @@ export const getBidangStudi = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil detail guru.",
+      message: "Detalles del profesor obtenidos exitosamente",
       mapel,
     });
   } catch (error) {

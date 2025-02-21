@@ -15,8 +15,10 @@ import {
 } from "@/store/slices/admin-slice";
 import DeleteModal from "@/components/fragments/ModalDelete";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
+import { useTranslation } from "react-i18next";
 
 const DataJadwalPage = () => {
+  const { t } = useTranslation();
   const dataChecked = useSelector(selectedDataDeleteMany);
   const dataDelete = useSelector(selectedDataDelete);
   const [loading, setLoading] = useState(true);
@@ -109,7 +111,7 @@ const DataJadwalPage = () => {
           <input
             type="search"
             id="search"
-            placeholder="Cari bidang studi dan guru dari jadwal.  "
+            placeholder={t('forms.dataSchedule.placeholders.search')}
             value={search}
             disabled={loading}
             onChange={(e) => setSearch(e.target.value)}
@@ -127,7 +129,7 @@ const DataJadwalPage = () => {
           className="bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
         >
           <AcaraIcon width={15} height={15} className="" />
-          Tambah Jadwal
+          {t('forms.dataSchedule.buttons.addSchedule')}
         </button>
       </div>
       <div className="relative bg-white w-full  mt-6 border  overflow-hidden  rounded-md">
@@ -170,14 +172,14 @@ const DataJadwalPage = () => {
         <DeleteModal
           onClose={handleToggleDelete}
           url={"/api/jadwal/delete-jadwal/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus jadwal?"}
+          title={t('forms.dataSchedule.messages.confirmDeleteSingle')}
         />
       )}
       {isDeleteMany && (
         <DeleteManyModal
           onClose={handleToggDeleteMany}
           setAllCheck={setAllCheck}
-          title={"Apakah anda yakin ingin menghapus jadwal terpilih?"}
+          title={t('forms.dataSchedule.messages.confirmDeleteMultiple')}
           url={"/api/jadwal/delete-many-jadwal"}
         />
       )}

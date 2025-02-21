@@ -11,8 +11,10 @@ import FilterMapel from "@/components/elements/FilterMapel";
 import { useSelector } from "react-redux";
 import { selectedDataDelete } from "@/store/slices/admin-slice";
 import DeleteModal from "@/components/fragments/ModalDelete";
+import { useTranslation } from "react-i18next";
 
 const DataPelajaranPage = () => {
+  const { t } = useTranslation();
   const dataDelete = useSelector(selectedDataDelete);
   const [dataMapel, setDataMapel] = useState([]);
   const [dataFilter, setDataFilter] = useState([]);
@@ -86,7 +88,7 @@ const DataPelajaranPage = () => {
         !filterRef.current.contains(e.target) &&
         buttonFilterRef.current &&
         !buttonFilterRef.current.contains(e.target)
-      ) {
+      ) { 
         setIsFilter(false);
       }
     };
@@ -125,7 +127,7 @@ const DataPelajaranPage = () => {
             type="search"
             id="search"
             disabled={loading}
-            placeholder="Cari kode dan nama mata pelajaran."
+            placeholder={t('forms.dataLessons.placeholders.search')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full disabled:bg-gray-100  rounded-full py-2 pr-2 pl-10 text-xs border border-gray-400 outline-offset-1 outline-1 outline-neutral"
@@ -152,7 +154,7 @@ const DataPelajaranPage = () => {
               onClick={() => setOption("terbaru")}
               className="border border-gray-400 bg-white text-gray-500  hover:bg-neutral hover:border-gray-400 border-dashed  py-1.5 transition-all duration-300 font-medium hover:text-white  text-xs px-4 rounded-lg flex-between gap-3"
             >
-              Clear
+              {t('ui.buttons.clear')}
             </button>
           )}
 
@@ -172,7 +174,7 @@ const DataPelajaranPage = () => {
           className="bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
         >
           <MapelIcon width={15} height={15} className="" />
-          Tambah pelajaran
+          {t('forms.dataLessons.buttons.addLesson')}
         </button>
       </div>
       <div className="relative bg-white w-full  mt-6 border  overflow-hidden  rounded-md">
@@ -195,7 +197,7 @@ const DataPelajaranPage = () => {
         <DeleteModal
           onClose={handleToggleDelete}
           url={"/api/mapel/delete-mapel/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus mata pelajaran?"}
+          title={t('forms.dataLessons.messages.confirmDelete')}
         />
       )}
       {isAddMapel && <AddModal onClose={handleToggleAdd} />}

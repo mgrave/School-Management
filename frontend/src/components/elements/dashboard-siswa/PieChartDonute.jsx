@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { useTranslation } from 'react-i18next';
 
 const data = [{ name: "Total", value: 400 }];
 
@@ -71,6 +72,7 @@ const renderActiveShape = (props) => {
 const COLORS = ["#fcc43e", "#00C49F", "#FFBB28", "#FF8042"];
 
 const PieChartDonute = ({ dataJadwal, loading }) => {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onPieEnter = (_, index) => {
@@ -98,7 +100,7 @@ const PieChartDonute = ({ dataJadwal, loading }) => {
   if (!totalMapel) {
     return (
       <div className="w-full h-full flex-center">
-        <p className="text-xs">Data tidak ada.</p>
+        <p className="text-xs">{t('common.status.noData')}</p>
       </div>
     );
   }

@@ -6,8 +6,10 @@ import axios from "axios";
 import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const DayDropdown = ({ onChange, value }) => {
+  const { t } = useTranslation();
   const dataEdit = useSelector(selectedDataEdit);
   const dayRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,15 +21,7 @@ const DayDropdown = ({ onChange, value }) => {
     }
   }, [dataEdit]);
 
-  const daysOfWeek = [
-    "Senin",
-    "Selasa",
-    "Rabu",
-    "Kamis",
-    "Jumat",
-    "Sabtu",
-    "Minggu",
-  ];
+  const daysOfWeek = t('common.calendar.days', { returnObjects: true });
 
   const handleInputClick = (e) => {
     e.preventDefault();
@@ -57,7 +51,7 @@ const DayDropdown = ({ onChange, value }) => {
       <input
         type="text"
         id="hari"
-        value={!selectedHari ? "Pilih Hari" : selectedHari}
+        value={!selectedHari ? t('forms.formName.placeholders.select') : selectedHari}
         readOnly
         onClick={handleInputClick}
         onKeyDown={() => setIsOpen(true)}
@@ -74,7 +68,7 @@ const DayDropdown = ({ onChange, value }) => {
       {isOpen && (
         <div className="absolute mt-1  w-full bg-white border z-50 border-gray-400 rounded shadow">
           <ul className="max-h-24 overflow-y-auto">
-            {daysOfWeek.map((day, i) => (
+            {Object.values(daysOfWeek).map((day, i) => (
               <li
                 key={i}
                 onClick={() => handleSelectDay(day, i)}

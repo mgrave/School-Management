@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Edit, Trash, Trash2 } from "lucide-react";
 import { space } from "postcss/lib/list";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const TablePelajaran = ({
   data,
@@ -14,6 +15,7 @@ const TablePelajaran = ({
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 5;
+  const { t } = useTranslation();
 
   const lastIndexmapel = perPage * currentPage;
   const firstIndexmapel = lastIndexmapel - perPage;
@@ -44,10 +46,10 @@ const TablePelajaran = ({
           <thead className="text-xs uppercase text-white bg-neutral">
             <tr>
               <th scope="col" className="px-2 w-[30%] py-4">
-                Kode Mata Pelajaran
+                {t('forms.dataSubjects.labels.subjectCode')}
               </th>
               <th scope="col" className="px-3 w-[50%] py-4">
-                Nama Mata Pelajaran
+                {t('forms.dataSubjects.labels.subjectName')}
               </th>
               <th className="sr-only w-[20%]"></th>
             </tr>
@@ -61,7 +63,7 @@ const TablePelajaran = ({
                 >
                   <div className="flex flex-col items-center justify-center">
                     <span className="w-8 h-8 block mb-2 animate-spin rounded-full border-4 border-t-gray-800 border-gray-300"></span>
-                    <span>Loading</span>
+                    <span>{t('common.status.loading')}</span>
                   </div>
                 </td>
               </tr>
@@ -72,7 +74,7 @@ const TablePelajaran = ({
                   colSpan="10"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[350px]"
                 >
-                  Tidak ada data
+                  {t('ui.table.noData')}
                 </td>
               </tr>
             )}
@@ -159,6 +161,7 @@ const Pagination = ({
   paginate,
   dataSlice,
 }) => {
+  const { t } = useTranslation();
   const pageNumber = [];
 
   const totalPage = Math.ceil(totalmapel / perPage);
@@ -183,11 +186,12 @@ const Pagination = ({
       {!loading && (
         <>
           <div className="h-6 flex-center">
-            <p className="text-xs">{`Menampilkan ${
-              dataSlice.length === 0 ? 0 : firstIndexmapel + 1
-            } - ${
-              firstIndexmapel + dataSlice.length
-            } dari ${totalmapel} Data`}</p>
+            <p className="text-xs">
+              {t('ui.table.showing')
+                .replace('{from}', dataSlice.length === 0 ? 0 : firstIndexmapel + 1)
+                .replace('{to}', firstIndexmapel + dataSlice.length)
+                .replace('{total}', totalmapel)}
+            </p>
           </div>
           {pageNumber.length !== 0 && (
             <div className="flex gap-2 ">

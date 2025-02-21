@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const TablePagination = ({
   lastOfIndex,
@@ -13,6 +14,7 @@ const TablePagination = ({
   const pageNumber = [];
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   for (let i = 1; i <= totalPage; i++) {
     pageNumber.push(i);
@@ -29,11 +31,12 @@ const TablePagination = ({
   return (
     <div className=" absolute h-9 left-0 bottom-5 border-t pt-4 w-full flex-between px-3">
       <div className="flex">
-        <p className="text-[10px] sm:text-xs">{`Menampilkan ${
-          totalData === 0 ? 0 : firstOfindex + 1
-        } - ${
-          page === totalPage ? totalData : totalData === 0 ? 0 : lastOfIndex
-        } dari ${totalData} data`}</p>
+        <p className="text-[10px] sm:text-xs">
+          {t('ui.table.showing')
+            .replace('{from}', totalData === 0 ? 0 : firstOfindex + 1)
+            .replace('{to}', page === totalPage ? totalData : totalData === 0 ? 0 : lastOfIndex)
+            .replace('{total}', totalData)}
+        </p>
       </div>
       <div className="flex-center space-x-4">
         <div className="flex gap-2 ">

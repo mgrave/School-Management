@@ -11,11 +11,13 @@ import { TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const dataChecked = useSelector(selectedDataDeleteMany);
+  const { t } = useTranslation();
 
   const handleDelete = async () => {
     setLoading(true);
@@ -47,7 +49,7 @@ const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
       >
         <div className="p-4 border-b">
           <HeaderModal
-            titile={"Konfimasi Hapus"}
+            titile={t('messages.confirmation.delete.title')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -56,7 +58,7 @@ const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
           <div>
             <TriangleAlert className="w-8 h-8 text-neutral2" />
           </div>
-          <h3 className="text-sm  font-medium">{title}</h3>
+          <h3 className="text-sm  font-medium">{title || t('forms.dataClasses.messages.confirmDeleteGeneric')}</h3>
         </div>
         <div className="text-end border-t mt-4 p-4 space-x-4">
           <button
@@ -66,7 +68,7 @@ const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
             className="btn w-24 h-8.5 bg-gray-100 disabled:bg-gray-200  text-gray-800 border-gray-200 border hover:text-white"
             onClick={() => onClose()}
           >
-            {loading ? "Loading" : "Tidak"}
+            {loading ? t('common.status.loading') : t('common.basic.no')}
           </button>
           <button
             aria-label="ya"
@@ -75,7 +77,7 @@ const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
             onClick={handleDelete}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Ya"}
+            {loading ? t('common.status.loading') : t('common.basic.yes')}
           </button>
         </div>
       </div>

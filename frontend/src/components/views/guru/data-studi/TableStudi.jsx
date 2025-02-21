@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight, Edit, Trash, Trash2 } from "lucide-react";
 import { space } from "postcss/lib/list";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const TableStudi = ({
   data,
@@ -21,6 +22,7 @@ const TableStudi = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [dataChecked, setDataChecked] = useState([]);
   const perPage = 6;
+  const { t } = useTranslation();
 
   const lastIndexNilai = perPage * currentPage;
   const firstIndexNilai = lastIndexNilai - perPage;
@@ -89,31 +91,31 @@ const TableStudi = ({
                 scope="col"
                 className="w-[25%] px-10 py-4 text-left whitespace-nowrap  "
               >
-                Nama Siswa
+                {t('forms.dataStudy.labels.studentName')}
               </th>
 
               <th scope="col" className="px-5 py-4 w-[15%] ">
-                Pertemuan
+                {t('forms.dataStudy.labels.meeting')}
               </th>
               <th
                 scope="col"
                 className="px-5 w-[15%]  whitespace-nowrap  py-4 text-center"
               >
-                Nilai
+                {t('forms.dataStudy.labels.grade')}
               </th>
               <th
                 scope="col"
                 className="px-5 w-[20%]  whitespace-nowrap  py-4 text-center"
               >
-                Tahun Ajaran
+                {t('forms.dataStudy.labels.academicYear')}
               </th>
               <th
                 scope="col"
                 className="px-5 w-[20%]  whitespace-nowrap  py-4 text-center"
               >
-                Semester
+                {t('forms.dataStudy.labels.semester')}
               </th>
-              <th className="opacity-0 px-3 ">Edit</th>
+              <th className="opacity-0 px-3 ">{t('ui.buttons.edit')}</th>
             </tr>
           </thead>
           <tbody>
@@ -123,7 +125,7 @@ const TableStudi = ({
                   colSpan="10"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[290px]"
                 >
-                  Tidak ada data
+                  {t('ui.table.noData')}
                 </td>
               </tr>
             )}
@@ -187,7 +189,7 @@ const TableStudi = ({
                   >
                     <div className="flex-center gap-4">
                       <button
-                        title="Edit"
+                        title={t('ui.buttons.edit')}
                         onClick={() => handleEditNilai(Nilai)}
                         className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral1 flex-center transition-all duration-300"
                       >
@@ -199,7 +201,7 @@ const TableStudi = ({
                         />
                       </button>
                       <button
-                        title="Hapus"
+                        title={t('ui.buttons.delete')}
                         className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral2 flex-center transition-all duration-300"
                         onClick={() => handleDeleteNilai(Nilai)}
                       >
@@ -243,6 +245,7 @@ const Pagination = ({
   dataSlice,
 }) => {
   const pageNumber = [];
+  const { t } = useTranslation();
 
   const totalPage = Math.ceil(totalNilai / perPage);
 
@@ -266,11 +269,11 @@ const Pagination = ({
       {!loading && (
         <>
           <div className="h-6 flex-center">
-            <p className="text-xs">{`Menampilkan ${
-              dataSlice?.length === 0 ? 0 : firstIndexNilai + 1
-            } - ${
-              firstIndexNilai + dataSlice?.length
-            } dari ${totalNilai} Data`}</p>
+            <p className="text-xs">{t('ui.table.showing', {
+              start: dataSlice?.length === 0 ? 0 : firstIndexNilai + 1,
+              end: firstIndexNilai + dataSlice?.length,
+              total: totalNilai
+            })}</p>
           </div>
           {pageNumber?.length !== 0 && (
             <div className="flex gap-2 ">

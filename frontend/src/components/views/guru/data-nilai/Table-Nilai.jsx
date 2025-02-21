@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import profile from "../../../../assets/profile.png";
+import { useTranslation } from 'react-i18next';
 
 const TableNilai = ({
   data,
@@ -34,6 +35,7 @@ const TableNilai = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [dataChecked, setDataChecked] = useState([]);
+  const { t } = useTranslation();
 
   const lastOfIndexnilai = pagination?.page * pagination?.limit;
   const firstOfindexnilai = lastOfIndexnilai - pagination?.limit;
@@ -96,29 +98,29 @@ const TableNilai = ({
                 </th>
 
                 <th scope="col" className="px-10 py-4  whitespace-nowrap">
-                  Mata Pelajaran
+                  {t('forms.dataGrades.labels.subject')}
                 </th>
 
                 <th scope="col" className="px-10 pr-4  py-4  whitespace-nowrap">
-                  Nama Siswa
+                  {t('common.labels.name')}
                 </th>
                 <th
                   scope="col"
                   className="px-5 py-4 text-center whitespace-nowrap"
                 >
-                  Kategori
+                  {t('forms.dataGrades.labels.category')}
                 </th>
                 <th scope="col" className="px-3 py-4 text-center ">
-                  Nilai
+                  {t('forms.dataGrades.labels.grade')}
                 </th>
                 <th
                   scope="col"
                   className="px-5 py-4 text-center  whitespace-nowrap"
                 >
-                  Tahun Ajaran
+                  {t('forms.dataGrades.labels.academicYear')}
                 </th>
                 <th scope="col" className="py-4 text-center ">
-                  Semester
+                  {t('forms.dataGrades.labels.semester')}
                 </th>
                 <th scope="col" className="px-5 py-3">
                   <span className="sr-only">Edit</span>
@@ -133,7 +135,7 @@ const TableNilai = ({
                     className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                   >
                     <div className="flex justify-center w-full">
-                      Tidak ada data
+                      {t('ui.table.noData')}
                     </div>
                   </td>
                 </tr>
@@ -270,23 +272,23 @@ const TableNilai = ({
                   </th>
 
                   <th scope="col" className="px-3 py-4">
-                    NIS
+                    {t('forms.dataStudent.labels.nis')}
                   </th>
 
                   <th scope="col" className="pl-1 pr-4  py-4">
-                    Nama
+                    {t('common.labels.name')}
                   </th>
                   <th scope="col" className=" py-4 whitespace-nowrap">
-                    Jenis Kelamin
+                    {t('common.gender.title')}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-4 text-center whitespace-nowrap"
                   >
-                    Tahun Masuk
+                    {t('forms.dataStudent.labels.entryYear')}
                   </th>
                   <th scope="col" className="px-2 py-4">
-                    Alamat
+                    {t('forms.dataStudent.labels.address')}
                   </th>
                   <th scope="col" className="py-4 text-center">
                     Kontak
@@ -301,7 +303,7 @@ const TableNilai = ({
                       className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                     >
                       <div className="flex justify-center w-full">
-                        Tidak ada data
+                        {t('common.basic.empty')}
                       </div>
                     </td>
                   </tr>
@@ -360,7 +362,7 @@ const TableNilai = ({
                           `${nilai.alamat}`
                         ) : (
                           <span className="text-gray-700 font-bold">
-                            Data Kosong
+                            {t('common.basic.empty')}
                           </span>
                         )}
                       </td>

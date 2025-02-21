@@ -13,8 +13,10 @@ import NamaKelasDropdown from "@/components/elements/NamaKelasDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedDataEdit, setDataEdit } from "@/store/slices/admin-slice";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from 'react-i18next';
 
 const EditModal = ({ onClose }) => {
+  const { t } = useTranslation();
   const {
     control,
     register,
@@ -99,7 +101,7 @@ const EditModal = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Edit Jadwal"}
+            titile={t('forms.dataClasses.labels.editSchedule')}
             onClose={onClose2}
             className={"font-semibold"}
           />
@@ -110,12 +112,12 @@ const EditModal = ({ onClose }) => {
               htmlFor="bidangStudi"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Bidang Studi
+              {t('forms.dataClasses.labels.subject')}
             </label>
             <Controller
               name="bidangStudi"
               control={control}
-              rules={{ required: "Bidang studi diperlukan." }}
+              rules={{ required: t('forms.dataClasses.validation.required.subject') }}
               render={({ field: { onChange, value } }) => (
                 <DropdownBidangStudi value={value} onChange={onChange} />
               )}
@@ -129,12 +131,12 @@ const EditModal = ({ onClose }) => {
               htmlFor="guru"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Guru
+              {t('forms.dataTeacher.labels.name')}
             </label>
             <Controller
               name="guru"
               control={control}
-              rules={{ required: "Guru diperlukan." }}
+              rules={{ required: t('forms.dataTeacher.validation.required.name') }}
               render={({ field: { onChange, value } }) => (
                 <DropdownGuru
                   bidangStudi={bidangStudi.id}
@@ -154,12 +156,12 @@ const EditModal = ({ onClose }) => {
                 htmlFor="hari"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Kelas
+                {t('forms.dataClasses.labels.level')}
               </label>
               <Controller
                 name="kelas"
                 control={control}
-                rules={{ required: "Kelas diperulakan" }}
+                rules={{ required: t('forms.dataClasses.validation.required.class') }}
                 render={({ field: { onChange, value } }) => (
                   <KelasDropdown value={value} onChange={onChange} />
                 )}
@@ -174,12 +176,12 @@ const EditModal = ({ onClose }) => {
                 htmlFor="hari"
                 className="text-xs  w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nama Kelas
+                {t('forms.dataClasses.labels.className')}
               </label>
               <Controller
                 control={control}
                 name="namaKelas"
-                rules={{ required: "Nama Kelas diperlukan." }}
+                rules={{ required: t('forms.dataClasses.validation.required.className') }}
                 render={({ field: { onChange, value } }) => (
                   <NamaKelasDropdown
                     onChange={onChange}
@@ -198,12 +200,12 @@ const EditModal = ({ onClose }) => {
                 htmlFor="hari"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Hari
+                {t('forms.dataClasses.labels.day')}
               </label>
               <Controller
                 control={control}
                 name="hari"
-                rules={{ required: "Hari diperlukan." }}
+                rules={{ required: t('forms.dataClasses.validation.required.day') }}
                 render={({ field: { onChange, value } }) => (
                   <DayDropdown onChange={onChange} value={value} />
                 )}
@@ -219,16 +221,16 @@ const EditModal = ({ onClose }) => {
               htmlFor="hari"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Jam Pembelajaran
+              {t('forms.dataClasses.labels.time')}
             </label>
             <div className="flex-between gap-4 w-full">
               <div className=" gap-2 text-xs w-full">
-                <span className="block mb-3">Mulai</span>
+                <span className="block mb-3">{t('common.time.start')}</span>
                 <div className="w-full">
                   <input
                     type="time"
                     {...register("start", {
-                      required: "Jam mulai diperlukan.",
+                      required: t('forms.dataClasses.validation.required.start'),
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline"
                   />
@@ -238,12 +240,12 @@ const EditModal = ({ onClose }) => {
                 </div>
               </div>
               <div className=" gap-2 text-xs w-full">
-                <span className="block mb-3">Selesai</span>
+                <span className="block mb-3">{t('common.time.end')}</span>
                 <div className="w-full">
                   <input
                     type="time"
                     {...register("end", {
-                      required: "jam selesai diperlukan.",
+                      required: t('forms.dataClasses.validation.required.end'),
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
                   />
@@ -260,27 +262,26 @@ const EditModal = ({ onClose }) => {
               htmlFor="jumlah pertemuan"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Jumlah Pertemuan{" "}
+              {t('forms.dataClasses.labels.meeting')}
               <span className="text-[0.625rem] text-neutral2">
-                ( Maksimal jumlah pertemuan 50 persemester )
+                ({t('forms.dataClasses.validation.max.meeting')})
               </span>
             </label>
             <input
               id="jumlah pertemuan"
               {...register("jumlahPertemuan", {
-                required: "Jumlah pertemuan diperlukan.",
+                required: t('messages.errors.required'),
                 max: {
                   value: 50,
-                  message:
-                    "Maksimal jumlah pertemuan di kelas adalah 50 persemester. ",
+                  message: t('forms.dataClasses.validation.max.meeting')
                 },
                 min: {
                   value: 15,
-                  message: "Minimal jumlah pertemuan di kelas adalah 15",
+                  message: t('forms.dataClasses.validation.min.meeting')
                 },
               })}
               type="number"
-              placeholder="Masukkan jumlah pertemuan"
+              placeholder={t('forms.dataClasses.placeholders.enterMeetingCount')}
               className=" w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-2 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
             />
             <span className="text-xs h-4 text-neutral2 block">
@@ -295,7 +296,7 @@ const EditModal = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.status.loading') : t('ui.buttons.save')}
             </button>
           </div>
         </form>

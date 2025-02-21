@@ -1,9 +1,11 @@
 import { Filter } from "lucide-react";
 import React, { useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const FilterSort = ({ handleSortChange, selectedSort }) => {
   const filterRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggleDropDown = (e) => {
     e.stopPropagation();
@@ -45,10 +47,10 @@ const FilterSort = ({ handleSortChange, selectedSort }) => {
           className="w-[200px] border left-0 top-8 rounded-lg absolute  bg-white shadow-md z-10 flex flex-col gap-2 flex-between py-3 items-stretch"
         >
           <h4 className="text-xs border-b mb-2 px-3 pb-3 font-medium text-gray-700">
-            Urut Bedasarkan :
+            {t('ui.filters.sortBy')}:
           </h4>
 
-          {["terbaru", "terlama", "a-z", "z-a", "100-0", "0-100"].map(
+          {["newest", "oldest", "aToZ", "zToA", "100-0", "0-100"].map(
             (sort) => (
               <div key={sort} className="px-3 space-y-2">
                 <div className="flex-between">
@@ -56,7 +58,7 @@ const FilterSort = ({ handleSortChange, selectedSort }) => {
                     htmlFor={sort}
                     className="text-xs capitalize cursor-pointer font-medium w-full"
                   >
-                    {sort}
+                    {t(`forms.dataClasses.orderOptions.${sort}`)}
                   </label>
                   <input
                     type="radio"

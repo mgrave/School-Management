@@ -4,10 +4,12 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableMingguan = ({ loading, libur }) => {
   const [isSabtu, setIsSabtu] = useState(false);
   const [isMinggu, setIsMinggu] = useState(false);
+  const { t } = useTranslation();
 
   const handleToggleSwitch = async (hari, status) => {
     hari === "Sabtu" ? setIsSabtu(!isSabtu) : setIsMinggu(!isMinggu);
@@ -40,12 +42,12 @@ const TableMingguan = ({ loading, libur }) => {
         <thead className="text-xs uppercase text-white bg-neutral">
           <tr>
             <th scope="col" className="px-2 py-4">
-              Hari
+              {t('forms.dataClasses.labels.day')}
             </th>
             <th scope="col" className="px-3 py-4">
-              Status
+              {t('common.status.title')}
             </th>
-            <th className="opacity-0">Edit</th>
+            <th className="opacity-0">{t('ui.buttons.edit')}</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +66,7 @@ const TableMingguan = ({ loading, libur }) => {
           )}
           <tr className="border-b hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Sabtu
+              {t('common.calendar.days.saturday')}
             </td>
             <td
               scope="row"
@@ -72,7 +74,7 @@ const TableMingguan = ({ loading, libur }) => {
                 isSabtu ? "text-neutral1" : "text-neutral2"
               } py-4 w-12 text-xs font-semibold`}
             >
-              {isSabtu ? "Aktif" : "Non Aktif"}
+              {isSabtu ? t('common.status.active') : t('common.status.inactive')}
             </td>
             <td scope="row" className="py-4 w-12">
               <label
@@ -100,7 +102,7 @@ const TableMingguan = ({ loading, libur }) => {
           </tr>
           <tr className=" hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Minggu
+              {t('common.calendar.days.sunday')}
             </td>
             <td
               scope="row"
@@ -108,7 +110,7 @@ const TableMingguan = ({ loading, libur }) => {
                 isMinggu ? "text-neutral1" : "text-neutral2"
               } py-4 w-12 text-xs font-semibold`}
             >
-              {isMinggu ? "Aktif" : "Non Aktif"}
+              {isMinggu ? t('common.status.active') : t('common.status.inactive')}
             </td>
             <td scope="row" className="py-4 w-12">
               <label

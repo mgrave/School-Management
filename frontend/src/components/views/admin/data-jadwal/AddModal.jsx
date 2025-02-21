@@ -11,8 +11,10 @@ import DayDropdown from "@/components/elements/DayDropdown";
 import KelasDropdown from "@/components/elements/KelasDropdown";
 import NamaKelasDropdown from "@/components/elements/NamaKelasDropdown";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from 'react-i18next';
 
 const AddModal = ({ onClose }) => {
+  const { t } = useTranslation();
   const {
     control,
     register,
@@ -72,7 +74,7 @@ const AddModal = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Tambah Jadwal"}
+            titile={t('forms.dataClasses.labels.addSchedule')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -83,12 +85,12 @@ const AddModal = ({ onClose }) => {
               htmlFor="bidangStudi"
               className="text-xs mb-2 block w-fit font-semibold text-gray-700"
             >
-              Bidang Studi
+              {t('forms.dataClasses.labels.subject')}
             </label>
             <Controller
               name="bidangStudi"
               control={control}
-              rules={{ required: "Bidang studi diperlukan." }}
+              rules={{ required: t('forms.dataClasses.validation.required.class') }}
               render={({ field: { onChange, value } }) => (
                 <DropdownBidangStudi value={value} onChange={onChange} />
               )}
@@ -102,12 +104,12 @@ const AddModal = ({ onClose }) => {
               htmlFor="guru"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Guru
+              {t('forms.dataTeacher.labels.name')}
             </label>
             <Controller
               name="guru"
               control={control}
-              rules={{ required: "Guru diperlukan." }}
+              rules={{ required: t('forms.dataTeacher.validation.required.name') }}
               render={({ field: { onChange, value } }) => (
                 <DropdownGuru
                   bidangStudi={bidangStudi.id}
@@ -129,12 +131,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="kelas"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Kelas
+                {t('forms.dataClasses.labels.level')}
               </label>
               <Controller
                 name="kelas"
                 control={control}
-                rules={{ required: "Kelas diperulakan" }}
+                rules={{ required: t('forms.dataClasses.validation.required.class') }}
                 render={({ field: { onChange, value } }) => (
                   <KelasDropdown value={value} onChange={onChange} />
                 )}
@@ -149,12 +151,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="namaKelas"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nama Kelas
+                {t('forms.dataClasses.labels.className')}
               </label>
               <Controller
                 control={control}
                 name="namaKelas"
-                rules={{ required: "Nama Kelas diperlukan." }}
+                rules={{ required: t('forms.dataClasses.validation.required.className') }}
                 render={({ field: { onChange, value } }) => (
                   <NamaKelasDropdown
                     onChange={onChange}
@@ -173,12 +175,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="hari"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Hari
+                {t('forms.dataClasses.labels.day')}
               </label>
               <Controller
                 control={control}
                 name="hari"
-                rules={{ required: "Hari diperlukan." }}
+                rules={{ required: t('forms.dataClasses.validation.required.day') }}
                 render={({ field: { onChange, value } }) => (
                   <DayDropdown onChange={onChange} value={value} />
                 )}
@@ -191,19 +193,19 @@ const AddModal = ({ onClose }) => {
 
           <div className="px-4 mb-2">
             <span className="text-xs w-fit mb-2 block font-semibold text-gray-700">
-              Jam Pembelajaran
+              {t('forms.dataClasses.labels.time')}
             </span>
             <div className="flex-between gap-4 w-full">
               <div className=" gap-2 text-xs w-full">
                 <label htmlFor="mulai" className="block mb-3">
-                  Mulai
+                  {t('common.time.start')}
                 </label>
                 <div className="w-full">
                   <input
                     type="time"
                     id="mulai"
                     {...register("start", {
-                      required: "Jam mulai diperlukan.",
+                      required: t('forms.dataClasses.validation.required.start'),
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline"
                   />
@@ -214,14 +216,14 @@ const AddModal = ({ onClose }) => {
               </div>
               <div className=" gap-2 text-xs w-full">
                 <label htmlFor="selesai" className="block mb-3">
-                  Selesai
+                  {t('common.time.end')}
                 </label>
                 <div className="w-full">
                   <input
                     type="time"
                     id="selesai"
                     {...register("end", {
-                      required: "jam selesai diperlukan.",
+                      required: t('forms.dataClasses.validation.required.end'),
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
                   />
@@ -238,27 +240,26 @@ const AddModal = ({ onClose }) => {
               htmlFor="jumlah pertemuan"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Jumlah Pertemuan{" "}
+              {t('forms.dataClasses.labels.meeting')}
               <span className="text-[0.625rem] text-neutral2">
-                ( Maksimal jumlah pertemuan 50 persemester )
+                ({t('forms.dataClasses.validation.max.meeting')})
               </span>
             </label>
             <input
               id="jumlah pertemuan"
               {...register("jumlahPertemuan", {
-                required: "Jumlah pertemuan diperlukan.",
+                required: t('messages.errors.required'),
                 max: {
                   value: 50,
-                  message:
-                    "Maksimal jumlah pertemuan di kelas adalah 50 persemester. ",
+                  message: t('forms.dataClasses.validation.max.meeting')
                 },
                 min: {
                   value: 15,
-                  message: "Minimal jumlah pertemuan di kelas adalah 15",
-                },
+                  message: t('forms.dataClasses.validation.min.meeting')
+                }
               })}
               type="number"
-              placeholder="Masukkan jumlah pertemuan"
+              placeholder={t('forms.dataClasses.placeholders.enterMeetingCount')}
               className=" w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-2 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
             />
             <span className="text-xs h-4 text-neutral2 block">
@@ -273,7 +274,7 @@ const AddModal = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.status.loading') : t('ui.buttons.save')}
             </button>
           </div>
         </form>

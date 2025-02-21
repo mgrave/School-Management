@@ -6,8 +6,10 @@ import axios from "axios";
 import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const DropdownCategoryNilai = ({ onChange }) => {
+  const { t } = useTranslation();
   const dataEdit = useSelector(selectedDataEdit);
   const siswaRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -70,14 +72,14 @@ const DropdownCategoryNilai = ({ onChange }) => {
                 selectedCategory === "ujian" && "bg-blue-600 text-white"
               }`}
             >
-              <p className="">Ujian</p>
+              <p>{t('forms.dataCategories.options.exam')}</p>
             </li>
             <li
               onClick={() => handleSelectCategory("tugas")}
               tabIndex={0}
               className="px-4 py-2 text-xs hover:bg-gray-200 cursor-pointer"
             >
-              <p className="">Tugas</p>
+              <p>{t('forms.dataCategories.options.assignment')}</p>
             </li>
           </ul>
         </div>
