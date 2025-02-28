@@ -82,14 +82,15 @@ export const uploadPhotoSiswa = async (req, res, next) => {
 
     const uploadParams = {
       Bucket: process.env.AWS_S3_BUCKET,
-      Key: `Siswa/${Date.now().toString()}-${req.file.originalname}`,
+      Key: `${process.env.AWS_FOLDER}/Siswa/${Date.now().toString()}-${req.file.originalname}`,
       Body: fileStream,
       ACL: "public-read",
     };
 
     const data = await s3.send(new PutObjectCommand(uploadParams));
 
-    const fileName = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+    const fileName = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;    
+    //console.log("[Siswa] Ruta del archivo cargado: "+filename);
 
     fs.unlink(req.file.path, (err) => {
       if (err) {
