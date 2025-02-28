@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
   const token = req.cookies.Scholarcy;
 
   if (!token) {
-    console.error("[Auth] Error: No se encontró token en las cookies");
+    console.error("[Auth] Error: No se encontró token en las cookies, pueden ser los cors");
     throw new ResponseError(401, "La sesión de inicio de sesión ha expirado. Si deseas continuar, inicia sesión nuevamente.");
   }
 

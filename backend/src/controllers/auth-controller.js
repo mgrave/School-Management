@@ -42,7 +42,9 @@ export const createAdmin = async (req, res, next) => {
 
 export const loginUser = async (req, res, next) => {
   try {
+    console.log("[Auth] Iniciando proceso de autenticación...");
     const { ni, password } = req.body;
+    console.log(`[Auth] Credenciales recibidas - NI/NIS: ${ni}`);
 
     let user =
       (await Admin.findOne({ username: ni })) ||
@@ -50,14 +52,18 @@ export const loginUser = async (req, res, next) => {
       (await Siswa.findOne({ nis: ni }));
 
     if (!user) {
+      console.error(`[Auth] Usuario no encontrado - NI/NIS: ${ni}`);
       throw new ResponseError(404, "NIS/NIP o contraseña incorrectos");
     }
+    console.log(`[Auth] Usuario encontrado - Rol: ${user.role}, ID: ${user.id}`);
 
+    console.log("[Auth] Verificando contraseña...");
     const isMatch = await compare(password, user.password);
-
     if (!isMatch) {
+      console.error(`[Auth] Contraseña incorrecta - Usuario: ${user.id}`);
       throw new ResponseError(400, "NIS/NIP o contraseña incorrectos.");
     }
+    console.log("[Auth] Credenciales válidas - Generando token...");
 
     let data;
 
@@ -72,6 +78,7 @@ export const loginUser = async (req, res, next) => {
     }
 
     const accessToken = createToken(ni, user.id, user.role);
+    console.log(`[Auth] Token generado - Duración: ${maxAge}ms`);
 
     res.cookie("Scholarcy", accessToken, {
       maxAge,
@@ -79,9 +86,11 @@ export const loginUser = async (req, res, next) => {
       secure: true,
       sameSite: "none",
     });
+    console.log("[Auth] Cookie configurada correctamente");
 
     res.status(200).json({ success: true, message: "Inicio de sesión exitoso", data });
   } catch (error) {
+    console.error("[Auth] Error en proceso de autenticación:", error.message);
     next(error);
   }
 };
@@ -110,8 +119,9 @@ export const loginUser = async (req, res, next) => {
 
 export const getAuth = async (req, res, next) => {
   try {
+    console.log("[Auth] Solicitud de datos de autenticación");
     const userId = req.userId;
-    // const refreshToken = req.cookies.Schoolarcy;
+    console.log(`[Auth] Obteniendo datos para usuario ID: ${userId}`);
 
     let user =
       (await Admin.findOne({ _id: userId }).select("-password")) ||
@@ -121,8 +131,10 @@ export const getAuth = async (req, res, next) => {
       (await Siswa.findById({ _id: userId }).select("-password"));
 
     if (!user) {
+      console.error(`[Auth] Usuario no encontrado - ID: ${userId}`);
       throw new ResponseError(404, "Usuario no encontrado");
     }
+    console.log(`[Auth] Datos obtenidos - Rol: ${user.role}`);
 
     res.status(200).json({
       success: true,
@@ -130,15 +142,19 @@ export const getAuth = async (req, res, next) => {
       user,
     });
   } catch (error) {
+    console.error("[Auth] Error obteniendo datos:", error.message);
     next(error);
   }
 };
 
 export const uploadProfileImage = async (req, res, next) => {
   try {
+    console.log("[Auth] Solicitud de subida de imagen recibida");
     if (!req.file) {
+      console.error("[Auth] Error: Archivo no proporcionado");
       throw new ResponseError(400, "Se requiere una foto");
     }
+    console.log(`[Auth] Procesando archivo: ${req.file.originalname} (${req.file.size} bytes)`);
 
     const fileStream = fs.createReadStream(req.file.path);
 
@@ -164,26 +180,37 @@ export const uploadProfileImage = async (req, res, next) => {
       );
     }
 
-    await res.status(200).json({
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        console.error("[Auth] Error eliminando archivo temporal:", err.message);
+      } else {
+        console.log("[Auth] Archivo temporal eliminado correctamente");
+      }
+    });
+
+    console.log(`[Auth] Imagen subida a S3 - URL: ${fileName}`);
+    await res.status(200).json({ 
       success: true,
       message: "Imagen subida exitosamente",
       foto: userUpdate.foto,
     });
   } catch (error) {
+    console.error("[Auth] Error en subida de imagen:", error.message);
     next(error);
   }
 };
 
 export const updateProfile = async (req, res, next) => {
   try {
+    console.log("[Auth] Actualización de perfil iniciada");
     const id = req.userId;
     const role = req.role;
+    console.log(`[Auth] Actualizando perfil - ID: ${id}, Rol: ${role}`);
 
     const update = req.body;
-
     if (update.password && update.password !== "") {
+      console.log("[Auth] Actualizando contraseña...");
       const salt = await genSalt();
-
       update.password = await hash(update.password, salt);
     } else {
       delete update.password;
@@ -214,12 +241,14 @@ export const updateProfile = async (req, res, next) => {
       ).select("-password");
     }
 
+    console.log(`[Auth] Perfil actualizado correctamente - ID: ${id}`);
     res.status(200).json({
       success: true,
       message: "Perfil actualizado correctamente",
       user: updatedUser,
     });
   } catch (error) {
+    console.error("[Auth] Error actualizando perfil:", error.message);
     next(error);
   }
 };
