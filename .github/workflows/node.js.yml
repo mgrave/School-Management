@@ -1,0 +1,31 @@
+name: Deploy Docker to AWS - CICD
+
+on:
+  push:
+    branches: [test]
+    paths:
+      - 'backend/**'  # Solo activa el flujo de trabajo si hay cambios en la carpeta 'backend'
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
+      - name: Build docker image
+        run: docker build -t htumba1105/school ./backend
+      - name: Publish image to docker hub
+        run: docker push htumba1105/school:latest
+        
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull image from docker hub
+        run: sudo docker pull htumba1105/school:latest
+      - name: Delete old container
+        run: sudo docker rm -f school-app-container
+      - name: Run docker container
+        run: sudo docker run -d -p 80:80 --name school-app-container htumba1105/school
