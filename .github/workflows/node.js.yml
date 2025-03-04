@@ -3,8 +3,8 @@ name: Deploy Docker to AWS - CICD
 on:
   push:
     branches: [test]
-    paths:
-      - 'backend/**'  # Solo activa el flujo de trabajo si hay cambios en la carpeta 'backend'
+    #paths:
+      #- 'backend/**'  # Solo activa el flujo de trabajo si hay cambios en la carpeta 'backend'
 
 jobs:
   build:
