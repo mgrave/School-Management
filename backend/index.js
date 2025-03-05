@@ -11,8 +11,8 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const port = process.env.PORT || 8000;
-const databaseURL = process.env.DATABASE_URL;
+const port = process.env.PORT || 80;
+const databaseURL = process.env.DATABASE_URL || "mongodb+srv://bubu:bubito@onlyou.wnd5t.mongodb.net/school?retryWrites=true&w=majority&appName=ONLYOU";
 
 // Function to hash passwords
 async function hashPassword(users) {

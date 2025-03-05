@@ -21,7 +21,7 @@ export const app = express();
 
 app.use(
   cors({
-    origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173"],
+    origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173", "http://nomadas.infy.uk"],
     methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
     credentials: true,
   })
