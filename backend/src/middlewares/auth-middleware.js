@@ -7,7 +7,6 @@ dotenv.config();
 const verifyToken = (req, res, next) => {
   console.log("[Auth] Iniciando verificación de token...");
 
-  console.log("[Auth] Request completa:", JSON.stringify(req, null, 2));
   console.log("[Auth] Headers:", JSON.stringify(req.headers, null, 2));
   console.log("[Auth] Body:", JSON.stringify(req.body, null, 2));
   console.log("[Auth] Params:", JSON.stringify(req.params, null, 2));

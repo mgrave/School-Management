@@ -128,7 +128,7 @@ const bulkAddSiswa = async () => {
 
     console.log("✅ Bulk data added successfully");
   } catch (error) {
-    console.error("❌ Failed to bulk add siswa:", error);
+    console.error("❌ Failed to bulk add siswa:", error.message);
   }
 };
 
