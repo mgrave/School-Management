@@ -19,11 +19,12 @@ COPY --from=builder /app /app
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Configurar Certbot y SSL
-#RUN mkdir -p /etc/letsencrypt/live/api.nomadas.uk && \
-    #openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    #-keyout /etc/letsencrypt/live/api.nomadas.uk/privkey.pem \
-    #-out /etc/letsencrypt/live/api.nomadas.uk/fullchain.pem \
-    #-subj "/CN=api.nomadas.uk"
+RUN mkdir -p /etc/letsencrypt/live/api.nomadas.uk && \
+    chmod -R 755 /etc/letsencrypt && \
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout /etc/letsencrypt/live/api.nomadas.uk/privkey.pem \
+        -out /etc/letsencrypt/live/api.nomadas.uk/fullchain.pem \
+        -subj "/CN=api.nomadas.uk"
 
 # Script de inicio
 COPY entrypoint.sh /entrypoint.sh
