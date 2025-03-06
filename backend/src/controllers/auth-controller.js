@@ -15,7 +15,7 @@ dotenv.config();
 const maxAge = 24 * 60 * 60 * 1000;
 
 const createToken = (data, id, role) => {
-  const secretKey = process.env.JWT_SECRET_KEY;
+  const secretKey = process.env.JWT_SECRET_KEY || thisismysecretkey;
   if (!secretKey) {
     throw new Error("CLAVE SECRETA JWT NO ESTÁ DEFINIDA");
   }
