@@ -83,8 +83,8 @@ export const loginUser = async (req, res, next) => {
     res.cookie("Scholarcy", accessToken, {
       maxAge,
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "lax",
     });
     console.log("[Auth] Cookie configurada correctamente");
 
