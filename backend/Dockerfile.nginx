@@ -1,0 +1,12 @@
+# Usar una imagen base de Nginx
+FROM nginx:1.27-alpine
+
+#RUN rm -rf /etc/nginx/conf.d/default.conf
+# Copiar la configuración de Nginx al contenedor
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Exponer el puerto 80
+EXPOSE 80
+
+# Comando para iniciar Nginx
+CMD ["nginx", "-g", "daemon off;"]

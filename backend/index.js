@@ -11,8 +11,9 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 const databaseURL = process.env.DATABASE_URL || "mongodb+srv://bubu:bubito@onlyou.wnd5t.mongodb.net/school?retryWrites=true&w=majority&appName=ONLYOU";
+const replicaApp = process.env.APP_NAME
 
 // Function to hash passwords
 async function hashPassword(users) {
@@ -149,33 +150,61 @@ const connectDB = async () => {
 // Endpoint to check API status
 app.get("/", (req, res) => {
   res.send(`
-    <html">
+    <html>
       <head>
         <title>API Status</title>
+        <style>
+          body {
+            background: #1a1a1a;  /* Fondo oscuro */
+            color: #ffffff;      /* Texto blanco */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+          }
+          h1 {
+            color: #f8f9fa;      /* Blanco ligeramente más brillante */
+            margin-bottom: 15px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+          }
+          p {
+            font-size: 1.2em;
+            margin: 8px 0;
+            color: #e9ecef;      /* Gris claro para mejor contraste */
+          }
+          strong {
+            color: #4dabf7;      /* Azul claro para destacar */
+          }
+        </style>
         <script>
           function updateTime() {
             const date = new Date();
-            const idn = new Intl.DateTimeFormat('id-ID', {
+            const peTime = new Intl.DateTimeFormat('es-PE', {
               dateStyle: 'full',
               timeStyle: 'long',
-              timeZone: 'Asia/Jakarta',
+              timeZone: 'America/Lima'
             }).format(date);
-            document.getElementById("timestamp").textContent = idn;
+            document.getElementById("timestamp").textContent = peTime;
           }
           setInterval(updateTime, 1000);
         </script>
       </head>
-      <body style="font-family: Arial, sans-serif; background:#9118e2; color:#ffffff; text-align: center; width:100%; height:100vh; display:flex; justify-content:center; align-items:center; overflow:hidden;">
-        <h1 ">API is running</h1>
-        <p ">Status: <strong>success</strong></p>
-        <p ">Timestamp: <strong id="timestamp">${new Date().toISOString()}</strong></p>
+      <body>
+        <h1>API ${replicaApp} is running</h1>
+        <p>Status: <strong>success</strong></p>
+        <p>Timestamp: <strong id="timestamp">${new Date().toLocaleString('es-PE', { timeZone: 'America/Lima' })}</strong></p>
       </body>
     </html>
   `);
 });
 
 app.listen(port, async () => {
-  console.log("🚀 Starting server initialization...");
+  console.log(`🚀 Starting server initialization on ... ${replicaApp}`);
   console.log("🕒 Server time:", new Date().toISOString());
   await connectDB();
   console.log("🌐 Server is running on port", port);
