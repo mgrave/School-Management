@@ -43,7 +43,7 @@ jobs:
           sudo docker-compose run --rm certbot certonly --webroot -w /var/www/certbot \
             --email htumba1105@gmail.com \
             --agree-tos --no-eff-email \
-            -d nomadas.infy.uk
+            -d api.nomadas.uk
 
       - name: Full deployment
         working-directory: ./backend
