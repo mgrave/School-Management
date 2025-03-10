@@ -25,25 +25,6 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-        with:
-          clean: false  # Evita la limpieza del repositorio
-          path: /home/ubuntu/actions-runner/backend/School-Management/School-Management
-
-      - name: Check and clean certbot directory
-        run: |
-          if [ -d "/home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot/conf" ]; then
-            echo "Certbot directory exists, checking certificates..."
-            if ! openssl x509 -checkend 86400 -noout -in /home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot/conf/live/nomadas.infy.uk/fullchain.pem; then
-              echo "Certificates are expired or will expire soon, cleaning directory..."
-              sudo rm -rf /home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot/conf
-            else
-              echo "Certificates are valid, skipping cleanup."
-            fi
-          else
-            echo "Certbot directory does not exist, creating it..."
-          fi
-          mkdir -p /home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot/conf
-          chmod -R 755 /home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot
 
       - name: Start Nginx for Certbot challenge
         working-directory: ./backend
@@ -64,6 +45,7 @@ jobs:
         run: |
           sudo docker-compose down
           sudo docker-compose up -d
+
       - name: Clean certbot directory
         run: |
           docker run --rm -v /home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot:/certbot alpine sh -c "rm -rf /certbot/conf && mkdir -p /certbot/conf && chmod -R 755 /certbot"
