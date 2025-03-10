@@ -26,17 +26,19 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Create certbot directories
+      - name: Create certbot directories        
         run: |
-          mkdir -p certbot/{www,conf}
+          mkdir -p backend/certbot/{www,conf}
           chmod -R 777 certbot
 
       - name: Start Nginx for Certbot challenge
+        working-directory: ./backend
         run: |
           docker-compose up -d nginx
           sleep 10  # Esperar a que Nginx esté listo
 
       - name: Generate SSL certificates
+        working-directory: ./backend
         run: |
           docker-compose run --rm certbot certonly --webroot -w /var/www/certbot \
             --email htumba1105@gmail.com \
@@ -44,6 +46,7 @@ jobs:
             -d nomadas.infy.uk
 
       - name: Full deployment
+        working-directory: ./backend
         run: |
           docker-compose down
           docker-compose up -d
