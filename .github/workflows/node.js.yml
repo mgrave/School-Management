@@ -26,6 +26,11 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
+      - name: Create certbot directories
+        run: |
+          mkdir -p certbot/{www,conf}
+          chmod -R 777 certbot
+
       - name: Start Nginx for Certbot challenge
         working-directory: ./backend
         run: |
