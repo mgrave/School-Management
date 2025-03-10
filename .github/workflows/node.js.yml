@@ -29,7 +29,7 @@ jobs:
       - name: Create certbot directories 
         run: |
           mkdir -p certbot/{www,conf}
-          chmod -R 777 certbot
+          chown -R ubuntu:ubuntu certbot
 
       - name: Start Nginx for Certbot challenge
         working-directory: ./backend
