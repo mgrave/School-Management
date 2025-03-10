@@ -12,7 +12,6 @@ services:
       - backend1
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/error.log:/etc/nginx/error_log.log
       - /etc/letsencrypt/:/etc/letsencrypt/
     networks:
       - school-network
