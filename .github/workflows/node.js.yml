@@ -29,13 +29,13 @@ jobs:
       - name: Start Nginx for Certbot challenge
         working-directory: ./backend
         run: |
-          docker-compose up -d nginx
+          sudo docker-compose up -d nginx
           sleep 10  # Esperar a que Nginx esté listo
 
       - name: Generate SSL certificates
         working-directory: ./backend
         run: |
-          docker-compose run --rm certbot certonly --webroot -w /var/www/certbot \
+          sudo docker-compose run --rm certbot certonly --webroot -w /var/www/certbot \
             --email htumba1105@gmail.com \
             --agree-tos --no-eff-email \
             -d nomadas.infy.uk
@@ -43,5 +43,5 @@ jobs:
       - name: Full deployment
         working-directory: ./backend
         run: |
-          docker-compose down
-          docker-compose up -d
+          sudo docker-compose down
+          sudo docker-compose up -d
