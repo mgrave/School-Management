@@ -26,31 +26,7 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Create certbot directories 
-        run: |
-          mkdir -p certbot/{www,conf}
-          chown -R ubuntu:ubuntu certbot
-
-      - name: Start Nginx for Certbot challenge
-        working-directory: ./backend
-        run: |
-          sudo docker-compose up -d nginx
-          sleep 10  # Esperar a que Nginx esté listo
-
-      - name: Generate SSL certificates
-        working-directory: ./backend
-        run: |
-          sudo docker-compose run --rm certbot certonly --webroot -w /var/www/certbot \
-            --email htumba1105@gmail.com \
-            --agree-tos --no-eff-email \
-            -d api.nomadas.uk
-
       - name: Full deployment
         working-directory: ./backend
-        run: |
-          sudo docker-compose down
+        run: |          
           sudo docker-compose up -d
-
-      - name: Clean certbot directory
-        run: |
-          docker run --rm -v /home/ubuntu/actions-runner/backend/School-Management/School-Management/backend/certbot:/certbot alpine sh -c "rm -rf /certbot/conf && mkdir -p /certbot/conf && chmod -R 755 /certbot"
