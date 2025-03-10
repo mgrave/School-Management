@@ -19,13 +19,28 @@ import nilaiPertemuanRouter from "../routes/nilaiPertemuan-router.js";
 
 export const app = express();
 
-app.use(
-  cors({
-    origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173", "http://nomadas.infy.uk"],
-    methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
-    credentials: true,
-  })
-);
+// Configuración de CORS
+const corsOptions = {
+  origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173", "https://schoolfrontend.vercel.app/"],
+  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
+  credentials: true,
+};
+
+// Middleware para registrar el resultado de CORS
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (corsOptions.origin.includes(origin)) {
+    console.log(`✅ CORS validation passed for origin: ${origin}`);
+  } else {
+    console.log(`❌ CORS validation failed for origin: ${origin}`);
+  }
+
+  next();
+});
+
+// Aplicar CORS
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());

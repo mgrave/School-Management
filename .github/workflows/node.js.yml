@@ -25,7 +25,6 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-
       - name: Full deployment
         working-directory: ./backend
         run: |          
