@@ -26,6 +26,7 @@ const corsOptions = {
   credentials: true,
 };
 
+app.use(cors(corsOptions)); // Aplicar CORS a todas las rutas
 app.options('*', cors()); // Manejar solicitudes OPTIONS
 
 // Middleware para registrar el resultado de CORS

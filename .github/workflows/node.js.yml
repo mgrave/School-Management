@@ -25,7 +25,16 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+      - name: Stop docker-compose
+        working-directory: ./backend
+        run: sudo docker-compose down -v --remove-orphans 
+      - name: Remove old school image
+        run: |
+          if docker images -q htumba1105/school:latest; then
+            docker rmi htumba1105/school:latest
+          fi
+      - name: Pull new school image
+        run: docker pull htumba1105/school:latest
       - name: Full deployment
         working-directory: ./backend
-        run: |          
-          sudo docker-compose up -d
+        run: sudo docker-compose up -d
