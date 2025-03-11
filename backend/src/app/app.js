@@ -21,13 +21,13 @@ export const app = express();
 
 // Configuración de CORS
 const corsOptions = {
-  origin: "https://schoolfrontend.vercel.app",
-  methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+  origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173", "https://schoolfrontend.vercel.app"],
+  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
   credentials: true,
 };
 
-app.use(cors(corsOptions)); // Aplicar CORS a todas las rutas
-app.options('*', cors()); // Manejar solicitudes OPTIONS
+//app.use(cors(corsOptions)); // Aplicar CORS a todas las rutas
+//app.options('*', cors()); // Manejar solicitudes OPTIONS
 
 // Middleware para registrar el resultado de CORS
 app.use((req, res, next) => {
