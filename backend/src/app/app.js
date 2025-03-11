@@ -24,13 +24,13 @@ const corsOptions = {
   origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173", "https://schoolfrontend.vercel.app"],
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Authorization', 'Set-Cookie'], // Exponer encabezados específicos
-  optionsSuccessStatus: 204 // Respuesta para solicitudes OPTIONS
+  allowedHeaders: ["Content-Type", "Authorization"],
+  exposedHeaders: ["Authorization", "Set-Cookie"],
+  optionsSuccessStatus: 204,
 };
 
-app.use(cors(corsOptions)); // Aplicar CORS a todas las rutas
-app.options('*', cors(corsOptions)); // Manejar solicitudes OPTIONS
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 // Middleware para registrar el resultado de CORS
 app.use((req, res, next) => {
@@ -49,9 +49,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-// Aplicar CORS
-//app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());
