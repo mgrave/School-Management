@@ -19,36 +19,13 @@ import nilaiPertemuanRouter from "../routes/nilaiPertemuan-router.js";
 
 export const app = express();
 
-// Configuración de CORS
-const corsOptions = {
-  origin: "https://schoolfrontend.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-  exposedHeaders: ["Authorization", "Set-Cookie"],
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
-
-// Middleware para registrar el resultado de CORS
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-
-  if (!origin) {
-    console.log("⚠️ [App] No se encontró el encabezado Origin");
-    return next();
-  }
-
-  if (corsOptions.origin === origin) {
-    console.log(`✅ [App] CORS validation passed for origin: ${origin}`);
-  } else {
-    console.log(`❌ [App] CORS validation failed for origin: ${origin}`);
-  }
-
-  next();
-});
+app.use(
+  cors({
+    origin: "https://schoolfrontend.vercel.app",
+    methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
 app.use(express.json());

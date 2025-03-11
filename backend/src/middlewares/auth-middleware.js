@@ -17,10 +17,10 @@ const verifyToken = (req, res, next) => {
 
   if (!token) {
     console.error("[Auth-Middleware] Error: No se encontró token en las cookies, pueden ser los cors");
-    throw new ResponseError(401, "La sesión de inicio de sesión ha expirado. Si deseas continuar, inicia sesión nuevamente.");
+    throw new ResponseError(401, "La sesión de inicio de sesión ha expirado.");
   }
 
-  jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
+  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, payload) => {
     if (err) {
       console.error(`[Auth-Middleware] Error de token: ${err.message}`);
       res.clearCookie("Scholarcy");
