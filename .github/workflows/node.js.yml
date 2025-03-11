@@ -30,11 +30,11 @@ jobs:
         run: sudo docker-compose down -v --remove-orphans 
       - name: Remove old school image
         run: |
-          if docker images -q htumba1105/school:latest; then
-            docker rmi htumba1105/school:latest
+          if sudo docker images -q htumba1105/school:latest; then
+            sudo docker rmi htumba1105/school:latest
           fi
       - name: Pull new school image
-        run: docker pull htumba1105/school:latest
+        run: sudo docker pull htumba1105/school:latest
       - name: Full deployment
         working-directory: ./backend
         run: sudo docker-compose up -d
