@@ -25,7 +25,7 @@ const corsOptions = {
   methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
-  //exposedHeaders: ['X-Custom-Header'], // Encabezados que el frontend puede leer
+  exposedHeaders: ['Authorization', 'Set-Cookie'], // Exponer encabezados específicos
   optionsSuccessStatus: 204 // Respuesta para solicitudes OPTIONS
 };
 

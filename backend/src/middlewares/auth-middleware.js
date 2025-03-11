@@ -23,14 +23,13 @@ const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
     if (err) {
       console.error(`[Auth-Middleware] Error de token: ${err.message}`);
-      res.clearCookie("jwt");
+      res.clearCookie("Scholarcy");
       throw new ResponseError(401, "Token no válido");
     }
 
     console.log(`[Auth-Middleware] Token válido para usuario ID: ${payload.id} Rol: ${payload.role}`);
     req.userId = payload.id;
     req.role = payload.role;
-
     next();
   });
 };
