@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
   const token = req.cookies.Scholarcy;
 
   if (!token) {
-    console.error("[Auth-Middleware] Error: No se encontró token en las cookies, pueden ser los cors");
+    console.error("[Auth-Middleware] Error: No se encontró token en las cookies");
     throw new ResponseError(401, "La sesión de inicio de sesión ha expirado.");
   }
 
