@@ -22,7 +22,7 @@ export const app = express();
 // Configuración de CORS
 const corsOptions = {
   origin: "https://schoolfrontend.vercel.app",
-  methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
   exposedHeaders: ["Authorization", "Set-Cookie"],
@@ -41,7 +41,7 @@ app.use((req, res, next) => {
     return next();
   }
 
-  if (corsOptions.origin.includes(origin)) {
+  if (corsOptions.origin === origin) {
     console.log(`✅ [App] CORS validation passed for origin: ${origin}`);
   } else {
     console.log(`❌ [App] CORS validation failed for origin: ${origin}`);
