@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
     throw new ResponseError(401, "La sesión de inicio de sesión ha expirado.");
   }
 
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, payload) => {
+  jwt.verify(token, "thisismysecretkey", (err, payload) => {
     if (err) {
       console.error(`[Auth-Middleware] Error de token: ${err.message}`);
       res.clearCookie("Scholarcy");
