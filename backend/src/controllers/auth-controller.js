@@ -81,10 +81,10 @@ export const loginUser = async (req, res, next) => {
     console.log(`[Auth] Token generado - Duración: ${maxAge}ms`);
 
     res.cookie("Scholarcy", accessToken, {
-      maxAge,
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      httpOnly: true, // La cookie no es accesible desde JavaScript
+      secure: true, // Solo se envía sobre HTTPS
+      sameSite: "none", // Permitir cookies en solicitudes entre sitios
+      maxAge: 86400000, // Duración de la cookie (1 día)
     });
     console.log("[Auth] Cookie configurada correctamente");
 
