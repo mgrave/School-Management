@@ -33,6 +33,11 @@ const corsOptions = {
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
+  if (!origin) {
+    console.log("⚠️ No se encontró el encabezado Origin");
+    return next();
+  }
+
   if (corsOptions.origin.includes(origin)) {
     console.log(`✅ CORS validation passed for origin: ${origin}`);
   } else {
