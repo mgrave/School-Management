@@ -22,11 +22,11 @@ export const app = express();
 // Configuración de CORS
 const corsOptions = {
   origin: [process.env.ORIGIN, "http://localhost:3000", "http://localhost:5173", "https://schoolfrontend.vercel.app"],
-  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
+  methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['X-Custom-Header'], // Encabezados que el frontend puede leer
-  optionsSuccessStatus: 200 // Respuesta para solicitudes OPTIONS
+  //exposedHeaders: ['X-Custom-Header'], // Encabezados que el frontend puede leer
+  optionsSuccessStatus: 204 // Respuesta para solicitudes OPTIONS
 };
 
 app.use(cors(corsOptions)); // Aplicar CORS a todas las rutas
@@ -37,21 +37,21 @@ app.use((req, res, next) => {
   const origin = req.headers.origin;
 
   if (!origin) {
-    console.log("⚠️ No se encontró el encabezado Origin");
+    console.log("⚠️ [App] No se encontró el encabezado Origin");
     return next();
   }
 
   if (corsOptions.origin.includes(origin)) {
-    console.log(`✅ CORS validation passed for origin: ${origin}`);
+    console.log(`✅ [App] CORS validation passed for origin: ${origin}`);
   } else {
-    console.log(`❌ CORS validation failed for origin: ${origin}`);
+    console.log(`❌ [App] CORS validation failed for origin: ${origin}`);
   }
 
   next();
 });
 
 // Aplicar CORS
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());

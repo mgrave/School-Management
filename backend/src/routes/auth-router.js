@@ -15,37 +15,37 @@ const authRouter = express.Router();
 
 // Log para registrar solicitudes entrantes
 authRouter.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  console.log(`[Auth-Router] ${new Date().toISOString()} Method: ${req.method} Url: ${req.url}`);
   next();
 });
 
 // Ruta para crear un administrador
 authRouter.post("/create-admin", (req, res, next) => {
-  console.log("📝 Creando un nuevo administrador");
+  console.log("📝 [Auth-Router] Creando un nuevo administrador");
   createAdmin(req, res, next);
 });
 
 // Ruta para iniciar sesión
 authRouter.post("/login", (req, res, next) => {
-  console.log("🔑 Iniciando sesión");
+  console.log("🔑 [Auth-Router] Iniciando sesión");
   loginUser(req, res, next);
 });
 
 // Ruta para obtener la autenticación
 authRouter.get("/get-auth", verifyToken, (req, res, next) => {
-  console.log("🔍 Obteniendo autenticación");
+  console.log("🔍 [Auth-Router] Obteniendo autenticación");
   getAuth(req, res, next);
 });
 
 // Ruta para actualizar el perfil
 authRouter.put("/update-profile", verifyToken, (req, res, next) => {
-  console.log("🔄 Actualizando perfil");
+  console.log("🔄 [Auth-Router] Actualizando perfil");
   updateProfile(req, res, next);
 });
 
 // Ruta para cerrar sesión
 authRouter.delete("/logout", verifyToken, (req, res, next) => {
-  console.log("🚪 Cerrando sesión");
+  console.log("🚪 [Auth-Router] Cerrando sesión");
   logout(req, res, next);
 });
 
@@ -55,14 +55,14 @@ authRouter.post(
   verifyToken,
   upload.single("image"),
   (req, res, next) => {
-    console.log("📸 Subiendo imagen de perfil");
+    console.log("📸 [Auth-Router] Subiendo imagen de perfil");
     uploadProfileImage(req, res, next);
   }
 );
 
 // Ruta para obtener datos generales
 authRouter.get("/get-data-umum", verifyToken, (req, res, next) => {
-  console.log("📊 Obteniendo datos generales");
+  console.log("📊 [Auth-Router] Obteniendo datos generales");
   getDataUmum(req, res, next);
 });
 
