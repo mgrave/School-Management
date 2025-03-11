@@ -85,6 +85,8 @@ export const loginUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: "schoolfrontend.vercel.app",
+      path: "/",
     });
     console.log("[Auth] Cookie configurada correctamente");
 
