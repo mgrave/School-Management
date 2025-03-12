@@ -17,19 +17,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
-      - name: Create env file
-        run: |
-          echo "DOMAIN=${{ secrets.DOMAIN }}" > env_file
-          echo "EMAIL=${{ secrets.EMAIL }}" >> env_file
-          echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> env_file
-          echo "AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }}" >> env_file
-          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> env_file
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> env_file
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> env_file
-          echo "AWS_FOLDER=${{ secrets.AWS_FOLDER }}" >> env_file
-          echo "PORT=${{ secrets.PORT }}" >> env_file
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> env_file
-          echo "ORIGIN=${{ secrets.ORIGIN }}" >> env_file
       - name: Build docker image
         run: docker build -t htumba1105/school ./backend
       - name: Publish image to docker hub

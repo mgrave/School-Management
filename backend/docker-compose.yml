@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   nginx:
     #build:
@@ -24,11 +22,10 @@ services:
       #context: .  # Usa el directorio actual como contexto de construcción
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
+    env_file:
+      - /home/ubuntu/.env
     environment:
       - APP_NAME=backend1
-    secrets:
-      - source: filenv
-        target: .env
     ports:
       - "3001:3000" 
     networks:
@@ -39,11 +36,10 @@ services:
       #context: .  # Usa el directorio actual como contexto de construcción
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
+    env_file:
+      - /home/ubuntu/.env
     environment:
       - APP_NAME=backend2
-    secrets:
-      - source: filenv
-        target: .env
     ports:
       - "3002:3000" 
     networks:
@@ -54,19 +50,14 @@ services:
       #context: .  # Usa el directorio actual como contexto de construcción
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
+    env_file:
+      - /home/ubuntu/.env
     environment:
       - APP_NAME=backend3
-    secrets:
-      - source: filenv
-        target: .env
     ports:
       - "3003:3000" 
     networks:
       - school-network       
-
-secrets:
-  env_file:
-    file: /home/ubuntu/
 
 networks:
   school-network:
