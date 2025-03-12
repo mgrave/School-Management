@@ -18,20 +18,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
       - name: Build docker image
-        run: |
-          docker build -t htumba1105/school ./backend \
-            --build-arg DOMAIN=${{ secrets.DOMAIN }} \
-            --build-arg EMAIL=${{ secrets.EMAIL }} \
-            --build-arg JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
-            --build-arg AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} \
-            --build-arg AWS_REGION=${{ secrets.AWS_REGION }} \
-            --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-            --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-            --build-arg AWS_FOLDER=${{ secrets.AWS_FOLDER }} \
-            --build-arg PORT=${{ secrets.PORT }} \
-            --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            --build-arg ORIGIN=${{ secrets.ORIGIN }}
-            
+        run: docker build -t htumba1105/school ./backend
       - name: Publish image to docker hub
         run: docker push htumba1105/school:latest
         
