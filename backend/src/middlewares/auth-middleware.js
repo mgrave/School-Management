@@ -13,17 +13,17 @@ const verifyToken = (req, res, next) => {
   console.log("[Auth-Middleware] Query:", JSON.stringify(req.query, null, 2));
   console.log("[Auth-Middleware] Cookies:", JSON.stringify(req.cookies, null, 2));
 
-  const token = req.cookies.Scholarcy;
+  const token = req.cookies[process.env.COOKIE];
 
   if (!token) {
     console.error("[Auth-Middleware] Error: No se encontró token en las cookies");
     throw new ResponseError(401, "La sesión de inicio de sesión ha expirado.");
   }
 
-  jwt.verify(token, "thisismysecretkey", (err, payload) => {
+  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, payload) => {
     if (err) {
       console.error(`[Auth-Middleware] Error de token: ${err.message}`);
-      res.clearCookie("Scholarcy");
+      res.clearCookie([process.env.COOKIE]);
       throw new ResponseError(401, "Token no válido");
     }
 

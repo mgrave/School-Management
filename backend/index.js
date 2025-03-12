@@ -17,8 +17,8 @@ if (process.env.DOMAIN) {
   console.error('❌ Archivo de variables no encontrado');
 }
 
-const port = process.env.PORT || 3000;
-const databaseURL = process.env.DATABASE_URL || "mongodb+srv://bubu:bubito@onlyou.wnd5t.mongodb.net/school?retryWrites=true&w=majority&appName=ONLYOU";
+const port = process.env.PORT;
+const databaseURL = process.env.DATABASE_URL;
 const replicaApp = process.env.APP_NAME
 
 // Function to hash passwords

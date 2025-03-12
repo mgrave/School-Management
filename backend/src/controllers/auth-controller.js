@@ -15,7 +15,7 @@ dotenv.config();
 const maxAge = 24 * 60 * 60 * 1000;
 
 const createToken = (data, id, role) => {
-  const secretKey = process.env.JWT_SECRET_KEY || "thisismysecretkey";
+  const secretKey = process.env.JWT_SECRET_KEY;
   if (!secretKey) {
     throw new Error("CLAVE SECRETA JWT NO ESTÁ DEFINIDA");
   }
@@ -80,7 +80,7 @@ export const loginUser = async (req, res, next) => {
     const accessToken = createToken(ni, user.id, user.role);
     console.log(`[Auth] Token generado - Duración: ${maxAge}ms`);
 
-    res.cookie("Scholarcy", accessToken, {
+    res.cookie([process.env.COOKIE], accessToken, {
       httpOnly: true, // La cookie no es accesible desde JavaScript
       secure: true, // Solo se envía sobre HTTPS
       sameSite: "none", // Permitir cookies en solicitudes entre sitios
@@ -255,7 +255,7 @@ export const updateProfile = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    res.clearCookie("Scholarcy", {
+    res.clearCookie([process.env.COOKIE], {
       httpOnly: true,
       secure: true,
       sameSite: "None",
