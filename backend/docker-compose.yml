@@ -22,8 +22,19 @@ services:
       #context: .  # Usa el directorio actual como contexto de construcción
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
-    environment: 
+    environment:
       - APP_NAME=backend1
+      - DOMAIN=${DOMAIN}
+      - EMAIL=${EMAIL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_FOLDER=${AWS_FOLDER}
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - ORIGIN=${ORIGIN}
     ports:
       - "3001:3000" 
     networks:
@@ -34,8 +45,19 @@ services:
       #context: .  # Usa el directorio actual como contexto de construcción
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
-    environment: 
+    environment:
       - APP_NAME=backend2
+      - DOMAIN=${DOMAIN}
+      - EMAIL=${EMAIL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_FOLDER=${AWS_FOLDER}
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - ORIGIN=${ORIGIN}
     ports:
       - "3002:3000" 
     networks:
@@ -46,8 +68,19 @@ services:
       #context: .  # Usa el directorio actual como contexto de construcción
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
-    environment: 
+    environment:
       - APP_NAME=backend3
+      - DOMAIN=${DOMAIN}
+      - EMAIL=${EMAIL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_FOLDER=${AWS_FOLDER}
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - ORIGIN=${ORIGIN}
     ports:
       - "3003:3000" 
     networks:
