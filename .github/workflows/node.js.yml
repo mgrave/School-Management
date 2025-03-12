@@ -40,17 +40,16 @@ jobs:
         run: sudo docker pull htumba1105/school:latest
       - name: Full deployment
         working-directory: ./backend
-        env:
-          DOMAIN: ${{ secrets.DOMAIN }}
-          EMAIL: ${{ secrets.EMAIL }}
-          JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_FOLDER: ${{ secrets.AWS_FOLDER }}
-          PORT: ${{ secrets.PORT }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          ORIGIN: ${{ secrets.ORIGIN }}
         run: |
-          sudo docker-compose up -d
+          sudo DOMAIN=${{ secrets.DOMAIN }} \
+               EMAIL=${{ secrets.EMAIL }} \
+               JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} \
+               AWS_S3_BUCKET=${{ secrets.AWS_S3_BUCKET }} \
+               AWS_REGION=${{ secrets.AWS_REGION }} \
+               AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+               AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+               AWS_FOLDER=${{ secrets.AWS_FOLDER }} \
+               PORT=${{ secrets.PORT }} \
+               DATABASE_URL=${{ secrets.DATABASE_URL }} \
+               ORIGIN=${{ secrets.ORIGIN }} \
+               docker-compose up -d
