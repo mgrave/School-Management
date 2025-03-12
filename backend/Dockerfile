@@ -28,9 +28,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 
 WORKDIR /app
 COPY package*.json ./
-RUN echo "Instalando dependencias..." && \
-    npm install && \
-    echo "Dependencias instaladas correctamente."
+RUN npm ci
 COPY . .
 EXPOSE 3000
 #CMD npm run dev
