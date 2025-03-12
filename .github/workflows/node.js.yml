@@ -5,6 +5,9 @@ on:
     branches: [test]
     #paths:
       #- 'backend/**'  # Solo activa el flujo de trabajo si hay cambios en la carpeta 'backend'
+env:
+      NODE_ENV: production
+      ORIGIN: ${{ vars.ORIGIN }}      
 
 jobs:
   build:
