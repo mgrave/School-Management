@@ -35,7 +35,7 @@ services:
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
     environment: 
-      - APP_NAME=backend1
+      - APP_NAME=backend2
     ports:
       - "3002:3000" 
     networks:
@@ -47,7 +47,7 @@ services:
       #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
     image: htumba1105/school:latest
     environment: 
-      - APP_NAME=backend1
+      - APP_NAME=backend3
     ports:
       - "3003:3000" 
     networks:
