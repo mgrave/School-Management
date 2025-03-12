@@ -11,6 +11,12 @@ import { fileURLToPath } from "url";
 
 dotenv.config();
 
+if (process.env.DOMAIN) {
+  console.log('✅ Archivo de variables cargado:', process.env.DOMAIN);
+} else {
+  console.error('❌ Archivo de variables no encontrado');
+}
+
 const port = process.env.PORT || 3000;
 const databaseURL = process.env.DATABASE_URL || "mongodb+srv://bubu:bubito@onlyou.wnd5t.mongodb.net/school?retryWrites=true&w=majority&appName=ONLYOU";
 const replicaApp = process.env.APP_NAME
