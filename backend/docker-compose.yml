@@ -29,6 +29,30 @@ services:
     networks:
       - school-network 
 
+  backend2:
+    #build:
+      #context: .  # Usa el directorio actual como contexto de construcción
+      #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
+    image: htumba1105/school:latest
+    environment: 
+      - APP_NAME=backend1
+    ports:
+      - "3001:3000" 
+    networks:
+      - school-network 
+
+  backend3:
+    #build:
+      #context: .  # Usa el directorio actual como contexto de construcción
+      #dockerfile: Dockerfile  # Especifica el Dockerfile unificado
+    image: htumba1105/school:latest
+    environment: 
+      - APP_NAME=backend1
+    ports:
+      - "3001:3000" 
+    networks:
+      - school-network       
+
 networks:
   school-network:
     driver: bridge
