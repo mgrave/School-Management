@@ -37,7 +37,7 @@ services:
     environment: 
       - APP_NAME=backend1
     ports:
-      - "3001:3000" 
+      - "3002:3000" 
     networks:
       - school-network 
 
@@ -49,7 +49,7 @@ services:
     environment: 
       - APP_NAME=backend1
     ports:
-      - "3001:3000" 
+      - "3003:3000" 
     networks:
       - school-network       
 
