@@ -21,7 +21,7 @@ export const app = express();
 
 // Configuración de CORS
 const corsOptions = {
-  origin: "https://schoolfrontend.vercel.app",
+  origin: process.env.ORIGIN,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
