@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   nginx:
     #build:
@@ -25,7 +27,7 @@ services:
     environment:
       - APP_NAME=backend1
     secrets:
-      - source: env_file
+      - source: filenv
         target: .env
     ports:
       - "3001:3000" 
@@ -40,7 +42,7 @@ services:
     environment:
       - APP_NAME=backend2
     secrets:
-      - source: env_file
+      - source: filenv
         target: .env
     ports:
       - "3002:3000" 
@@ -55,7 +57,7 @@ services:
     environment:
       - APP_NAME=backend3
     secrets:
-      - source: env_file
+      - source: filenv
         target: .env
     ports:
       - "3003:3000" 
@@ -64,7 +66,7 @@ services:
 
 secrets:
   env_file:
-    file: ./env_file
+    file: /home/ubuntu/filenv
 
 networks:
   school-network:
