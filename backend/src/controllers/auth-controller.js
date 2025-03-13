@@ -86,7 +86,7 @@ export const loginUser = async (req, res, next) => {
       sameSite: "none", // Permitir cookies en solicitudes entre sitios
       maxAge: 86400000, // Duración de la cookie (1 día)
     });
-    console.log("[Auth] Cookie configurada correctamente");
+    console.log("[Auth] Cookie "+process.env.COOKIE+" configurada correctamente");
 
     res.status(200).json({ success: true, message: "Inicio de sesión exitoso", data });
   } catch (error) {
