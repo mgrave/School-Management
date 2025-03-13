@@ -147,7 +147,7 @@ const connectDB = async () => {
     console.log("✅ Conectado a la base de datos");
     
     console.log("🔄 Verificando si es necesaria la inserción masiva");
-    await bulkAddSiswa();
+    //await bulkAddSiswa();
   } catch (error) {
     console.log("❌ Error al conectar a la base de datos:", error);
   }
