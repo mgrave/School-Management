@@ -11,6 +11,7 @@ import DayDropdown from "@/components/elements/DayDropdown";
 import KelasDropdown from "@/components/elements/KelasDropdown";
 import NamaKelasDropdown from "@/components/elements/NamaKelasDropdown";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from "react-i18next";
 
 const AddModal = ({ onClose }) => {
   const {
@@ -35,6 +36,7 @@ const AddModal = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const bidangStudi = watch("bidangStudi");
   const kelas = watch("kelas");
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -72,7 +74,7 @@ const AddModal = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Tambah Jadwal"}
+            titile={t("schedule.add_schedule")}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -83,12 +85,12 @@ const AddModal = ({ onClose }) => {
               htmlFor="bidangStudi"
               className="text-xs mb-2 block w-fit font-semibold text-gray-700"
             >
-              Bidang Studi
+              {t("schedule.study_field")}
             </label>
             <Controller
               name="bidangStudi"
               control={control}
-              rules={{ required: "Bidang studi diperlukan." }}
+              rules={{ required: t("validation.required.field", { field: t("schedule.study_field") }) }}
               render={({ field: { onChange, value } }) => (
                 <DropdownBidangStudi value={value} onChange={onChange} />
               )}
@@ -102,12 +104,12 @@ const AddModal = ({ onClose }) => {
               htmlFor="guru"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Guru
+              {t("common.roles.guru")}
             </label>
             <Controller
               name="guru"
               control={control}
-              rules={{ required: "Guru diperlukan." }}
+              rules={{ required: t("validation.required.field", { field: t("common.roles.guru") }) }}
               render={({ field: { onChange, value } }) => (
                 <DropdownGuru
                   bidangStudi={bidangStudi.id}
@@ -129,12 +131,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="kelas"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Kelas
+                {t("common.class")}
               </label>
               <Controller
                 name="kelas"
                 control={control}
-                rules={{ required: "Kelas diperulakan" }}
+                rules={{ required: t("validation.required.field", { field: t("common.class") }) }}
                 render={({ field: { onChange, value } }) => (
                   <KelasDropdown value={value} onChange={onChange} />
                 )}
@@ -149,12 +151,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="namaKelas"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nama Kelas
+                {t("class.columnClassName")}
               </label>
               <Controller
                 control={control}
                 name="namaKelas"
-                rules={{ required: "Nama Kelas diperlukan." }}
+                rules={{ required: t("validation.required.field", { field: t("class.columnClassName") }) }}
                 render={({ field: { onChange, value } }) => (
                   <NamaKelasDropdown
                     onChange={onChange}
@@ -173,12 +175,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="hari"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Hari
+                {t("common.days.day")}
               </label>
               <Controller
                 control={control}
                 name="hari"
-                rules={{ required: "Hari diperlukan." }}
+                rules={{ required: t("validation.required.field", { field: t("common.days.day") }) }}
                 render={({ field: { onChange, value } }) => (
                   <DayDropdown onChange={onChange} value={value} />
                 )}
@@ -191,19 +193,19 @@ const AddModal = ({ onClose }) => {
 
           <div className="px-4 mb-2">
             <span className="text-xs w-fit mb-2 block font-semibold text-gray-700">
-              Jam Pembelajaran
+              {t("schedule.start_time")}
             </span>
             <div className="flex-between gap-4 w-full">
               <div className=" gap-2 text-xs w-full">
                 <label htmlFor="mulai" className="block mb-3">
-                  Mulai
+                  {t("schedule.start_time")}
                 </label>
                 <div className="w-full">
                   <input
                     type="time"
                     id="mulai"
                     {...register("start", {
-                      required: "Jam mulai diperlukan.",
+                      required: t("validation.required.time", { time: t("schedule.start_time") })
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline"
                   />
@@ -214,14 +216,14 @@ const AddModal = ({ onClose }) => {
               </div>
               <div className=" gap-2 text-xs w-full">
                 <label htmlFor="selesai" className="block mb-3">
-                  Selesai
+                  {t("schedule.end_time")}
                 </label>
                 <div className="w-full">
                   <input
                     type="time"
                     id="selesai"
                     {...register("end", {
-                      required: "jam selesai diperlukan.",
+                      required: t("validation.required.time", { time: t("schedule.end_time") })
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
                   />
@@ -238,19 +240,18 @@ const AddModal = ({ onClose }) => {
               htmlFor="jumlah pertemuan"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Jumlah Pertemuan{" "}
+              {t("schedule.meeting_count")}{" "}
               <span className="text-[0.625rem] text-neutral2">
-                ( Maksimal jumlah pertemuan 50 persemester )
+                {t("schedule.meeting_limit")}
               </span>
             </label>
             <input
               id="jumlah pertemuan"
               {...register("jumlahPertemuan", {
-                required: "Jumlah pertemuan diperlukan.",
+                required: t("validation.required.meetings"),
                 max: {
                   value: 50,
-                  message:
-                    "Maksimal jumlah pertemuan di kelas adalah 50 persemester. ",
+                  message: t("validation.meeting_range"),
                 },
                 min: {
                   value: 15,
@@ -273,7 +274,7 @@ const AddModal = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t("common.loading") : t("common.save")}
             </button>
           </div>
         </form>

@@ -55,7 +55,7 @@ export const getAll = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data siswa",
+      message: "Listado de estudiantes obtenido",
       data: siswa,
       pagination: {
         page,
@@ -72,7 +72,7 @@ export const getAll = async (req, res, next) => {
 export const uploadPhotoSiswa = async (req, res, next) => {
   try {
     if (!req.file) {
-      throw new ResponseError(400, "Foto di butuhkan");
+      throw new ResponseError(400, "Se requiere foto");
     }
 
     const fileStream = fs.createReadStream(req.file.path);
@@ -94,7 +94,7 @@ export const uploadPhotoSiswa = async (req, res, next) => {
     });
     await res.status(200).json({
       success: true,
-      message: "Berhasil unggah gambar",
+      message: "Imagen subida correctamente",
       foto: fileName,
     });
   } catch (error) {
@@ -109,13 +109,13 @@ export const addSiswa = async (req, res, next) => {
     const siswaExist = await Siswa.findOne({ nis });
 
     if (siswaExist) {
-      throw new ResponseError(400, "NIS sudah digunakan");
+      throw new ResponseError(400, "NIS ya está en uso");
     }
 
     if (!tahunMasuk) {
       throw new ResponseError(
         400,
-        "Silakan mengatur Tahun Masuk Ajaran pada data umum terlebih dulu"
+        "Configure el año académico en datos generales primero"
       );
     }
 
@@ -139,7 +139,7 @@ export const addSiswa = async (req, res, next) => {
       });
 
       if (!kelasSiswa) {
-        throw new ResponseError(404, "Kelas tidak ditemukan.");
+        throw new ResponseError(404, "Clase no encontrada");
       }
 
       newSiswa = new Siswa({
@@ -162,7 +162,7 @@ export const addSiswa = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, message: "Berhasil menambahkan siswa" });
+      .json({ success: true, message: "Estudiante agregado correctamente" });
   } catch (error) {
     next(error);
   }
@@ -175,13 +175,13 @@ export const editSiswa = async (req, res, next) => {
     const siswa = await Siswa.findById({ _id });
 
     if (!siswa) {
-      throw new ResponseError(404, "Siswa tidak ditemukan");
+      throw new ResponseError(404, "Estudiante no encontrado");
     }
 
     const existingSiswa = await Siswa.findOne({ nis, _id: { $ne: _id } });
 
     if (existingSiswa) {
-      throw new ResponseError(409, "NIS sudah digunakan oleh siswa lain");
+      throw new ResponseError(409, "NIS ya está en uso por otro estudiante");
     }
 
     if (password) {
@@ -227,7 +227,7 @@ export const editSiswa = async (req, res, next) => {
       const newKelas = await Kelas.findOne({ kelas, nama: namaKelas });
 
       if (!newKelas) {
-        throw new ResponseError(404, "Kelas tidak ditemukan.");
+        throw new ResponseError(404, "Clase no encontrada");
       }
 
       if (siswa.kelas && siswa.kelas !== newKelas._id) {
@@ -264,7 +264,7 @@ export const editSiswa = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, message: "Berhasil mengubah data siswa" });
+      .json({ success: true, message: "Datos del estudiante actualizados" });
   } catch (error) {
     next(error);
   }
@@ -277,7 +277,7 @@ export const deleteOneSiswa = async (req, res, next) => {
     const siswa = await Siswa.findById(id);
 
     if (!siswa) {
-      throw new ResponseError(404, "Siswa tidak ditemukan.");
+      throw new ResponseError(404, "Estudiante no encontrado");
     }
 
     const kelas = await Kelas.findById(siswa.kelas);
@@ -314,7 +314,7 @@ export const deleteOneSiswa = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil menghapus siswa`,
+      message: "Estudiante eliminado correctamente",
     });
   } catch (error) {
     next(error);
@@ -371,7 +371,7 @@ export const deleteManySiswa = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil menghapus siswa terpilih`,
+      message: "Estudiantes seleccionados eliminados",
     });
   } catch (error) {
     next(error);
@@ -386,7 +386,7 @@ export const getAllDetail = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengambil detail data`,
+      message: "Detalles estadísticos obtenidos",
       data: { jumlahSiswa, pr, lk },
     });
   } catch (error) {
@@ -401,12 +401,12 @@ export const getSiswaKelas = async (req, res, next) => {
     const siswa = await Siswa.find({ kelas: id });
 
     if (!siswa) {
-      throw new ResponseError(404, "Siswa tidak ditemukan.");
+      throw new ResponseError(404, "Estudiantes no encontrados");
     }
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengambil siswa`,
+      message: "Estudiantes de la clase obtenidos",
       siswa,
     });
   } catch (error) {
@@ -425,7 +425,7 @@ export const addWithExcel = async (req, res, next) => {
     if (!req.file) {
       return res
         .status(400)
-        .json({ success: false, message: "File tidak ditemukan" });
+        .json({ success: false, message: "Archivo no encontrado" });
     }
 
     const workbook = XLSX.readFile(req.file.path);
@@ -444,18 +444,18 @@ export const addWithExcel = async (req, res, next) => {
       const siswaExist = await Siswa.findOne({ nis });
 
       if (siswaExist) {
-        throw new ResponseError(400, `NIS ${nis} sudah digunakan.`);
+        throw new ResponseError(400, `NIS ${nis} ya está registrado`);
       }
 
       if (!tahunMasuk) {
         throw new ResponseError(
           400,
-          `Tahun Masuk Ajaran tidak diatur untuk NIS ${nis}.`
+          `Año académico no configurado para NIS ${nis}`
         );
       }
 
       if (!tahunMasuk.toString().includes("/")) {
-        throw new ResponseError(400, "Format Tahun Masuk tidak sesuai");
+        throw new ResponseError(400, "Formato de año académico inválido");
       }
 
       const [first, last] = tahunMasuk.split("/");
@@ -465,7 +465,7 @@ export const addWithExcel = async (req, res, next) => {
       if (lastYear - firstYear !== 1) {
         throw new ResponseError(
           404,
-          "Format Tahun Masuk. Pastikan perbedaan hanya 1 tahun."
+          "Formato de año debe tener diferencia de 1 año"
         );
       }
 
@@ -492,7 +492,7 @@ export const addWithExcel = async (req, res, next) => {
         if (!kelasSiswa) {
           throw new ResponseError(
             404,
-            `Kelas ${kelas} ${namaKelas} tidak ditemukan.`
+            `Clase ${kelas} ${namaKelas} no encontrada`
           );
         }
 
@@ -516,7 +516,7 @@ export const addWithExcel = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengunggah dan memproses data siswa",
+      message: "Datos de estudiantes procesados correctamente",
     });
   } catch (error) {
     next(error);
@@ -531,14 +531,14 @@ export const downloadTemplate = (req, res, next) => {
     const filePath = path.join(
       __dirname,
       "../uploads/file",
-      "TemplateTambahSiswa.xlsx" // Pastikan nama file dan ekstensi sudah benar
+      "TemplateTambahSiswa.xlsx" // Pastikan nama file y ekstensi sudah benar
     );
 
     res.sendFile(filePath, (err) => {
       if (err) {
         res
           .status(500)
-          .json({ message: "Terjadi kesalahan saat mengunduh template." });
+          .json({ message: "Error al descargar plantilla" });
       }
     });
   } catch (error) {

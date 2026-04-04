@@ -17,7 +17,7 @@ const maxAge = 24 * 60 * 60 * 1000;
 const createToken = (data, id, role) => {
   const secretKey = process.env.JWT_SECRET_KEY;
   if (!secretKey) {
-    throw new Error("JWT SECRET KEY IS NOT DEFINED");
+    throw new Error("CLAVE SECRETA JWT NO ESTÁ DEFINIDA");
   }
 
   const jwtExpiration = 24 * 60 * 60;
@@ -50,13 +50,13 @@ export const loginUser = async (req, res, next) => {
       (await Siswa.findOne({ nis: ni }));
 
     if (!user) {
-      throw new ResponseError(404, "NIS/NIK dan Password salah");
+      throw new ResponseError(404, "NIS/NIP o contraseña incorrectos");
     }
 
     const isMatch = await compare(password, user.password);
 
     if (!isMatch) {
-      throw new ResponseError(400, "NIS/NIK dan Password salah");
+      throw new ResponseError(400, "NIS/NIP o contraseña incorrectos");
     }
 
     let data;
@@ -80,7 +80,7 @@ export const loginUser = async (req, res, next) => {
       sameSite: "none",
     });
 
-    res.status(200).json({ success: true, message: "Berhasil Login", data });
+    res.status(200).json({ success: true, message: "Inicio de sesión exitoso", data });
   } catch (error) {
     next(error);
   }
@@ -121,12 +121,12 @@ export const getAuth = async (req, res, next) => {
       (await Siswa.findById({ _id: userId }).select("-password"));
 
     if (!user) {
-      throw new ResponseError(404, "User tidak ditemukan");
+      throw new ResponseError(404, "Usuario no encontrado");
     }
 
     res.status(200).json({
       success: true,
-      message: "Berhasil Mendapatkan Data",
+      message: "Datos obtenidos correctamente",
       user,
     });
   } catch (error) {
@@ -137,7 +137,7 @@ export const getAuth = async (req, res, next) => {
 export const uploadProfileImage = async (req, res, next) => {
   try {
     if (!req.file) {
-      throw new ResponseError(400, "Foto di butuhkan");
+      throw new ResponseError(400, "Se requiere una foto");
     }
 
     const fileStream = fs.createReadStream(req.file.path);
@@ -165,7 +165,7 @@ export const uploadProfileImage = async (req, res, next) => {
 
     await res.status(200).json({
       success: true,
-      message: "Berhasil unggah gambar",
+      message: "Imagen subida exitosamente",
       foto: userUpdate.foto,
     });
   } catch (error) {
@@ -215,7 +215,7 @@ export const updateProfile = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil memperbarui profil",
+      message: "Perfil actualizado correctamente",
       user: updatedUser,
     });
   } catch (error) {
@@ -233,7 +233,7 @@ export const logout = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Logout berhasil",
+      message: "Cierre de sesión exitoso",
     });
   } catch (error) {
     next(error);
@@ -247,7 +247,7 @@ export const getDataUmum = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Data umum",
+      message: "Datos generales",
       data: { tahunMasuk, kelas },
     });
   } catch (error) {

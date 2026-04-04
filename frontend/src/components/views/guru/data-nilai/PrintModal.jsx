@@ -1,7 +1,10 @@
 import React from "react";
 import logo from "../../../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const PrintComponent = React.forwardRef(({ data, dataNilai }, ref) => {
+  const { t } = useTranslation();
+
   return (
     <div ref={ref} className="p-4 page-landscape">
       <div className="w-full flex-center">
@@ -16,36 +19,36 @@ const PrintComponent = React.forwardRef(({ data, dataNilai }, ref) => {
                 colSpan={6}
                 className="px-3 py-2 text-center border-b border-white"
               >
-                DATA NILAI SISWA KELAS {data.kelas} {data.nama}
+                {t('excel.student_data', { class: data.kelas, name: data.nama })}
               </th>
             </tr>
             <tr className="border">
               <th scope="col" className="px-10 py-4 whitespace-nowrap">
-                Mata Pelajaran
+                {t('subjects.pageTitle')}
               </th>
               <th
                 scope="col"
                 className="px-10 pr-4 py-4 whitespace-nowrap border"
               >
-                Nama Siswa
+                {t('excel.studentName')}
               </th>
               <th
                 scope="col"
                 className="px-5 py-4 text-center whitespace-nowrap border"
               >
-                Kategori
+                {t('grades.category')}
               </th>
               <th scope="col" className="px-3 py-4 text-center border">
-                Nilai
+                {t('grades.score')}
               </th>
               <th
                 scope="col"
                 className="px-5 py-4 text-center whitespace-nowrap border"
               >
-                Tahun Ajaran
+                {t('common.academicYear')}
               </th>
               <th scope="col" className="py-4 text-center">
-                Semester
+                {t('common.semester')}
               </th>
             </tr>
           </thead>

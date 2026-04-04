@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const TimeComponent = () => {
+  const { t } = useTranslation();
   const today = new Date();
 
   const [time, setTime] = useState({
@@ -26,11 +28,12 @@ const TimeComponent = () => {
     .toString()
     .padStart(2, "0")} : ${time.minutes
     .toString()
-    .padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")} WIB`;
+    .padStart(2, "0")} : ${time.seconds.toString().padStart(2, "0")} ${t("common.timeZone")}`;
+    
   return (
     <div className="bg-neutral rounded-md py-2">
       <h3 className="text-sm text-white text-center">
-        {new Intl.DateTimeFormat("id-Id", {
+        {new Intl.DateTimeFormat(t("common.locale"), {
           weekday: "long",
           day: "numeric",
           month: "long",

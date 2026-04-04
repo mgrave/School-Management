@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import RekapAbsenFragment from "@/components/views/guru/rekap/RekapAbsenFragment";
 import RekapNilaiFragment from "@/components/views/guru/rekap/RekapNilaiFragement";
 import RekapNilaiStudiFragment from "@/components/views/guru/rekap/RekapNilaiStudiFragment";
@@ -6,10 +7,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const RekapDataPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const fragment = userData.waliKelas
-    ? ["Rekap Absen", "Rekap Nilai Rapor", "Rekap Nilai Studi"]
-    : ["Rekap Nilai Studi"];
+    ? [t('rekapData.attendance'), t('rekapData.reportCard'), t('rekapData.studyGrades')]
+    : [t('rekapData.studyGrades')];
   const [selectedFragment, setSelectedFragment] = useState(fragment[0]);
 
   return (
@@ -29,9 +31,9 @@ const RekapDataPage = () => {
           </button>
         ))}
       </div>
-      {selectedFragment === "Rekap Absen" && <RekapAbsenFragment />}
-      {selectedFragment === "Rekap Nilai Rapor" && <RekapNilaiFragment />}
-      {selectedFragment === "Rekap Nilai Studi" && <RekapNilaiStudiFragment />}
+      {selectedFragment === t('rekapData.attendance') && <RekapAbsenFragment />}
+      {selectedFragment === t('rekapData.reportCard') && <RekapNilaiFragment />}
+      {selectedFragment === t('rekapData.studyGrades') && <RekapNilaiStudiFragment />}
     </section>
   );
 };

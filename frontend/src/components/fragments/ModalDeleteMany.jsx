@@ -11,8 +11,10 @@ import { TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 
 const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const dataChecked = useSelector(selectedDataDeleteMany);
@@ -47,7 +49,7 @@ const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
       >
         <div className="p-4 border-b">
           <HeaderModal
-            titile={"Konfimasi Hapus"}
+            titile={t('admin.confirm_delete')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -60,22 +62,22 @@ const DeleteManyModal = ({ onClose, setAllCheck, url, title }) => {
         </div>
         <div className="text-end border-t mt-4 p-4 space-x-4">
           <button
-            aria-label="batal"
+            aria-label={t('common.cancel')}
             type="submit"
             disabled={loading}
             className="btn w-24 h-8.5 bg-gray-100 disabled:bg-gray-200  text-gray-800 border-gray-200 border hover:text-white"
             onClick={() => onClose()}
           >
-            {loading ? "Loading" : "Tidak"}
+            {loading ? t('common.loading') : t('common.no')}
           </button>
           <button
-            aria-label="ya"
+            aria-label={t('common.yes')}
             type="submit"
             disabled={loading}
             onClick={handleDelete}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Ya"}
+            {loading ? t('common.loading') : t('common.yes')}
           </button>
         </div>
       </div>

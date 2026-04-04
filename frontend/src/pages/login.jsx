@@ -10,8 +10,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserData } from "@/store/slices/auth-slice";
 import LoaderButton from "@/components/elements/LoaderButton";
+import { useTranslation } from 'react-i18next';
 
 const LoginPage = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -74,6 +76,17 @@ const LoginPage = () => {
 
   return (
     <div className="w-screen bg-white h-screen overflow-x-hidden">
+      <div className="absolute top-5 right-5">
+        <select
+          value={i18n.language}
+          onChange={(e) => i18n.changeLanguage(e.target.value)}
+          className="text-xs px-2 py-1 border rounded-md bg-white"
+        >
+          <option value="es">🇪🇸 Español</option>
+          <option value="en">🇬🇧 English</option>
+          <option value="id">🇮🇩 Bahasa Indonesia</option>
+        </select>
+      </div>
       <div className="w-full  h-full grid sm:grid-cols-2 max-w-[1280px] mx-auto">
         <div className="w-full h-full my-10 sm:my-0  flex justify-center order-2 sm:order-1 items-center lg:px-24 ">
           <Slider />
@@ -83,15 +96,15 @@ const LoginPage = () => {
             <img src={logo} alt="logo" className="mx-auto w-full h-full" />
           </figure>
 
-          <h1 className="text-center text-sm font-medium text-md text-gray-800 mt-10 mb-8  leading-relaxed">
-            Masukkan NIP / NIS & password <br />
-            <span>pada form di bawah ini dengan benar.</span>
+          <h1 className="text-center text-sm font-medium text-gray-800 mt-10 mb-8 leading-relaxed">
+            {t('loginPage.title')}
+            <span>{t('loginPage.spanishText')}</span>
           </h1>
           <label
             htmlFor="nip/nik"
             className="mr-auto mb-2 text-xs text-gray-500 font-medium"
           >
-            NIP / NIS
+            {t('loginPage.nipNis')}
           </label>
           <div className="w-full relative mb-5">
             <input
@@ -101,7 +114,7 @@ const LoginPage = () => {
               name="ni"
               onKeyDown={handleInputClick}
               onChange={handleInputChange}
-              placeholder="Masukkan NIP / NIS"
+              placeholder={t('loginPage.nipPlaceholder')}
               className="py-1.5 h-10 bg-white text-xs border text-gray-500 border-gray-700 w-full rounded-lg outline-neutral outline-offset-1 pl-10"
             />
             <User className="absolute w-4 h-4 stroke-slate-400 bottom-1/2 left-3 translate-y-1/2" />
@@ -110,7 +123,7 @@ const LoginPage = () => {
             htmlFor="password"
             className="mr-auto mb-2 text-xs text-gray-500 font-medium"
           >
-            Password
+            {t('loginPage.password')}
           </label>
           <div className="w-full relative mb-5">
             <input
@@ -120,7 +133,7 @@ const LoginPage = () => {
               name="password"
               onChange={handleInputChange}
               onKeyDown={handleInputClick}
-              placeholder="Masukkan Password"
+              placeholder={t('loginPage.passwordPlaceholder')}
               className="py-1.5 h-10 bg-white border text-gray-500 text-xs border-gray-700 w-full rounded-lg outline-neutral outline-offset-1 pl-10"
             />
             <KeyRound className="absolute w-4 h-4 stroke-gray-400 bottom-1/2 left-3 translate-y-1/2" />
@@ -157,7 +170,7 @@ const LoginPage = () => {
               htmlFor="remember"
               className="text-xs text-gray-500 font-medium"
             >
-              Remember me
+              {t('loginPage.rememberMe')}
             </label>
           </div>
           <button
@@ -166,7 +179,7 @@ const LoginPage = () => {
             onClick={handleLogin}
             className="rounded-lg bg-neutral w-full  font-medium text-white text-sm h-10 mt-4 hover:bg-indigo-800"
           >
-            {loading ? <LoaderButton /> : "Masuk"}
+            {loading ? <LoaderButton /> : t('loginPage.loginButton')}
           </button>
         </div>
       </div>

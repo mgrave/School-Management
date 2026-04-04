@@ -1,7 +1,10 @@
 import React, { useMemo } from "react";
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 const TableNilaiPertemuan = ({ data, totalPertemuan }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="block w-full shadow-md">
       <div className="w-full min-h-[calc(80vh-160px)]  overflow-auto ">
@@ -13,7 +16,7 @@ const TableNilaiPertemuan = ({ data, totalPertemuan }) => {
                 rowSpan={2}
                 className="px-10 w-[30%] py-2 border text-center whitespace-nowrap"
               >
-                Nama Siswa
+                {t('tableNilai.studentName')}
               </th>
 
               <th
@@ -21,7 +24,7 @@ const TableNilaiPertemuan = ({ data, totalPertemuan }) => {
                 colSpan={totalPertemuan + 1}
                 className="px-4 pr-4 py-2 text-center border whitespace-nowrap"
               >
-                Pertemuan
+                {t('common.meeting')}
               </th>
             </tr>
             <tr>
@@ -37,7 +40,7 @@ const TableNilaiPertemuan = ({ data, totalPertemuan }) => {
                   </th>
                 ))}
               <th scope="col" className="px-4 text-center border">
-                U
+                {t('common.exam_abbr')}
               </th>
             </tr>
           </thead>
@@ -49,7 +52,7 @@ const TableNilaiPertemuan = ({ data, totalPertemuan }) => {
                   className="px-2 py-4  text-xs font-medium text-gray-900 h-[350px]  whitespace-nowrap"
                 >
                   <div className="flex justify-center w-full">
-                    Tidak ada data
+                    {t('common.no_data')}
                   </div>
                 </td>
               </tr>

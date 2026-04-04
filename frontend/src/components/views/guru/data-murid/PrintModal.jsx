@@ -1,56 +1,55 @@
 import React from "react";
 import logo from "../../../../assets/Schoolarcy (2).webp";
 import { formatDate } from "@/util/formatDate";
+import { useTranslation } from "react-i18next";
 
 const PrintComponent = React.forwardRef(({ data, dataSiswa }, ref) => {
+  const { t } = useTranslation();
+  
   return (
     <div ref={ref} className="p-4 page-landscape">
       <div className="w-full flex-center">
         <img src={logo} alt="logo" width={200} height={200} />
       </div>
       <div className="w-full h-max p-8">
-        <table className="w-full    text-left  text-gray-500 border">
-          <thead className="text-xs text-left  text-white uppercase bg-gradient-to-r from-[#12a7e3] to-neutral">
+        <table className="w-full text-left text-gray-500 border">
+          <thead className="text-xs text-left text-white uppercase bg-gradient-to-r from-[#12a7e3] to-neutral">
             <tr>
               <th
                 scope="col"
                 colSpan={9}
                 className="px-3 py-2 text-center border-b border-white"
               >
-                DATA SISWA {data.kelas} {data.nama}
+                {t('excel.student_data', { class: data.kelas, name: data.nama })}
               </th>
             </tr>
             <tr className="border">
-              <th scope="col" className="px-3 py-2  border ">
-                NIS
+              <th scope="col" className="px-3 py-2 border">
+                {t('excel.nis')}
               </th>
-
-              <th scope="col" className="pl-1 pr-4  py-2 border">
-                Nama
+              <th scope="col" className="pl-1 pr-4 py-2 border">
+                {t('excel.studentName')}
               </th>
-              <th scope="col" className=" py-2 whitespace-nowrap border px-1">
-                Jenis Kelamin
+              <th scope="col" className="py-2 whitespace-nowrap border px-1">
+                {t('common.gender.status')}
               </th>
-              <th scope="col" className=" py-2 whitespace-nowrap border px-1">
-                Tempat Lahir
+              <th scope="col" className="py-2 whitespace-nowrap border px-1">
+                {t('excel.birth_place')}
               </th>
-              <th scope="col" className=" py-2 whitespace-nowrap border px-1">
-                Tanggal Lahir
+              <th scope="col" className="py-2 whitespace-nowrap border px-1">
+                {t('excel.birthDate')}
               </th>
-              <th scope="col" className=" py-2 whitespace-nowrap border px-1">
-                Agama
+              <th scope="col" className="py-2 whitespace-nowrap border px-1">
+                {t('excel.religion')}
               </th>
-              <th
-                scope="col"
-                className="px-3 py-2 text-center whitespace-nowrap border"
-              >
-                Tahun Masuk
+              <th scope="col" className="px-3 py-2 text-center whitespace-nowrap border">
+                {t('excel.entry_year')}
               </th>
               <th scope="col" className="px-2 py-2 border">
-                Alamat
+                {t('excel.address')}
               </th>
               <th scope="col" className="py-2 text-center border">
-                Kontak
+                {t('excel.contact')}
               </th>
             </tr>
           </thead>
@@ -62,7 +61,7 @@ const PrintComponent = React.forwardRef(({ data, dataSiswa }, ref) => {
                   className="px-2 py-2 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                 >
                   <div className="flex justify-center w-full">
-                    Tidak ada data
+                    {t('common.empty_data')}
                   </div>
                 </td>
               </tr>

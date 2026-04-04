@@ -6,8 +6,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AddModal = ({ onClose }) => {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -40,7 +42,7 @@ const AddModal = ({ onClose }) => {
       >
         <div className="py-4 px-6 border-b">
           <HeaderModal
-            titile={"Tambah Mata Pelajaran"}
+            titile={t('subjects.addSubject')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -52,7 +54,7 @@ const AddModal = ({ onClose }) => {
               htmlFor="kode"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Kode Mata Pelajaran
+              {t('subjects.code')}
             </label>
             <input
               type="text"
@@ -60,7 +62,7 @@ const AddModal = ({ onClose }) => {
               name="kode"
               autoFocus
               {...register("kode", {
-                required: "Kode tidak boleh kosong.",
+                required: t('validation.required.field', { field: t('subjects.code') }),
               })}
               className="w-full border text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
             />
@@ -74,13 +76,13 @@ const AddModal = ({ onClose }) => {
               htmlFor="nama"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Nama Mata Pelajaran
+              {t('subjects.name')}
             </label>
             <input
               id="nama"
               type="text"
               {...register("nama", {
-                required: "Nama Mata Pelajaran tidak boleh kosong.",
+                required: t('validation.required.field', { field: t('subjects.name') }),
               })}
               className="w-full border text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
             />
@@ -96,7 +98,7 @@ const AddModal = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.loading') : t('common.save')}
             </button>
           </div>
         </form>

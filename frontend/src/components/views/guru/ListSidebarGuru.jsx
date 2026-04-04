@@ -15,12 +15,14 @@ import {
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectedUserData } from "@/store/slices/auth-slice";
+import { useTranslation } from "react-i18next";
 // import KelasSVG from "@/components/base/svg/KelasSVG
 
 const ListSidebarGuru = () => {
   const navigate = useNavigate();
   const [activeDropDown, setActiveDropDown] = useState(null);
   const userData = useSelector(selectedUserData);
+  const { t } = useTranslation();
 
   const handleActiveDropDown = (id) => {
     setActiveDropDown(activeDropDown === id ? null : id);
@@ -29,7 +31,7 @@ const ListSidebarGuru = () => {
   const Navlist = [
     {
       id: 1,
-      nama: "Dashboard",
+      nama: t("common.admin.sidebar.dashboard"),
       path: "/guru/dashboard",
       icon: (
         <DashboardIcon
@@ -44,7 +46,7 @@ const ListSidebarGuru = () => {
 
     userData.waliKelas && {
       id: 2,
-      nama: "Wali Kelas",
+      nama: t("class.homeroom_teacher"),
       icon: (
         <KelasIcon
           height={20}
@@ -57,7 +59,7 @@ const ListSidebarGuru = () => {
       dropDown: [
         {
           id: 1,
-          nama: "Absen Harian",
+          nama: t("attendance.title"),
           path: "/guru/absen-harian",
           icon: (
             <NotebookPen
@@ -71,7 +73,7 @@ const ListSidebarGuru = () => {
         },
         {
           id: 2,
-          nama: "Data Siswa",
+          nama: t("dataSiswa.addStudent"),
           path: "/guru/data-siswa",
           icon: (
             <GraduationCap
@@ -85,7 +87,7 @@ const ListSidebarGuru = () => {
         },
         {
           id: 3,
-          nama: "Data Nilai",
+          nama: t("grades.title"),
           path: "/guru/data-nilai",
           icon: (
             <ScoreIcon
@@ -101,7 +103,7 @@ const ListSidebarGuru = () => {
     },
     {
       id: 3,
-      nama: "Studi",
+      nama: t("schedule.study_field"),
       path: "/guru/data-studi",
       icon: (
         <StudiIcon
@@ -116,7 +118,7 @@ const ListSidebarGuru = () => {
 
     {
       id: 4,
-      nama: "Rekap",
+      nama: t("rekapData.title"),
       path: "/guru/rekap-data",
       icon: (
         <NotebookTabs
@@ -130,7 +132,7 @@ const ListSidebarGuru = () => {
     },
     userData.waliKelas && {
       id: 5,
-      nama: "Rapor",
+      nama: t("reportCard.title"),
       path: "/guru/rapor-siswa",
       icon: (
         <BookUser

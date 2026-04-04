@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import ReactToPrint from "react-to-print";
+import { useTranslation } from 'react-i18next';
 
 import TableNilai from "@/components/fragments/TableNilai";
 import PrintComponentNilai from "@/components/fragments/PrintModalNilai";
@@ -30,6 +31,7 @@ const RekapNilaiPageadmin = () => {
   const [dataKelas, setDataKelas] = useState({});
   const [rekapNilai, setRekapNilai] = useState([]);
   const [dataMapel, setDataMapel] = useState([]);
+  const { t } = useTranslation();
 
   const componentRef = useRef(null);
 
@@ -109,7 +111,7 @@ const RekapNilaiPageadmin = () => {
     <section className="px-6 py-4 mb-4 ">
       <div className="  bg-white p-4 rounded-md shadow-md border border-b-0">
         <h3 className="text-sm font-semibold mb-4 text-neutral">
-          Pilih rekap nilai siswa pada setiap kelas.
+          {t('gradeReport.selectClassPrompt')}
         </h3>
         <div className="flex-between">
           <div className="hidden xl:flex-between">
@@ -161,7 +163,7 @@ const RekapNilaiPageadmin = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t('common.excel')}
             </button>
 
             <ReactToPrint
@@ -171,7 +173,7 @@ const RekapNilaiPageadmin = () => {
                   className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t('common.print')}
                 </button>
               )}
               content={() => componentRef.current}
@@ -189,7 +191,9 @@ const RekapNilaiPageadmin = () => {
         )}
         {(!kelas || !idKelas) && (
           <div className="absolute inset-0 flex-center bg-white">
-            <p className="text-xs font-medium">Pilih Kelas Terlebih dulu..</p>
+            <p className="text-xs font-medium">
+              {t('gradeReport.selectClassFirst')}
+            </p>
           </div>
         )}
       </div>

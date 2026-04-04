@@ -2,6 +2,8 @@ import KelasDropdown from "@/components/elements/KelasDropdown";
 import NamaKelasDropdown from "@/components/elements/NamaKelasDropdown";
 import MonthDropdown from "@/components/elements/MonthDropdown";
 import YearDropdown from "@/components/elements/YearDropDown";
+import { useTranslation } from "react-i18next";
+
 const DropdownGroup = ({
   handleSelectYear,
   handleSelectMonth,
@@ -9,6 +11,8 @@ const DropdownGroup = ({
   onSelectIdKelas,
   kelas,
 }) => {
+  const { t } = useTranslation();
+  
   return (
     <div className="grid md:flex gap-4">
       <div className="flex flex-wrap justify-start gap-4">
@@ -17,7 +21,7 @@ const DropdownGroup = ({
             htmlFor="tahun"
             className="text-sm font-semibold text-gray-700"
           >
-            Tahun
+            {t('common.year')}
           </label>
           <YearDropdown onSelectYear={handleSelectYear} />
         </div>
@@ -26,17 +30,17 @@ const DropdownGroup = ({
             htmlFor="bulan"
             className="text-sm font-semibold text-gray-700"
           >
-            Bulan
+            {t('common.month')}
           </label>
           <MonthDropdown onSelectMonth={handleSelectMonth} />
         </div>
 
         <div className="flex items-center gap-2">
-          <p className="text-sm font-semibold text-gray-700">Kelas</p>
+          <p className="text-sm font-semibold text-gray-700">{t('common.class')}</p>
           <KelasDropdown onChange={onSelectKelas} />
         </div>
         <div className="flex items-center gap-2">
-          <p className="text-sm font-semibold text-gray-700 w-fit">Nama </p>
+          <p className="text-sm font-semibold text-gray-700 w-fit">{t('common.name')}</p>
           <NamaKelasDropdown onChange={onSelectIdKelas} kelas={kelas} />
         </div>
       </div>

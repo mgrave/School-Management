@@ -8,10 +8,12 @@ import { LogOut, Menu } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HeaderGuruLayout = ({ handleToggleSidebar }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const buttonRef = useRef();
   const data = useSelector(selectedUserData);
@@ -35,7 +37,7 @@ const HeaderGuruLayout = ({ handleToggleSidebar }) => {
     <header className="w-full p-4 flex justify-between items-center">
       <div className="flex-center gap-4 ">
         <button
-          aria-label="toggle sidebar"
+          aria-label={t("common.menu")}
           onClick={handleToggleSidebar}
           className=" lg:hidden w-9 h-9  p-2 border bg-white hover:border-neutral transition-all duration-300 flex-center rounded-full"
         >
@@ -50,7 +52,7 @@ const HeaderGuruLayout = ({ handleToggleSidebar }) => {
               {data.nama ? data.nama : data.username}
             </h5>
             <span className="text-xs hidden sm:block leading-2 text-right font-medium capitalize">
-              {data.role}
+              {t(`common.roles.${data.role}`)}
             </span>
           </div>
           <Link

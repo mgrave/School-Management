@@ -12,6 +12,7 @@ import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import PrintComponent from "@/components/views/guru/rekap/PrintModal";
+import { useTranslation } from "react-i18next";
 
 const RekapAbsenFragment = () => {
   const menuRef = useRef(null);
@@ -27,6 +28,7 @@ const RekapAbsenFragment = () => {
   const [kelas, setkelas] = useState({});
 
   const componentRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -83,11 +85,11 @@ const RekapAbsenFragment = () => {
         <div className="flex-between flex-row-reverse md:flex-row-reverse">
           <div className="hidden md:flex justify-start flex-wrap gap-4">
             <div className="flex items-center gap-4">
-              <p className="text-sm font-semibold text-gray-700">Tahun</p>
+              <p className="text-sm font-semibold text-gray-700">{t("common.year")}</p>
               <YearDropdown onSelectYear={handleSelectYeay} />
             </div>
             <div className="flex items-center gap-4">
-              <p className="text-sm font-semibold text-gray-700">Bulan</p>
+              <p className="text-sm font-semibold text-gray-700">{t("common.month")}</p>
               <MonthDropdown onSelectMonth={handleSelectMonth} />
             </div>
           </div>
@@ -107,7 +109,7 @@ const RekapAbsenFragment = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t("common.excel")}
             </button>
 
             <ReactToPrint
@@ -117,7 +119,7 @@ const RekapAbsenFragment = () => {
                   className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t("common.print")}
                 </button>
               )}
               content={() => componentRef.current}
@@ -138,11 +140,11 @@ const RekapAbsenFragment = () => {
             {isMenu && (
               <div className="absolute left-0  w-max  mt-1 z-10 bg-white border shadow-md rounded-md p-4">
                 <div className="grid grid-cols-2 items-center">
-                  <p className="text-sm font-semibold text-gray-700">Tahun</p>
+                  <p className="text-sm font-semibold text-gray-700">{t("common.year")}</p>
                   <YearDropdown onSelectYear={handleSelectYeay} />
                 </div>
                 <div className="grid grid-cols-2 mt-4 items-center">
-                  <p className="text-sm font-semibold text-gray-700">Bulan</p>
+                  <p className="text-sm font-semibold text-gray-700">{t("common.month")}</p>
                   <MonthDropdown onSelectMonth={handleSelectMonth} />
                 </div>
               </div>

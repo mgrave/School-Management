@@ -7,8 +7,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import profile from "../../assets/profile.png";
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 
 const AbsenHarianPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(false);
@@ -182,7 +184,7 @@ const AbsenHarianPage = () => {
             className="w-full max-w-[120px] sm:max-w-[200px] h-10 disabled:cursor-not-allowed disabled:bg-indigo-500 bg-neutral hover:bg-blue-700 text-white  text-xs rounded-md"
             disabled={loading2 || alreadyAbsensi || hariLibur}
           >
-            {!absensiData ? "Tidak ada siswa" : loading ? "Loading" : "Simpan"}
+            {!absensiData ? t('attendance.noStudents') : loading ? t('common.loading') : t('common.save')}
           </button>
         )}
 
@@ -191,7 +193,7 @@ const AbsenHarianPage = () => {
             onClick={handleGetAlreadyAbsen}
             className="btn w-full max-w-[120px] sm:max-w-[200px] hover:bg-blue-700  h-10 text-xs rounded-md"
           >
-            Edit Absen
+            {t('attendance.editAttendance')}
           </button>
         )}
       </div>
@@ -264,7 +266,7 @@ const AbsenHarianPage = () => {
                             onChange={(e) => handleChangeAbsen(e, siswa._id)}
                             className=" hidden "
                           />
-                          <p className="text-xs font-medium  ">H</p>
+                          <p className="text-xs font-medium  ">{t('attendance.status.hadir')}</p>
                         </label>
                         <label
                           htmlFor={`${siswa._id}-izin`}
@@ -289,7 +291,7 @@ const AbsenHarianPage = () => {
                             onChange={(e) => handleChangeAbsen(e, siswa._id)}
                             className=" hidden "
                           />
-                          <p className="text-xs font-medium  ">I</p>
+                          <p className="text-xs font-medium  ">{t('attendance.status.izin')}</p>
                         </label>
                         <label
                           htmlFor={`${siswa._id}-sakit`}
@@ -314,7 +316,7 @@ const AbsenHarianPage = () => {
                             onChange={(e) => handleChangeAbsen(e, siswa._id)}
                             className=" hidden "
                           />
-                          <p className="text-xs font-medium  ">S</p>
+                          <p className="text-xs font-medium  ">{t('attendance.status.sakit')}</p>
                         </label>
                         <label
                           htmlFor={`${siswa._id}-alpha`}
@@ -339,7 +341,7 @@ const AbsenHarianPage = () => {
                             onChange={(e) => handleChangeAbsen(e, siswa._id)}
                             className=" hidden "
                           />
-                          <p className="text-xs font-medium  ">A</p>
+                          <p className="text-xs font-medium  ">{t('attendance.status.alpha')}</p>
                         </label>
                       </div>
                     </div>

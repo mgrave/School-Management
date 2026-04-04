@@ -1,8 +1,11 @@
 import React, { Fragment, useMemo } from "react";
 import logo from "../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const PrintComponentNilai = React.forwardRef(
   ({ dataMapel, kelas, tahunAjaran, semester, data }, ref) => {
+    const { t } = useTranslation();
+
     const siswas = useMemo(() => {
       return Array.from(new Set(data.map((nilai) => nilai.siswa._id)))
         .map((siswaId) => {
@@ -76,8 +79,11 @@ const PrintComponentNilai = React.forwardRef(
                     scope="col"
                     className="py-4 border-b uppercase"
                   >
-                    Nilai Siswa Tahun Ajaran {tahunAjaran} {semester} - Kelas
-                    {kelas?.kelas} {kelas?.nama}
+                    {t('print.grades.title', {
+                      year: tahunAjaran,
+                      semester: semester,
+                      class: `${kelas?.kelas} ${kelas?.nama}`
+                    })}
                   </th>
                 </tr>
                 <tr>
@@ -86,7 +92,7 @@ const PrintComponentNilai = React.forwardRef(
                     rowSpan={3}
                     className="px-20 py-2  text-center whitespace-nowrap"
                   >
-                    Nama Siswa
+                    {t('common.student_name')}
                   </th>
 
                   <th
@@ -94,21 +100,21 @@ const PrintComponentNilai = React.forwardRef(
                     colSpan={dataMapel.length * 2}
                     className="px-4 pr-4 py-2 text-center border whitespace-nowrap"
                   >
-                    Mata Pelajaran
+                    {t('common.subjects')}
                   </th>
                   <th
                     scope="col"
                     rowSpan={3}
                     className="px-2 w-10 py-2 border text-center whitespace-nowrap"
                   >
-                    Rata-Rata
+                    {t('common.average')}
                   </th>
                   <th
                     scope="col"
                     rowSpan={3}
                     className="w-10 py-2 px-2  text-center "
                   >
-                    Rangking
+                    {t('common.ranking')}
                   </th>
                 </tr>
                 <tr>
@@ -133,7 +139,7 @@ const PrintComponentNilai = React.forwardRef(
                           colSpan={1}
                           className="px-5 text-center border"
                         >
-                          T
+                          {t('common.task_abbr')}
                         </th>
                         <th
                           key={i}
@@ -141,7 +147,7 @@ const PrintComponentNilai = React.forwardRef(
                           colSpan={1}
                           className="px-5 text-center border"
                         >
-                          U
+                          {t('common.exam_abbr')}
                         </th>
                       </Fragment>
                     ))}
@@ -155,7 +161,7 @@ const PrintComponentNilai = React.forwardRef(
                       className="px-2 py-4  text-xs font-medium text-gray-900 h-[400px]  whitespace-nowrap"
                     >
                       <div className="flex justify-center w-full">
-                        Tidak ada data
+                        {t('common.no_data')}
                       </div>
                     </td>
                   </tr>

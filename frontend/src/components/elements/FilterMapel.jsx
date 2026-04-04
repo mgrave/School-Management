@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect, useRef } from "react";
+import { t } from "i18next";
 
 const FilterMapel = forwardRef(
   ({ handleOptionChange, option, handleToggleFilter }, ref) => {
@@ -8,12 +9,12 @@ const FilterMapel = forwardRef(
         className="w-[200px] border left-0 top-8 rounded-lg absolute  bg-white shadow-md z-10 flex flex-col flex-between py-3 items-stretch"
       >
         <h4 className="text-xs border-b mb-2 px-3 pb-3 font-medium text-gray-700">
-          Urut Bedasarkan :
+          {t("common.sort_by")} :
         </h4>
         <div className="px-3 space-y-2">
           <div className="flex-between ">
             <label htmlFor="terbaru" className="text-xs font-medium w-full">
-              Terbaru
+              {t("filters.latest")}
             </label>
 
             <input
@@ -27,7 +28,7 @@ const FilterMapel = forwardRef(
           </div>
           <div className="flex-between ">
             <label htmlFor="terlama" className="text-xs font-medium w-full">
-              Terlama
+              {t("filters.oldest")}
             </label>
 
             <input
@@ -41,7 +42,7 @@ const FilterMapel = forwardRef(
           </div>
           <div className="flex-between ">
             <label htmlFor="a-z" className="text-xs font-medium w-full">
-              A-Z
+              {t("common.a_to_z")}
             </label>
 
             <input
@@ -55,7 +56,7 @@ const FilterMapel = forwardRef(
           </div>
           <div className="flex-between ">
             <label htmlFor="z-a" className="text-xs font-medium w-full">
-              Z-A
+              {t("common.z_to_a")}
             </label>
 
             <input

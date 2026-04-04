@@ -8,6 +8,7 @@ import axios from "axios";
 import { Upload, X } from "lucide-react";
 import React, { createElement, useRef, useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const ModalUploadExcel = ({ onClose }) => {
   const inputRef = useRef(null);
@@ -15,6 +16,7 @@ const ModalUploadExcel = ({ onClose }) => {
   const [file, setFile] = useState(null);
   const [message, setMassage] = useState("");
   const [dragging, setDragging] = useState(false);
+  const { t } = useTranslation();
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -137,7 +139,7 @@ const ModalUploadExcel = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Tambah Siswa"}
+            titile={t('dataSiswa.addStudent')}
             onClose={handleClose}
             className={"font-bold"}
           />
@@ -145,37 +147,29 @@ const ModalUploadExcel = ({ onClose }) => {
         <div className="my-4 px-4  ">
           <div>
             <h3 className="text-xs text-gray-700 text-center select-none mb-2 font-bold">
-              Unggah File Untuk Menambahkan Siswa
+              {t('excel.upload_students')}
             </h3>
-            <p className="text-xs">Petunjuk :</p>
+            <p className="text-xs">{t('excel.instructions.title')}:</p>
             <ol type="1" className="pl-5 text-[0.625rem] mt-2 mb-4">
               <li>
-                <span className="font-medium">Unduh Template</span> – Klik
-                tombol <strong>"Unduh Template"</strong> untuk mendapatkan file
-                Excel kosong yang akan Anda isi dengan data siswa.
+                <span className="font-medium">{t('excel.instructions.download')}</span> - 
+                {t('excel.instructions.download_desc')}
               </li>
               <li>
-                <span className="font-medium">Isi Data Siswa</span> – Buka
-                template Excel dan isi semua data siswa dengan informasi yang
-                benar. Dan pastikan NIS pada setiap siswa berbeda.
+                <span className="font-medium">{t('excel.instructions.fill_data')}</span> - 
+                {t('excel.instructions.fill_data_desc')}
               </li>
               <li>
-                <span className="font-medium">Masukan Kelas & Nama Kelas</span>{" "}
-                – Pastikan mengisi Kelas dan Nama Kelas ke dalam tempalte
-                bedasarkan data yang sudah ada.
+                <span className="font-medium">{t('excel.instructions.class_info')}</span> - 
+                {t('excel.instructions.class_info_desc', {class: t('common.class')})}
               </li>
               <li>
-                <span className="font-medium">
-                  Tarik atau Pilih File ke Area Unggah
-                </span>{" "}
-                – Setelah data siswa diisi, tarik file ke dalam area unggah atau
-                memilih file secara manual.
+                <span className="font-medium">{t('excel.instructions.upload_area')}</span> - 
+                {t('excel.instructions.upload_area_desc')}
               </li>
-
               <li>
-                <span className="font-medium">Unggah File</span> – Klik tombol{" "}
-                <strong>"Unggah"</strong> untuk memproses data siswa. Tunggu
-                hingga proses selesai.
+                <span className="font-medium">{t('excel.instructions.upload_file')}</span> - 
+                {t('excel.instructions.upload_file_desc')}
               </li>
             </ol>
           </div>
@@ -184,7 +178,7 @@ const ModalUploadExcel = ({ onClose }) => {
               onClick={handleDownloadTemplate}
               className=" py-2 px-4 text-xs   bg-neutral text-white rounded-md"
             >
-              Unduh Template Excel
+              {t('excel.download_template')}
             </button>
           </div>
 
@@ -217,9 +211,9 @@ const ModalUploadExcel = ({ onClose }) => {
                 </span>
               ) : (
                 <span>
-                  Tarik template atau klik untuk{" "}
+                  {t('excel.drag_drop')}{' '}
                   <button onClick={handleClick} className="font-bold">
-                    Memilih
+                    {t('common.select')}
                   </button>
                 </span>
               )}
@@ -229,7 +223,7 @@ const ModalUploadExcel = ({ onClose }) => {
                 message ? "text-neutral2  " : ""
               } text-[0.625rem] mt-1 text-neutral select-none `}
             >
-              {message ? message : "  .XLSX, .XLS Format. Maksimal Ukuran 1 mb"}
+              {message ? message : t('excel.file_requirements')}
             </p>
             <input
               onChange={handleFileChange}
@@ -247,7 +241,7 @@ const ModalUploadExcel = ({ onClose }) => {
             disabled={loading || !file}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Unggah"}
+            {loading ? t('common.loading') : t('excel.upload')}
           </button>
         </div>
       </div>

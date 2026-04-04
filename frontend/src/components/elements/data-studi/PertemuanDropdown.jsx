@@ -4,8 +4,10 @@ import axios from "axios";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const PertemuanDropdown = ({ onChange, value, kelas }) => {
+  const { t } = useTranslation();
   const dataUser = useSelector(selectedUserData);
   const dropdownRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +84,7 @@ const PertemuanDropdown = ({ onChange, value, kelas }) => {
         readOnly
         id="pertemuan"
         disabled={dataPer === 0}
-        value={selectedPer ? selectedPer : dataPer === 0 ? "kosong" : "Pilih"}
+        value={selectedPer ? selectedPer : dataPer === 0 ? t('common.empty') : t('common.select')}
         onClick={handleInputClick}
       />
       <div className="absolute pointer-events-none right-2 top-2.5">
@@ -110,7 +112,7 @@ const PertemuanDropdown = ({ onChange, value, kelas }) => {
               className="px-4 py-2 text-left text-xs hover:bg-gray-200 cursor-pointer truncate"
               onClick={() => handleSelectKelas("ujian")}
             >
-              Ujian
+              {t('common.exam')}
             </li>
           </ul>
         </div>

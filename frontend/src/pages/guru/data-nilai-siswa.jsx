@@ -30,10 +30,12 @@ import ReactToPrint from "react-to-print";
 import { saveAs } from "file-saver";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
 import DeleteModal from "@/components/fragments/ModalDelete";
+import { useTranslation } from 'react-i18next';
 
 const selectRow = [7, 14, 21, 28];
 
 const DataNilainilaiPage = () => {
+  const { t } = useTranslation();
   const componentRef = useRef(null);
   const menuRef = useRef(null);
   const userData = useSelector(selectedUserData);
@@ -154,7 +156,7 @@ const DataNilainilaiPage = () => {
           <input
             type="search"
             id="search"
-            placeholder="Cari Nama Nilai, Kode Dan Nama Mapel"
+            placeholder={t('gradeSearch.placeholder')}
             value={search}
             disabled={loading}
             onChange={(e) => setSearch(e.target.value)}
@@ -165,13 +167,13 @@ const DataNilainilaiPage = () => {
           </div>
         </div>
         <button
-          aria-label="tambah nilai"
+          aria-label={t('common.addGrade')}
           disabled={loading}
           onClick={handleToggleAdd}
           className="flex-between gap-3 min-w-fit disabled:cursor-not-allowed bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
         >
           <Nilai />
-          Tambah Nilai
+          {t('common.addGrade')}
         </button>
       </div>
 
@@ -179,7 +181,7 @@ const DataNilainilaiPage = () => {
         <div className="flex  justify-between flex-row-reverse sm:flex-row items-center px-4 h-14 ">
           <div className="flex flex-row-reverse sm:flex-row items-center gap-4  ">
             <button
-              title="Hapus nilai terpilih"
+              title={t('common.deleteSelectedGrades')}
               onClick={handleToggleDeleteMany}
               className={`${
                 dataChecked.length > 0
@@ -217,13 +219,13 @@ const DataNilainilaiPage = () => {
                 }}
                 className="border border-gray-400 bg-white text-gray-500  hover:bg-neutral hover:border-gray-400 border-dashed  py-1.5 transition-all duration-300 font-medium hover:text-white  text-xs px-4 rounded-md flex-between gap-3"
               >
-                Clear
+                {t('common.clear')}
               </button>
             )}
           </div>
           <div className="hidden sm:flex gap-2 ">
             <button
-              title="Excel"
+              title={t('common.excel')}
               disabled={loading}
               className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
               onClick={() =>
@@ -244,7 +246,7 @@ const DataNilainilaiPage = () => {
             <ReactToPrint
               trigger={() => (
                 <button
-                  title="Print"
+                  title={t('common.print')}
                   disabled={loading}
                   className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
                   onClick={handlePrintScreen}
@@ -289,7 +291,7 @@ const DataNilainilaiPage = () => {
                 </div>
                 <div className="flex flex-col gap-3">
                   <button
-                    title="Excel"
+                    title={t('common.excel')}
                     disabled={loading}
                     className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1 rounded-md"
                     onClick={() =>
@@ -310,7 +312,7 @@ const DataNilainilaiPage = () => {
                   <ReactToPrint
                     trigger={() => (
                       <button
-                        title="Print"
+                        title={t('common.print')}
                         disabled={loading}
                         className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1 rounded-md"
                         onClick={handlePrintScreen}
@@ -353,7 +355,7 @@ const DataNilainilaiPage = () => {
       {isDeleteNilai && (
         <DeleteModal
           onClose={handleToggleDeleteOne}
-          title={"Apakah Anda yakin ingin menghapus nilai?"}
+          title={t('deleteConfirmation.grade')}
           url={"/api/nilai/delete-one-nilai/" + dataDelete._id}
         />
       )}
@@ -364,7 +366,7 @@ const DataNilainilaiPage = () => {
           url={"/api/nilai/delete-many-nilai"}
           onClose={handleToggleDeleteMany}
           setAllCheck={setAllCheck}
-          title={"Apakah Anda yakin ingin menghapus nilai terpilih?"}
+          title={t('deleteConfirmation.selectedGrades')}
         />
       )}
       <div style={{ display: "none" }}>

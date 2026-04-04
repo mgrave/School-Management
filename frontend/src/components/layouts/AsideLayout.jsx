@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import { selectedUserData } from "@/store/slices/auth-slice";
 import ListSidebarGuru from "../views/guru/ListSidebarGuru";
 import ListSidebarSiswa from "../views/siswa/ListSidebarSiswa";
+import { useTranslation } from "react-i18next";
 
 const AsideLayout = ({ setIsSidebar }) => {
   const userData = useSelector(selectedUserData);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -35,8 +37,8 @@ const AsideLayout = ({ setIsSidebar }) => {
       </button>
       <div className="flex justify-center align-center">
         <small className="text-[0.625rem] text-white text-center">
-          Copyright <span className="text-[#fdc148]">&copy;</span> 2024.
-          <br /> Created By{" "}
+          {t('common.copyright')} <span className="text-[#fdc148]">&copy;</span> 2024.
+          <br /> {t('common.createdBy')}{" "}
           <Link
             target="_blank"
             className=" underline text-[#fdc148]"

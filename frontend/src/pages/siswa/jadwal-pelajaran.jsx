@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 
 const JadwalPelajaranPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const userData = useSelector(selectedUserData);
   const hari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];

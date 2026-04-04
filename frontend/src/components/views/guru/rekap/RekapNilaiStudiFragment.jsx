@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import ExcelJS from "exceljs";
 import ReactToPrint from "react-to-print";
+import { useTranslation } from "react-i18next";
 
 import DropdownSemester from "@/components/elements/DropdownSemester";
 
@@ -26,6 +27,8 @@ const RekapNilaiStudiFragment = () => {
 
   const [rekapNilai, setRekapNilai] = useState([]);
   const [totalPertemuan, setTotalPertemuan] = useState(0);
+
+  const { t } = useTranslation();
 
   console.log(kelas);
 
@@ -183,9 +186,11 @@ const exportToExcel = async (rekapNilai, totalPertemuan, kelas, semester) => {
 
   // Title Header
   const header = [
-    `NILAI PERTEMUAN KELAS ${
-      kelas.grade
-    } ${kelas.nama.toUpperCase()}  ${semester.toUpperCase()}`,
+    `${t('grades.reportTitle', {
+      grade: kelas.grade,
+      name: kelas.nama.toUpperCase(),
+      semester: semester.toUpperCase()
+    })}`
   ];
   const headerRow = worksheet.addRow(header);
 
@@ -200,14 +205,14 @@ const exportToExcel = async (rekapNilai, totalPertemuan, kelas, semester) => {
 
   // Membuat header tabel
   const header1 = [
-    "Nama Siswa",
-    ...Array(totalPertemuan).fill("Pertemuan"),
-    "",
+    t('tableNilai.studentName'),
+    ...Array(totalPertemuan).fill(t('common.meeting')),
+    t('grades.exam')
   ];
   const header2 = [
-    "",
+    '',
     ...Array.from({ length: totalPertemuan }, (_, i) => i + 1),
-    "U",
+    t('common.exam_abbr')
   ];
 
   // Menambahkan header ke worksheet

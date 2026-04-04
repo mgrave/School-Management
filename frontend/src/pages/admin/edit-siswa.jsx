@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Plus, Trash, X } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const EditSiswaPage = () => {
   const PhotoRef = useRef();
@@ -48,6 +49,7 @@ const EditSiswaPage = () => {
   const agama = watch("agama");
   const phone = watch("phone");
   const selectKelas = watch("kelas");
+  const { t } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -187,7 +189,9 @@ const EditSiswaPage = () => {
   return (
     <>
       <div className="bg-white mx-6 border-b rounded-md p-4">
-        <h1 className="font-bold text-gray-700 text-sm">Ganti Data Siswa</h1>
+        <h1 className="font-bold text-gray-700 text-sm">
+          {t('editStudent.changeStudentData')}
+        </h1>
       </div>
       <div className="  mx-6 mb-16  grid  bg-white grid-cols-1 rounded-lg py-6 px-6 gap-8 lg:grid-cols-4">
         <div className=" flex justify-start  items-center flex-col">
@@ -225,10 +229,10 @@ const EditSiswaPage = () => {
             )}
           </div>
           <p className="text-[0.625rem] text-neutral mt-8">
-            Besar file maksimal 1 MB
+            {t('editStudent.maxFileSize')}
           </p>
           <p className="text-[0.625rem] text-neutral mt-2">
-            Ekstensi file: jpeg/jpg, png
+            {t('editStudent.allowedExtensions')}
           </p>
         </div>
         <form
@@ -241,7 +245,7 @@ const EditSiswaPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama <span className="text-red-500">*</span>
+                {t('editStudent.nameLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -262,7 +266,7 @@ const EditSiswaPage = () => {
             </div>
             <div className="mb-2">
               <label htmlFor="nis" className="text-xs mb-2 block font-semibold">
-                NIS <span className="text-red-500">*</span>
+                {t('editStudent.nisLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -312,7 +316,7 @@ const EditSiswaPage = () => {
                 htmlFor="tempatLahir"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tempat Lahir <span className="text-red-500">*</span>
+                {t('editStudent.birthPlaceLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -335,7 +339,7 @@ const EditSiswaPage = () => {
                 htmlFor="TanggalLahir"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tanggal Lahir <span className="text-red-500">*</span>
+                {t('editStudent.birthDateLabel')} <span className="text-red-500">*</span>
               </label>
 
               <input
@@ -356,7 +360,7 @@ const EditSiswaPage = () => {
                 htmlFor="Jenis Kelamin"
                 className="text-xs mb-2 block font-semibold"
               >
-                Jenis Kelamin <span className="text-red-500">*</span>
+                {t('editStudent.genderLabel')} <span className="text-red-500">*</span>
               </label>
               <select
                 id="Jenis Kelamin"
@@ -378,7 +382,7 @@ const EditSiswaPage = () => {
                 htmlFor="Tahun Masuk"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tahun Masuk <span className="text-red-500">*</span>
+                {t('editStudent.entryYearLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -405,7 +409,7 @@ const EditSiswaPage = () => {
                 htmlFor="Agama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Agama <span className="text-red-500">*</span>
+                {t('editStudent.religionLabel')} <span className="text-red-500">*</span>
               </label>
               <select
                 id="Agama"
@@ -433,7 +437,7 @@ const EditSiswaPage = () => {
                 htmlFor="No. Telepon"
                 className="text-xs mb-2 block font-semibold"
               >
-                No. Telepon <span className="text-red-500">*</span>
+                {t('editStudent.phoneLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"number"}
@@ -457,7 +461,7 @@ const EditSiswaPage = () => {
                 htmlFor="kelas"
                 className="text-xs mb-2 block font-semibold"
               >
-                Kelas
+                {t('editStudent.classLabel')}
               </label>
               <select
                 id="kelas"
@@ -465,7 +469,7 @@ const EditSiswaPage = () => {
                 className="py-1.5 h-8  bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
                 <option value="">
-                  {selectKelas === "" ? "Pilih Kelas" : "Kosongkan"}
+                  {selectKelas === "" ? t('editStudent.selectClassPlaceholder') : t('editStudent.clearClass')}
                 </option>
                 {kelas &&
                   kelas.map((kel, i) => (
@@ -485,14 +489,14 @@ const EditSiswaPage = () => {
                     htmlFor="namaKelas"
                     className="text-xs mb-2 block font-semibold"
                   >
-                    Nama Kelas <span className="text-red-500">*</span>
+                    {t('editStudent.selectClassName')} <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="namaKelas"
                     {...register("namaKelas")}
                     className="py-1.5 h-8  bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                   >
-                    <option value="">Pilih Nama Kelas</option>
+                    <option value="">{t('editStudent.selectClassNamePlaceholder')}</option>
                     {kelasNama.map((kel) => (
                       <option
                         key={kel._id}
@@ -514,7 +518,7 @@ const EditSiswaPage = () => {
                 htmlFor="Alamat"
                 className="text-xs mb-2 block font-semibold"
               >
-                Alamat
+                {t('editStudent.addressLabel')}
               </label>
               <textarea
                 id="Alamat"
@@ -529,16 +533,16 @@ const EditSiswaPage = () => {
                   type="button"
                   className="btn  w-28 bg-gray-300 text-gray-800 hover:text-white disabled:cursor-not-allowed   border border-gray-500"
                 >
-                  {loading ? "Loading" : "Batal"}
+                  {loading ? t('common.loading') : t('common.cancel')}
                 </button>
               </Link>
 
               <button
                 disabled={loading}
                 type="submit"
-                className="btn disabled:cursor-not-allowed w-28 "
+                className="btn disabled:cursor-not-allowed w-28"
               >
-                {loading ? "Loading" : "Simpan"}
+                {loading ? t('common.loading') : t('common.save')}
               </button>
             </div>
           </div>

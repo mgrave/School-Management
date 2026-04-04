@@ -12,12 +12,15 @@ import { TriangleAlert } from "lucide-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import { useTranslation } from 'react-i18next';
 
 const DeleteModal = ({ onClose, title, url }) => {
   const dispath = useDispatch();
   const deleteOne = useSelector(selectedDataDelete);
   const deleteMany = useSelector(selectedDataDeleteMany);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+
   const handleDelete = async () => {
     setLoading(true);
 
@@ -52,7 +55,7 @@ const DeleteModal = ({ onClose, title, url }) => {
       >
         <div className="p-4 border-b">
           <HeaderModal
-            titile={"Konfirmasi Hapus"}
+            titile={t('admin.delete.confirm')}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -68,10 +71,10 @@ const DeleteModal = ({ onClose, title, url }) => {
             aria-label="batal"
             type="submit"
             disabled={loading}
-            className="btn w-24 h-8.5 bg-gray-100 disabled:bg-gray-200  text-gray-800 border-gray-200 border hover:text-white"
+            className="btn w-24 h-8.5 bg-gray-100 disabled:bg-gray-200 text-gray-800 border-gray-200 border hover:text-white"
             onClick={() => onClose()}
           >
-            {loading ? "Loading" : "Tidak"}
+            {loading ? t('common.loading') : t('common.cancel')}
           </button>
           <button
             aria-label="ya"
@@ -80,7 +83,7 @@ const DeleteModal = ({ onClose, title, url }) => {
             onClick={handleDelete}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Ya"}
+            {loading ? t('common.loading') : t('common.yes')}
           </button>
         </div>
       </div>

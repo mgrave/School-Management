@@ -1,8 +1,11 @@
 import React from "react";
 import logo from "../../../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const PrintComponent = React.forwardRef(
   ({ rekapAbsen, countDay, kelas, month, year }, ref) => {
+    const { t } = useTranslation();
+
     const formatTable = (status) => {
       switch (status) {
         case "hadir":
@@ -33,11 +36,16 @@ const PrintComponent = React.forwardRef(
                     scope="col"
                     className="py-4 border-b"
                   >
-                    ABSENSI KELAS {kelas?.grade} {kelas?.nama}{" "}
-                    {new Date(year, month + 1, 0).toLocaleString("default", {
-                      month: "long",
+                    {t("attendance.reportTitle", {
+                      grade: kelas?.grade,
+                      name: kelas?.nama
                     })}{" "}
-                    {year}
+                    {t("attendance.monthYear", {
+                      month: new Date(year, month).toLocaleString(t("common.dateLocale") || 'id-ID', {
+                        month: "long"
+                      }),
+                      year: year
+                    })}
                   </th>
                 </tr>
                 <tr>
@@ -46,21 +54,21 @@ const PrintComponent = React.forwardRef(
                     rowSpan={2}
                     className="py-4 w-28 text-center border-r whitespace-nowrap"
                   >
-                    Nama Siswa
+                    {t("attendance.studentName")}
                   </th>
                   <th
                     scope="col"
                     colSpan={countDay}
                     className="py-2 text-center border-b"
                   >
-                    Tanggal
+                    {t("attendance.dateHeader")}
                   </th>
                   <th
                     scope="col"
                     colSpan={4}
                     className="px-2 text-center border border-r-0"
                   >
-                    Total
+                    {t("attendance.totalHeader")}
                   </th>
                 </tr>
                 <tr>

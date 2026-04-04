@@ -9,6 +9,7 @@ import { space } from "postcss/lib/list";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useTranslation } from "react-i18next";
 
 const TableJadwal = ({
   data,
@@ -24,6 +25,7 @@ const TableJadwal = ({
   const [dataChecked, setDataChecked] = useState([]);
   const lastIndexjadwal = perPage * currentPage;
   const firstIndexjadwal = lastIndexjadwal - perPage;
+  const { t } = useTranslation();
 
   const dataSlice = data?.slice(firstIndexjadwal, lastIndexjadwal);
 
@@ -92,22 +94,22 @@ const TableJadwal = ({
                 scope="col"
                 className="px-10 text-left py-4 whitespace-nowrap"
               >
-                Bidang Studi
+                {t('schedule.study_field')}
               </th>
               <th scope="col" className="px-10 text-left py-4">
-                Guru
+                {t('common.roles.guru')}
               </th>
               <th scope="col" className="px-4 text-left py-4">
-                kelas
+                {t('common.class')}
               </th>
               <th scope="col" className="px-1 py-4 whitespace-nowrap">
-                Jumlah pertemuan
+                {t('schedule.meeting_count')}
               </th>
               <th scope="col" className="px-1  py-4">
-                Hari
+                {t('common.days.day')}
               </th>
               <th scope="col" className="px-5 py-4">
-                waktu
+                {t('schedule.time')}
               </th>
 
               <th className="sr-only"></th>
@@ -133,7 +135,7 @@ const TableJadwal = ({
                   colSpan="7"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[280px]"
                 >
-                  <p className="text-center">Tidak ada data.</p>
+                  <p className="text-center">{t('common.no_data')}</p>
                 </td>
               </tr>
             )}
@@ -260,6 +262,7 @@ const Pagination = ({
   dataSlice,
 }) => {
   const pageNumber = [];
+  const { t } = useTranslation();
 
   const totalPage = Math.ceil(totaljadwal / perPage);
 
@@ -283,11 +286,11 @@ const Pagination = ({
       {!loading && (
         <>
           <div className="h-6 flex-center">
-            <p className="text-xs">{`Menampilkan ${
-              dataSlice.length === 0 ? 0 : firstIndexjadwal + 1
-            } - ${
-              firstIndexjadwal + dataSlice.length
-            } dari ${totaljadwal} Data`}</p>
+            <p className="text-xs">{t('common.pagination.showing_data', {
+              start: dataSlice.length === 0 ? 0 : firstIndexjadwal + 1,
+              end: firstIndexjadwal + dataSlice.length,
+              total: totaljadwal
+            })}</p>
           </div>
           {pageNumber.length !== 0 && (
             <div className="flex gap-2 ">

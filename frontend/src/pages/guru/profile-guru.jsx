@@ -12,8 +12,10 @@ import { toast } from "sonner";
 import { Edit, Edit2, Plus, Trash, X } from "lucide-react";
 import { selectedUserData, setUserData } from "@/store/slices/auth-slice";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from 'react-i18next';
 
 const ProfileGuruPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -154,7 +156,7 @@ const ProfileGuruPage = () => {
     <section className="mx-6 mb-10">
       <div className="flex-between mt-4 border-b  bg-white  p-4 rounded-tl-lg rounded-tr-lg">
         <div>
-          <h1 className="text-neutral mb-1 font-semibold">Data Pribadi Anda</h1>
+          <h1 className="text-neutral mb-1 font-semibold">{t('editGuru.editTeacherData')}</h1>
           <p className="text-xs font-medium text-gray-500">
             Lihat dan Kelola Data Pribadi Anda.
           </p>
@@ -236,10 +238,10 @@ const ProfileGuruPage = () => {
             )}
           </div>
           <p className="text-[0.625rem] text-center mt-4 text-neutral">
-            Besar file maksimal 1 MB
+            {t('editGuru.maxFileSize')}
           </p>
           <p className="text-[0.625rem] text-center mt-2 text-neutral">
-            Ekstensi file: jpeg/jpg, png
+            {t('editGuru.allowedExtensions')}
           </p>
 
           <div className="flex flex-col justify-center  mt-8">
@@ -278,7 +280,7 @@ const ProfileGuruPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama
+                {t('editGuru.nameLabel')}
               </label>
               <input
                 readOnly={isNoEdit}
@@ -286,10 +288,10 @@ const ProfileGuruPage = () => {
                 id="nama"
                 name="nama"
                 {...register("nama", {
-                  required: "Nama tidak boleh kosong.",
+                  required: t('validation.required'),
                   maxLength: {
                     value: 50,
-                    message: "Nama maksimal 50 karakter.",
+                    message: t('validation.maxLength', { value: 50 })
                   },
                 })}
                 className={`${
@@ -304,7 +306,7 @@ const ProfileGuruPage = () => {
             </div>
             <div className="mb-2">
               <label htmlFor="nis" className="text-xs mb-2 block font-semibold">
-                NIP
+                {t('editGuru.nipLabel')}
               </label>
               <input
                 readOnly={isNoEdit}
@@ -313,7 +315,7 @@ const ProfileGuruPage = () => {
                 name="nip"
                 value={nip}
                 {...register("nip", {
-                  required: "NIP tidak boleh kosong.",
+                  required: t('validation.required'),
                 })}
                 onChange={(e) => handleNumberChange(e, "nip")}
                 className={`${
@@ -332,13 +334,13 @@ const ProfileGuruPage = () => {
                 htmlFor="password"
                 className="text-xs mb-2 block font-semibold"
               >
-                Password
+                {t('editGuru.passwordLabel')}
               </label>
               <input
                 readOnly={isNoEdit}
                 type={"text"}
                 id="password"
-                placeholder="Password tidak ditampilkan demi keamanan"
+                placeholder={t('editGuru.passwordPlaceholder')}
                 {...register("password", {
                   maxLength: {
                     value: 50,

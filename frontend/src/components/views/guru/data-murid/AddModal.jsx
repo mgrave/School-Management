@@ -8,6 +8,7 @@ import responseError from "@/util/services";
 import axios, { all } from "axios";
 import { HOST } from "@/util/constant";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AddModal = ({ onClose, kelas }) => {
   const {
@@ -37,6 +38,7 @@ const AddModal = ({ onClose, kelas }) => {
   const fotoRef = useRef();
   const nis = watch("nis");
   const phone = watch("phone");
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (kelas) {
@@ -136,7 +138,7 @@ const AddModal = ({ onClose, kelas }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Tambah Siswa"}
+            title={t("dataSiswa.addStudent")}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -191,18 +193,15 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="nama"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Nama <span className="text-red-500">*</span>
+                  {t("common.name")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   id="nama"
                   name="nama"
                   {...register("nama", {
-                    required: "Nama diperlukan.",
-                    maxLength: {
-                      value: 50,
-                      message: "Nama maksimal 50 karakter.",
-                    },
+                    required: t("validation.required.field", { field: t("common.name") }),
+                    maxLength: { value: 50, message: t("validation.name.max") }
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral px-2"
                 />
@@ -215,7 +214,7 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="nis"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  NIS <span className="text-red-500">*</span>
+                  {t("excel.nis")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type={"number"}
@@ -223,7 +222,7 @@ const AddModal = ({ onClose, kelas }) => {
                   name="nis"
                   value={nis}
                   {...register("nis", {
-                    required: "NIS diperlukan.",
+                    required: t("validation.required.field", { field: t("excel.nis") })
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 />
@@ -237,21 +236,15 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="password"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Password <span className="text-red-500">*</span>
+                  {t("common.password")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type={"text"}
                   id="password"
                   {...register("password", {
-                    required: "Password diperlukan.",
-                    maxLength: {
-                      value: 50,
-                      message: "Password maksimal 20 karakter.",
-                    },
-                    minLength: {
-                      value: 5,
-                      message: "Password minimal 5 karakter.",
-                    },
+                    required: t("validation.required.field", { field: t("common.password") }),
+                    minLength: { value: 5, message: t("validation.password.min") },
+                    maxLength: { value: 20, message: t("validation.password.max") }
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 />
@@ -264,18 +257,18 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="Jenis Kelamin"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Jenis Kelamin <span className="text-red-500">*</span>
+                  {t("common.gender.status")} <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="Jenis Kelamin"
                   {...register("jenisKelamin", {
-                    required: "Jenis Kelamin diperlukan.",
+                    required: t("validation.required.field", { field: t("common.gender.status") })
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 >
-                  <option value="">Pilih jenis kelamin</option>
-                  <option value="Laki-Laki">Laki-Laki</option>
-                  <option value="Perempuan">Perempuan</option>
+                  <option value="">{t("common.select")} {t("common.gender.status")}</option>
+                  <option value="Laki-Laki">{t("common.gender.male")}</option>
+                  <option value="Perempuan">{t("common.gender.female")}</option>
                 </select>
                 <span className="text-xs h-4 block mt-1 text-neutral2">
                   {errors.jenisKelamin && errors.jenisKelamin.message}
@@ -288,17 +281,14 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="tempatLahir"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Tempat Lahir <span className="text-red-500">*</span>
+                  {t("editStudent.birthPlaceLabel")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type={"text"}
                   id="tempatLahir"
                   {...register("tempatLahir", {
-                    required: "Tempat Lahir diperlukan.",
-                    maxLength: {
-                      value: 50,
-                      message: "Tempat Lahir maksimal 20 karakter.",
-                    },
+                    required: t("validation.required.field", { field: t("editStudent.birthPlaceLabel") }),
+                    maxLength: { value: 20, message: t("validation.name.max") }
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 />
@@ -311,14 +301,14 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="TanggalLahir"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Tanggal Lahir <span className="text-red-500">*</span>
+                  {t("editStudent.birthDateLabel")} <span className="text-red-500">*</span>
                 </label>
 
                 <input
                   type="date"
                   id="TanggalLahir"
                   {...register("tanggalLahir", {
-                    required: "Tanggal Lahir diperlukan.",
+                    required: t("validation.required.field", { field: t("editStudent.birthDateLabel") })
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 />
@@ -331,18 +321,18 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="Agama"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Agama <span className="text-red-500">*</span>
+                  {t("editStudent.religionLabel")} <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="Agama"
                   onChange={(e) => handleNumberChange(e, "agama")}
                   {...register("agama", {
-                    required: "Agama tidak boleh kosong..",
+                    required: t("validation.required.field", { field: t("editStudent.religionLabel") })
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500   text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 >
                   <option value="" className="">
-                    Pilih agama
+                    {t("common.select")} {t("editStudent.religionLabel")}
                   </option>
                   <option value="Islam">Islam</option>
                   <option value="Kristen Protestan">Kristen Protestan</option>
@@ -362,7 +352,7 @@ const AddModal = ({ onClose, kelas }) => {
                   htmlFor="No. Telepon"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  No. Telepon <span className="text-red-500">*</span>
+                  {t("editStudent.phoneLabel")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type={"number"}
@@ -371,7 +361,7 @@ const AddModal = ({ onClose, kelas }) => {
                   name="phone"
                   value={phone}
                   {...register("phone", {
-                    required: "No. Telepon diperlukan.",
+                    required: t("validation.required.field", { field: t("editStudent.phoneLabel") })
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 />
@@ -385,7 +375,7 @@ const AddModal = ({ onClose, kelas }) => {
                 htmlFor="alamat"
                 className="text-xs mb-2 block font-semibold"
               >
-                Alamat
+                {t("editStudent.addressLabel")}
               </label>
               <textarea
                 type={"text"}
@@ -406,7 +396,7 @@ const AddModal = ({ onClose, kelas }) => {
             onClick={handleSubmit(onSubmit)}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Simpan"}
+            {loading ? t("common.loading") : t("common.save")}
           </button>
         </div>
       </div>

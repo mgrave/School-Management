@@ -4,53 +4,10 @@ import Schedule from "../../../assets/svg/studi.svg?react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BookUser, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
-
-const Navlist = [
-  {
-    id: 1,
-    nama: "Dashboard",
-    path: "/siswa/dashboard",
-    icon: (
-      <DashboardIcon
-        height={17}
-        width={17}
-        className={
-          "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 2,
-    nama: "Jadwal",
-    path: "/siswa/jadwal-pelajaran",
-    icon: (
-      <Schedule
-        height={17}
-        width={17}
-        className={
-          "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-  {
-    id: 3,
-    nama: "Rapor",
-    path: "/siswa/hasil-rapor",
-    icon: (
-      <BookUser
-        height={17}
-        width={17}
-        className={
-          "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
-        }
-      />
-    ),
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const ListSidebarSiswa = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeDropDown, setActiveDropDown] = useState(null);
 
@@ -61,6 +18,51 @@ const ListSidebarSiswa = () => {
       setActiveDropDown(index);
     }
   };
+
+  const Navlist = [
+    {
+      id: 1,
+      nama: t('common.sidebar.dashboard'),
+      path: "/siswa/dashboard",
+      icon: (
+        <DashboardIcon
+          height={17}
+          width={17}
+          className={
+            "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 2,
+      nama: t('schedule.pageTitle'),
+      path: "/siswa/jadwal-pelajaran",
+      icon: (
+        <Schedule
+          height={17}
+          width={17}
+          className={
+            "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+    {
+      id: 3,
+      nama: t('reportCard.title'),
+      path: "/siswa/hasil-rapor",
+      icon: (
+        <BookUser
+          height={17}
+          width={17}
+          className={
+            "text-white group-hover:text-neutral stroke-[2] duration-300 transition-all"
+          }
+        />
+      ),
+    },
+  ];
 
   return (
     <ul className="w-full py-1 h-[80vh] overflow-auto">

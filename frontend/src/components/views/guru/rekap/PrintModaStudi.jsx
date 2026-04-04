@@ -1,8 +1,11 @@
 import React from "react";
 import logo from "../../../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const PrintComponent = React.forwardRef(
   ({ data, totalPertemuan, kelas, semester }, ref) => {
+    const { t } = useTranslation();
+
     return (
       <div ref={ref} className="p-4 page-landscape left-0 ">
         <div className="w-full flex-center">
@@ -18,7 +21,11 @@ const PrintComponent = React.forwardRef(
                     scope="col"
                     className="py-4 border"
                   >
-                    NILAI PERTEMUAN KELAS {kelas.grade} {kelas.nama} {semester}
+                    {t("grades.reportTitle", { 
+                      grade: kelas.grade, 
+                      name: kelas.nama, 
+                      semester: semester 
+                    })}
                   </th>
                 </tr>
                 <tr>
@@ -27,7 +34,7 @@ const PrintComponent = React.forwardRef(
                     rowSpan={2}
                     className="px-10 w-[30%] py-2 border text-center whitespace-nowrap"
                   >
-                    Nama Siswa
+                    {t("tableNilai.studentName")}
                   </th>
 
                   <th
@@ -51,7 +58,7 @@ const PrintComponent = React.forwardRef(
                       </th>
                     ))}
                   <th scope="col" className="px-2 text-center border">
-                    U
+                    {t("common.exam_abbr")}
                   </th>
                 </tr>
               </thead>

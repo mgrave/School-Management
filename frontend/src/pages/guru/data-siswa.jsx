@@ -33,10 +33,12 @@ import PrintComponent from "@/components/views/guru/data-murid/PrintModal";
 import { formatDate } from "@/util/formatDate";
 import DeleteModal from "@/components/fragments/ModalDelete";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
+import { useTranslation } from 'react-i18next';
 
 const selectRow = [7, 14, 21, 28];
 
 const DataSiswaPageguru = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const buttonFilterRef = useRef();
@@ -170,7 +172,7 @@ const DataSiswaPageguru = () => {
         <div className="relative flex w-full  md:max-w-[300px]">
           <input
             type="search"
-            placeholder="Cari Nama Dan NIS Siswa"
+            placeholder={t('studentSearch.placeholder')}
             value={search}
             id="search"
             disabled={loading}
@@ -183,20 +185,20 @@ const DataSiswaPageguru = () => {
         </div>
 
         <button
-          aria-label="tambah siswa"
+          aria-label={t('actions.addStudent')}
           disabled={loading}
           onClick={handleToggleAdd}
           className="flex-between gap-3 min-w-fit disabled:cursor-not-allowed bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
         >
           <img src={Student} alt="student" width={15} height={15} />
-          Tambah Siswa
+          {t('common.addStudent')}
         </button>
       </div>
       <div className="relative bg-white w-full  mt-6 border  overflow-hidden  rounded-lg">
         <div className="flex-between px-4 h-14 ">
           <div className="flex items-center gap-4  ">
             <button
-              title="Hapus siswa terpilih"
+              title={t('actions.deleteSelected')}
               onClick={handleToggleDeleteMany}
               className={`${
                 dataChecked.length > 0
@@ -231,7 +233,7 @@ const DataSiswaPageguru = () => {
                   onClick={() => setFilter("terbaru")}
                   className="border border-gray-400 bg-white text-gray-500  hover:bg-neutral hover:border-gray-400 border-dashed  py-1.5 transition-all duration-300 font-medium hover:text-white  text-xs px-4 rounded-md flex-between gap-3"
                 >
-                  Clear
+                  {t('common.clear')}
                 </button>
               )}
               {isFilter && (
@@ -247,7 +249,7 @@ const DataSiswaPageguru = () => {
           </div>
           <div className="hidden sm:flex gap-2">
             <button
-              title="Excel"
+              title={t('common.excel')}
               disabled={loading}
               className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
               onClick={() => exportToExcel(dataSiswa, data.kelas, data.nama)}
@@ -262,7 +264,7 @@ const DataSiswaPageguru = () => {
             <ReactToPrint
               trigger={() => (
                 <button
-                  title="Print"
+                  title={t('common.print')}
                   className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
                 >
                   <Printer
@@ -295,7 +297,7 @@ const DataSiswaPageguru = () => {
               >
                 <div className="flex flex-col gap-3">
                   <button
-                    title="Excel"
+                    title={t('common.excel')}
                     disabled={loading}
                     className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1 rounded-md"
                     onClick={() =>
@@ -316,7 +318,7 @@ const DataSiswaPageguru = () => {
                   <ReactToPrint
                     trigger={() => (
                       <button
-                        title="Print"
+                        title={t('common.print')}
                         disabled={loading}
                         className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1 rounded-md"
                       >
@@ -358,7 +360,7 @@ const DataSiswaPageguru = () => {
       {isDeleteSiswa && (
         <DeleteModal
           onClose={handleToggleDeleteOne}
-          title={"Apakah anda yakin ingin menghapus siswa?"}
+          title={t('deleteConfirmation.student')}
           url={"/api/siswa/delete-one-siswa/" + dataDelete._id}
         />
       )}
@@ -368,7 +370,7 @@ const DataSiswaPageguru = () => {
         <DeleteManyModal
           onClose={handleToggleDeleteMany}
           setAllCheck={setAllCheck}
-          title={"Apakah anda yakin ingin menghapus siswa terpilih?"}
+          title={t('deleteConfirmation.selectedStudents')}
           url={"/api/siswa/delete-many-siswa"}
         />
       )}
@@ -380,6 +382,7 @@ const DataSiswaPageguru = () => {
 };
 
 const exportToExcel = async (data, kelas, nama) => {
+  const { t } = useTranslation();
   const workbook = new ExelJs.Workbook();
   const worksheet = workbook.addWorksheet(`Data Siswa Kelas ${kelas} ${nama}`);
 

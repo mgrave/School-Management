@@ -4,8 +4,10 @@ import { data } from "autoprefixer";
 import axios from "axios";
 import { ChevronDown, ChevronUpIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const DropdownSemester = ({ onSelectedSemester }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const dropdownRef = useRef(null);
@@ -82,7 +84,7 @@ const DropdownSemester = ({ onSelectedSemester }) => {
                 "bg-blue-600 text-white"
               }`}
             >
-              Semester 1
+              {t("masterData.semester1")}
             </li>
             <li
               tabIndex={0}
@@ -93,7 +95,7 @@ const DropdownSemester = ({ onSelectedSemester }) => {
                 "bg-blue-600 text-white"
               }`}
             >
-              Semester 2
+              {t("masterData.semester2")}
             </li>
           </ul>
         </div>

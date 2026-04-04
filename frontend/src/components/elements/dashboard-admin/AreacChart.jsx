@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   LineChart,
   Line,
@@ -11,6 +12,7 @@ import {
 } from "recharts";
 
 const LineChartComponent = ({ data }) => {
+  const { t } = useTranslation();
   const dataSort = useMemo(() => {
     return data && data.sort((a, b) => a.year.localeCompare(b.year));
   }, [data]);
@@ -18,7 +20,7 @@ const LineChartComponent = ({ data }) => {
   if (dataSort && dataSort.length === 0) {
     return (
       <div className="flex-center w-full h-full">
-        <p className="text-xs text-neutral">Tidak ada data.</p>
+        <p className="text-xs text-neutral">{t('common.no_data')}</p>
       </div>
     );
   }

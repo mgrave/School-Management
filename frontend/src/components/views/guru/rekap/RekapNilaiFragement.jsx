@@ -14,6 +14,7 @@ import DropdownSemester from "@/components/elements/DropdownSemester";
 import TableNilai from "../../../fragments/TableNilai";
 import { data } from "autoprefixer";
 import PrintComponentNilai from "../../../fragments/PrintModalNilai";
+import { useTranslation } from "react-i18next";
 
 const RekapNilaiFragment = () => {
   const menuRef = useRef(null);
@@ -27,6 +28,7 @@ const RekapNilaiFragment = () => {
   const [dataMapel, setDataMapel] = useState([]);
 
   const componentRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -268,9 +270,12 @@ const exportToExcel = async (data, dataMapel, kelas, tahunAjaran, semester) => {
   // Step 4: Export to Excel
   // Title Header
   const headerTitle = [
-    `NILAI SISWA KELAS TAHUN AJARAN ${tahunAjaran} ${semester.toUpperCase()} - KELAS ${
-      kelas.kelas
-    } ${kelas.nama.toUpperCase()} `,
+    t('gradeReport.excelTitle', {
+      tahunAjaran: tahunAjaran,
+      semester: semester.toUpperCase(),
+      kelas: kelas.kelas,
+      namaKelas: kelas.nama.toUpperCase()
+    })
   ];
   worksheet.addRow(headerTitle);
 
@@ -286,7 +291,7 @@ const exportToExcel = async (data, dataMapel, kelas, tahunAjaran, semester) => {
     "Rangking",
   ];
   const header2 = ["", ...dataMapel.flatMap((mapel) => [mapel, ""]), "", ""];
-  const header3 = ["", ...dataMapel.flatMap(() => ["T", "U"]), "", ""];
+  const header3 = ["", ...dataMapel.flatMap(() => [t('common.task_abbr'), t('common.exam_abbr')]), "", ""];
 
   // Add headers to the worksheet
   worksheet.addRow(header1);
@@ -361,7 +366,12 @@ const exportToExcel = async (data, dataMapel, kelas, tahunAjaran, semester) => {
     const rataRata = siswa.average || 0;
     const rangking = siswa.ranking || "-";
 
-    const rowValues = [siswa.siswa.nama, ...nilaiPerMapel, rataRata, rangking];
+    const rowValues = [
+      siswa.siswa.nama, 
+      ...nilaiPerMapel, 
+      rataRata.toFixed(2), 
+      rangking
+    ];
     const row = worksheet.addRow(rowValues);
 
     // Add border to each cell in the body

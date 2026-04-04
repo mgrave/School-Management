@@ -6,6 +6,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AddModalNasional = ({ onClose }) => {
   const {
@@ -15,6 +16,7 @@ const AddModalNasional = ({ onClose }) => {
   } = useForm();
 
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -44,7 +46,7 @@ const AddModalNasional = ({ onClose }) => {
       >
         <div className="px-6 py-4 border-b">
           <HeaderModal
-            titile={"Tambah Libur Nasional"}
+            titile={t("masterData.addNationalHoliday")}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -56,7 +58,7 @@ const AddModalNasional = ({ onClose }) => {
                 htmlFor="tanggal"
                 className="text-xs mb-2 block font-semibold text-gray-700"
               >
-                Tanggal
+                {t("common.date")}
               </label>
               <input
                 type="date"
@@ -69,7 +71,7 @@ const AddModalNasional = ({ onClose }) => {
                 className=" border w-full text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
               />
               <span className="text-xs h-4 text-neutral2 block">
-                {errors.tanggal && errors.tanggal.message}
+                {errors.tanggal && t("validation.required.date")}
               </span>
             </div>
             <div className="w-full mb-2">
@@ -77,7 +79,7 @@ const AddModalNasional = ({ onClose }) => {
                 htmlFor="keterangan"
                 className="text-xs mb-2 block font-semibold text-gray-700"
               >
-                Keterangan Libur
+                {t("masterData.holidayDescription")}
               </label>
               <input
                 type="text"
@@ -89,7 +91,7 @@ const AddModalNasional = ({ onClose }) => {
                 className=" border w-full text-xs px-2 py-1.5 rounded-md  outline-neutral border-gray-500"
               />
               <span className="text-xs h-4 text-neutral2 block">
-                {errors.keterangan && errors.keterangan.message}
+                {errors.keterangan && t("validation.required.description")}
               </span>
             </div>
           </div>
@@ -101,7 +103,7 @@ const AddModalNasional = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t("common.loading") : t("common.save")}
             </button>
           </div>
         </form>

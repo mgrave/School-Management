@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableGuru = ({
   data,
@@ -37,6 +38,7 @@ const TableGuru = ({
   const [dataChecked, setDataChecked] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const HandleCopyText = (text) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -97,38 +99,38 @@ const TableGuru = ({
                   />
                 </th>
                 <th scope="col" className="px-4 py-4">
-                  NIP
+                  {t("dataGuru.columnNip")}
                 </th>
                 <th scope="col" className="px-4 py-4">
-                  Nama
+                  {t("common.name")}
                 </th>
                 <th scope="col" className=" py-4 whitespace-nowrap">
-                  Jenis Kelamin
+                  {t("common.gender._")}
                 </th>
                 <th
                   scope="col"
                   className="px-3 py-4 text-left whitespace-nowrap"
                 >
-                  Bidang Studi
+                  {t("dataGuru.columnSubject")}
                 </th>
 
                 <th scope="col" className="py-4 text-center">
-                  Kontak
+                  {t("common.contact")}
                 </th>
                 <th
                   scope="Kelas"
                   className="text-center px-4 py-4 whitespace-nowrap"
                 >
-                  Status
+                  {t("common.status._")}
                 </th>
                 <th
                   scope="Kelas"
                   className="text-center px-4 py-4 whitespace-nowrap"
                 >
-                  Wali Kelas
+                  {t("class.columnHomeroomTeacher")}
                 </th>
                 <th scope="col" className="px-5 py-3">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">{t("common.actions")}</span>
                 </th>
               </tr>
             </thead>
@@ -140,7 +142,7 @@ const TableGuru = ({
                     className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                   >
                     <div className="flex justify-center w-full">
-                      Tidak ada data
+                      {t("common.no_data")}
                     </div>
                   </td>
                 </tr>
@@ -185,17 +187,15 @@ const TableGuru = ({
                       scope="row"
                       className="py-4 text-xs font-normal text-gray-900 whitespace-nowrap "
                     >
-                      {guru.jenisKelamin}
+                      {t(`common.gender.${guru.jenisKelamin.toLowerCase()}`)}
                     </td>
                     <td
                       scope="row"
                       className="py-4 px-4 text-xs font-normal text-gray-900 whitespace-nowrap "
                     >
-                      {guru?.bidangStudi?.nama ? (
-                        guru.bidangStudi.nama
-                      ) : (
+                      {guru?.bidangStudi?.nama || (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t("common.no_data")}
                         </span>
                       )}
                     </td>
@@ -223,8 +223,7 @@ const TableGuru = ({
                           guru.status ? "bg-gray-700" : "bg-gray-600"
                         } px-4 py-1 text-white rounded-full`}
                       >
-                        {" "}
-                        {guru.status ? "Aktif" : "Non Aktif"}
+                        {t(`common.status.${guru.status ? "active" : "inactive"}`)}
                       </span>
                     </td>
                     <td
@@ -235,7 +234,7 @@ const TableGuru = ({
                         `${guru.waliKelas.kelas} ${guru.waliKelas.nama}`
                       ) : (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t("common.no_data")}
                         </span>
                       )}
                     </td>

@@ -4,12 +4,14 @@ import { data } from "autoprefixer";
 import axios from "axios";
 import { ChevronDown, ChevronUpIcon } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const DropdownTahunAjaran = ({ onSelectAjaran }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAjaran, setSelectedAjaran] = useState(null);
   const [dataAjaran, setDataAjaran] = useState([]);
   const dropdownRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event) => {

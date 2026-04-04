@@ -15,8 +15,10 @@ import {
 } from "@/store/slices/admin-slice";
 import DeleteModal from "@/components/fragments/ModalDelete";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
+import { useTranslation } from 'react-i18next';
 
 const DataJadwalPage = () => {
+  const { t, i18n } = useTranslation();
   const dataChecked = useSelector(selectedDataDeleteMany);
   const dataDelete = useSelector(selectedDataDelete);
   const [loading, setLoading] = useState(true);
@@ -109,7 +111,7 @@ const DataJadwalPage = () => {
           <input
             type="search"
             id="search"
-            placeholder="Cari bidang studi dan guru dari jadwal.  "
+            placeholder={t('schedule.search_placeholder')}
             value={search}
             disabled={loading}
             onChange={(e) => setSearch(e.target.value)}
@@ -121,20 +123,20 @@ const DataJadwalPage = () => {
         </div>
 
         <button
-          aria-label="tambah jawdwal"
+          aria-label={t('schedule.add_schedule')}
           onClick={handleToggleAdd}
           disabled={loading}
           className="bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
         >
           <AcaraIcon width={15} height={15} className="" />
-          Tambah Jadwal
+          {t('schedule.add_schedule')}
         </button>
       </div>
       <div className="relative bg-white w-full  mt-6 border  overflow-hidden  rounded-md">
         <div className="flex-between px-4 h-14 ">
           <div className="flex items-center gap-4  ">
             <button
-              title="Hapus siswa terpilih"
+              title={t('schedule.delete_selected')}
               onClick={handleToggDeleteMany}
               className={`${
                 dataChecked.length > 0 ? "opacity-100" : "opacity-0"
@@ -170,14 +172,14 @@ const DataJadwalPage = () => {
         <DeleteModal
           onClose={handleToggleDelete}
           url={"/api/jadwal/delete-jadwal/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus jadwal?"}
+          title={t('schedule.delete_confirmation')}
         />
       )}
       {isDeleteMany && (
         <DeleteManyModal
           onClose={handleToggDeleteMany}
           setAllCheck={setAllCheck}
-          title={"Apakah anda yakin ingin menghapus jadwal terpilih?"}
+          title={t('schedule.delete_selected_confirmation')}
           url={"/api/jadwal/delete-many-jadwal"}
         />
       )}

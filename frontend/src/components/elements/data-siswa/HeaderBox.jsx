@@ -1,8 +1,11 @@
 import student from "../../../assets/svg/Teacher.svg";
 import male from "../../../assets/svg/male.svg";
 import female from "../../../assets/svg/female.svg";
+import { useTranslation } from 'react-i18next';
 
 const HeaderBox = ({ dataDetail, loading }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="grid mb-6 sm:grid-cols-3 md:grid-cols-3 gap-4  md:gap-2 lg:gap-8 ">
       <div className=" bg-white flex items-center justify-between p-4 sm:px-3 xl:p-5 h-[85px]  rounded-md shadow-sm ">
@@ -21,7 +24,7 @@ const HeaderBox = ({ dataDetail, loading }) => {
               height={20}
             />
           </div>
-          <h1 className="text-sm font-medium  text-neutral">Total Siswa</h1>
+          <h1 className="text-sm font-medium  text-neutral">{t('students.total')}</h1>
         </div>
         <div className="flex-center w-8 h-8">
           {loading ? (
@@ -49,7 +52,7 @@ const HeaderBox = ({ dataDetail, loading }) => {
               height={25}
             />
           </div>
-          <h1 className="text-sm text-neutral font-medium">Laki - Laki</h1>
+          <h1 className="text-sm text-neutral font-medium">{t('students.male')}</h1>
         </div>
         <div className="flex-center w-8 h-8">
           {loading ? (
@@ -77,7 +80,7 @@ const HeaderBox = ({ dataDetail, loading }) => {
               height={20}
             />
           </div>
-          <h1 className="text-sm font-medium text-neutral ">Perempuan</h1>
+          <h1 className="text-sm font-medium text-neutral ">{t('students.female')}</h1>
         </div>
         <div className="flex-center w-8 h-8">
           {loading ? (

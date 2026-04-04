@@ -7,7 +7,11 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useTranslation } from "react-i18next";
+
 const BarChartComponent = ({ data, x, y, loading }) => {
+  const { t } = useTranslation();
+
   if (loading) {
     return (
       <div className="w-full h-full flex-center">
@@ -24,7 +28,7 @@ const BarChartComponent = ({ data, x, y, loading }) => {
 
   if (!data || data.length === 0) {
     return (
-      <p className="text-xs h-full w-full   flex-center">Data tidak ada.</p>
+      <p className="text-xs h-full w-full flex-center">{t('common.no_data')}</p>
     );
   }
 
@@ -64,12 +68,14 @@ const BarChartComponent = ({ data, x, y, loading }) => {
 export default BarChartComponent;
 
 const CustomTooltip = ({ active, payload, label }) => {
+  const { t } = useTranslation();
+  
   if (active && payload && payload.length) {
     return (
       <div className="p-2 bg-white border flex text-xs gap-4 rounded-md">
         <p className=" text-xs ">{label}</p>
         <p className="text-xs text-neutral">
-          <span className="ml-2">{payload[0].value} Siswa</span>
+          <span className="ml-2">{payload[0].value} {t('common.student')}</span>
         </p>
       </div>
     );

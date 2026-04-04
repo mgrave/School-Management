@@ -12,8 +12,10 @@ import { useSelector } from "react-redux";
 import { selectedUserData } from "@/store/slices/auth-slice";
 
 import AnimasiCounter from "@/components/elements/AnimasiCounter";
+import { useTranslation } from 'react-i18next';
 
 const GuruDashboardPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const [loading, setLoading] = useState(true);
   const [dataJadwal, setDataJadwal] = useState([]);
@@ -80,7 +82,7 @@ const GuruDashboardPage = () => {
               />
             </div>
             <h3 className="text-sm font-semibold text-neutral line-clamp-1 ">
-              Guru Bidang Studi
+              {t('dashboard.subjects')}
             </h3>
           </div>
           <div className="h-8 flex-1 flex-center">
@@ -110,7 +112,7 @@ const GuruDashboardPage = () => {
               />
             </div>
             <h3 className="text-sm font-semibold text-neutral line-clamp-1 ">
-              Total Pertemuan
+              {t('dashboard.classes')}
             </h3>
           </div>
           <div className="h-8 flex-1 flex-center">
@@ -187,7 +189,7 @@ const GuruDashboardPage = () => {
                 />
               </div>
               <h3 className="text-sm font-semibold text-neutral line-clamp-1">
-                Total Siswa
+                {t('dashboard.students')}
               </h3>
             </div>
             <div className="h-8 flex-1 flex-center">

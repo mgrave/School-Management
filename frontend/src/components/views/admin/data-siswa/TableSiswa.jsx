@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const TableSiswa = ({
   data,
@@ -30,10 +31,11 @@ const TableSiswa = ({
   const [dataChecked, setDataChecked] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const HandleCopyText = (text) => {
     navigator.clipboard.writeText(text).then(() => {
-      toast.info("berhasil menyalin data");
+      toast.info(t('common.copied'));
     });
   };
 
@@ -89,32 +91,22 @@ const TableSiswa = ({
                     }
                   />
                 </th>
-                <th scope="col" className="px-3 py-4">
-                  NIS
-                </th>
-                <th scope="col" className="px-4 py-4">
-                  Nama
-                </th>
-                <th scope="col" className=" py-4 whitespace-nowrap">
-                  Jenis Kelamin
-                </th>
+                <th scope="col" className="px-3 py-4">{t('excel.nis')}</th>
+                <th scope="col" className="px-4 py-4">{t('common.name')}</th>
+                <th scope="col" className="py-4 whitespace-nowrap">{t('common.gender.title')}</th>
                 <th
                   scope="col"
                   className="px-3 py-4 text-center whitespace-nowrap"
                 >
-                  Tahun Masuk
+                  {t('excel.entryYear')}
                 </th>
-                <th scope="col" className="px-2 py-4">
-                  Alamat
-                </th>
-                <th scope="col" className="py-4 text-center">
-                  Kontak
-                </th>
+                <th scope="col" className="px-2 py-4">{t('excel.address')}</th>
+                <th scope="col" className="py-4 text-center">{t('common.contact')}</th>
                 <th
                   scope="Kelas"
                   className="text-center px-8 py-4 whitespace-nowrap"
                 >
-                  Kelas
+                  {t('common.class')}
                 </th>
                 <th scope="col" className="px-5 py-3">
                   <span className="sr-only">Edit</span>
@@ -129,7 +121,7 @@ const TableSiswa = ({
                     className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                   >
                     <div className="flex justify-center w-full">
-                      Tidak ada data
+                      {t('common.no_data')}
                     </div>
                   </td>
                 </tr>

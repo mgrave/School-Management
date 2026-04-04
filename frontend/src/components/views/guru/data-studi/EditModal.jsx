@@ -16,6 +16,7 @@ import { selectedUserData } from "@/store/slices/auth-slice";
 import DropdownSiswa from "@/components/elements/DropdownSiswa";
 import DropdownCategoryNilai from "@/components/elements/DropdownCategoryNilai";
 import { selectedDataEdit, setDataEdit } from "@/store/slices/admin-slice";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ onClose, pertemuan }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const EditModal = ({ onClose, pertemuan }) => {
     },
   });
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -125,7 +127,7 @@ const EditModal = ({ onClose, pertemuan }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={`Edit Nilai Pertemuan Kelas ${dataEdit?.kelas?.kelas} ${dataEdit?.kelas?.nama}`}
+            titile={`${t('grades.edit_grade')} ${t('grades.meeting')} ${t('common.class')} ${dataEdit?.kelas?.kelas} ${dataEdit?.kelas?.nama}`}
             onClose={handleClose}
             className={"font-semibold"}
           />
@@ -136,7 +138,7 @@ const EditModal = ({ onClose, pertemuan }) => {
               htmlFor="mataPelajaran"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Mata Pelajaran
+              {t('subjects.name')}
             </label>
             <Controller
               name="mataPelajaran"
@@ -161,7 +163,7 @@ const EditModal = ({ onClose, pertemuan }) => {
               htmlFor="siswa"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Siswa
+              {t('common.student')}
             </label>
             <Controller
               name="siswa"
@@ -186,7 +188,7 @@ const EditModal = ({ onClose, pertemuan }) => {
                 htmlFor="kategori"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Pertemuan
+                {t('grades.meeting')}
               </label>
               <input
                 type="text"
@@ -205,7 +207,7 @@ const EditModal = ({ onClose, pertemuan }) => {
                 htmlFor="nilai"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nilai
+                {t('grades.score')}
               </label>
               <input
                 type="number"
@@ -235,7 +237,7 @@ const EditModal = ({ onClose, pertemuan }) => {
                 htmlFor="tahunAjaran"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Tahun Ajaran
+                {t('grades.academic_year')}
               </label>
 
               <input
@@ -258,7 +260,7 @@ const EditModal = ({ onClose, pertemuan }) => {
                 htmlFor="semester"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Semester
+                {t('grades.semester')}
               </label>
               <input
                 type="text"
@@ -281,7 +283,7 @@ const EditModal = ({ onClose, pertemuan }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.loading') : t('common.save')}
             </button>
           </div>
         </form>

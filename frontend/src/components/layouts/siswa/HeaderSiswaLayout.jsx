@@ -8,10 +8,12 @@ import { LogOut, Menu } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HeaderSiswaLayout = ({ handleToggleSidebar }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const buttonRef = useRef();
   const data = useSelector(selectedUserData);
@@ -50,7 +52,7 @@ const HeaderSiswaLayout = ({ handleToggleSidebar }) => {
               {data.nama ? data.nama : data.username}
             </h5>
             <span className="text-xs hidden sm:block leading-2 text-right font-medium capitalize">
-              {data.role}
+              {t(`common.roles.${data.role}`)}
             </span>
           </div>
           <Link
@@ -58,7 +60,7 @@ const HeaderSiswaLayout = ({ handleToggleSidebar }) => {
             className="w-9 h-9 bg-backup flex items-center justify-center rounded-full overflow-hidden"
           >
             <img
-              src={data.photo ? data.photo : profile}
+              src={data.photo ? data.photo : t("common.profile")}
               alt="foto"
               className="w-full h-full object-cover"
             />

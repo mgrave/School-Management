@@ -13,11 +13,13 @@ import { selectedUserData } from "@/store/slices/auth-slice";
 import DropdownSiswa from "@/components/elements/DropdownSiswa";
 import DropdownCategoryNilai from "@/components/elements/DropdownCategoryNilai";
 import { selectedDataEdit, setDataEdit } from "@/store/slices/admin-slice";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const userData = useSelector(selectedUserData);
   const editData = useSelector(selectedDataEdit);
+  const { t } = useTranslation();
 
   const {
     control,
@@ -89,7 +91,7 @@ const EditModal = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Edit Nilai"}
+            titile={t('grades.edit_grade')}
             onClose={handleClose}
             className={"font-semibold"}
           />
@@ -100,7 +102,7 @@ const EditModal = ({ onClose }) => {
               htmlFor="mapel"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Mata Pelajaran
+              {t('grades.subject')}
             </label>
             <Controller
               name="mataPelajaran"
@@ -123,7 +125,7 @@ const EditModal = ({ onClose }) => {
               htmlFor="siswa"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Siswa
+              {t('grades.student')}
             </label>
             <Controller
               name="siswa"
@@ -148,7 +150,7 @@ const EditModal = ({ onClose }) => {
                 htmlFor="kategori"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Kategori Nilai
+                {t('grades.category')}
               </label>
               <Controller
                 name="kategori"
@@ -168,7 +170,7 @@ const EditModal = ({ onClose }) => {
                 htmlFor="nilai"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nilai
+                {t('grades.score')}
               </label>
               <input
                 type="number"
@@ -198,7 +200,7 @@ const EditModal = ({ onClose }) => {
                 htmlFor="tahunAjaran"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Tahun Ajaran
+                {t('grades.academic_year')}
               </label>
 
               <input
@@ -221,7 +223,7 @@ const EditModal = ({ onClose }) => {
                 htmlFor="semester"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Semester
+                {t('grades.semester')}
               </label>
               <input
                 type="text"
@@ -244,7 +246,7 @@ const EditModal = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t('common.loading') : t('common.save')}
             </button>
           </div>
         </form>

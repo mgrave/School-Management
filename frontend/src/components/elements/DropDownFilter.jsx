@@ -4,8 +4,10 @@ import axios from "axios";
 import { ListRestart, SlidersHorizontal } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const FilterDropdown = ({ handleFilterChange, setFilters }) => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
 
   const [selectedFilter, setSelectedFilter] = useState({
@@ -120,11 +122,11 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
           className=" absolute right-0 mt-1 w-[11rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
         >
           <div className="flex-between px-4 py-4 h-12 border-gray-200 border-b ">
-            <h3 className=" font-bold  text-xs">Kategori Filter</h3>
+            <h3 className=" font-bold  text-xs">{t('admin.filter.filter_category')}</h3>
             {Object.values(selectedFilter).some((value) => value !== "") && (
               <button
                 className="text-xs font-medium rounded-xl bg-indigo-400 p-1"
-                title="Clear Filter"
+                title={t('common.clear_filter')}
                 onClick={() => {
                   setSelectedFilter({
                     kelas: "",
@@ -160,7 +162,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
           >
             <div className="px-4 py-2">
               <label className="block text-xs font-medium text-gray-700">
-                Kelas
+                {t('common.class')}
               </label>
               <select
                 name="kelas"
@@ -169,7 +171,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
                 className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md border focus:outline-none"
                 role="menuitem"
               >
-                <option value="">Semua</option>
+                <option value="">{t('common.all')}</option>
                 {kelas &&
                   kelas
                     .sort((a, b) => b - a)
@@ -183,7 +185,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
             {selectedFilter.kelas !== "" && (
               <div className="px-4 py-2">
                 <label className="block text-xs font-medium text-gray-700">
-                  Nama Kelas
+                  {t('common.class_name')}
                 </label>
                 <select
                   name="kelasNama"
@@ -204,7 +206,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
 
             <div className="px-4 py-2">
               <label className="block text-xs font-medium text-gray-700">
-                Jenis Kelamin
+                {t('common.gender')}
               </label>
               <select
                 name="jenisKelamin"
@@ -213,15 +215,15 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
                 className="block w-full px-4 py-1.5 mt-1 text-xs text-gray-700 bg-white border-gray-300 rounded-md border  focus:outline-none"
                 role="menuitem"
               >
-                <option value="">Semua</option>
-                <option value="Laki-Laki">Laki-Laki</option>
-                <option value="Perempuan">Perempuan</option>
+                <option value="">{t('common.all')}</option>
+                <option value="Laki-Laki">{t('common.male')}</option>
+                <option value="Perempuan">{t('common.female')}</option>
               </select>
             </div>
             {pathname === "/admin/data-guru" && (
               <div className="px-4 py-2">
                 <label className="block text-xs font-medium text-gray-700">
-                  Bidang Studi
+                  {t('common.study_field')}
                 </label>
                 <select
                   name="bidangStudi"
@@ -243,7 +245,7 @@ const FilterDropdown = ({ handleFilterChange, setFilters }) => {
             {pathname !== "/admin/data-guru" && (
               <div className="px-4 py-2">
                 <label className="block text-xs font-medium text-gray-700">
-                  Tahun Masuk
+                  {t('common.entry_year')}
                 </label>
                 <select
                   name="tahunMasuk"

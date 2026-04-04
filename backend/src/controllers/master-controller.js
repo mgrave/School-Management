@@ -103,7 +103,7 @@ export const getMaster = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data Umum.",
+      message: "Datos generales obtenidos correctamente.",
       data: {
         totalSiswa,
         totalGuru,
@@ -140,14 +140,14 @@ export const getAkademik = async (req, res, next) => {
 
       res.status(200).json({
         success: true,
-        message: "Berhasil mengambil data akademik.",
+        message: "Datos académicos obtenidos",
         akademik: masterSemester,
       });
     }
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil data akademik.",
+      message: "Datos académicos obtenidos",
       akademik,
     });
   } catch (error) {
@@ -162,7 +162,7 @@ export const toggleSemester = async (req, res, next) => {
     const master = await Master.findOne();
 
     if (!master) {
-      throw new ResponseError(404, "Data master tidak ditemukan.");
+      throw new ResponseError(404, "Configuración no encontrada");
     }
 
     const selectedSemester = master.semester.find(
@@ -184,7 +184,7 @@ export const toggleSemester = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengubah status semester`,
+      message: "Estado del semestre actualizado",
     });
   } catch (error) {
     next(error);
@@ -198,20 +198,20 @@ export const updateJam = async (req, res, next) => {
     const master = await Master.findOne();
 
     if (!master) {
-      throw new ResponseError(404, "Data master tidak ditemukan");
+      throw new ResponseError(404, "Configuración no encontrada");
     }
 
     if (start >= end) {
       throw new ResponseError(
         400,
-        "Waktu mulai tidak bisa lebih dari waktu selesai"
+        "Hora inicio no puede ser mayor que fin"
       );
     }
 
     if (end <= start) {
       throw new ResponseError(
         400,
-        "Waktu Selesai tidak bisa kurang dari waktu mulai"
+        "Hora fin no puede ser menor que inicio"
       );
     }
 
@@ -229,7 +229,7 @@ export const updateJam = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "berhasil mengupdate jam pembelajaran",
+      message: "Horario de clases actualizado",
       update,
     });
   } catch (error) {
@@ -245,7 +245,7 @@ export const getSemester = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "berhasil mengambil semester aktif",
+      message: "Semestre activo obtenido",
       semester: aktif,
     });
   } catch (error) {

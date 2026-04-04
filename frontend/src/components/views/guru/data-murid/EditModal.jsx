@@ -11,9 +11,11 @@ import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedDataEdit, setDataEdit } from "@/store/slices/admin-slice";
 import { formatDate } from "@/util/formatDate";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ onClose, kelas }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -149,7 +151,7 @@ const EditModal = ({ onClose, kelas }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Edit Siswa"}
+            titile={t('editStudent.editStudentTitle')}
             onClose={handleClose}
             className={"font-semibold"}
           />
@@ -191,10 +193,10 @@ const EditModal = ({ onClose, kelas }) => {
               />
             </div>
             <p className="text-[0.625rem] text-center mt-4 text-neutral">
-              Besar file maksimal 1 MB
+              {t('editStudent.maxFileSize')}
             </p>
             <p className="text-[0.625rem] text-center mt-2 text-neutral">
-              Ekstensi file: jpeg/jpg, png
+              {t('editStudent.allowedExtensions')}
             </p>
           </div>
           <form className=" col-span-2 w-full   grid grid-cols-2 gap-2">
@@ -204,7 +206,7 @@ const EditModal = ({ onClose, kelas }) => {
                   htmlFor="nama"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Nama <span className="text-red-500">*</span>
+                  {t('editStudent.nameLabel')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -254,7 +256,7 @@ const EditModal = ({ onClose, kelas }) => {
                 </label>
                 <input
                   type={"text"}
-                  placeholder="Password tidak ditampilkan"
+                  placeholder={t('editStudent.passwordPlaceholder')}
                   id="password"
                   {...register("password", {
                     maxLength: {
@@ -277,7 +279,7 @@ const EditModal = ({ onClose, kelas }) => {
                   htmlFor="Jenis Kelamin"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Jenis Kelamin <span className="text-red-500">*</span>
+                  {t('editStudent.genderLabel')} <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="Jenis Kelamin"
@@ -286,9 +288,9 @@ const EditModal = ({ onClose, kelas }) => {
                   })}
                   className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
                 >
-                  <option value="">Pilih jenis kelamin</option>
-                  <option value="Laki-Laki">Laki-Laki</option>
-                  <option value="Perempuan">Perempuan</option>
+                  <option value="">{t("editStudent.genderPlaceholder")}</option>
+                  <option value="Laki-Laki">{t('editStudent.genderOptions.male')}</option>
+                  <option value="Perempuan">{t('editStudent.genderOptions.female')}</option>
                 </select>
                 <span className="text-xs h-4 block mt-1 text-neutral2">
                   {errors.jenisKelamin && errors.jenisKelamin.message}
@@ -301,7 +303,7 @@ const EditModal = ({ onClose, kelas }) => {
                   htmlFor="tempatLahir"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Tempat Lahir <span className="text-red-500">*</span>
+                  {t('editStudent.birthPlaceLabel')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type={"text"}
@@ -324,7 +326,7 @@ const EditModal = ({ onClose, kelas }) => {
                   htmlFor="TanggalLahir"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Tanggal Lahir <span className="text-red-500">*</span>
+                  {t('editStudent.birthDateLabel')} <span className="text-red-500">*</span>
                 </label>
 
                 <input
@@ -344,7 +346,7 @@ const EditModal = ({ onClose, kelas }) => {
                   htmlFor="Agama"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  Agama <span className="text-red-500">*</span>
+                  {t('editStudent.religionLabel')} <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="Agama"
@@ -357,13 +359,13 @@ const EditModal = ({ onClose, kelas }) => {
                   <option value="" className="">
                     Pilih agama
                   </option>
-                  <option value="Islam">Islam</option>
-                  <option value="Kristen Protestan">Kristen Protestan</option>
-                  <option value="Kristen Katolik">Kristen Katolik</option>
-                  <option value="Hindu">Hindu</option>
-                  <option value="Budha">Budha</option>
-                  <option value="Kong Hu Chu">Kong Hu Chu</option>
-                  <option value="Aliran Kepercayaan">Aliran Kepercayaan</option>
+                  <option value="Islam">{t('editStudent.religionOptions.islam')}</option>
+                  <option value="Kristen Protestan">{t('editStudent.religionOptions.protestant')}</option>
+                  <option value="Kristen Katolik">{t('editStudent.religionOptions.catholic')}</option>
+                  <option value="Hindu">{t('editStudent.religionOptions.hindu')}</option>
+                  <option value="Budha">{t('editStudent.religionOptions.buddhist')}</option>
+                  <option value="Kong Hu Chu">{t('editStudent.religionOptions.confucianism')}</option>
+                  <option value="Aliran Kepercayaan">{t('editStudent.religionOptions.beliefs')}</option>
                 </select>
                 <span className="text-xs h-4 block mt-1 text-neutral2">
                   {errors.agama && errors.agama.message}
@@ -375,7 +377,7 @@ const EditModal = ({ onClose, kelas }) => {
                   htmlFor="No. Telepon"
                   className="text-xs mb-2 block font-semibold"
                 >
-                  No. Telepon <span className="text-red-500">*</span>
+                  {t('editStudent.phoneLabel')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type={"number"}
@@ -398,7 +400,7 @@ const EditModal = ({ onClose, kelas }) => {
                 htmlFor="alamaat"
                 className="text-xs mb-2 block font-semibold"
               >
-                Alamat
+                {t('editStudent.addressLabel')} <span className="text-red-500">*</span>
               </label>
               <textarea
                 type={"text"}
@@ -412,13 +414,13 @@ const EditModal = ({ onClose, kelas }) => {
         </div>
         <div className="text-end border-t  p-4 space-x-4">
           <button
-            aria-label="batal"
+            aria-label={t("common.cancel")}
             type="button"
             disabled={loading}
             className="btn w-24 h-8.5 bg-gray-100 disabled:bg-gray-200  text-gray-800 border-gray-200 border hover:text-white"
             onClick={() => onClose()}
           >
-            {loading ? "Loading" : "Batal"}
+            {loading ? t('common.loading') : t('common.cancel')}
           </button>
           <button
             aria-label="ya"
@@ -428,7 +430,7 @@ const EditModal = ({ onClose, kelas }) => {
             onClick={handleSubmit(onSubmit)}
             className="btn w-24 h-8.5 disabled:bg-gray-800"
           >
-            {loading ? "Loading" : "Simpan"}
+            {loading ? t('common.loading') : t('common.save')}
           </button>
         </div>
       </div>

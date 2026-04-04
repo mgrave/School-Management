@@ -11,8 +11,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Edit, Edit2, Plus, Trash, X } from "lucide-react";
 import { selectedUserData, setUserData } from "@/store/slices/auth-slice";
+import { useTranslation } from 'react-i18next';
 
 const ProfileSiswaPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -132,7 +134,7 @@ const ProfileSiswaPage = () => {
     <section className="mx-6 mb-10">
       <div className="flex-between mt-4 border-b  bg-white  p-4 rounded-tl-lg rounded-tr-lg">
         <div>
-          <h1 className="text-neutral mb-1 font-semibold">Data Pribadi Anda</h1>
+          <h1 className="text-neutral mb-1 font-semibold">{t('editStudent.editProfile')}</h1>
           <p className="text-xs font-medium text-gray-500">
             Lihat dan Kelola Data Pribadi Anda.
           </p>
@@ -214,10 +216,10 @@ const ProfileSiswaPage = () => {
             )}
           </div>
           <p className="text-[0.625rem] text-center mt-4 text-neutral">
-            Besar file maksimal 1 MB
+            {t('editStudent.maxFileSize')}
           </p>
           <p className="text-[0.625rem] text-center mt-2 text-neutral">
-            Ekstensi file: jpeg/jpg, png
+            {t('editStudent.allowedExtensions')}
           </p>
         </div>
         <form
@@ -227,7 +229,7 @@ const ProfileSiswaPage = () => {
           <div className="">
             <div className="mb-2">
               <label htmlFor="nis" className="text-xs mb-2 block font-semibold">
-                NIS
+                {t('editStudent.nisLabel')}
               </label>
               <input
                 readOnly
@@ -250,7 +252,7 @@ const ProfileSiswaPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama
+                {t('editStudent.nameLabel')}
               </label>
               <input
                 readOnly={isNoEdit}
@@ -258,10 +260,10 @@ const ProfileSiswaPage = () => {
                 id="nama"
                 name="nama"
                 {...register("nama", {
-                  required: "Nama tidak boleh kosong.",
+                  required: t('validation.required'),
                   maxLength: {
                     value: 50,
-                    message: "Nama maksimal 50 karakter.",
+                    message: t('validation.maxLength', { value: 50 })
                   },
                 })}
                 className={`${
@@ -279,13 +281,13 @@ const ProfileSiswaPage = () => {
                 htmlFor="password"
                 className="text-xs mb-2 block font-semibold"
               >
-                Password
+                {t('editStudent.passwordLabel')}
               </label>
               <input
                 readOnly={isNoEdit}
                 type={"text"}
                 id="password"
-                placeholder="Password tidak ditampilkan demi keamanan"
+                placeholder={t('editStudent.passwordPlaceholder')}
                 {...register("password", {
                   maxLength: {
                     value: 50,

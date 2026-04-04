@@ -15,9 +15,11 @@ import { useSelector } from "react-redux";
 import { selectedUserData } from "@/store/slices/auth-slice";
 import DropdownSiswa from "@/components/elements/DropdownSiswa";
 import DropdownCategoryNilai from "@/components/elements/DropdownCategoryNilai";
+import { useTranslation } from "react-i18next";
 
 const AddModal = ({ onClose }) => {
   const userData = useSelector(selectedUserData);
+  const { t } = useTranslation();
 
   const {
     control,
@@ -103,7 +105,7 @@ const AddModal = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Tambah Nilai"}
+            titile={t("grades.add_grade")}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -114,12 +116,12 @@ const AddModal = ({ onClose }) => {
               htmlFor="mapel"
               className="text-xs mb-2 w-fit block font-semibold text-gray-700"
             >
-              Mata Pelajaran
+              {t("grades.subject")}
             </label>
             <Controller
               name="mataPelajaran"
               control={control}
-              rules={{ required: "Mata Pelajaran diperlukan." }}
+              rules={{ required: t("validation.required.field", { field: t("grades.subject") }) }}
               render={({ field: { onChange, value } }) => (
                 <DropdownMapel
                   value={value}
@@ -137,12 +139,12 @@ const AddModal = ({ onClose }) => {
               htmlFor="siswa"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Siswa
+              {t("grades.student")}
             </label>
             <Controller
               name="siswa"
               control={control}
-              rules={{ required: "Siswa diperlukan." }}
+              rules={{ required: t("validation.required.field", { field: t("grades.student") }) }}
               render={({ field: { onChange, value } }) => (
                 <DropdownSiswa
                   onChange={onChange}
@@ -162,12 +164,12 @@ const AddModal = ({ onClose }) => {
                 htmlFor="kategori"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Kategori Nilai
+                {t("grades.category")}
               </label>
               <Controller
                 name="kategori"
                 control={control}
-                rules={{ required: "Kategori Nilai Diperlukan." }}
+                rules={{ required: t("validation.required.grade_category") }}
                 render={({ field: { onChange } }) => (
                   <DropdownCategoryNilai onChange={onChange} />
                 )}
@@ -182,7 +184,7 @@ const AddModal = ({ onClose }) => {
                 htmlFor="nilai"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nilai
+                {t("grades.score")}
               </label>
               <input
                 type="number"
@@ -191,14 +193,14 @@ const AddModal = ({ onClose }) => {
                 className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
                 id="nilai"
                 {...register("nilai", {
-                  required: "Nilai diperlukan.",
+                  required: t("validation.required.score"),
                   min: {
                     value: 0,
-                    message: "Nilai tidak kurang dari 0",
+                    message: t("validation.score.min"),
                   },
                   max: {
                     value: 100,
-                    message: "Nilai tidak lebih dari 100",
+                    message: t("validation.score.max"),
                   },
                 })}
               />
@@ -213,14 +215,14 @@ const AddModal = ({ onClose }) => {
                 htmlFor="tahunAjaran"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Tahun Ajaran
+                {t("grades.academic_year")}
               </label>
 
               <input
                 type="text"
                 name="tahunAjaran"
                 {...register("tahunAjaran", {
-                  required: "Tahun Ajaran di perlukan.",
+                  required: t("validation.required.field", { field: t("grades.academic_year") }),
                 })}
                 readOnly
                 disabled
@@ -236,7 +238,7 @@ const AddModal = ({ onClose }) => {
                 htmlFor="semester"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Semester
+                {t("grades.semester")}
               </label>
               <input
                 type="text"
@@ -254,12 +256,12 @@ const AddModal = ({ onClose }) => {
           </div>
           <div className="text-end border-t mt-4 p-4 space-x-4">
             <button
-              aria-label="simpan nilai"
+              aria-label={t("common.save")}
               type="submit"
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t("common.loading") : t("common.save")}
             </button>
           </div>
         </form>

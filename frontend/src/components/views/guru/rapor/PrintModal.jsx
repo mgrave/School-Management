@@ -1,8 +1,11 @@
 import React from "react";
 import logo from "../../../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const PrintComponent = React.forwardRef(
   ({ dataRapor, average, totalAbsen, dataMapel }, ref) => {
+    const { t } = useTranslation();
+
     return (
       <div
         ref={ref}
@@ -21,46 +24,46 @@ const PrintComponent = React.forwardRef(
             <div className="col-span-2 space-y-2">
               <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                 <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                  Nama Siswa
+                  {t('reportCard.studentName')}
                 </p>
-                <span className="block">:</span>
+                <span>:</span>
                 <p className="font-medium">{dataRapor?.nama}</p>
               </div>
               <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                 <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                  Nomor Induk
+                  {t('common.nis')}
                 </p>
-                <span className="block">:</span>
+                <span>:</span>
                 <p className="font-medium">{dataRapor?.nis}</p>
               </div>
               <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                 <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                  Wali Kelas
+                  {t('class.homeroom_teacher')}
                 </p>
-                <span className="block">:</span>
+                <span>:</span>
                 <p className="font-medium">{dataRapor?.waliKelas}</p>
               </div>
             </div>
             <div className="col-span-2 space-y-2">
               <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                 <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                  Kelas
+                  {t('common.class')}
                 </p>
-                <span className="block">:</span>
+                <span>:</span>
                 <p className="font-medium">{dataRapor?.kelas}</p>
               </div>
               <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                 <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                  Tahun Ajaran
+                  {t('common.academicYear')}
                 </p>
-                <span className="block">:</span>
+                <span>:</span>
                 <p className="font-medium">{dataRapor?.ajaran}</p>
               </div>
               <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                 <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                  Semester
+                  {t('common.semester')}
                 </p>
-                <span className="block">:</span>
+                <span>:</span>
                 <p className="font-medium">
                   {dataRapor?.semester?.split("semester").join(" ")}
                 </p>
@@ -81,19 +84,19 @@ const PrintComponent = React.forwardRef(
                     scope="col"
                     className="px-4 py-2 w-[40%] font-medium border border-gray-600"
                   >
-                    Mata Pelajaran
+                    {t('common.subject')}
                   </th>
                   <th
                     scope="col"
                     className="px-4 py-2 w-[25%] text-center font-medium border border-gray-600"
                   >
-                    Tugas
+                    {t('common.assignment')}
                   </th>
                   <th
                     scope="col"
                     className="px-4 py-2 w-[25%] text-center font-medium border border-gray-600"
                   >
-                    Ujian
+                    {t('common.exam')}
                   </th>
                 </tr>
               </thead>
@@ -182,7 +185,7 @@ const PrintComponent = React.forwardRef(
                     colSpan={2}
                     className="px-4 py-1 w-[50%]  font-medium border border-gray-600"
                   >
-                    Rata-Rata
+                    {t('tableNilai.average')}
                   </td>
                   <td
                     scope="row"
@@ -203,7 +206,7 @@ const PrintComponent = React.forwardRef(
                     colSpan={2}
                     className="px-4 py-1 w-[50%]  font-medium border border-gray-600"
                   >
-                    Total Rata-Rata
+                    {t('reportCard.gradeSummary')}
                   </td>
                   <td
                     scope="row"
@@ -223,13 +226,13 @@ const PrintComponent = React.forwardRef(
                     rowSpan={3}
                     className="px-4 py-1 w-[50%] text-center font-medium border border-gray-600"
                   >
-                    Ketidakhadiran
+                    {t('reportCard.absence')}
                   </td>
                   <td
                     scope="row"
                     className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
                   >
-                    Izin
+                    {t('attendance.status.izin')}
                   </td>
                   <td
                     scope="row"
@@ -243,7 +246,7 @@ const PrintComponent = React.forwardRef(
                     scope="row"
                     className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
                   >
-                    Sakit
+                    {t('attendance.status.sakit')}
                   </td>
                   <td
                     scope="row"
@@ -257,7 +260,7 @@ const PrintComponent = React.forwardRef(
                     scope="row"
                     className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
                   >
-                    Alpha
+                    {t('attendance.status.alpha')}
                   </td>
                   <td
                     scope="row"

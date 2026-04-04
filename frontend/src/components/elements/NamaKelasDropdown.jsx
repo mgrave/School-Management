@@ -4,6 +4,7 @@ import axios from "axios";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const NamaKelasDropdown = ({ onChange, kelas, onChange2, value }) => {
   const dataEdit = useSelector(selectedDataEdit);
@@ -12,7 +13,8 @@ const NamaKelasDropdown = ({ onChange, kelas, onChange2, value }) => {
   const [dataKelas, setDataKelas] = useState([]);
   const [namaKelas, setNamaKelas] = useState([]);
   const [selectedNamaKelas, setSelectedNamaKelas] = useState("");
-
+  const { t } = useTranslation();
+  
   useEffect(() => {
     if (dataEdit) {
       setTimeout(() => {
@@ -99,9 +101,9 @@ const NamaKelasDropdown = ({ onChange, kelas, onChange2, value }) => {
         disabled={kelas === 0 || !kelas}
         value={
           kelas === ""
-            ? "Pilih Kelas terlebih Dulu"
+            ? t("common.select_class_first")
             : !selectedNamaKelas.nama
-            ? "Pilih Kelas"
+            ? t("common.select_class")
             : selectedNamaKelas.nama
         }
         onClick={handleInputClick}

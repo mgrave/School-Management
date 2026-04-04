@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import profile from "../../../../assets/profile.png";
+import { useTranslation } from "react-i18next";
 
 const TableNilai = ({
   data,
@@ -34,6 +35,7 @@ const TableNilai = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [dataChecked, setDataChecked] = useState([]);
+  const { t } = useTranslation();
 
   const lastOfIndexnilai = pagination?.page * pagination?.limit;
   const firstOfindexnilai = lastOfIndexnilai - pagination?.limit;
@@ -96,29 +98,29 @@ const TableNilai = ({
                 </th>
 
                 <th scope="col" className="px-10 py-4  whitespace-nowrap">
-                  Mata Pelajaran
+                  {t("tableNilai.subjects")}
                 </th>
 
                 <th scope="col" className="px-10 pr-4  py-4  whitespace-nowrap">
-                  Nama Siswa
+                  {t("tableNilai.studentName")}
                 </th>
                 <th
                   scope="col"
                   className="px-5 py-4 text-center whitespace-nowrap"
                 >
-                  Kategori
+                  {t("tableNilai.category")}
                 </th>
                 <th scope="col" className="px-3 py-4 text-center ">
-                  Nilai
+                  {t("tableNilai.score")}
                 </th>
                 <th
                   scope="col"
                   className="px-5 py-4 text-center  whitespace-nowrap"
                 >
-                  Tahun Ajaran
+                  {t("tableNilai.academicYear")}
                 </th>
                 <th scope="col" className="py-4 text-center ">
-                  Semester
+                  {t("tableNilai.semester")}
                 </th>
                 <th scope="col" className="px-5 py-3">
                   <span className="sr-only">Edit</span>
@@ -274,22 +276,22 @@ const TableNilai = ({
                   </th>
 
                   <th scope="col" className="pl-1 pr-4  py-4">
-                    Nama
+                    {t("tableNilai.studentName")}
                   </th>
                   <th scope="col" className=" py-4 whitespace-nowrap">
-                    Jenis Kelamin
+                    {t("tableNilai.gender")}
                   </th>
                   <th
                     scope="col"
                     className="px-3 py-4 text-center whitespace-nowrap"
                   >
-                    Tahun Masuk
+                    {t("tableNilai.entryYear")}
                   </th>
                   <th scope="col" className="px-2 py-4">
-                    Alamat
+                    {t("tableNilai.address")}
                   </th>
                   <th scope="col" className="py-4 text-center">
-                    Kontak
+                    {t("tableNilai.contact")}
                   </th>
                 </tr>
               </thead>
@@ -407,15 +409,15 @@ const Pagination = ({
   return (
     <div className=" absolute h-9 left-0 bottom-5 border-t pt-4 w-full flex-between px-3">
       <div className="flex">
-        <p className="text-[10px] sm:text-xs">{`Menampilkan ${
-          pagination?.total === 0 ? 0 : firstOfindexnilai + 1 || 0
-        } - ${
-          page === totalPage
-            ? pagination?.total
-            : pagination?.total === 0
-            ? 0
-            : lastOfIndexnilai || 0
-        } dari ${pagination?.total || 0} data`}</p>
+        <p className="text-[10px] sm:text-xs">{t("pagination.showing", {
+          from: pagination?.total === 0 ? 0 : firstOfindexnilai + 1 || 0,
+          to: page === totalPage
+              ? pagination?.total
+              : pagination?.total === 0
+              ? 0
+              : lastOfIndexnilai || 0,
+          total: pagination?.total || 0
+        })}</p>
       </div>
       <div className="flex-center space-x-4">
         {pagination?.total === 0 ? (

@@ -1,12 +1,14 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const InputSearch = ({ loading }) => {
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -39,7 +41,7 @@ const InputSearch = ({ loading }) => {
     <div className="relative flex w-full   sm:max-w-[300px]">
       <input
         type="search"
-        placeholder="Cari nama dan nis dari siswa."
+        placeholder={t("common.search_student_placeholder")}
         id="search"
         value={search}
         disabled={loading}

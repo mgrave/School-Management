@@ -31,7 +31,7 @@ export const addNilai = async (req, res, next) => {
     if (isExist) {
       throw new ResponseError(
         400,
-        `Kategori nilai ${kategori.toLowerCase()} untuk siswa ini sudah ada.`
+        `La categoría ${kategori.toLowerCase()} ya existe para este estudiante`
       );
     }
 
@@ -41,7 +41,7 @@ export const addNilai = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Berhasil menambahkan nilai siswa",
+      message: "Nota del estudiante agregada correctamente",
     });
   } catch (error) {
     next(error);
@@ -64,7 +64,7 @@ export const getNilaiKelas = async (req, res, next) => {
     if (!kelas) {
       throw new ResponseError(
         404,
-        "Kelas dengan Wali kelas ini tidak ditemukan."
+        "Clase con este tutor no encontrada"
       );
     }
 
@@ -239,7 +239,7 @@ export const getNilaiKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil semua nilai siswa",
+      message: "Notas de estudiantes obtenidas",
       nilai,
       pagination: {
         limit,
@@ -261,7 +261,7 @@ export const deleteOneNilai = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menghapus nilai siswa",
+      message: "Nota eliminada correctamente",
     });
   } catch (error) {
     next(error);
@@ -276,7 +276,7 @@ export const deleteManyNilai = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil menghapus nilai siswa",
+      message: "Notas seleccionadas eliminadas",
     });
   } catch (error) {
     next(error);
@@ -306,7 +306,7 @@ export const updateNilai = async (req, res, next) => {
     if (isExist) {
       throw new ResponseError(
         400,
-        `Kategori nilai ${kategori.toLowerCase()} untuk siswa ini sudah ada.`
+        `La categoría ${kategori.toLowerCase()} ya existe para este estudiante`
       );
     }
 
@@ -314,7 +314,7 @@ export const updateNilai = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengubah nilai siswa",
+      message: "Nota actualizada correctamente",
     });
   } catch (error) {
     next(error);
@@ -337,7 +337,7 @@ export const getRekapKelas = async (req, res, next) => {
     }
 
     if (!kelass) {
-      throw new ResponseError(404, "Kelas tidak memiliki siswa.");
+      throw new ResponseError(404, "La clase no tiene estudiantes");
     }
 
     const mapel = await Jadwal.find({ kelas: kelass._id });
@@ -361,7 +361,7 @@ export const getRekapKelas = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil semua nilai siswa",
+      message: "Reporte de notas obtenido",
       nilai,
       kelas: {
         kelas: kelass.kelas,
@@ -431,7 +431,7 @@ export const getRaport = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil semua nilai siswa",
+      message: "Boleta académica generada",
       rapor: siswaWithNiali,
       absen,
       publish: totalMapel <= 5,
@@ -493,7 +493,7 @@ export const getNilaiAverage = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil semua nilai siswa",
+      message: "Promedios calculados correctamente",
       averages,
     });
   } catch (error) {

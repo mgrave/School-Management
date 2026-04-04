@@ -11,9 +11,11 @@ import DropdownMapel from "@/components/elements/DropdownMapel";
 import { useSelector } from "react-redux";
 import { selectedUserData } from "@/store/slices/auth-slice";
 import DropdownSiswa from "@/components/elements/DropdownSiswa";
+import { useTranslation } from "react-i18next";
 
 const AddModal = ({ onClose, kelas, pertemuan }) => {
   const userData = useSelector(selectedUserData);
+  const { t } = useTranslation();
 
   const {
     control,
@@ -115,7 +117,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={`Tambah Nilai Pertemuan Kelas ${kelas.grade} ${kelas.nama}`}
+            titile={`${t("grades.add")} ${t("grades.meeting")} ${kelas.grade} ${kelas.nama}`}
             onClose={onClose}
             className={"font-semibold"}
           />
@@ -126,7 +128,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
               htmlFor="mapel"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Mata Pelajaran
+              {t("grades.subject")}
             </label>
             <Controller
               name="mataPelajaran"
@@ -143,7 +145,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
               )}
             />
             <span className="text-xs h-4 text-neutral2 block">
-              {errors.mataPelajaran && errors.mataPelajaran.message}
+              {errors.mataPelajaran && t("validation.required.field", { field: t("grades.subject") })}
             </span>
           </div>
           <div className="px-4 mb-2">
@@ -151,7 +153,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
               htmlFor="siswa"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Siswa
+              {t("common.student")}
             </label>
             <Controller
               name="siswa"
@@ -167,7 +169,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
             />
 
             <span className="text-xs h-4 text-neutral2 block">
-              {errors.siswa && errors.siswa.message}
+              {errors.siswa && t("validation.required.field", { field: t("common.student") })}
             </span>
           </div>
           <div className="flex w-full ">
@@ -176,7 +178,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
                 htmlFor="pertemuan"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Pertemuan
+                {t("grades.meeting")}
               </label>
               <input
                 type="text"
@@ -196,7 +198,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
                 htmlFor="nilai"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Nilai
+                {t("grades.score")}
               </label>
               <input
                 type="number"
@@ -204,15 +206,9 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
                 className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
                 id="nilai"
                 {...register("nilai", {
-                  required: "Nilai diperlukan.",
-                  min: {
-                    value: 0,
-                    message: "Nilai tidak kurang dari 0",
-                  },
-                  max: {
-                    value: 100,
-                    message: "Nilai tidak lebih dari 100",
-                  },
+                  required: t("grades.score_required"),
+                  min: { value: 0, message: t("grades.min_score") },
+                  max: { value: 100, message: t("grades.max_score") }
                 })}
               />
               <span className="text-xs h-4 text-neutral2 block">
@@ -226,7 +222,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
                 htmlFor="tahunAjaran"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Tahun Ajaran
+                {t("common.academicYear")}
               </label>
 
               <input
@@ -249,7 +245,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
                 htmlFor="semester"
                 className="text-xs w-fit mb-2 block font-semibold text-gray-700"
               >
-                Semester
+                {t("common.semester")}
               </label>
               <input
                 type="text"
@@ -272,7 +268,7 @@ const AddModal = ({ onClose, kelas, pertemuan }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t("common.loading") : t("common.save")}
             </button>
           </div>
         </form>

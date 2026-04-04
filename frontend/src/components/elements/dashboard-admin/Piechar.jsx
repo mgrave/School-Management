@@ -1,6 +1,9 @@
 import { Tooltip, ResponsiveContainer, Pie, PieChart, Legend } from "recharts";
+import { useTranslation } from "react-i18next";
 
 const PieChartComponent = ({ data, loading }) => {
+  const { t } = useTranslation();
+
   if (loading) {
     return (
       <div className="w-full h-full flex-center">
@@ -13,7 +16,7 @@ const PieChartComponent = ({ data, loading }) => {
 
   if (!data || data.length === 0) {
     return (
-      <p className="text-xs h-full w-full   flex-center">Data tidak ada.</p>
+      <p className="text-xs h-full w-full flex-center">{t('common.no_data')}</p>
     );
   }
 
@@ -31,6 +34,8 @@ const PieChartComponent = ({ data, loading }) => {
 export default PieChartComponent;
 
 const CustomTooltip = ({ active, payload }) => {
+  const { t } = useTranslation();
+  
   if (active && payload && payload.length) {
     const fillColor = payload[0].payload.fill;
     return (
@@ -41,7 +46,7 @@ const CustomTooltip = ({ active, payload }) => {
           style={{ background: fillColor }}
         ></div>
         <p className="text-xs text-neutral">
-          <span className="ml-2">{payload[0].value} Jumlah</span>
+          <span className="ml-2">{payload[0].value} {t('common.quantity')}</span>
         </p>
       </div>
     );

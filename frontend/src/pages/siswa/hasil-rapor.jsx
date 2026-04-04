@@ -12,6 +12,7 @@ import PrintComponent from "@/components/views/guru/rapor/PrintModal";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { SyncLoader } from "react-spinners";
+import { useTranslation } from 'react-i18next';
 
 const HasilRaporPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const HasilRaporPage = () => {
   const [dataRapor, setDataRapor] = useState([]);
   const [dataMapel, setDataMapel] = useState([]);
   const [dataAbsen, setDataAbsen] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -173,7 +175,8 @@ const HasilRaporPage = () => {
                   disabled={loading || dataRapor?.nilai?.length === 0}
                   className=" btn disabled:cursor-not-allowed disabled:pointer-events-none flex-center py-2 gap-2 text-xs "
                 >
-                  <Printer width={18} height={18} /> Print
+                  <Printer width={18} height={18} />
+                  {t('common.print')}
                 </button>
               )}
               content={() => raporRef.current}
@@ -194,21 +197,21 @@ const HasilRaporPage = () => {
               <div className="col-span-2 space-y-2">
                 <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                   <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                    Nama Siswa
+                    {t('reportCard.studentName')}
                   </p>
                   <span className="block">:</span>
                   <p className="font-medium">{dataRapor?.nama}</p>
                 </div>
                 <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                   <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                    Nomor Induk
+                    {t('reportCard.nis')}
                   </p>
                   <span className="block">:</span>
                   <p className="font-medium">{dataRapor?.nis}</p>
                 </div>
                 <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                   <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                    Wali Kelas
+                    {t('reportCard.teacherName')}
                   </p>
                   <span className="block">:</span>
                   <p className="font-medium">{dataRapor?.waliKelas}</p>
@@ -217,21 +220,21 @@ const HasilRaporPage = () => {
               <div className="col-span-2 space-y-2">
                 <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                   <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                    Kelas
+                    {t('reportCard.class')}
                   </p>
                   <span className="block">:</span>
                   <p className="font-medium">{dataRapor?.kelas}</p>
                 </div>
                 <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                   <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                    Tahun Ajaran
+                    {t('reportCard.schoolYear')}
                   </p>
                   <span className="block">:</span>
                   <p className="font-medium">{dataRapor?.ajaran}</p>
                 </div>
                 <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
                   <p className="min-w-[30px] md:min-w-[80px] font-medium">
-                    Semester
+                    {t('reportCard.semester')}
                   </p>
                   <span className="block">:</span>
                   <p className="font-medium">
@@ -254,19 +257,19 @@ const HasilRaporPage = () => {
                       scope="col"
                       className="px-4 py-2 w-[40%] font-medium border border-gray-600"
                     >
-                      Mata Pelajaran
+                      {t('reportCard.subject')}
                     </th>
                     <th
                       scope="col"
                       className="px-4 py-2 w-[25%] text-center font-medium border border-gray-600"
                     >
-                      Tugas
+                      {t('reportCard.assignment')}
                     </th>
                     <th
                       scope="col"
                       className="px-4 py-2 w-[25%] text-center font-medium border border-gray-600"
                     >
-                      Ujian
+                      {t('reportCard.exam')}
                     </th>
                   </tr>
                 </thead>
@@ -283,7 +286,7 @@ const HasilRaporPage = () => {
                         scope="row"
                         className="px-4 py-1 w-[40%]  font-medium border border-gray-600"
                       >
-                        Tidak Ada Nilai
+                        {t('reportCard.noGrades')}
                       </td>
 
                       <td
@@ -307,7 +310,7 @@ const HasilRaporPage = () => {
                         colSpan={4}
                         className="px-4 py-1 text-center   font-medium border border-gray-600"
                       >
-                        Tidak memiliki nilai.
+                        {t('reportCard.noGrades')}
                       </td>
                     </tr>
                   )}
@@ -357,7 +360,7 @@ const HasilRaporPage = () => {
                       colSpan={2}
                       className="px-4 py-1 w-[50%]  font-medium border border-gray-600"
                     >
-                      Rata-Rata
+                      {t('reportCard.average')}
                     </td>
                     <td
                       scope="row"
@@ -378,7 +381,7 @@ const HasilRaporPage = () => {
                       colSpan={2}
                       className="px-4 py-1 w-[50%]  font-medium border border-gray-600"
                     >
-                      Total Rata-Rata
+                      {t('reportCard.totalAverage')}
                     </td>
                     <td
                       scope="row"
@@ -398,13 +401,13 @@ const HasilRaporPage = () => {
                       rowSpan={3}
                       className="px-4 py-1 w-[50%] text-center font-medium border border-gray-600"
                     >
-                      Ketidakhadiran
+                      {t('reportCard.attendance')}
                     </td>
                     <td
                       scope="row"
                       className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
                     >
-                      Izin
+                      {t('reportCard.permit')}
                     </td>
                     <td
                       scope="row"
@@ -418,7 +421,7 @@ const HasilRaporPage = () => {
                       scope="row"
                       className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
                     >
-                      Sakit
+                      {t('reportCard.sick')}
                     </td>
                     <td
                       scope="row"
@@ -432,7 +435,7 @@ const HasilRaporPage = () => {
                       scope="row"
                       className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
                     >
-                      Alpha
+                      {t('reportCard.alpha')}
                     </td>
                     <td
                       scope="row"

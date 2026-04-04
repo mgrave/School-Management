@@ -7,6 +7,7 @@ import { Edit2Icon, Flag, LogOut, Menu, Settings, User } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HeaderAdminLayout = ({
   handleOpenEdit,
@@ -19,6 +20,7 @@ const HeaderAdminLayout = ({
   const buttonRef = useRef();
   const [isSetting, setIsSetting] = useState(false);
   const data = useSelector(selectedUserData);
+  const { t } = useTranslation();
 
   const handleLogout = async () => {
     try {
@@ -118,7 +120,7 @@ const HeaderAdminLayout = ({
                 >
                   <Edit2Icon className="bg-neutral1 text-white w-7 h-7  rounded-sm p-2" />
                   <p className="text-xs font-medium group-hover:text-neutral">
-                    Edit profile
+                    {t("common.editProfile")}
                   </p>
                 </li>
                 <li className="w-full h-[0.25px] bg-backup relative"></li>
@@ -128,7 +130,7 @@ const HeaderAdminLayout = ({
                 >
                   <LogOut className="bg-neutral2 text-white w-7 h-7  rounded-sm p-2" />
                   <p className="text-xs font-medium group-hover:text-neutral">
-                    Logout
+                    {t("common.logout")}
                   </p>
                 </li>
               </ul>

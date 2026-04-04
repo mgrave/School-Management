@@ -39,49 +39,49 @@ export const addJadwal = async (req, res, next) => {
     if (mulai < master.startTime) {
       throw new ResponseError(
         400,
-        "Jam mulai pembelajaran tidak bisa sebelum waktu mulai masuk sekolah."
+        "La hora de inicio no puede ser antes del horario de entrada escolar."
       );
     }
 
     if (mulai > master.endTime) {
       throw new ResponseError(
         400,
-        "Jam mulai pembelajaran tidak bisa setelah waktu selesai sekolah."
+        "La hora de inicio no puede ser después del horario de salida escolar."
       );
     }
 
     if (selesai > master.endTime) {
       throw new ResponseError(
         400,
-        "Jam selesai pembelajaran tidak bisa setelah waktu selesai sekolah."
+        "La hora de finalización no puede ser después del horario de salida escolar."
       );
     }
 
     if (selesai <= master.startTime) {
       throw new ResponseError(
         400,
-        "Jam selesai pembelajaran tidak bisa sebelum atau sama dengan jam mulai."
+        "La hora de finalización no puede ser antes o igual a la hora de inicio."
       );
     }
 
     if (mulai > master.endTime) {
       throw new ResponseError(
         400,
-        "Jam mulai pembelajaran tidak boleh melebihi jam selesai."
+        "La hora de inicio no puede exceder la hora de finalización."
       );
     }
 
     if (selesai <= mulai) {
       throw new ResponseError(
         400,
-        "Jam selesai tidak boleh sebelum jam mulai dalam pembelajaran"
+        "La hora de finalización no puede ser anterior a la hora de inicio."
       );
     }
 
     if (mulai >= selesai) {
       throw new ResponseError(
         400,
-        "Jam mulai tidak boleh setelah jam selesai dalam pembelajaran"
+        "La hora de inicio no puede exceder la hora de finalización."
       );
     }
 
@@ -98,7 +98,7 @@ export const addJadwal = async (req, res, next) => {
     if (jadwalKelas) {
       throw new ResponseError(
         400,
-        "Kelas ini sudah memiliki jadwal pada waktu tersebut."
+        "Esta clase ya tiene un horario en ese período."
       );
     }
 
@@ -115,12 +115,12 @@ export const addJadwal = async (req, res, next) => {
     if (jadwalGuru) {
       throw new ResponseError(
         400,
-        "Guru ini sudah memiliki jadwal mengajar pada waktu tersebut."
+        "Este profesor ya tiene una clase programada en ese horario."
       );
     }
 
     if (jumlahPertemuan <= 0) {
-      throw new ResponseError(400, "Jumlah pertemuan harus lebih dari 0.");
+      throw new ResponseError(400, "El número de sesiones debe ser mayor a 0.");
     }
 
     const libur = await Libur.findOne();
@@ -130,14 +130,14 @@ export const addJadwal = async (req, res, next) => {
     if (weekendHoliday && weekendHoliday.status) {
       throw new ResponseError(
         400,
-        "Hari yang yang di atur merupakan libur  pekan"
+        "El día seleccionado está configurado como día de descanso semanal."
       );
     }
 
     if (selisihDetik <= 40) {
       throw new ResponseError(
         400,
-        "Jam belajar tidak bisa kurang dari 40menit"
+        "La duración de la clase no puede ser menor a 40 minutos."
       );
     }
 
@@ -157,16 +157,16 @@ export const addJadwal = async (req, res, next) => {
       if (totalPertemuan >= 50) {
         throw new ResponseError(
           400,
-          `Jumlah pertemuan bidang studi ${mapel.nama.toLowerCase()} pada kelas ini sudah melewati 50  pertemuan`
+          `Las sesiones de ${mapel.nama.toLowerCase()} en esta clase han excedido 50 sesiones`
         );
       }
 
       if (totalPertemuan + parseInt(jumlahPertemuan) > 50) {
         throw new ResponseError(
           400,
-          `Jumlah pertemuan bidang studi  ${mapel.nama.toLowerCase()} pada kelas ini tersisa ${
+          `Sesiones restantes de ${mapel.nama.toLowerCase()} en esta clase: ${
             50 - totalPertemuan
-          } pertemuan`
+          }`
         );
       }
     }
@@ -185,7 +185,7 @@ export const addJadwal = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Jadwal berhasil ditambahkan",
+      message: "Horario agregado exitosamente",
       jadwal,
     });
   } catch (error) {
@@ -211,7 +211,7 @@ export const getJadwal = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil jadwal",
+      message: "Horarios obtenidos con éxito",
       jadwal,
     });
   } catch (error) {
@@ -238,7 +238,7 @@ export const getJadwalMengajar = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil jadwal",
+      message: "Horario docente obtenido con éxito",
       jadwal,
     });
   } catch (error) {
@@ -254,7 +254,7 @@ export const deleteJadwal = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, message: "Berhasil menghapus jadwal." });
+      .json({ success: true, message: "Horario eliminado exitosamente." });
   } catch (error) {
     next(error);
   }
@@ -268,7 +268,7 @@ export const deleteManyJadwal = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, message: "Berhasil menghapus jadwal terpilih." });
+      .json({ success: true, message: "Horarios seleccionados eliminados." });
   } catch (error) {
     next(error);
   }
@@ -292,56 +292,56 @@ export const editJadwal = async (req, res, next) => {
     if (selisihDetik < 40) {
       throw new ResponseError(
         400,
-        "Jam belajar tidak bisa kurang dari 40 menit"
+        "La duración de la clase debe ser de al menos 40 minutos."
       );
     }
 
     if (mulai < master.startTime) {
       throw new ResponseError(
         400,
-        "Jam mulai pembelajaran tidak bisa sebelum waktu mulai masuk sekolah."
+        "La hora de inicio no puede ser antes del horario de entrada escolar."
       );
     }
 
     if (mulai > master.endTime) {
       throw new ResponseError(
         400,
-        "Jam mulai pembelajaran tidak bisa setelah waktu selesai sekolah."
+        "La hora de inicio no puede ser después del horario de salida escolar."
       );
     }
 
     if (selesai > master.endTime) {
       throw new ResponseError(
         400,
-        "Jam selesai pembelajaran tidak bisa setelah waktu selesai sekolah."
+        "La hora de finalización no puede ser después del horario de salida escolar."
       );
     }
 
     if (selesai <= master.startTime) {
       throw new ResponseError(
         400,
-        "Jam selesai pembelajaran tidak bisa sebelum atau sama dengan jam mulai."
+        "La hora de finalización no puede ser antes o igual a la hora de inicio."
       );
     }
 
     if (selesai <= mulai) {
       throw new ResponseError(
         400,
-        "Jam selesai tidak boleh sebelum jam mulai dalam pembelajaran"
+        "La hora de finalización no puede ser anterior a la hora de inicio."
       );
     }
 
     if (mulai >= selesai) {
       throw new ResponseError(
         400,
-        "Jam mulai tidak boleh setelah jam selesai dalam pembelajaran"
+        "La hora de inicio no puede exceder la hora de finalización."
       );
     }
 
     if (mulai > master.endTime) {
       throw new ResponseError(
         400,
-        "Jam mulai pembelajaran tidak boleh melebihi jam selesai."
+        "La hora de inicio no puede exceder la hora de finalización."
       );
     }
 
@@ -359,7 +359,7 @@ export const editJadwal = async (req, res, next) => {
     if (jadwalKelas) {
       throw new ResponseError(
         400,
-        "Kelas ini sudah memiliki jadwal pada waktu tersebut."
+        "Esta clase ya tiene un horario en ese período."
       );
     }
 
@@ -377,12 +377,12 @@ export const editJadwal = async (req, res, next) => {
     if (jadwalGuru) {
       throw new ResponseError(
         400,
-        "Guru ini sudah memiliki jadwal mengajar pada waktu tersebut."
+        "Este profesor ya tiene una clase programada en ese horario."
       );
     }
 
     if (jumlahPertemuan <= 0) {
-      throw new ResponseError(400, "Jumlah pertemuan harus lebih dari 0.");
+      throw new ResponseError(400, "El número de sesiones debe ser mayor a 0.");
     }
 
     const libur = await Libur.findOne();
@@ -392,7 +392,7 @@ export const editJadwal = async (req, res, next) => {
     if (weekendHoliday && weekendHoliday.status) {
       throw new ResponseError(
         400,
-        "Hari yang yang di atur merupakan libur  pekan"
+        "El día seleccionado está configurado como día de descanso semanal."
       );
     }
     const updateData = await Jadwal.findById(id);
@@ -418,14 +418,14 @@ export const editJadwal = async (req, res, next) => {
       ) {
         throw new ResponseError(
           400,
-          `Jumlah pertemuan bidang studi ${mapel.nama.toLowerCase()} pada kelas ini sudah melewati 50  pertemuan`
+          `Las sesiones de ${mapel.nama.toLowerCase()} en esta clase han excedido 50 sesiones`
         );
       }
     } else {
       if (totalPertemuan + parseInt(jumlahPertemuan) > 50) {
         throw new ResponseError(
           400,
-          `Jumlah pertemuan bidang studi ${mapel.nama.toLowerCase()} pada kelas ini sudah melewati 50  pertemuan`
+          `Las sesiones de ${mapel.nama.toLowerCase()} en esta clase han excedido 50 sesiones`
         );
       }
     }
@@ -438,7 +438,7 @@ export const editJadwal = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ success: true, message: "Berhasil mengubah jadwal." });
+      .json({ success: true, message: "Horario actualizado correctamente." });
   } catch (error) {
     next(error);
   }
@@ -467,10 +467,7 @@ export const getJadwalGuru = async (req, res, next) => {
     let durasiSekolah = await Master.findOne();
 
     if (!durasiSekolah) {
-      throw new ResponseError(
-        404,
-        "Durasi Sekolah tidak ditemukan di master data"
-      );
+      throw new ResponseError(404, "Duración escolar no encontrada en configuración");
     }
 
     const mulai = waktuKeTanggal(durasiSekolah.startTime);
@@ -485,7 +482,7 @@ export const getJadwalGuru = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil jadwal",
+      message: "Horario docente obtenido",
       schedules,
       durasi: { lama: lamaSekolah, mulai: mulaiSekolah },
     });
@@ -512,7 +509,7 @@ export const getPertemuan = async (req, res, next) => {
 
       res.status(200).json({
         success: true,
-        message: "Berhasil mengambil total jadwal pertemuan",
+        message: "Total de sesiones obtenido exitosamente",
         pertemuan,
       });
     }
@@ -543,7 +540,7 @@ export const getJadwalSiswa = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil jadwal pertemuan",
+      message: "Horarios de clases obtenidos con éxito",
       jadwal,
       libur: libur.perpekan,
       nasional: libur.nasional,

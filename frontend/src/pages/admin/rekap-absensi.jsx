@@ -11,8 +11,10 @@ import ExcelJS from "exceljs";
 import ReactToPrint, { useReactToPrint } from "react-to-print";
 import PrintComponent from "@/components/views/guru/rekap/PrintModal";
 import DropdownGroup from "@/components/views/admin/RekapData/DropdownGrup";
+import { useTranslation } from 'react-i18next';
 
 const RekapAbsensiPage = () => {
+  const { t } = useTranslation();
   const menuRef = useRef();
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
@@ -96,7 +98,7 @@ const RekapAbsensiPage = () => {
     <section className="px-6 py-4 mb-4 ">
       <div className=" bg-white p-4 border shadow-md rounded-md">
         <h3 className="text-sm font-semibold mb-4 text-neutral">
-          Pilih rekap absensi siswa pada setiap kelas.
+          {t('attendanceReport.selectClassPrompt')}
         </h3>
         <div className="flex-between">
           <div className="hidden md:flex gap-4">
@@ -149,7 +151,7 @@ const RekapAbsensiPage = () => {
               className="rounded-md py-2 border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
             >
               <FileDownIcon height={15} width={15} />
-              Excel
+              {t('common.excel')}
             </button>
 
             <ReactToPrint
@@ -159,7 +161,7 @@ const RekapAbsensiPage = () => {
                   className="rounded-md py-2  border disabled:cursor-not-allowed text-xs px-4 shadow-sm hover:border-neutral bg-white font-medium flex-center gap-2 border-gray-400"
                 >
                   <Printer height={15} width={15} />
-                  Print
+                  {t('common.print')}
                 </button>
               )}
               content={() => componentRef.current}
@@ -184,7 +186,9 @@ const RekapAbsensiPage = () => {
         )}
         {(!kelas || !idKelas) && (
           <div className="absolute inset-0 flex-center bg-white">
-            <p className="text-xs font-medium">Pilih Kelas Terlebih dulu..</p>
+            <p className="text-xs font-medium">
+              {t('attendanceReport.selectClassFirst')}
+            </p>
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@ import DropdownSiswa from "@/components/elements/DropdownSiswa";
 import { selectedUserData } from "@/store/slices/auth-slice";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 import axios from "axios";
 import { HOST } from "@/util/constant";
@@ -12,6 +13,7 @@ import PrintComponent from "@/components/views/guru/rapor/PrintModal";
 import TableRapor from "@/components/views/guru/rapor/TableRapor";
 
 const RaporSiswaPage = () => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const raporRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -128,11 +130,13 @@ const RaporSiswaPage = () => {
     <section className="px-6 py-4 mb-4">
       <div className="flex flex-col flex-wrap gap-4">
         <h3 className="text-sm font-semibold text-neutral">
-          Pilih Siswa untuk menampilkan dan cetak rapor
+          {t('reportCard.title')}
         </h3>
         <div className="flex gap-4">
           <div className="flex items-center w-fit gap-4">
-            <p className="text-sm font-semibold text-gray-700">Siswa</p>
+            <p className="text-sm font-semibold text-gray-700">
+              {t('reportCard.studentName')}
+            </p>
             <DropdownSiswa
               onChange={handleSelectSiswa}
               url={`/api/siswa/get-siswa/kelas/${userData.waliKelas._id}`}
@@ -144,7 +148,8 @@ const RaporSiswaPage = () => {
                 disabled={loading || dataRapor?.nilai?.length === 0 || !siswaId}
                 className=" btn disabled:cursor-not-allowed disabled:pointer-events-none flex-center py-2 gap-2 text-xs "
               >
-                <Printer width={18} height={18} /> Print
+                <Printer width={18} height={18} />
+                {t('reportCard.print')}
               </button>
             )}
             content={() => raporRef.current}

@@ -7,8 +7,10 @@ import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const DropdownBidangStudi = ({ onChange, value, disabled }) => {
+  const { t } = useTranslation();
   const userData = useSelector(selectedUserData);
   const { pathname } = useLocation();
   const dataEdit = useSelector(selectedDataEdit);
@@ -114,7 +116,7 @@ const DropdownBidangStudi = ({ onChange, value, disabled }) => {
         disabled={disabled}
         value={
           !selectedMapel
-            ? "Pilih bidang studi"
+            ? t('common.select_study_field')
             : `${selectedMapel.kode}      ${selectedMapel.nama}`
         }
         readOnly
@@ -137,7 +139,7 @@ const DropdownBidangStudi = ({ onChange, value, disabled }) => {
           <div className="sticky top-0    text-xs hover:bg-gray-200 cursor-pointer">
             <input
               type="search"
-              placeholder="Cari nama Bidang Studi..."
+              placeholder={t('common.search_study_field')}
               value={search}
               className="block mb-2 w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-8 py-2 pr-8 rounded shadow leading-tight focus:outline-none  "
               onChange={(e) => setSearch(e.target.value)}
@@ -154,7 +156,7 @@ const DropdownBidangStudi = ({ onChange, value, disabled }) => {
                 tabIndex={0}
                 className="   text-xs hover:bg-gray-200 text-center py-2"
               >
-                <p>Data Bidang Studi tidak ditemukan.</p>
+                <p>{t('common.no_study_field_found')}</p>
               </li>
             )}
             {dataMapel &&

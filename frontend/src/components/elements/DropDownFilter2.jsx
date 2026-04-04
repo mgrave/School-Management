@@ -4,6 +4,7 @@ import DayDropdown from "./DayDropdown";
 import KelasDropdown from "./KelasDropdown";
 import { object } from "zod";
 import NamaKelasDropdown from "./NamaKelasDropdown";
+import { t } from "i18next";
 
 const DropDownFilter2 = ({ handleFilterChange, setFilter }) => {
   const filterRef = useRef(null);
@@ -64,11 +65,11 @@ const DropDownFilter2 = ({ handleFilterChange, setFilter }) => {
           className="absolute mt-1 w-[9.25rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
         >
           <div className="flex-between px-4 py-4 h-12 border-gray-200 border-b ">
-            <h3 className=" font-bold  text-xs">Kategori Filter</h3>
+            <h3 className=" font-bold  text-xs">{t('common.filter_category')}</h3>
             {Object.values(selectedFilter).some((value) => value !== "") && (
               <button
                 className="text-xs font-medium rounded-xl bg-indigo-400 hover:bg-neutral p-1"
-                title="Clear Filter"
+                title={t('common.clear_filter')}
                 onClick={() => {
                   setSelectedFilter({ hari: "", kelas: "", namaKelas: "" });
                   setFilter({ hari: "", kelas: "", namaKelas: "" });

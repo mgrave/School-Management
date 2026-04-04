@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import guru from "../../assets/svg/Student.svg";
 import ExcelJs from "exceljs";
 import CustomDropdown from "@/components/elements/DropDown";
@@ -23,6 +24,7 @@ import InputSearch from "@/components/elements/InputSearch";
 const selectRow = [7, 14, 21, 28];
 
 const DataGuruPage = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const dataChecked = useSelector(selectedDataDeleteMany);
   const dataDelete = useSelector(selectedDataDelete);
@@ -147,7 +149,7 @@ const DataGuruPage = () => {
           className="flex-between gap-3 min-w-fit bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
         >
           <img src={guru} alt="guru" width={15} height={15} />
-          Tambah Guru
+          {t('dataGuru.addTeacherButton')}
         </Link>
       </div>
 

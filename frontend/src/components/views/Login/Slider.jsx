@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const slides = [
   {
@@ -22,6 +23,7 @@ const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [clone, setClone] = useState(slides);
   const timeoutRef = useRef(null);
+  const { t } = useTranslation();
 
   const nextSlide = () => {
     setCurrentIndex((prevState) => prevState + 1);
@@ -43,7 +45,7 @@ const Slider = () => {
 
   return (
     <div className="w-full max-w-[220px] sm:max-w-[400px] sm:h-[250px] mx-auto select-none">
-      <h1 className="font-bold text-xl mb-4 text-center">Quotes</h1>
+      <h1 className="font-bold text-xl mb-4 text-center">{t("common.quotes")}</h1>
       <div className="relative w-full z-10 h-full overflow-hidden">
         <div className="absolute top-1/3 left-1/2 -translate-y-1/2 -translate-x-1/2 -z-[1]">
           <img

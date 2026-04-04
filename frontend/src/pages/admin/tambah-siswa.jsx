@@ -7,6 +7,7 @@ import { ALLOWED_FILE_TYPES, HOST, MAX_FILE_SIZE } from "@/util/constant";
 import axios from "axios";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const TambahSiswaPage = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const TambahSiswaPage = () => {
   const tahunMasuk = watch("tahunMasuk", "");
 
   const PhotoRef = useRef();
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -164,7 +166,7 @@ const TambahSiswaPage = () => {
   return (
     <>
       <div className="bg-white mx-6 border-b rounded-md p-4">
-        <h1 className="font-bold text-gray-700 text-sm">Masukkan Data Siswa</h1>
+        <h1 className="font-bold text-gray-700 text-sm">{t('tambahSiswa.addStudentData')}</h1>
       </div>
       <div className=" mx-6 mb-16 bg-white  grid grid-cols-1 rounded-lg rounded-tr-none rounded-tl-none py-6 px-6 gap-8 lg:grid-cols-4">
         <div className=" flex justify-start  items-center flex-col">
@@ -218,7 +220,7 @@ const TambahSiswaPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama <span className="text-red-500">*</span>
+                {t('tambahSiswa.nameLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -240,7 +242,7 @@ const TambahSiswaPage = () => {
             </div>
             <div className="mb-2">
               <label htmlFor="nis" className="text-xs mb-2 block font-semibold">
-                NIS <span className="text-red-500">*</span>
+                {t('tambahSiswa.nisLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -263,7 +265,7 @@ const TambahSiswaPage = () => {
                 htmlFor="password"
                 className="text-xs mb-2 block font-semibold"
               >
-                Password <span className="text-red-500">*</span>
+                {t('tambahSiswa.passwordLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -290,7 +292,7 @@ const TambahSiswaPage = () => {
                 htmlFor="tempatLahir"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tempat Lahir <span className="text-red-500">*</span>
+                {t('tambahSiswa.birthPlaceLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -313,7 +315,7 @@ const TambahSiswaPage = () => {
                 htmlFor="TanggalLahir"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tanggal Lahir <span className="text-red-500">*</span>
+                {t('tambahSiswa.birthDateLabel')} <span className="text-red-500">*</span>
               </label>
 
               <input
@@ -333,7 +335,7 @@ const TambahSiswaPage = () => {
                 htmlFor="Jenis Kelamin"
                 className="text-xs mb-2 block font-semibold"
               >
-                Jenis Kelamin <span className="text-red-500">*</span>
+                {t('tambahSiswa.genderLabel')} <span className="text-red-500">*</span>
               </label>
               <select
                 id="Jenis Kelamin"
@@ -342,7 +344,7 @@ const TambahSiswaPage = () => {
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
-                <option value="">Pilih jenis kelamin</option>
+                <option value="">{t('tambahSiswa.selectGenderPlaceholder')}</option>
                 <option value="Laki-Laki">Laki-Laki</option>
                 <option value="Perempuan">Perempuan</option>
               </select>
@@ -355,7 +357,7 @@ const TambahSiswaPage = () => {
                 htmlFor="Tahun Masuk"
                 className="text-xs mb-2 block font-semibold"
               >
-                Tahun Masuk <span className="text-red-500">*</span>
+                {t('tambahSiswa.entryYearLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -383,7 +385,7 @@ const TambahSiswaPage = () => {
                 htmlFor="Agama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Agama <span className="text-red-500">*</span>
+                {t('tambahSiswa.religionLabel')} <span className="text-red-500">*</span>
               </label>
               <select
                 id="Agama"
@@ -394,7 +396,7 @@ const TambahSiswaPage = () => {
                 className="py-1.5 h-8 bg-white border text-gray-500   text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
                 <option value="" className="">
-                  Pilih agama
+                  {t('tambahSiswa.selectReligionPlaceholder')}
                 </option>
                 <option value="Islam">Islam</option>
                 <option value="Kristen">Kristen</option>
@@ -413,7 +415,7 @@ const TambahSiswaPage = () => {
                 htmlFor="No. Telepon"
                 className="text-xs mb-2 block font-semibold"
               >
-                No. Telepon <span className="text-red-500">*</span>
+                {t('tambahSiswa.phoneLabel')} <span className="text-xs text-gray-500">{t('tambahSiswa.optionalText')}</span>
               </label>
               <input
                 type="number"
@@ -437,7 +439,7 @@ const TambahSiswaPage = () => {
                 htmlFor="kelas"
                 className="text-xs mb-2 block font-semibold"
               >
-                Kelas
+                {t('tambahSiswa.classLabel')} <span className="text-red-500">*</span>
               </label>
               <select
                 id="kelas"
@@ -445,7 +447,7 @@ const TambahSiswaPage = () => {
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
                 {kelasNama.length === 0 && (
-                  <option value="">Pilih Kelas</option>
+                  <option value="">{t('tambahSiswa.selectClassPlaceholder')}</option>
                 )}
                 {kelas &&
                   kelas.map((kel, i) => (
@@ -465,7 +467,7 @@ const TambahSiswaPage = () => {
                     htmlFor="Nama Kelas"
                     className="text-xs mb-2 block font-semibold"
                   >
-                    Nama Kelas <span className="text-red-500">*</span>
+                    {t('tambahSiswa.classNameLabel')} <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="Nama Kelas"
@@ -496,7 +498,7 @@ const TambahSiswaPage = () => {
                 htmlFor="Alamat"
                 className="text-xs mb-2 block font-semibold"
               >
-                Alamat
+                {t('tambahSiswa.addressLabel')} <span className="text-red-500">*</span>
               </label>
               <textarea
                 id="Alamat"
@@ -511,7 +513,7 @@ const TambahSiswaPage = () => {
                   type="button"
                   className="btn  w-28 bg-gray-300 text-gray-800 hover:text-white disabled:cursor-not-allowed   border border-gray-500"
                 >
-                  {loading ? "Loading" : "Batal"}
+                  {loading ? t('common.loading') : t('common.cancel')}
                 </button>
               </Link>
 
@@ -520,7 +522,7 @@ const TambahSiswaPage = () => {
                 type="submit"
                 className="btn  disabled:cursor-not-allowed w-28 "
               >
-                {loading ? "Loading" : "Simpan"}
+                {loading ? t('common.loading') : t('common.save')}
               </button>
             </div>
           </div>

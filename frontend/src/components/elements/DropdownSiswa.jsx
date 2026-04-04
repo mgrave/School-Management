@@ -7,6 +7,7 @@ import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const DropdownSiswa = ({ onChange, value, url }) => {
   const dataEdit = useSelector(selectedDataEdit);
@@ -16,6 +17,7 @@ const DropdownSiswa = ({ onChange, value, url }) => {
   const [dataSiswa, setdataSiswa] = useState([]);
   const [dataSearch, setDataSearch] = useState([]);
   const [selectedSiswa, setSelectedSiswa] = useState(null);
+  const { t } = useTranslation();
 
   const handleInputClick = (e) => {
     e.preventDefault();
@@ -107,7 +109,7 @@ const DropdownSiswa = ({ onChange, value, url }) => {
               type="search"
               id="search"
               onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
-              placeholder="Cari nama siswa..."
+              placeholder={t('studentSearch.placeholder')}
               value={search}
               className="block mb-2 w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-8 py-2 pr-8 rounded shadow leading-tight focus:outline-none  "
               onChange={(e) => setSearch(e.target.value)}
@@ -124,7 +126,7 @@ const DropdownSiswa = ({ onChange, value, url }) => {
                 tabIndex={0}
                 className="   text-xs hover:bg-gray-200 text-center py-2"
               >
-                <p>Data Siswa tidak ditemukan.</p>
+                <p>{t('common.no_student_found')}</p>
               </li>
             )}
             {dataSiswa &&

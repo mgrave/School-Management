@@ -25,8 +25,10 @@ import {
 } from "@/store/slices/admin-slice";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
 import EditModal from "@/components/views/guru/data-studi/EditModal";
+import { useTranslation } from 'react-i18next';
 
 const DataStudiPage = () => {
+  const { t } = useTranslation();
   const menuRef = useRef(null);
   const dataDelete = useSelector(selectedDataDelete);
   const dataChecked = useSelector(selectedDataDeleteMany);
@@ -125,7 +127,7 @@ const DataStudiPage = () => {
           <input
             type="search"
             id="search"
-            placeholder="Cari Nama Siswa"
+            placeholder={t('studentSearch.placeholder')}
             value={search}
             disabled={loading}
             onChange={(e) => setSearch(e.target.value)}
@@ -143,7 +145,7 @@ const DataStudiPage = () => {
           className="flex-between gap-3 min-w-fit disabled:cursor-not-allowed bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
         >
           <Studi width={15} height={15} className="stroke-white" />
-          Tambah Data
+          {t('common.addData')}
         </button>
       </div>
 
@@ -152,7 +154,7 @@ const DataStudiPage = () => {
           <div className="flex-center gap-2 relative  mr-auto  px-4 h-14 ">
             <div className="flex-center">
               <button
-                title="Hapus nilai terpilih"
+                title={t('actions.deleteSelected')}
                 onClick={handleToggleDeleteMany}
                 className={`${
                   dataChecked.length > 0
@@ -169,7 +171,7 @@ const DataStudiPage = () => {
                   htmlFor="kelas"
                   className="text-xs font-semibold text-gray-700"
                 >
-                  Kelas
+                  {t('common.class')}
                 </label>
                 <KelasDropdown onChange={handleChangeKelas} />
               </div>
@@ -179,7 +181,7 @@ const DataStudiPage = () => {
                     htmlFor="pertemuan"
                     className="text-xs font-semibold text-gray-700"
                   >
-                    Pertemuan
+                    {t('common.meeting')}
                   </label>
                   <PertemuanDropdown
                     kelas={kelas.id}
@@ -208,14 +210,14 @@ const DataStudiPage = () => {
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-4">
                       <p className="text-xs font-semibold text-gray-700">
-                        Kelas
+                        {t('common.class')}
                       </p>
                       <KelasDropdown onChange={handleChangeKelas} />
                     </div>
                     {kelas.id && (
                       <div className="flex items-center gap-4">
                         <p className="text-xs font-semibold text-gray-700">
-                          Pertemuan
+                          {t('common.meeting')}
                         </p>
                         <PertemuanDropdown
                           kelas={kelas.id}
@@ -250,7 +252,7 @@ const DataStudiPage = () => {
       {isDeleteNilai && (
         <ModalDelete
           onClose={handleToggleDelete}
-          title={"Apakah Anda yakin ingin menghapus nilai pertemuan?"}
+          title={t('deleteConfirmation.gradeSession')}
           url={`/api/nilaiPertemuan/delete-one/${dataDelete._id}`}
         />
       )}
@@ -267,7 +269,7 @@ const DataStudiPage = () => {
           onClose={handleToggleDeleteMany}
           setAllCheck={setAllChecked}
           url={"/api/nilaiPertemuan/delete-many"}
-          title={"Apakah And yakin ingin menghapus nilai terpilih?"}
+          title={t('deleteConfirmation.selectedGrades')}
         />
       )}
     </section>

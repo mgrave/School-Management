@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const totalDailyMinutes = 8 * 60;
 
@@ -21,7 +22,11 @@ const getClassColor = (classNumber) => {
 };
 
 const GantChart = ({ schedules, durasi, loading }) => {
-  const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
+  const { t } = useTranslation();
+  
+  const days = [t('common.monday'), t('common.tuesday'), t('common.wednesday'), 
+               t('common.thursday'), t('common.friday'), t('common.saturday'), 
+               t('common.sunday')];
 
   const calculatePercentage = (start, end) => {
     const [startHour, startMinute] = start.split(":").map(Number);
@@ -52,7 +57,7 @@ const GantChart = ({ schedules, durasi, loading }) => {
           <div className="relative   sm:col-span-9 border-b border-l  border-gray-100 h-16    sm:h-10">
             {!loading &&
               schedules
-                .filter((schedule) => schedule.hari === day)
+                .filter((schedule) => schedule.hari === t(`common.days.${day.toLowerCase()}`)) //todo: es posible que el dia en otro dioma no calce con el schedule.hari
                 .map((schedule, idx) => {
                   const width = calculatePercentage(
                     schedule.mulai,

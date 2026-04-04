@@ -21,10 +21,12 @@ import DeleteModal from "@/components/fragments/ModalDelete";
 import DeleteManyModal from "@/components/fragments/ModalDeleteMany";
 import ModalUploadExcel from "@/components/views/admin/data-siswa/ModalUploadExcel";
 import InputSearch from "@/components/elements/InputSearch";
+import { useTranslation } from 'react-i18next';
 
 const selectRow = [7, 14, 21, 28];
 
 const DataSiswaPage = () => {
+  const { t } = useTranslation();
   const dataChecked = useSelector(selectedDataDeleteMany);
   const dataDelete = useSelector(selectedDataDelete);
   const navigate = useNavigate();
@@ -147,7 +149,7 @@ const DataSiswaPage = () => {
           <button
             onClick={handleToggleUpload}
             className="btn bg-neutral rounded-md flex-center "
-            title="upload siswa with excel"
+            title={t('excel.upload')}
           >
             <Upload width={15} height={15} className="text-white" />
           </button>
@@ -156,7 +158,7 @@ const DataSiswaPage = () => {
             className="flex-between gap-3 min-w-fit bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md "
           >
             <img src={Student} alt="student" width={15} height={15} />
-            Tambah Siswa
+            {t('dataSiswa.addStudent')}
           </Link>
         </div>
       </div>
@@ -165,7 +167,7 @@ const DataSiswaPage = () => {
         <div className="flex-between px-4 h-14 ">
           <div className="flex items-center gap-4  ">
             <button
-              title="Hapus siswa terpilih"
+              title={t('common.deleteSelected')}
               disabled={loading}
               onClick={() => setIsDeletManySiswa(!isDeleteManySiswa)}
               className={`${
@@ -187,7 +189,7 @@ const DataSiswaPage = () => {
           </div>
           <div>
             <button
-              title="Excel"
+              title={t('excel.export')}
               disabled={loading}
               className="hover:bg-neutral transition-all disabled:cursor-not-allowed duration-300 group border p-1.5 rounded-md"
               onClick={() => exportToExcel(dataSiswa)}
@@ -199,8 +201,6 @@ const DataSiswaPage = () => {
                 className="group-hover:text-white"
               />
             </button>
-
-            <button></button>
           </div>
         </div>
         {loading ? (
@@ -228,7 +228,7 @@ const DataSiswaPage = () => {
         <DeleteModal
           onClose={() => setIsDeleteSiswa(!isDeleteSiswa)}
           url={"/api/siswa/delete-one-siswa/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus siswa?"}
+          title={t('deleteConfirmation.student')}
         />
       )}
       {isDeleteManySiswa && (
@@ -236,7 +236,7 @@ const DataSiswaPage = () => {
           onClose={() => setIsDeletManySiswa(!isDeleteManySiswa)}
           setAllCheck={setAllCheck}
           url={"/api/siswa/delete-many-siswa"}
-          title={"Apakah anda yakin ingin menghapus siswa terpilih?"}
+          title={t('deleteConfirmation.selectedStudents')}
         />
       )}
       {isUpload && <ModalUploadExcel onClose={handleToggleUpload} />}

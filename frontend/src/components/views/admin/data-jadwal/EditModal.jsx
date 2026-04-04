@@ -13,6 +13,7 @@ import NamaKelasDropdown from "@/components/elements/NamaKelasDropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { selectedDataEdit, setDataEdit } from "@/store/slices/admin-slice";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ onClose }) => {
   const {
@@ -39,6 +40,7 @@ const EditModal = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const bidangStudi = watch("bidangStudi");
   const kelas = watch("kelas");
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (dataJadwal) {
@@ -99,7 +101,7 @@ const EditModal = ({ onClose }) => {
       >
         <div className="p-4 sticky top-0 bg-white z-20 sm:static border-b">
           <HeaderModal
-            titile={"Edit Jadwal"}
+            titile={t("schedule.edit_schedule")}
             onClose={onClose2}
             className={"font-semibold"}
           />
@@ -110,12 +112,12 @@ const EditModal = ({ onClose }) => {
               htmlFor="bidangStudi"
               className="text-xs mb-2 block font-semibold text-gray-700"
             >
-              Bidang Studi
+              {t("schedule.study_field")}
             </label>
             <Controller
               name="bidangStudi"
               control={control}
-              rules={{ required: "Bidang studi diperlukan." }}
+              rules={{ required: t("schedule.study_field_required") }}
               render={({ field: { onChange, value } }) => (
                 <DropdownBidangStudi value={value} onChange={onChange} />
               )}
@@ -129,12 +131,12 @@ const EditModal = ({ onClose }) => {
               htmlFor="guru"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Guru
+              {t("common.teacher")}
             </label>
             <Controller
               name="guru"
               control={control}
-              rules={{ required: "Guru diperlukan." }}
+              rules={{ required: t("schedule.teacher_required") }}
               render={({ field: { onChange, value } }) => (
                 <DropdownGuru
                   bidangStudi={bidangStudi.id}
@@ -219,16 +221,16 @@ const EditModal = ({ onClose }) => {
               htmlFor="hari"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Jam Pembelajaran
+              {t("schedule.learning_hours")}
             </label>
             <div className="flex-between gap-4 w-full">
               <div className=" gap-2 text-xs w-full">
-                <span className="block mb-3">Mulai</span>
+                <span className="block mb-3">{t("schedule.start")}</span>
                 <div className="w-full">
                   <input
                     type="time"
                     {...register("start", {
-                      required: "Jam mulai diperlukan.",
+                      required: t("schedule.start_time_required"),
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline"
                   />
@@ -238,12 +240,12 @@ const EditModal = ({ onClose }) => {
                 </div>
               </div>
               <div className=" gap-2 text-xs w-full">
-                <span className="block mb-3">Selesai</span>
+                <span className="block mb-3">{t("schedule.end")}</span>
                 <div className="w-full">
                   <input
                     type="time"
                     {...register("end", {
-                      required: "jam selesai diperlukan.",
+                      required: t("schedule.end_time_required"),
                     })}
                     className="block w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 rounded-md shadow leading-tight focus:outline-neutral focus:shadow-outline "
                   />
@@ -260,23 +262,22 @@ const EditModal = ({ onClose }) => {
               htmlFor="jumlah pertemuan"
               className="text-xs w-fit mb-2 block font-semibold text-gray-700"
             >
-              Jumlah Pertemuan{" "}
+              {t("schedule.meeting_count")}{" "}
               <span className="text-[0.625rem] text-neutral2">
-                ( Maksimal jumlah pertemuan 50 persemester )
+                {t("schedule.meeting_limit")}
               </span>
             </label>
             <input
               id="jumlah pertemuan"
               {...register("jumlahPertemuan", {
-                required: "Jumlah pertemuan diperlukan.",
+                required: t("schedule.meeting_count_required"),
                 max: {
                   value: 50,
-                  message:
-                    "Maksimal jumlah pertemuan di kelas adalah 50 persemester. ",
+                  message: t("validation.meeting_range"),
                 },
                 min: {
                   value: 15,
-                  message: "Minimal jumlah pertemuan di kelas adalah 15",
+                  message: t("schedule.meeting_min"),
                 },
               })}
               type="number"
@@ -295,7 +296,7 @@ const EditModal = ({ onClose }) => {
               disabled={loading}
               className="btn w-24 h-8.5"
             >
-              {loading ? "Loading" : "Simpan"}
+              {loading ? t("common.loading") : t("common.save")}
             </button>
           </div>
         </form>

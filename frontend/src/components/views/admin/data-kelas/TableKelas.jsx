@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Edit, Trash, Trash2 } from "lucide-react";
 import { space } from "postcss/lib/list";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from 'react-i18next';
 
 const TableKelas = ({
   data,
@@ -13,6 +14,7 @@ const TableKelas = ({
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 5;
+  const { t } = useTranslation();
 
   const lastIndexKelas = perPage * currentPage;
   const firstIndexKelas = lastIndexKelas - perPage;
@@ -43,28 +45,26 @@ const TableKelas = ({
           <thead className="text-xs uppercase text-white bg-neutral">
             <tr>
               <th scope="col" className="px-2 py-4">
-                Kelas
+                {t('common.className')}
               </th>
               <th scope="col" className="px-3 py-4">
-                Nama
+                {t('class.columnLevel')}
               </th>
               <th scope="col" className="px-3 py-4 whitespace-nowrap">
-                Jumlah Siswa
+                {t('class.columnHomeroomTeacher')}
               </th>
               <th
                 scope="col"
                 className="px-6 py-4  whitespace-nowrap text-left"
               >
-                Wali Kelas
+                {t('common.quantity')}
               </th>
               <th
                 scope="col"
                 className="px-6  whitespace-nowrap  py-4 text-left"
               >
-                Posisi Kelas
+                {t('common.actions')}
               </th>
-
-              <th className="opacity-0 px-3 ">Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -76,7 +76,7 @@ const TableKelas = ({
                 >
                   <div className="flex flex-col items-center justify-center">
                     <span className="w-8 h-8 block mb-2 animate-spin rounded-full border-4 border-t-gray-800 border-gray-300"></span>
-                    <span>Loading</span>
+                    <span>{t('common.loading')}</span>
                   </div>
                 </td>
               </tr>
@@ -87,7 +87,7 @@ const TableKelas = ({
                   colSpan="10"
                   className="px-2 py-4  border-gray-300 text-xs text-gray-900 whitespace-nowrap h-[350px]"
                 >
-                  Tidak ada data
+                  {t('common.no_data')}
                 </td>
               </tr>
             )}
@@ -126,7 +126,7 @@ const TableKelas = ({
                       kelas.waliKelas.nama
                     ) : (
                       <span className="text-gray-800 font-bold">
-                        Data Kosong
+                        {t('common.data_kosong')}
                       </span>
                     )}
                   </td>
@@ -138,7 +138,7 @@ const TableKelas = ({
                       kelas.posisi
                     ) : (
                       <span className="text-gray-800 font-bold">
-                        Data Kosong
+                        {t('common.data_kosong')}
                       </span>
                     )}
                   </td>
@@ -148,7 +148,7 @@ const TableKelas = ({
                   >
                     <div className="flex-center gap-4">
                       <button
-                        title="Edit"
+                        title={t('common.edit')}
                         onClick={() => handleEditKelas(kelas)}
                         className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral1 flex-center transition-all duration-300"
                       >
@@ -160,7 +160,7 @@ const TableKelas = ({
                         />
                       </button>
                       <button
-                        title="Hapus"
+                        title={t('common.delete')}
                         className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral2 flex-center transition-all duration-300"
                         onClick={() => handleDeleteKelas(kelas)}
                       >
@@ -204,6 +204,7 @@ const Pagination = ({
   dataSlice,
 }) => {
   const pageNumber = [];
+  const { t } = useTranslation();
 
   const totalPage = Math.ceil(totalKelas / perPage);
 
@@ -227,11 +228,11 @@ const Pagination = ({
       {!loading && (
         <>
           <div className="h-6 flex-center">
-            <p className="text-xs">{`Menampilkan ${
-              dataSlice.length === 0 ? 0 : firstIndexKelas + 1
-            } - ${
-              firstIndexKelas + dataSlice.length
-            } dari ${totalKelas} Data`}</p>
+            <p className="text-xs">{t('pagination.showing', { 
+              from: firstIndexKelas + 1, 
+              to: firstIndexKelas + dataSlice.length, 
+              total: totalKelas 
+            })}</p>
           </div>
           {pageNumber.length !== 0 && (
             <div className="flex gap-2 ">

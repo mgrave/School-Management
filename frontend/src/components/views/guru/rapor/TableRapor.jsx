@@ -1,6 +1,9 @@
 import logo from "../../../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="p-4 md:p-8">
       <div className="flex justify-center border-b-2 border-double border-gray-700 py-10">
@@ -15,21 +18,21 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
         <div className="col-span-2 space-y-2">
           <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
             <p className="min-w-[30px] md:min-w-[80px] font-medium">
-              Nama Siswa
+              {t('tableNilai.studentName')}
             </p>
             <span className="block">:</span>
             <p className="font-medium">{dataRapor?.nama}</p>
           </div>
           <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
             <p className="min-w-[30px] md:min-w-[80px] font-medium">
-              Nomor Induk
+              {t('tableNilai.nis')}
             </p>
             <span className="block">:</span>
             <p className="font-medium">{dataRapor?.nis}</p>
           </div>
           <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
             <p className="min-w-[30px] md:min-w-[80px] font-medium">
-              Wali Kelas
+              {t('tableNilai.waliKelas')}
             </p>
             <span className="block">:</span>
             <p className="font-medium">{dataRapor?.waliKelas}</p>
@@ -37,19 +40,23 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
         </div>
         <div className="col-span-2 space-y-2">
           <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
-            <p className="min-w-[30px] md:min-w-[80px] font-medium">Kelas</p>
+            <p className="min-w-[30px] md:min-w-[80px] font-medium">
+              {t('tableNilai.class')}
+            </p>
             <span className="block">:</span>
             <p className="font-medium">{dataRapor?.kelas}</p>
           </div>
           <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
             <p className="min-w-[30px] md:min-w-[80px] font-medium">
-              Tahun Ajaran
+              {t('tableNilai.year')}
             </p>
             <span className="block">:</span>
             <p className="font-medium">{dataRapor?.ajaran}</p>
           </div>
           <div className="flex text-[0.5rem] sm:text-[0.625rem] md:text-xs gap-2">
-            <p className="min-w-[30px] md:min-w-[80px] font-medium">Semester</p>
+            <p className="min-w-[30px] md:min-w-[80px] font-medium">
+              {t('tableNilai.semester')}
+            </p>
             <span className="block">:</span>
             <p className="font-medium">
               {dataRapor?.semester?.split("semester").join(" ")}
@@ -71,19 +78,19 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
                 scope="col"
                 className="px-4 py-2 w-[40%] font-medium border border-gray-600"
               >
-                Mata Pelajaran
+                {t('tableNilai.subjects')}
               </th>
               <th
                 scope="col"
                 className="px-4 py-2 w-[25%] text-center font-medium border border-gray-600"
               >
-                Tugas
+                {t('tableNilai.assignment')}
               </th>
               <th
                 scope="col"
                 className="px-4 py-2 w-[25%] text-center font-medium border border-gray-600"
               >
-                Ujian
+                {t('tableNilai.exam')}
               </th>
             </tr>
           </thead>
@@ -172,7 +179,7 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
                 colSpan={2}
                 className="px-4 py-1 w-[50%]  font-medium border border-gray-600"
               >
-                Rata-Rata
+                {t('tableNilai.average')}
               </td>
               <td
                 scope="row"
@@ -193,7 +200,7 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
                 colSpan={2}
                 className="px-4 py-1 w-[50%]  font-medium border border-gray-600"
               >
-                Total Rata-Rata
+                {t('reportCard.totalAverage')}
               </td>
               <td
                 scope="row"
@@ -213,13 +220,13 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
                 rowSpan={3}
                 className="px-4 py-1 w-[50%] text-center font-medium border border-gray-600"
               >
-                Ketidakhadiran
+                {t('attendance.absence')}
               </td>
               <td
                 scope="row"
                 className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
               >
-                Izin
+                {t('tableNilai.izin')}
               </td>
               <td
                 scope="row"
@@ -233,7 +240,7 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
                 scope="row"
                 className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
               >
-                Sakit
+                {t('tableNilai.sick')}
               </td>
               <td
                 scope="row"
@@ -247,7 +254,7 @@ const TableRapor = ({ dataMapel, dataRapor, average, totalAbsen }) => {
                 scope="row"
                 className="px-4 py-1 w-[25%] text-center font-medium border border-gray-600"
               >
-                Alpha
+                {t('tableNilai.alpha')}
               </td>
               <td
                 scope="row"

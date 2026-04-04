@@ -11,6 +11,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Plus, Trash } from "lucide-react";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from 'react-i18next';
 
 const EditGuruPage = () => {
   const PhotoRef = useRef();
@@ -24,6 +25,7 @@ const EditGuruPage = () => {
   const [loading, setLoading] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const [photo, setPhoto] = useState("");
+  const { t } = useTranslation();
 
   const {
     control,
@@ -177,9 +179,9 @@ const EditGuruPage = () => {
     const file = e.target.files[0];
 
     if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      return toast.error("Ektensi file tidak di dukung");
+      return toast.error(t('editGuru.fileTypeNotSupported'));
     } else if (file.size > MAX_FILE_SIZE) {
-      return toast.error("Ukuran File Maksimal 1 MB.");
+      return toast.error(t('editGuru.maxFileSize'));
     } else {
       const formData = new FormData();
 
@@ -222,7 +224,7 @@ const EditGuruPage = () => {
     <>
       <div>
         <div className="bg-white mx-6 border-b rounded-md p-4">
-          <h1 className="font-bold text-gray-700 text-sm">Ganti Data Guru</h1>
+          <h1 className="font-bold text-gray-700 text-sm">{t('editGuru.editTeacherData')}</h1>
         </div>
       </div>
       <div className="  mx-6 mb-16  grid  bg-white grid-cols-1 rounded-lg py-6 px-6 gap-8 lg:grid-cols-4">
@@ -261,13 +263,13 @@ const EditGuruPage = () => {
             )}
           </div>
           <p className="text-[0.625rem] text-neutral mt-8">
-            Besar file maksimal 1 MB
+            {t('editGuru.maxFileSize')}
           </p>
           <p className="text-[0.625rem] text-neutral mt-2">
-            Ekstensi file: jpeg/jpg, png
+            {t('editGuru.allowedExtensions')}
           </p>
           <div className="flex flex-col justify-center  mt-8">
-            <p className="text-xs mb-2">Status</p>
+            <p className="text-xs mb-2">{t('editGuru.status')}</p>
             <div className="relative inline-block w-10 h-5">
               <input
                 type="checkbox"
@@ -301,7 +303,7 @@ const EditGuruPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama <span className="text-red-500">*</span>
+                {t('editGuru.nameLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -317,12 +319,12 @@ const EditGuruPage = () => {
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral px-2"
               />
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.nama && errors.nama.message}
+                {errors.nama && t(errors.nama.message)}
               </span>
             </div>
             <div className="mb-2">
               <label htmlFor="nip" className="text-xs mb-2 block font-semibold">
-                NIP <span className="text-red-500">*</span>
+                {t('editGuru.nipLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -337,7 +339,7 @@ const EditGuruPage = () => {
               />
 
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.nip && errors.nip.message}
+                {errors.nip && t(errors.nip.message)}
               </span>
             </div>
             <div className="mb-2">
@@ -345,12 +347,12 @@ const EditGuruPage = () => {
                 htmlFor="password"
                 className="text-xs mb-2 block font-semibold"
               >
-                Password
+                {t('editGuru.passwordLabel')}
               </label>
               <input
                 type={"text"}
                 id="password"
-                placeholder="Password tidak ditampilkan untuk keamanan"
+                placeholder={t('editGuru.passwordPlaceholder')}
                 {...register("password", {
                   maxLength: {
                     value: 50,
@@ -364,7 +366,7 @@ const EditGuruPage = () => {
                 className="py-1.5 h-8  bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               />
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.password && errors.password.message}
+                {errors.password && t(errors.password.message)}
               </span>
             </div>
             <div className="mb-2">
@@ -387,7 +389,7 @@ const EditGuruPage = () => {
                 className="py-1.5 h-8  bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               />
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.tempatLahir && errors.tempatLahir.message}
+                {errors.tempatLahir && t(errors.tempatLahir.message)}
               </span>
             </div>
             <div className="mb-2">
@@ -408,7 +410,7 @@ const EditGuruPage = () => {
                 className="py-1.5 h-8  bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               />
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.tanggalLahir && errors.tanggalLahir.message}
+                {errors.tanggalLahir && t(errors.tanggalLahir.message)}
               </span>
             </div>
             <div className="mb-2">
@@ -430,7 +432,7 @@ const EditGuruPage = () => {
                 <option value="Perempuan">Perempuan</option>
               </select>
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.jenisKelamin && errors.jenisKelamin.message}
+                {errors.jenisKelamin && t(errors.jenisKelamin.message)}
               </span>
             </div>
           </div>
@@ -455,7 +457,7 @@ const EditGuruPage = () => {
                 )}
               />
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.bidangStudi && errors.bidangStudi.message}
+                {errors.bidangStudi && t(errors.bidangStudi.message)}
               </span>
             </div>
             <div className="mb-2">
@@ -478,7 +480,7 @@ const EditGuruPage = () => {
                 className="py-1.5 h-8  bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               />
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.phone && errors.phone.message}
+                {errors.phone && t(errors.phone.message)}
               </span>
             </div>
 
@@ -505,7 +507,7 @@ const EditGuruPage = () => {
                   ))}
               </select>
               <span className="text-xs h-4 block mt-1 text-neutral2">
-                {errors.kelas && errors.kelas.message}
+                {errors.kelas && t(errors.kelas.message)}
               </span>
             </div>
             {kelasNama.length !== 0 && (
@@ -536,7 +538,7 @@ const EditGuruPage = () => {
                     ))}
                   </select>
                   <span className="text-xs h-4 block mt-1 text-neutral2">
-                    {errors.namaKelas && errors.namaKelas.message}
+                    {errors.namaKelas && t(errors.namaKelas.message)}
                   </span>
                 </div>
               </>

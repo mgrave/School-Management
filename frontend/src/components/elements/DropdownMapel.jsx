@@ -6,6 +6,7 @@ import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const DropdownMapel = ({ onChange, value, url, disabled, readOnly }) => {
   const { pathname } = useLocation();
@@ -16,6 +17,7 @@ const DropdownMapel = ({ onChange, value, url, disabled, readOnly }) => {
   const [dataMapel, setDataMapel] = useState([]);
   const [dataSearch, setDataSearch] = useState([]);
   const [selectedMapel, setSelectedMapel] = useState("");
+  const { t } = useTranslation();
 
   const handleInputClick = (e) => {
     e.preventDefault();
@@ -107,7 +109,7 @@ const DropdownMapel = ({ onChange, value, url, disabled, readOnly }) => {
         onKeyDown={(e) => e.key === "Enter" && setIsOpen(true)}
         value={
           !selectedMapel
-            ? "Pilih Mata Pelajaran"
+            ? t("common.select_subject")
             : `${selectedMapel.kode}      ${selectedMapel.nama}`
         }
         readOnly
@@ -128,7 +130,7 @@ const DropdownMapel = ({ onChange, value, url, disabled, readOnly }) => {
             <input
               type="search"
               id="search"
-              placeholder="Cari nama Mata Pelajaran..."
+              placeholder={t("common.search_subject_placeholder")}
               value={search}
               className="block mb-2 w-full text-xs bg-white border border-gray-400 hover:border-gray-500 px-8 py-2 pr-8 rounded shadow leading-tight focus:outline-none  "
               onChange={(e) => setSearch(e.target.value)}
@@ -146,7 +148,7 @@ const DropdownMapel = ({ onChange, value, url, disabled, readOnly }) => {
                 onClick={() => handleSelectMapel("", "", "")}
                 className="   text-xs hover:bg-gray-200 text-center py-2"
               >
-                <p>Data Mata Pelajaran tidak ditemukan.</p>
+                <p>{t("common.no_subject_found")}</p>
               </li>
             )}
             {dataMapel &&

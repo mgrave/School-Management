@@ -31,7 +31,7 @@ export const addNilai = async (req, res, next) => {
     if (isExist) {
       throw new ResponseError(
         400,
-        `nilai pada pertemuan ${pertemuan} untuk siswa ini sudah ada.`
+        `La nota para el encuentro ${pertemuan} de este estudiante ya existe`
       );
     }
 
@@ -41,7 +41,7 @@ export const addNilai = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "Berhasil menambahkan nilai pertemuan.",
+      message: "Nota de encuentro agregada",
     });
   } catch (error) {
     next(error);
@@ -56,7 +56,7 @@ export const getNilai = async (req, res, next) => {
     const kelass = await Kelas.findById(kelas);
 
     if (!kelass) {
-      throw new ResponseError(404, "Kelas tidak ditemukan.");
+      throw new ResponseError(404, "Clase no encontrada");
     }
 
     const nilai = await NilaiPertemuan.find({
@@ -69,7 +69,7 @@ export const getNilai = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil nilai pertemuan.",
+      message: "Notas de encuentro obtenidas",
       nilai,
     });
   } catch (error) {
@@ -85,7 +85,7 @@ export const deleteNilai = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil menghapus nilai pertemuan ${nilai.pertemuan}`,
+      message: `Nota del encuentro ${nilai.pertemuan} eliminada`,
     });
   } catch (error) {
     next(error);
@@ -100,7 +100,7 @@ export const deleteManyNilai = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil menghapus nilai pertemuan terpilih.`,
+      message: "Notas seleccionadas eliminadas",
     });
   } catch (error) {
     next(error);
@@ -119,12 +119,12 @@ export const updateNilai = async (req, res, next) => {
     );
 
     if (!update) {
-      throw new ResponseError(400, "Gagal mengedit nilai pertemuan");
+      throw new ResponseError(400, "Error al actualizar la nota");
     }
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengubah nilai pertemuan.`,
+      message: "Nota actualizada correctamente",
     });
   } catch (error) {
     next(error);
@@ -149,7 +149,7 @@ export const getRekap = async (req, res, next) => {
     const kelas = await Kelas.findById(kelasId).populate({ path: "siswa" });
 
     if (!kelas) {
-      return res.status(404).json({ message: "Kelas tidak ditemukan." });
+      return res.status(404).json({ message: "Clase no encontrada" });
     }
 
     const siswaList = kelas.siswa.sort((a, b) => {
@@ -187,7 +187,7 @@ export const getRekap = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `Berhasil mengambil rekap nilai pertemuan.`,
+      message: "Reporte de encuentros generado",
       rekapNilai,
       totalPertemuan,
     });

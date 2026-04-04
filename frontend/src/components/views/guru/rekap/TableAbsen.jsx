@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../../../assets/Schoolarcy (2).webp";
+import { useTranslation } from "react-i18next";
 
 const formatTable = (status) => {
   switch (status) {
@@ -23,6 +24,8 @@ const TableAbsen = ({
   kelas,
   month,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="w-full min-h-[calc(80vh-160px)] overflow-auto ">
@@ -34,17 +37,17 @@ const TableAbsen = ({
                 rowSpan={2}
                 className="py-4 px-4 w-[30%] text-center  whitespace-nowrap"
               >
-                Nama Siswa
+                {t('attendance.studentName')}
               </th>
               <th
                 scope="col"
                 colSpan={countDay}
                 className="py-2 w-[50%] text-center border"
               >
-                Tanggal
+                {t('common.date')}
               </th>
               <th scope="col" colSpan={4} className="w-[20%] px-2 text-center ">
-                Total
+                {t('common.total')}
               </th>
             </tr>
             <tr>
@@ -53,10 +56,10 @@ const TableAbsen = ({
                   {i + 1}
                 </th>
               ))}
-              <th className="py-2 px-1 border w-6">H</th>
-              <th className="py-2 px-1 border w-6">I</th>
-              <th className="py-2 px-1 border w-6">S</th>
-              <th className="py-2 px-1  border-t w-6">A</th>
+              <th className="py-2 px-1 border w-6">{t('attendance.status.hadir')}</th>
+              <th className="py-2 px-1 border w-6">{t('attendance.status.izin')}</th>
+              <th className="py-2 px-1 border w-6">{t('attendance.status.sakit')}</th>
+              <th className="py-2 px-1  border-t w-6">{t('attendance.status.alpha')}</th>
             </tr>
           </thead>
           <tbody>
@@ -67,7 +70,7 @@ const TableAbsen = ({
                   className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[300px] whitespace-nowrap"
                 >
                   <p className="flex-center w-full text-xs">
-                    Kelas Tidak Memiliki Siswa.
+                    {t('attendance.noStudents')}
                   </p>
                 </td>
               </tr>

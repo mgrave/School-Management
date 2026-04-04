@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import profile from "../../../../assets/profile.png";
+import { useTranslation } from "react-i18next";
 
 const TableSiswa = ({
   data,
@@ -33,6 +34,7 @@ const TableSiswa = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [dataChecked, setDataChecked] = useState([]);
+  const { t } = useTranslation();
 
   const lastOfIndexSiswa = page * limit;
   const firstOfindexSiswa = lastOfIndexSiswa - limit;
@@ -99,30 +101,30 @@ const TableSiswa = ({
                 </th>
 
                 <th scope="col" className="px-3 py-4">
-                  NIS
+                  {t("excel.nis")}
                 </th>
                 <th scope="col" className="sr-only"></th>
                 <th scope="col" className="pl-1 pr-4  py-4">
-                  Nama
+                  {t("common.name")}
                 </th>
                 <th scope="col" className=" py-4 whitespace-nowrap">
-                  Jenis Kelamin
+                  {t("common.gender.title")}
                 </th>
                 <th
                   scope="col"
                   className="px-3 py-4 text-center whitespace-nowrap"
                 >
-                  Tahun Masuk
+                  {t("excel.entry_year")}
                 </th>
                 <th scope="col" className="px-2 py-4">
-                  Alamat
+                  {t("excel.address")}
                 </th>
                 <th scope="col" className="py-4 text-center">
-                  Kontak
+                  {t("excel.contact")}
                 </th>
 
                 <th scope="col" className="px-5 py-3">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">{t("actions.edit")}</span>
                 </th>
               </tr>
             </thead>
@@ -134,7 +136,7 @@ const TableSiswa = ({
                     className="px-2 py-4 border-gray-300 text-xs font-medium text-gray-900 h-[350px] whitespace-nowrap"
                   >
                     <div className="flex justify-center w-full">
-                      Tidak ada data
+                      {t("common.empty_data")}
                     </div>
                   </td>
                 </tr>
@@ -201,7 +203,7 @@ const TableSiswa = ({
                         `${siswa.alamat}`
                       ) : (
                         <span className="text-gray-700 font-bold">
-                          Data Kosong
+                          {t("common.empty_data")}
                         </span>
                       )}
                     </td>
@@ -226,7 +228,7 @@ const TableSiswa = ({
                     >
                       <div className="flex-center gap-4">
                         <button
-                          title="Edit"
+                          title={t("actions.edit")}
                           onClick={() => handleEditSiswa(siswa)}
                           className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral1 flex-center transition-all duration-300"
                         >
@@ -239,7 +241,7 @@ const TableSiswa = ({
                           />
                         </button>
                         <button
-                          title="Hapus"
+                          title={t("actions.delete")}
                           className="w-[25px] h-[25px] border-2 rounded-md  border-gray-300 group hover:border-neutral2 flex-center transition-all duration-300"
                           onClick={() => handleDeleteSiswa(siswa)}
                         >
@@ -281,6 +283,7 @@ const Pagination = ({
   handlePagination,
 }) => {
   const pageNumber = [];
+  const { t } = useTranslation();
 
   const totalPage = Math.ceil(totalSiswa / limit);
 
@@ -299,15 +302,13 @@ const Pagination = ({
   return (
     <div className=" absolute h-9 left-0 bottom-5 border-t pt-4 w-full flex-between px-3">
       <div className="flex">
-        <p className="text-[10px] sm:text-xs">{`Menampilkan ${
-          totalSiswa === 0 ? 0 : firstOfindexSiswa + 1
-        } - ${
-          page === totalPage
-            ? totalSiswa
-            : totalSiswa === 0
-            ? 0
-            : lastOfIndexSiswa
-        } dari ${totalSiswa} data`}</p>
+        <p className="text-[10px] sm:text-xs">
+          {t("common.pagination.showing_data", {
+            start: totalSiswa === 0 ? 0 : firstOfindexSiswa + 1,
+            end: page === totalPage ? totalSiswa : lastOfIndexSiswa,
+            total: totalSiswa,
+          })}
+        </p>
       </div>
       <div className="flex-center space-x-4">
         {totalSiswa === 0 ? (

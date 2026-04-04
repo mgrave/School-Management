@@ -11,8 +11,10 @@ import FilterMapel from "@/components/elements/FilterMapel";
 import { useSelector } from "react-redux";
 import { selectedDataDelete } from "@/store/slices/admin-slice";
 import DeleteModal from "@/components/fragments/ModalDelete";
+import { useTranslation } from 'react-i18next';
 
 const DataPelajaranPage = () => {
+  const { t } = useTranslation();
   const dataDelete = useSelector(selectedDataDelete);
   const [dataMapel, setDataMapel] = useState([]);
   const [dataFilter, setDataFilter] = useState([]);
@@ -172,7 +174,7 @@ const DataPelajaranPage = () => {
           className="bg-neutral hover:bg-indigo-800 transition-all duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
         >
           <MapelIcon width={15} height={15} className="" />
-          Tambah pelajaran
+          {t('subjects.addSubjectButton')}
         </button>
       </div>
       <div className="relative bg-white w-full  mt-6 border  overflow-hidden  rounded-md">
@@ -195,7 +197,7 @@ const DataPelajaranPage = () => {
         <DeleteModal
           onClose={handleToggleDelete}
           url={"/api/mapel/delete-mapel/" + dataDelete._id}
-          title={"Apakah anda yakin ingin menghapus mata pelajaran?"}
+          title={t('deleteConfirmation.subject')}
         />
       )}
       {isAddMapel && <AddModal onClose={handleToggleAdd} />}

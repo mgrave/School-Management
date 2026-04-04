@@ -1,19 +1,22 @@
 import React, { forwardRef, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const FilterKelas = forwardRef(
   ({ handleOptionChange, option, handleToggleFilter }, ref) => {
+    const { t } = useTranslation();
+
     return (
       <div
         ref={ref}
         className="w-[200px] border left-0 top-8 rounded-lg absolute  bg-white shadow-md z-10 flex flex-col flex-between py-3 items-stretch"
       >
         <h4 className="text-xs border-b mb-2 px-3 pb-3 font-medium text-gray-700">
-          Urut Bedasarkan :
+          {t('data_class.filter.sort_by')} :
         </h4>
         <div className="px-3 space-y-2">
           <div className="flex-between ">
             <label htmlFor="terbaru" className="text-xs font-medium w-full">
-              Terbaru
+              {t('data_class.filter.newest')}
             </label>
 
             <input
@@ -27,7 +30,7 @@ const FilterKelas = forwardRef(
           </div>
           <div className="flex-between ">
             <label htmlFor="terlama" className="text-xs font-medium w-full">
-              Terlama
+              {t('data_class.filter.oldest')}
             </label>
 
             <input
@@ -97,7 +100,7 @@ const FilterKelas = forwardRef(
           </div>
           <div className="flex-between ">
             <label htmlFor="terbanyak" className="text-xs font-medium w-full">
-              Siswa Terbanyak
+              {t('data_class.filter.most_students')}
             </label>
 
             <input
@@ -111,7 +114,7 @@ const FilterKelas = forwardRef(
           </div>
           <div className="flex-between ">
             <label htmlFor="terdikit" className="text-xs font-medium w-full">
-              Siswa Terdikit
+              {t('data_class.filter.least_students')}
             </label>
 
             <input

@@ -9,6 +9,7 @@ import axios from "axios";
 import { ALLOWED_FILE_TYPES, HOST, MAX_FILE_SIZE } from "@/util/constant";
 import { toast } from "sonner";
 import LoaderButton from "@/components/elements/LoaderButton";
+import { useTranslation } from 'react-i18next';
 
 const SideProfile = forwardRef(({ handleClose }, ref) => {
   const uploadRef = useRef();
@@ -30,6 +31,7 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
     },
     mode: onchange,
   });
+  const { t, i18n } = useTranslation();
 
   const handleClickImage = () => {
     uploadRef.current.click();
@@ -167,11 +169,11 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
             className="hidden"
           />
         </div>
-        <p className="font-medium text-xs text-center mt-2">Foto</p>
+        <p className="font-medium text-xs text-center mt-2">{t('common.photo')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="">
             <label htmlFor="username" className="text-xs ">
-              Username :
+              {t('common.username')} :
             </label>
             <Controller
               name="username"
@@ -179,11 +181,11 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
               rules={{
                 minLength: {
                   value: 8,
-                  message: "Username harus lebih dari 8 karakter",
+                  message: t('validation.username.min'),
                 },
                 maxLength: {
                   value: 20,
-                  message: "Username harus kurang dari 20 karakter",
+                  message: t('validation.username.max'),
                 },
               }}
               render={({ field }) => (
@@ -204,7 +206,7 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
           </div>
           <div className="">
             <label htmlFor="password" className="text-xs ">
-              Password :
+              {t('common.password')} :
             </label>
             <Controller
               name="password"
@@ -212,7 +214,7 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
               rules={{
                 minLength: {
                   value: 8,
-                  message: "Password harus lebih dari 8 karakter",
+                  message: t('validation.password.min'),
                 },
               }}
               render={({ field }) => (
@@ -234,18 +236,18 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
           </div>
           <div className="">
             <label htmlFor="nama" className="text-xs ">
-              Nama :
+              {t('common.name')} :
             </label>
             <Controller
               name="nama"
               rules={{
                 minLength: {
                   value: 5,
-                  message: "Nama harus lebih dari 5 karakter",
+                  message: t('validation.name.min'),
                 },
                 maxLength: {
                   value: 20,
-                  message: "Nama harus kurang dari 20 karakter",
+                  message: t('validation.name.max'),
                 },
               }}
               control={control}
@@ -265,11 +267,31 @@ const SideProfile = forwardRef(({ handleClose }, ref) => {
               <div className="w-full h-6"></div>
             )}
           </div>
+          
+          {/* Nuevo campo para selección de idioma */}
+          <div className="mb-4">
+            <label className="text-xs text-gray-500 font-medium block mb-2">
+              {t('common.language')}
+            </label>
+            <select
+              value={i18n.language}
+              onChange={(e) => {
+                i18n.changeLanguage(e.target.value);
+                localStorage.setItem('i18nextLng', e.target.value);
+              }}
+              className="w-full border text-xs px-2.5 py-1.5 rounded-md border-gray-500 outline-neutral"
+            >
+              <option value="es">🇪🇸 Español</option>
+              <option value="en">🇬🇧 English</option>
+              <option value="id">🇮🇩 Bahasa Indonesia</option>
+            </select>
+          </div>
+
           <button
             type="submit"
             className="w-full py-2.5 mt-4 text-white bg-neutral hover:bg-indigo-600 text-xs rounded-full"
           >
-            {loading ? <LoaderButton /> : "Simpan"}
+            {loading ? <LoaderButton /> : t('common.save')}
           </button>
         </form>
       </div>

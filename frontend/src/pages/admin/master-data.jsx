@@ -21,8 +21,10 @@ import AddModalNasional from "@/components/views/admin/master-data/AddModalNasio
 import DeleteModalNasional from "@/components/views/admin/master-data/DeleteModalNasional";
 import TableSemester from "@/components/views/admin/master-data/TableSemester";
 import TableJam from "@/components/views/admin/master-data/TableJam";
+import { useTranslation } from 'react-i18next';
 
 const MasterDataPage = () => {
+  const { t } = useTranslation();
   const [dataAjaran, setDataAjaran] = useState([]);
   const [dataLibur, setDataLibur] = useState([]);
   const [dataAkademik, setDataAkademik] = useState([]);
@@ -128,11 +130,13 @@ const MasterDataPage = () => {
     <section className="px-6 py-8  ">
       <div className="w-full">
         <div className="w-full   py-4 px-2 rounded-md  gap-6 border border-b-0 bg-white">
-          <h1 className="font-bold text-sm text-gray-800 ">Sistem Akademik</h1>
+          <h1 className="font-bold text-sm text-gray-800 ">
+            {t('admin.sidebar.academicSystem')}
+          </h1>
         </div>
         <div className="w-full flex-between  pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Jam Pembelajaran
+            {t('masterData.learningHours')}
           </h1>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden ">
@@ -150,7 +154,7 @@ const MasterDataPage = () => {
         </div>
         <div className="w-full flex-between  pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Semester
+            {t('masterData.semester')}
           </h1>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden  ">
@@ -167,7 +171,7 @@ const MasterDataPage = () => {
         </div>
         <div className="w-full flex-between flex-wrap pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Tahun Ajaran
+            {t('masterData.academicYear')}
           </h1>
           <div className="flex-center  ml-auto gap-2">
             {isAddajaran && (
@@ -208,13 +212,13 @@ const MasterDataPage = () => {
 
             {!isAddajaran && (
               <button
-                aria-label="tambah ajaran"
+                aria-label={t('masterData.addAcademicYear')}
                 disabled={loading || isAddajaran}
                 onClick={handleToggleAdd}
                 className="bg-neutral hover:bg-indigo-800  min-w-fit transition-all w-fit duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
               >
-                <CalendarCog width={15} height={15} className=" " /> Tambah
-                Ajaran
+                <CalendarCog width={15} height={15} className=" " />
+                {t('masterData.addAcademicYear')}
               </button>
             )}
           </div>
@@ -237,12 +241,12 @@ const MasterDataPage = () => {
       <div className="w-full mt-8">
         <div className="w-full   py-4 px-2 rounded-md  gap-6 border border-b-0 bg-white">
           <h1 className="font-bold text-sm text-gray-800 ">
-            Sistem Libur Sekolah
+            {t('masterData.holidaySystem')}
           </h1>
         </div>
         <div className="w-full flex-between  pt-8 pb-4 px-2    gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Libur Perpekan
+            {t('masterData.weeklyHoliday')}
           </h1>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden  rounded-md">
@@ -256,14 +260,15 @@ const MasterDataPage = () => {
         </div>
         <div className="w-full flex-between pt-10 pb-4  py-4 px-2  mt  gap-6 border bg-white">
           <h1 className=" font-semibold text-xs  text-neutral w-36 text-center py-1 rounded-full border bg-gray-100 border-gray-300">
-            Libur Nasional
+            {t('masterData.nationalHoliday')}
           </h1>
           <button
-            aria-label="tambah ajaran"
+            aria-label={t('masterData.addHoliday')}
             onClick={handleToggleAddNasional}
             className="bg-neutral hover:bg-indigo-800  min-w-fit transition-all w-fit duration-300 text-white py-2.5 text-xs px-4 rounded-md flex-between gap-3"
           >
-            <CalendarPlus width={15} height={15} className=" " /> Tambah Libur
+            <CalendarPlus width={15} height={15} className=" " />
+            {t('masterData.addHoliday')}
           </button>
         </div>
         <div className="relative bg-white w-full   border  overflow-hidden  rounded-md">

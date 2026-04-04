@@ -8,8 +8,10 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
 import DropdownBidangStudi from "@/components/elements/DropdownBidangStudi";
+import { useTranslation } from 'react-i18next';
 
 const TambahGuruPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     register,
@@ -176,7 +178,9 @@ const TambahGuruPage = () => {
   return (
     <>
       <div className="bg-white mx-6 border-b rounded-md p-4">
-        <h1 className="font-bold text-gray-700 text-sm">Masukkan Data Guru</h1>
+        <h1 className="font-bold text-gray-700 text-sm">
+          {t('tambahGuru.addTeacherData')}
+        </h1>
       </div>
       <div className="  mx-6 mb-16 bg-white  grid grid-cols-1 rounded-lg rounded-tr-none rounded-tl-none py-6 px-6 gap-8 lg:grid-cols-4">
         <div className=" flex justify-start  items-center flex-col">
@@ -214,7 +218,7 @@ const TambahGuruPage = () => {
             )}
           </div>
           <p className="text-[0.625rem] text-neutral mt-8">
-            Besar file maksimal 1 MB
+            {t('tambahGuru.maxFileSize')}
           </p>
           <p className="text-[0.625rem] text-neutral mt-2">
             Ekstensi file: jpeg/jpg, png
@@ -230,17 +234,17 @@ const TambahGuruPage = () => {
                 htmlFor="nama"
                 className="text-xs mb-2 block font-semibold"
               >
-                Nama <span className="text-red-500">*</span>
+                {t('tambahGuru.nameLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 id="nama"
                 name="nama"
                 {...register("nama", {
-                  required: "Nama tidak boleh kosong.",
+                  required: t('validation.required'),
                   maxLength: {
                     value: 50,
-                    message: "Nama maksimal 50 karakter.",
+                    message: t('validation.maxLength', { value: 50 })
                   },
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral px-2"
@@ -251,7 +255,7 @@ const TambahGuruPage = () => {
             </div>
             <div className="mb-2">
               <label htmlFor="nip" className="text-xs mb-2 block font-semibold">
-                NIP <span className="text-red-500">*</span>
+                {t('tambahGuru.nipLabel')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
@@ -259,7 +263,7 @@ const TambahGuruPage = () => {
                 name="nip"
                 value={nip}
                 {...register("nip", {
-                  required: "Nip tidak boleh kosong.",
+                  required: t('validation.required')
                 })}
                 onChange={(e) => handleNumberChange(e, "nip")}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
@@ -274,13 +278,13 @@ const TambahGuruPage = () => {
                 htmlFor="password"
                 className="text-xs mb-2 block font-semibold"
               >
-                Password <span className="text-red-500">*</span>
+                {t('common.password')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"text"}
                 id="password"
                 {...register("password", {
-                  required: "Password tidak boleh kosong.",
+                  required: t('validation.required.field', { field: t('common.password') }),
                   maxLength: {
                     value: 50,
                     message: "Password maksimal 20 karakter.",
@@ -307,7 +311,7 @@ const TambahGuruPage = () => {
                 type={"text"}
                 id="tempatLahir"
                 {...register("tempatLahir", {
-                  required: "Tempat Lahir tidak boleh kosong.",
+                  required: t('validation.required.field', { field: t('tambahGuru.birthPlaceLabel') }),
                   maxLength: {
                     value: 50,
                     message: "Tempat Lahir maksimal 20 karakter.",
@@ -331,7 +335,7 @@ const TambahGuruPage = () => {
                 type="date"
                 id="TanggalLahir"
                 {...register("tanggalLahir", {
-                  required: "Tanggal Lahir tidak boleh kosong.",
+                  required: t('validation.required.field', { field: t('tambahGuru.birthDateLabel') })
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               />
@@ -349,7 +353,7 @@ const TambahGuruPage = () => {
               <select
                 id="Jenis Kelamin"
                 {...register("jenisKelamin", {
-                  required: "Jenis Kelamin tidak boleh kosong.",
+                  required: t('validation.required.field', { field: t('common.gender.title') })
                 })}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
               >
@@ -391,7 +395,7 @@ const TambahGuruPage = () => {
                 htmlFor="No. Telepon"
                 className="text-xs mb-2 block font-semibold"
               >
-                No. Telepon <span className="text-red-500">*</span>
+                {t('common.phoneNumber')} <span className="text-red-500">*</span>
               </label>
               <input
                 type={"number"}
@@ -400,7 +404,7 @@ const TambahGuruPage = () => {
                 value={phone}
                 autoComplete="off"
                 {...register("phone", {
-                  required: "No. Telepon tidak boleh kosong.",
+                  required: t('validation.required.field', { field: t('common.phoneNumber') }),
                 })}
                 onChange={(e) => handleNumberChange(e, "phone")}
                 className="py-1.5 h-8 bg-white border text-gray-500 text-xs border-gray-400 w-full rounded-md outline-neutral  px-2"
@@ -492,7 +496,7 @@ const TambahGuruPage = () => {
                 type="submit"
                 className="btn  disabled:cursor-not-allowed w-28 "
               >
-                {loading ? "Loading" : "Simpan"}
+                {loading ? t('common.loading') : t('common.save')}
               </button>
             </div>
           </div>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { t } from "i18next";
 
 const TableJam = ({ loading, startTime, endTime }) => {
   const [start, setStart] = useState(startTime || 0);
@@ -51,7 +52,7 @@ const TableJam = ({ loading, startTime, endTime }) => {
           <tr>
             <th scope="col" className="opacity-0"></th>
             <th scope="col" className="px-3 py-4">
-              Pukul
+              {t("common.time")}
             </th>
           </tr>
         </thead>
@@ -71,7 +72,7 @@ const TableJam = ({ loading, startTime, endTime }) => {
           )}
           <tr className="border-b hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Mulai
+              {t("schedule.start")}
             </td>
 
             <td scope="row" className="py-4 w-12">
@@ -87,7 +88,7 @@ const TableJam = ({ loading, startTime, endTime }) => {
           </tr>
           <tr className=" hover:bg-gray-200">
             <td scope="row" className="py-4 w-12 text-xs font-medium">
-              Selesai
+              {t("schedule.end")}
             </td>
 
             <td scope="row" className="py-4 w-12">

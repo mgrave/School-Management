@@ -8,11 +8,11 @@ export const addAjaran = async (req, res, next) => {
     const isExist = await TahunAjaran.findOne({ ajaran });
 
     if (isExist) {
-      throw new ResponseError(400, "Tahun Ajaran yang sama sudah ada");
+      throw new ResponseError(400, "El mismo año académico ya existe");
     }
 
     if (!ajaran.includes("/")) {
-      throw new ResponseError(400, "Format Tahun ajaran tidak sesuai");
+      throw new ResponseError(400, "Formato de año académico no válido");
     }
 
     const [first, last] = ajaran.split("/");
@@ -29,12 +29,12 @@ export const addAjaran = async (req, res, next) => {
 
       res.status(200).json({
         success: true,
-        message: "Berhasil menambah Tahun Ajaran.",
+        message: "Éxito al agregar el Año Académico.",
       });
     } else {
       throw new ResponseError(
         404,
-        "Ajaran tidak valid. Pastikan perbedaan hanya 1 tahun."
+        "Año no válido. Asegúrese de que la diferencia sea de solo 1 año."
       );
     }
   } catch (error) {
@@ -48,7 +48,7 @@ export const getAjaran = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil Tahun Ajaran.",
+      message: "Éxito al obtener el Año Académico.",
       ajaran,
     });
   } catch (error) {
@@ -62,7 +62,7 @@ export const getAjaranAktif = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil mengambil Tahun Ajaran.",
+      message: "Éxito al obtener el Año Académico.",
       ajaran,
     });
   } catch (error) {
@@ -77,7 +77,7 @@ export const editAjaran = async (req, res, next) => {
     const ajaran = await TahunAjaran.findById(id);
 
     if (!ajaran) {
-      throw new ResponseError(404, "Tahun Ajaran tidak ditemukan.");
+      throw new ResponseError(404, "Año académico no encontrado.");
     }
 
     await TahunAjaran.updateMany({ status: false });
@@ -86,7 +86,7 @@ export const editAjaran = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: "Berhasil Mengaktifkan Tahun Ajaran " + ajaran.ajaran,
+      message: "Éxito al activar el Año Académico " + ajaran.ajaran,
       ajaran,
     });
   } catch (error) {
@@ -102,14 +102,14 @@ export const deleteAjaran = async (req, res, next) => {
     if (totalAjaran === 1) {
       throw new ResponseError(
         404,
-        "Tidak bisa menghapus tahun ajaran. setidak ada 1 tahun ajaran yang aktif."
+        "No se puede eliminar el año académico. Debe haber al menos 1 año activo."
       );
     }
 
     const ajaran = await TahunAjaran.findByIdAndDelete(id);
 
     if (!ajaran) {
-      throw new ResponseError(404, "Tahun Ajaran tidak ditemukan");
+      throw new ResponseError(404, "Año académico no encontrado");
     }
 
     if (ajaran.status) {
@@ -122,14 +122,14 @@ export const deleteAjaran = async (req, res, next) => {
       if (!newActiveAjaran) {
         throw new ResponseError(
           500,
-          "Gagal mengaktifkan tahun ajaran lain setelah penghapusan."
+          "Error al activar otro año académico después de la eliminación."
         );
       }
     }
 
     res.status(200).json({
       success: true,
-      message: "Berhasil Menghapus Tahun Ajaran " + ajaran.ajaran,
+      message: "Éxito al eliminar el Año Académico " + ajaran.ajaran,
     });
   } catch (error) {
     next(error);
